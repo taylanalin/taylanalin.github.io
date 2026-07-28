@@ -1,9 +1,9 @@
 const book = {
   title: "Teknoloji Atlası",
   kicker: "Kamu, Yazılım ve Gelecek İçin Saha Kitabı",
-  subtitle: "Kamu, savunma sanayii, büyük ölçekli özel sektör, yazılım, altyapı, siber güvenlik ve yapay zekâ projelerini aynı teknoloji haritasında buluşturan koyu temalı okuma sitesi.",
+  subtitle: "Kamu kurumlarında, savunma sanayiinde ve büyük ölçekli şirketlerde karşılaşılan yazılım, altyapı, siber güvenlik, veri ve yapay zekâ meselelerini aynı çalışma hayatının içinde sıraya koyar.",
   promise:
-    "Bir sabah kullanıcı ekranı açılmaz, öğleden sonra tedarikçi toplantısı başlar, akşam kabul tutanağı masaya gelir. Teknoloji Atlası, o günün içinde kodun, kurumun, insanın, bütçenin ve mimarinin nasıl birbirine bağlandığını anlatır."
+    "Bir sabah kullanıcı ekranı açılmaz, öğleden sonra tedarikçi toplantısı başlar, akşam kabul tutanağı masaya gelir. Aynı günün içinde kod, kurum, insan, bütçe ve mimari birbirine bağlanır."
 };
 
 const categories = [
@@ -33,13 +33,13 @@ const categories = [
   {
     id: "insanlar",
     title: "İnsanlar ve Teknoloji",
-    summary: "Teknik insanlar ne söyler, ne düşünür, neden direnir, neyi saklar ve hangi baskıyla karar verir?",
+    summary: "Teknik insanların görünen cümleleri, iç baskıları, direnç sebepleri ve karar anındaki gerçek dertleri.",
     mode: "people",
     chapters: [
       "İnsanlar ve teknoloji: söylenen cümlenin arkasındaki ihtiyaç",
       "Kamu personelinin güvenlik ve sorumluluk kaygısı",
       "Özel sektör teknik ekibinin hız ve performans baskısı",
-      "Yazılımcı, sistemci, ağcı ve güvenlikçi aynı olaya nasıl bakar?",
+      "Yazılımcı, sistemci, ağcı ve güvenlikçinin aynı olaya bakışı",
       "Tedarikçi sunumunda parlayan cümlelerin arkasını okumak",
       "Üst makam, saha ekibi ve kullanıcı arasında tercüman olmak",
       "Değişime direnç: tembellik değil çoğu zaman korunma refleksi",
@@ -413,7 +413,7 @@ const modeLexicon = {
   story: {
     scene: "hikâye bir toplantıyla başlar, fakat asıl mesele çoğu zaman ekrandaki hata değil o hatayı doğuran eski karar zinciridir",
     actors: "proje yöneticisi, teknik ekip, saha temsilcisi, tedarikçi ve karar makamı birbirinden eksik parçaları tamamlamaya çalışır",
-    stakes: "yaşanmış gibi anlatılan olay, okurun ileride benzer masada daha erken soru sormasını sağlar",
+    stakes: "yaşanmış gibi anlatılan olay, ileride benzer masada daha erken uyarı sezgisi kazandırır",
     tech: ["API", "Log", "Redis", "Kafka", "PostgreSQL", "SIEM"]
   },
   project: {
@@ -441,13 +441,13 @@ const modeLexicon = {
     tech: ["CDN", "WAF", "API Gateway", "PostgreSQL", "Redis", "Kafka", "Elasticsearch", "Kibana"]
   },
   future: {
-    scene: "yakın gelecek, bugünün moda kelimelerinden değil kurumların büyüyen kapasite, güvenlik, veri ve insan baskısından doğar",
+    scene: "yakın gelecek kurumların büyüyen kapasite, güvenlik, veri ve insan baskısında kendini gösterir",
     actors: "devletler, teknoloji şirketleri, kurum yöneticileri, güvenlik ekipleri, kullanıcılar ve tedarikçiler aynı değişimin farklı tarafında durur",
     stakes: "öngörü, kesin kehanet değil; hangi baskının büyüdüğünü doğru okumaktır",
     tech: ["RAG", "GPU", "Zero Trust", "VPN", "Object storage", "Kubernetes"]
   },
   software: {
-    scene: "yazılım ve veri tarafında amaç aracı ezberlemek değil, hangi ihtiyacın hangi teknoloji ailesiyle çözüldüğünü görmektir",
+    scene: "yazılım ve veri tarafında her araç, çözdüğü ihtiyaç ve taşıdığı sorumlulukla birlikte okunur",
     actors: "geliştirici, mimar, veri ekibi, DevOps, test ekibi ve ürün sahibi aynı yazılımın farklı sorumluluklarını taşır",
     stakes: "dil, veritabanı, API, kuyruk ve teslimat hattı birlikte düşünülmezse sistem büyüdükçe bakım zorlaşır",
     tech: ["Java", "Python", "C#", "JavaScript", "TypeScript", "REST", "PostgreSQL", "Redis", "Kafka", "Docker"]
@@ -476,7 +476,7 @@ const techDetails = {
   "Programlama dilleri": [
     "Programlama dili, kurumun fikirlerini çalışan sisteme çeviren ana ifade biçimidir. Java uzun ömürlü kurumsal servislerde, C# özellikle Microsoft ekosisteminde ve masaüstü/iç iş uygulamalarında, Python veri, otomasyon ve yapay zekâ işlerinde, JavaScript ise web arayüzünden sunucu tarafına kadar geniş bir alanda görülür.",
     "Dil seçimi yalnız hız tablosuyla yapılmaz. Mevcut ekibin yetkinliği, kurumun eski kodu, tedarikçi havuzu, güvenlik gereksinimi, bakım süresi, lisans modeli ve işe alım piyasası birlikte değerlendirilir. Yanlış dil seçimi ilk ayda değil, üçüncü yıl bakım talebi geldiğinde pahalılaşır.",
-    "Güncel hayatta bunu bina taşıyıcı sistemi gibi düşünebilirsin. Dışarıdan görünmez, ama kat çıkılacaksa, tadilat yapılacaksa ve bina uzun süre kullanılacaksa taşıyıcı sistemin doğru seçilmiş olması her şeyden önemlidir."
+    "Güncel hayatta programlama dili, binanın taşıyıcı sistemi gibidir. Dışarıdan görünmez, ama kat çıkılacaksa, tadilat yapılacaksa ve bina uzun süre kullanılacaksa taşıyıcı sistemin doğru seçilmiş olması her şeyden önemlidir."
   ],
   "Web arayüzü": [
     "Web arayüzü, kullanıcının kurumla temas ettiği yüzdür. HTML sayfanın iskeletini, CSS görünümünü, JavaScript davranışını kurar. TypeScript büyük projelerde JavaScript'e tip disiplini ekleyerek hata yakalama gücünü artırır. React ve Vue gibi frameworkler karmaşık ekranların bileşenlere ayrılmasını sağlar.",
@@ -496,7 +496,7 @@ const techDetails = {
   "Veritabanı": [
     "Veritabanı, kurumun kayıt hafızasıdır. PostgreSQL ve SQL dünyası sipariş, başvuru, ödeme, envanter, personel veya işlem kaydı gibi kalıcı ve tutarlı bilgileri düzenli tutar. Bu veriler yalnız uygulama için değil, rapor, denetim ve hukuki sorumluluk için de önemlidir.",
     "Kalıcı kayıt ile hızlı kopya birbirine karıştırılmamalıdır. Siparişin resmi değeri PostgreSQL tarafında dururken, arama veya hız için başka sistemler kullanılabilir. Ana defterin neresi olduğu bilinmezse kriz anında herkes farklı kaydı doğru sanabilir.",
-    "Bunu noter defteri gibi düşün. Herkes hızlıca not alabilir, ekranda kopya gösterebilir; ama sonradan hesap sorulacak kayıt hangi defterdeyse kurumun gerçeği oradadır."
+    "Buradaki karşılık noter defteridir. Herkes hızlıca not alabilir, ekranda kopya gösterebilir; ama sonradan hesap sorulacak kayıt hangi defterdeyse kurumun gerçeği oradadır."
   ],
   "Hız ve geçici veri": [
     "Redis, cache ve CDN aynı ailede düşünülür: hepsi kullanıcıyı bekletmemek ve ana sistemi yormamak için sık kullanılan bilgiyi daha yakın veya daha hızlı yerde tutar. Redis bellek içinde geçici veri saklar; CDN statik içeriği kullanıcıya yakın dağıtır; cache genel olarak yeniden hesaplamayı azaltır.",
@@ -506,7 +506,7 @@ const techDetails = {
   "Arama ve log": [
     "Elasticsearch büyük metin, ürün, belge ve log kümelerinde hızlı arama yapmak için kullanılır. Logstash farklı kaynaklardan gelen logları toplar, düzenler ve Elasticsearch'e gönderir. Kibana ise bu veriyi arama ekranı, grafik ve gösterge paneli haline getirir.",
     "Ana veritabanı ile arama motoru aynı şey değildir. PostgreSQL siparişin resmi kaydını tutarken Elasticsearch o siparişler içinde hızlı arama, filtreleme ve analiz sağlar. Log incelemesinde de amaç milyonlarca satır içinde doğru zamanı, doğru hatayı ve doğru kullanıcı etkisini bulmaktır.",
-    "Bunu büyük bir arşivin hızlı katalog görevlisi gibi düşünebilirsin. Belgenin aslı arşivdedir; katalog görevlisi sana doğru rafı, benzer kayıtları ve aradığın izleri hızla gösterir."
+    "Elasticsearch büyük bir arşivin hızlı katalog görevlisine benzer. Belgenin aslı arşivdedir; katalog görevlisi doğru rafı, benzer kayıtları ve aranan izleri hızla gösterir."
   ],
   "Mesajlaşma": [
     "Kafka ve RabbitMQ, servislerin birbirini doğrudan beklemeden çalışmasını sağlar. Ödeme tamamlandığında fatura, kargo, bildirim ve raporlama aynı anda farklı servislerin işi olabilir. Her servisi sırayla bekletmek yerine olay veya mesaj kuyruğa bırakılır.",
@@ -516,7 +516,7 @@ const techDetails = {
   "Paketleme": [
     "Docker uygulamayı bağımlılıklarıyla birlikte paketler. Git kodun geçmişini tutar. GitHub ekip çalışmasını, kod incelemeyi ve otomasyonu görünür kılar. CI/CD ise kodun testten geçip kontrollü biçimde ortama alınmasını sağlar.",
     "Bu aile yazılımın üretim hattıdır. Geliştirici kodu yazar, Git'e işler, ekip GitHub üzerinde inceler, testler çalışır, paket hazırlanır, uygun ortamda dağıtılır. Bir halka zayıfsa canlıya çıkan hatanın nereden geldiğini bulmak zorlaşır.",
-    "Bunu fabrikadaki kalite kapıları gibi düşünebilirsin. Ürün elden ele dolaşırken her adımda kayıt, kontrol ve geri dönüş imkânı varsa hata saklanmaz; erken yakalanır."
+    "Bu düzen fabrikadaki kalite kapılarına benzer. Ürün elden ele dolaşırken her adımda kayıt, kontrol ve geri dönüş imkânı varsa hata saklanmaz; erken yakalanır."
   ],
   "Donanım": [
     "CPU işlem yapar, RAM çalışan veriyi hızlı tutar, disk kalıcı kaydı saklar, anakart bu parçaların birlikte çalıştığı zemindir. Yazılım ne kadar iyi olursa olsun bu kaynaklardan biri tıkanırsa kullanıcı yavaşlık görür.",
@@ -536,7 +536,7 @@ const techDetails = {
   "Kimlik güvenliği": [
     "IAM, MFA, SSO ve PAM kimlik güvenliği ailesidir. Kullanıcı kim, hangi sisteme hangi yetkiyle girebilir, yetki kim tarafından onaylandı, ayrıcalıklı hesap nasıl izlenir soruları bu alanın temelidir.",
     "Parola tek başına zayıf bir sınırdır. MFA ikinci doğrulama ekler, SSO kullanıcı deneyimini sadeleştirir, PAM kritik yönetici hesaplarını daha sıkı denetler. Fakat süreç kurulmazsa araç yalnız ekranda yeni bir kutu olur.",
-    "Bunu kurum binasındaki giriş kartı, özel oda anahtarı ve ziyaretçi defteri gibi düşünebilirsin. Herkes binaya girebilir diye kasaya da giremez; giren kişinin izi de tutulmalıdır."
+    "Kimlik yönetimi kurum binasındaki giriş kartı, özel oda anahtarı ve ziyaretçi defteri gibidir. Herkes binaya girebilir diye kasaya da giremez; giren kişinin izi de tutulmalıdır."
   ],
   "Siber izleme": [
     "SIEM, SOC, EDR ve log yönetimi güvenlik görünürlüğü sağlar. Saldırı çoğu zaman tek parlak işaretle gelmez; başarısız girişler, olağandışı dosya hareketleri, garip ağ trafiği ve uç nokta davranışları birleşince anlam kazanır.",
@@ -834,13 +834,13 @@ function section(title, paragraphs) {
 function modeIntro(category) {
   const lex = modeLexicon[category.mode];
   return [
-    `${category.title} bölümünün kapısı, tek bir kavramı ezberletmek için değil, kurum içinde teknoloji işinin nasıl yaşadığını göstermek için açılır. Burada ${lex.scene}.`,
-    `Bu başlıkta kişiler önemlidir: ${lex.actors}. Aynı olayın masadaki adı bazen proje, bazen risk, bazen bütçe, bazen de hizmet sürekliliğidir.`,
-    `İlk dosyanın görevi harita çıkarmaktır. Hangi aktör nerede duruyor, hangi belge neyi koruyor, hangi teknik karar hangi insan davranışına bağlanıyor ve hangi noktada yönetici devreye girmek zorunda kalıyor, bunları önce topluca görmek gerekir.`,
-    `Bu bölüm ilerledikçe konular birbirine bağlanır. Bir yerde teknik şartname konuşulurken başka yerde kabul komisyonu görünür; bir yerde Redis yalnız hız gibi dururken başka yerde eski veri riski olarak karşımıza çıkar; bir yerde SIEM güvenlik ekranı iken başka yerde denetim kanıtına dönüşür.`,
-    `Temel gerilim şudur: ${lex.stakes}. Bu nedenle her sayfa tekil bilgi vermekle kalmayacak, o bilginin hangi iş akışında işe yaradığını da gösterecek.`,
-    `Bu bölümde sık karşılaşacağın teknoloji ve kavramlar şunlardır: ${lex.tech.join(", ")}. Bunlar ayrıntı yarışına sokulmayacak; ihtiyaç doğduğu anda, ilgili olayın içinde açıklanacak.`,
-    `Böylece bölümün sonunda yalnız kavram adı değil, o kavramın kurum hayatında nerede durduğu, kimlerin sorumluluğuna dokunduğu ve yanlış anlaşılırsa hangi sorunu büyüteceği daha net hale gelir.`
+    `${category.title} rotası sahadaki tabloyla başlar. ${lex.scene}.`,
+    `Masada ${lex.actors}. Aynı olay birinin gözünde proje, diğerinin gözünde risk, bir başkasının gözünde bütçe veya hizmet sürekliliğidir.`,
+    `Başlangıçta bu kalabalık yerli yerine oturur. Kimin hangi kararı taşıdığı, hangi belgenin hangi riski azalttığı, hangi teknik tercihin hangi insan davranışını değiştirdiği görünür hale gelir.`,
+    `Teknik şartname kabul komisyonuna, Redis eski veri riskine, SIEM denetim kanıtına, API kurumlar arası sorumluluğa uzanır. Bir başlık bitip diğeri başladığında konu değişmiş gibi görünür; aslında aynı kurumun başka odasına geçilir.`,
+    `${lex.stakes}. Kavramların değeri adlarında değil, iş akışında neyi değiştirdiklerinde ortaya çıkar.`,
+    `Bu başlık boyunca ${lex.tech.join(", ")} gibi kavramlar gerekli yerde sahneye girer. Ayrıntı olayın önüne geçmez; olay ayrıntının ne işe yaradığını gösterir.`,
+    `Teknoloji araç listesinden çıkar; kurumun çalışma biçimine, toplantı diline, kabul düzenine ve kriz refleksine bağlanır.`
   ];
 }
 
@@ -861,7 +861,7 @@ function narrativeChapter(category, chapter) {
     paragraph(`Günün başında mesele basit sanılabilir: bir ekran yapılacak, bir servis bağlanacak, bir yazı yazılacak veya bir ürün alınacaktır. Fakat iş ilerledikçe ${lex.actors}. Bu yüzden teknik kararın diliyle kurumsal kararın dili aynı cümlede buluşmak zorundadır.`),
     paragraph(`${family} etrafında ilk bakılacak şey ihtiyaçtır. İhtiyaç doğru yazılmışsa teknik ekip çözümü daraltabilir, satın alma doğru kalemi arayabilir, tedarikçi ne teslim edeceğini bilir, kabul komisyonu da neyi ölçeceğini son gün keşfetmez. İhtiyaç bulanıksa herkes kendi iyi niyetli yorumuyla başka yöne çekilir.`),
     paragraph(`Sahada en sık görülen hata, konunun yalnız teknik araç gibi ele alınmasıdır. Oysa ${topic.toLocaleLowerCase("tr")} bazen mevzuat sınırına, bazen veri sahibine, bazen yedekleme düzenine, bazen de kullanıcı alışkanlığına dokunur. Bu bağlantılar baştan konuşulmazsa proje ilerler ama kurumun zihni geride kalır.`),
-    paragraph(`Bir örnek düşün: tedarikçi çözümünü anlatır, ekip mimari çizimi inceler, kullanıcı temsilcisi kendi ekranını sorar, güvenlikçi log ve yetki ister, satın alma lisans modeline bakar. Aynı masada beş ayrı gerçek vardır. İyi yönetilen iş, bu gerçekleri birbirine düşürmeden tek karar kaydında toplar.`),
+    paragraph(`Tedarikçi çözümünü anlatırken ekip mimari çizimi inceler, kullanıcı temsilcisi kendi ekranını sorar, güvenlikçi log ve yetki ister, satın alma lisans modeline bakar. Aynı masada beş ayrı gerçek vardır. İyi yönetilen iş, bu gerçekleri birbirine düşürmeden tek karar kaydında toplar.`),
     paragraph(`Bu noktada teknoloji ayrıntısı gerektiği kadar devreye girer. API varsa hangi sistemle konuştuğu, log varsa hangi olayı kanıtladığı, veritabanı varsa hangi kaydı kalıcı tuttuğu, ağ varsa hangi hizmeti taşıdığı, güvenlik varsa hangi riski azalttığı açıklanır. Ama teknik ayrıntı metnin efendisi değil, olayın aracı olarak kalır.`),
     paragraph(`${topic} iyi yönetildiğinde kurum yalnız o işi bitirmiş olmaz. Sonraki proje için daha iyi şartname, daha net kabul ölçütü, daha doğru destek modeli ve daha sakin kriz refleksi kazanır. Asıl değer de buradadır: tekrar eden tartışmaları azaltan kurumsal hafıza oluşur.`),
     paragraph(`Kötü yönetildiğinde ise aynı başlık başka adlarla geri döner. Bir ay sonra performans sorunu, üç ay sonra güvenlik istisnası, yıl sonunda denetim bulgusu, bakım döneminde tedarikçi bağımlılığı olarak karşımıza çıkabilir. Bu yüzden ${category.title.toLocaleLowerCase("tr")} içinde bu konu, yalnız öğrenilecek bilgi değil, erken fark edilecek örüntüdür.`)
@@ -896,10 +896,10 @@ function historyChapter(chapter) {
     paragraph(`Bu ihtiyacın cevabı ${details[1]} oldu. Yeni araç ortaya çıktığında yalnız teknik kabiliyet getirmedi; kurumların iş yapma biçimini, ekiplerin görev tanımını ve yöneticilerin sorduğu soruları da değiştirdi.`),
     paragraph(`Önceki dönemin çözümü büyüdükçe yeni sorunlar doğdu. Makine hızlandı ama programlama zorlaştı; kayıt arttı ama veri modeli gerekti; ağ kuruldu ama güvenlik sınırı belirdi; bulut hız verdi ama maliyet ve egemenlik tartışması açıldı. Tarih, bu zincirin adıdır.`),
     paragraph(`${topic} kendi döneminde bir son durak gibi görünse de aslında sonraki teknolojinin zeminini hazırladı. Bir araç yaygınlaştığında kullanıcı beklentisi değişti, ekipler yeni uzmanlıklar kazandı, tedarikçiler yeni ürünler sundu ve kurum yöneticileri eskiden teknik sayılan kararları bütçe ve strateji meselesi olarak konuşmaya başladı.`),
-    paragraph(`Bu geçişlerin ortak tarafı şudur: önce küçük bir teknik kolaylık gelir, sonra o kolaylık alışkanlığa dönüşür, ardından kurumun işleyişi ona göre yeniden şekillenir. Veritabanı raporu kolaylaştırınca denetim daha ayrıntılı veri ister; web hizmeti hızlandırınca kullanıcı yirmi dört saat erişim bekler; mobil uygulama yaygınlaşınca kimlik ve güvenlik sınırı cebe kadar uzanır.`),
-    paragraph(`Bir kamu kurumu veya savunma şirketi açısından bu dönemlerden çıkarılacak ders şudur: ${details[2]}. Bugünün ihale dokümanı, veri merkezi kararı veya yapay zekâ pilotu da aynı mantığa bağlıdır. Önce baskı büyür, sonra araç doğar, ardından organizasyon değişmek zorunda kalır.`),
+    paragraph(`Bu geçişlerin ortak tarafı nettir: önce küçük bir teknik kolaylık gelir, sonra o kolaylık alışkanlığa dönüşür, ardından kurumun işleyişi ona göre yeniden şekillenir. Veritabanı raporu kolaylaştırınca denetim daha ayrıntılı veri ister; web hizmeti hızlandırınca kullanıcı yirmi dört saat erişim bekler; mobil uygulama yaygınlaşınca kimlik ve güvenlik sınırı cebe kadar uzanır.`),
+    paragraph(`Bir kamu kurumu veya savunma şirketi açısından bu dönemlerden çıkarılacak ders açıktır: ${details[2]}. Bugünün ihale dokümanı, veri merkezi kararı veya yapay zekâ pilotu da aynı mantığa bağlıdır. Önce baskı büyür, sonra araç doğar, ardından organizasyon değişmek zorunda kalır.`),
     paragraph(`Bu bakış Türkiye'deki büyük kurumlar için özellikle değerlidir. Cumhurbaşkanlığı düzeyinde dijital dönüşüm konuşulurken, bakanlıkta entegrasyon beklenirken, ASELSAN veya HAVELSAN benzeri yapılarda güvenilir sistem üretimi hedeflenirken aynı tarihsel ders tekrar eder: teknoloji yalnız satın alınmaz, kurumun çalışma düzenine yerleştirilir.`),
-    paragraph(`Bu yüzden ${topic.toLocaleLowerCase("tr")} yalnız geçmiş bilgisi değildir. Bir teknolojinin hangi ihtiyaçtan doğduğunu anlayan yönetici, yeni moda kelime duyduğunda hemen büyülenmez; önce hangi eski soruna cevap verdiğini ve hangi yeni sorumluluğu doğurduğunu sorar.`)
+    paragraph(`Bu yüzden ${topic.toLocaleLowerCase("tr")} yalnız geçmiş bilgisi değildir. Bir teknolojinin hangi ihtiyaçtan doğduğunu anlayan yönetici, yeni bir kavram duyduğunda önce hangi eski soruna cevap verdiğini ve hangi yeni sorumluluğu doğurduğunu sorgular.`)
   ].join("") + visualFor(getCategory("tarihsel-evrim"), chapter);
 }
 
@@ -907,10 +907,10 @@ function techChapter(category, chapter) {
   const topic = cleanTitle(chapter);
   const key = Object.keys(techDetails).find((item) => normalizeText(topic).includes(normalizeText(item))) || category.mode;
   const paragraphs = techDetails[key] || techDetails[category.mode === "ai" ? "Yapay zekâ" : category.mode === "security" ? "Siber izleme" : category.mode === "systems" ? "Donanım" : "Backend ve servis"];
-  const intro = `${topic} başlığı, ${category.title.toLocaleLowerCase("tr")} içinde aynı ailede düşünülmesi gereken parçaları bir araya getirir. Amaç her teknolojiyi ayrı ders gibi uzatmak değil, hangi ihtiyaçta hangi parçanın devreye girdiğini netleştirmektir.`;
+  const intro = `${topic} başlığı, ${category.title.toLocaleLowerCase("tr")} içinde aynı ailede düşünülmesi gereken parçaları bir araya getirir. Her parça, çalıştığı proje anı ve taşıdığı sorumlulukla birlikte ele alınır.`;
   const projectUse = `Gerçek bir projede ${topic.toLocaleLowerCase("tr")} çoğu zaman tek başına gündeme gelmez. Yanında bütçe, güvenlik, bakım, insan yetkinliği, tedarikçi desteği ve kabul ölçütü gelir. Bu yüzden konuya ürün kataloğu gibi değil, çalışan hizmetin bir parçası gibi bakmak gerekir.`;
-  const missing = `Bu aile hiç kullanılmasa ya da yanlış yerde kullanılsa ne olur? Bazen kullanıcı yalnız yavaşlık görür; bazen veri tutarsız kalır, bazen canlıya geçiş korkulu hale gelir, bazen de güvenlik ekibi olaydan sonra yeterli iz bulamaz. Teknolojinin değeri, tam da bu aksaklığı hangi noktada azalttığıyla anlaşılır.`;
-  const managerView = `Yönetici açısından doğru okuma şudur: ayrıntıya saygı duymak ama kararı ayrıntıya boğmamaktır. Hangi ekip işletecek, hangi kayıt kanıt sayılacak, hangi metrik izlenecek, hangi durumda geri dönülecek ve hangi kullanıcı grubu etkilenecek soruları netleşiyorsa teknoloji kurumun diline girmiş demektir.`;
+  const missing = `Bu aile hiç kullanılmadığında ya da yanlış yerde kullanıldığında aksaklık farklı yüzlerle görünür. Bazen kullanıcı yalnız yavaşlık hisseder; bazen veri tutarsız kalır, bazen canlıya geçiş korkulu hale gelir, bazen de güvenlik ekibi olaydan sonra yeterli iz bulamaz. Teknolojinin değeri, tam da bu aksaklığı hangi noktada azalttığıyla anlaşılır.`;
+  const managerView = `Karar masasında ayrıntı bütüne bağlanır. Hangi ekip işletecek, hangi kayıt kanıt sayılacak, hangi metrik izlenecek, hangi durumda geri dönülecek ve hangi kullanıcı grubu etkilenecek soruları netleştiğinde teknoloji kurumun diline girmiş olur.`;
   return [paragraph(intro), ...paragraphs.map(paragraph), paragraph(projectUse), paragraph(missing), paragraph(managerView)].join("") + visualFor(category, chapter);
 }
 
@@ -1034,11 +1034,11 @@ function architectureChapter(category, chapter) {
   const topic = profile.scene;
   return [
     paragraph(`${topic} ekranda tek bir işlem gibi görünür. ${profile.user}. Kullanıcı bu yolun arkasındaki servisleri bilmez; onun için önemli olan işlemin hızlı, doğru ve güvenilir tamamlanmasıdır.`),
-    paragraph(`Arka planda akış şöyle kurulur: ${profile.flow}. Bu cümlede geçen her parça farklı bir sorumluluk taşır. Biri trafiği dengeler, biri kimliği kontrol eder, biri iş kuralını çalıştırır, biri de olayın izini tutar.`),
+    paragraph(`Arka planda akış belirgin bir sırayla ilerler: ${profile.flow}. Bu cümlede geçen her parça farklı bir sorumluluk taşır. Biri trafiği dengeler, biri kimliği kontrol eder, biri iş kuralını çalıştırır, biri de olayın izini tutar.`),
     paragraph(`Veri tarafında tablo daha da netleşir. ${profile.data}. Büyük mimarilerde ana kayıt, hızlı kopya, arama indeksi ve olay kuyruğu birbirine karıştırılmaz. Hangi bilginin resmi kayıt, hangisinin hızlandırıcı kopya olduğu bilinirse kriz anında ekip aynı gerçeğe bakar.`),
     paragraph(`Donanım ve altyapı bu akışın sessiz zeminidir. Sunucuların CPU, RAM ve disk kapasitesi; ağın gecikmesi; veri merkezinin enerji ve soğutması; buluttaki kaynak limitleri bu deneyimi doğrudan etkiler. Yazılım iyi yazılmış olsa bile altyapı sınırı görülmezse sorun kullanıcı ekranına düşer.`),
-    paragraph(`En kritik risk şudur: ${profile.risk}. Bu yüzden mimari çizim yalnız kutular ve oklar değildir; hata anında hangi kutunun neyi etkilediğini gösteren karar aracıdır.`),
-    paragraph(`${profile.analogy} Yönetici için öğrenilmesi gereken ayrıntı budur: teknolojinin adı değil, akıştaki görevi ve bozulduğunda hangi hizmeti etkilediğidir.`)
+    paragraph(`Bu mimarinin kırılgan yeri çoğu zaman burada belirir: ${profile.risk}. Mimari çizim yalnız kutular ve oklar değildir; hata anında hangi kutunun neyi etkilediğini gösteren karar aracıdır.`),
+    paragraph(`${profile.analogy} Kalıcı ders teknolojinin adında değil, akıştaki görevinde ve bozulduğunda hangi hizmeti etkilediğinde kalır.`)
   ].join("") + visualFor(category, chapter);
 }
 
@@ -1052,7 +1052,7 @@ function storyChapter(category, chapter) {
     paragraph(`Olayı izleyen yönetici için değerli olan şey suçlu bulmak değil, sistemin nerede zayıf kaldığını anlamaktır. Bir kişi gece müdahale ederek hizmeti ayağa kaldırabilir; fakat kurum aynı zayıflıkla bir sonraki haftaya giriyorsa iş gerçekten çözülmüş sayılmaz.`),
     paragraph(`${topic} sonunda kurumun kazanması gereken şey yalnız çözüm değildir. Bir daha aynı olay olduğunda hangi alarma bakılacağı, hangi logun saklanacağı, hangi API sözleşmesinin güncelleneceği, hangi tedarikçi taahhüdünün ölçüleceği ve hangi kullanıcı grubunun önceden bilgilendirileceği netleşmelidir.`),
     paragraph(`Bu tür hikâyelerde tempo, teknik olayın insan tarafıyla birleştiği yerde artar. Kullanıcı sabırsızdır çünkü işi beklemektedir; tedarikçi savunmadadır çünkü taahhüdü sorgulanmaktadır; ekip yorgundur çünkü sistemin geçmiş borcunu o anda taşımaktadır. İyi karar, bu gerilimi görüp yine de somut kanıta dönmektir.`),
-    paragraph(`Böyle okunduğunda teknoloji hikâyesi dedikoduya dönüşmez. Her olay, kamu veya özel sektörde yıllarca çalışan birinin sezgisini besleyen küçük bir deneyim kaydına dönüşür.`)
+    paragraph(`Kapanışta geriye yalnız arıza kaydı kalmaz; hangi kararın işe yaradığı, hangi bilginin geç geldiği, hangi bağımlılığın görünmez kaldığı ve hangi toplantının gereksiz olduğu da ortaya çıkar. Bu kayıt bir sonraki projede daha sakin davranan, daha erken kanıt isteyen ve tedarikçi cümlesini daha dikkatli tartan kurumsal hafızaya dönüşür.`)
   ].join("") + visualFor(category, chapter);
 }
 
@@ -1147,11 +1147,11 @@ function pillText(index) {
   const evidence = pools.evidence[(index * 13 + Math.floor(index / 50)) % pools.evidence.length];
   const risk = pillRisks[(index * 17 + Math.floor(index / 100)) % pillRisks.length];
   const angle = [
-    `${name} için asıl değer, ürün adından çok iş akışındaki yerini anlayınca ortaya çıkar.`,
-    `${name} kısa not gibi okunabilir; fakat arkasında bütçe, sahiplik ve işletme sorumluluğu vardır.`,
-    `${name} toplantıda duyulduğunda yalnız adını bilmek yetmez, hangi kaydı veya hizmeti etkilediğini görmek gerekir.`,
-    `${name} doğru konumlandığında teknik ekibin işini azaltır ve yöneticinin kararını sadeleştirir.`,
-    `${name} yanlış bağlamda kullanıldığında çözümden çok yeni bağımlılık doğurabilir.`
+    `${name} karar masasında iş akışındaki yeriyle anlam kazanır.`,
+    `${name} bütçe, sahiplik ve işletme sorumluluğuyla birlikte düşünülür.`,
+    `${name} konuşulurken etkilediği kayıt, hizmet ve kullanıcı grubu da masada olmalıdır.`,
+    `${name} doğru konumlandığında ekiplerin günlük işini sadeleştirir.`,
+    `${name} yanlış bağlamda yeni bağımlılık ve bakım yükü doğurabilir.`
   ][(index * 19 + Math.floor(index / 125)) % 5];
   return `${name}, ${definition}. ${useCase} Örneğin ${domain} ${moment} ${evidence} üzerinden değerlendirilir; çünkü ${risk}. ${angle}`;
 }

@@ -1,6 +1,6 @@
 # Teknoloji Atlası
 
-HTML, CSS ve JavaScript ile kurulmuş koyu temalı statik kitap-site.
+HTML, CSS ve JavaScript ile hazırlanmış koyu temalı statik okuma arşivi.
 
 ## İçerik Yapısı
 
