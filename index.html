@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Teknoloji Atlası: kamu, proje yönetimi, yazılım, altyapı, siber güvenlik ve yapay zekâ için uzun soluklu okuma kitabı." />
+    <title>Teknoloji Atlası</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#/">Teknoloji Atlası</a>
+      <div class="top-actions">
+        <button id="themeToggle" class="icon-button" type="button" title="Tema değiştir" aria-label="Tema değiştir">◐</button>
+        <button id="menuToggle" class="icon-button mobile-only" type="button" title="Başlıklar" aria-label="Başlıklar">☰</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside id="sidebar" class="sidebar">
+        <div class="search-box">
+          <input id="searchInput" type="search" placeholder="Bölüm, teknoloji, kamu, kriz ara" />
+        </div>
+        <nav id="categoryNav" class="category-nav" aria-label="Ana başlıklar"></nav>
+      </aside>
+
+      <main class="reader">
+        <section id="homeView" class="home-view"></section>
+        <section id="chapterView" class="chapter-view hidden"></section>
+        <section id="pillsView" class="pills-view hidden"></section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
