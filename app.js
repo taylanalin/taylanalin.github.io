@@ -941,15 +941,60 @@ function routeIntro(category, chapter) {
 }
 
 function narrativeChapter(category, chapter) {
-  const lex = modeLexicon[category.mode];
   const topic = cleanTitle(chapter);
   const family = firstPhrase(topic);
-  return [
-    paragraph(`${topic} konusu kurumda çoğu zaman tek başına, temiz bir başlık olarak gelmez. Sabah kullanıcıdan bir şikâyet düşer, öğlene doğru tedarikçi toplantısı açılır, akşamüstü üst yönetim kısa ve net bir durum cümlesi ister. İlk bakışta mesele bir ekran, bir servis, bir resmi yazı veya küçük bir teknik ayar gibi görünür; iş ilerledikçe ${lex.actors}. Aynı olayın teknik, idari, mali ve insani karşılığı aynı masada buluşur.`),
-    paragraph(`${family} etrafında sağlam ilerlemenin ilk şartı ihtiyacın berrak olmasıdır. İhtiyaç doğru yazılmışsa teknik ekip çözümü daraltır, satın alma doğru kalemi arar, tedarikçi ne teslim edeceğini bilir, kabul komisyonu neyi ölçeceğini son gün keşfetmez. İhtiyaç bulanıksa herkes iyi niyetle başka yöne çekilir. Bir ekip hız ister, diğeri güvenlik sınırı çizer, bir başkası bütçe kalemini savunur; proje ilerliyor gibi görünürken ortak gerçek yavaş yavaş dağılır.`),
-    paragraph(`Sahada en sık görülen hata, ${topic.toLocaleLowerCase("tr")} konusunu yalnız teknik araç veya tek belge gibi ele almaktır. Oysa konu bazen mevzuat sınırına, bazen veri sahibine, bazen yedekleme düzenine, bazen kullanıcı alışkanlığına dokunur. Tedarikçi çözümünü anlatırken ekip mimari çizimi inceler, kullanıcı temsilcisi kendi ekranını sorar, güvenlikçi log ve yetki ister, satın alma lisans modeline bakar. Aynı masada beş ayrı gerçek vardır; iyi yönetilen iş, bu gerçekleri birbirine düşürmeden tek karar kaydında toplar.`),
-    paragraph(`Teknik ayrıntı burada gerektiği kadar devreye girer. API hangi sistemle konuştuğunu, log hangi olayı kanıtladığını, veritabanı hangi kaydı kalıcı tuttuğunu, ağ hangi hizmeti taşıdığını, güvenlik hangi riski azalttığını gösterir. ${topic} iyi yönetildiğinde kurum yalnız o işi bitirmiş olmaz; sonraki proje için daha iyi şartname, daha net kabul ölçütü, daha doğru destek modeli ve daha sakin kriz refleksi kazanır. Kötü yönetildiğinde aynı konu başka adlarla geri döner: performans sorunu, güvenlik istisnası, denetim bulgusu veya bakım döneminde tedarikçi bağımlılığı.`)
-  ].join("") + visualFor(category, chapter);
+  const lower = topic.toLocaleLowerCase("tr");
+  const bodies = {
+    public: [
+      `${topic} masaya geldiğinde odada yalnız bilgi işlem bulunmaz. Talep sahibi birim işin neden acil olduğunu anlatır, satın alma dosyanın hangi usulle ilerleyeceğini düşünür, hukuk veri ve sorumluluk sınırını yoklar, teknik ekip ise söylenen ihtiyacın gerçekten uygulanabilir olup olmadığını tartar. Kamu tarafında basit görünen her teknik kararın arkasında imza, bütçe, denetim ve hizmet sürekliliği vardır.`,
+      `${family} doğru kurulursa sonraki adımlar sakinleşir. Teknik şartname daha ölçülebilir olur, yaklaşık maliyet daha savunulabilir hale gelir, muayene ve kabul komisyonu son gün neye bakacağını bilir. Yanlış kurulursa herkes aynı kelimeyi kullanır ama farklı şeyi kasteder; biri yazılım isterken diğeri hazır ürün anlar, biri entegrasyon derken diğeri yalnız dosya aktarımı bekler.`,
+      `Gündelik örnek basittir: bir kurum vatandaş başvuru ekranı ister. Ekranın arkasında kimlik doğrulama, veri paylaşım protokolü, log kaydı, KVKK sınırı, yedekleme, destek masası ve bakım taahhüdü vardır. ${topic} bu zincirin hangi halkasına dokunuyorsa orada karar dili netleşmelidir. Kamu işi yavaş ilerlediği için değil, kararın sonradan açıklanabilir olması gerektiği için kayıt ister.`,
+      `${topic} iyi ele alındığında kurum yalnız bir dosyayı kapatmaz; daha sonra gelecek tedarikçiye, denetçiye, kullanıcıya ve üst makama aynı hikâyeyi tutarlı biçimde anlatabilecek hafıza kazanır. Bu hafıza yoksa aynı sorun farklı toplantılarda yeniden doğar ve her seferinde ilk kez yaşanıyormuş gibi enerji tüketir.`
+    ],
+    people: [
+      `${topic} teknoloji projesinin insan tarafını açar. Aynı masada yazılımcı kodun karmaşıklığını, sistemci işletme yükünü, ağcı bağlantı sınırını, güvenlikçi yetki riskini, kullanıcı günlük işinin aksamasını düşünür. Dışarıdan bakınca herkes kendi alanını savunuyor gibi görünür; içeriden bakınca herkes daha önce canını yakan bir hatanın tekrar etmemesi için tutunduğu noktayı korur.`,
+      `Bir kamu personeli imzadan çekiniyorsa bu her zaman isteksizlik değildir; çoğu zaman denetimde hesabını vereceği belgenin eksik kalmasından korkar. Özel sektör ekibi hızlı davranıyorsa bu her zaman plansızlık değildir; müşteri kaybı, kampanya tarihi veya gelir baskısı yakındadır. ${family} bu farklı baskıları aynı cümlede buluşturabildiğinde toplantı kavgadan çıkıp işe dönüşür.`,
+      `Gündelik bir sahne düşünülürse konu hemen anlaşılır: kullanıcı yeni ekran ister, yazılımcı veri modelinin değişeceğini söyler, güvenlikçi kişisel veri alanını işaret eder, tedarikçi bunun ek kapsam olduğunu belirtir. Yönetici bu seslerin hiçbirini susturmadan sıraya koyabilirse mesele kişisel inat olmaktan çıkar, yönetilebilir bir karara dönüşür.`,
+      `${topic} doğru okunduğunda ekip davranışı daha anlaşılır hale gelir. Direnç nerede gerçek risktir, nerede alışkanlıktır, nerede yorgunluktur, nerede kötü deneyimin izidir; bunlar seçilmeye başlar. Teknoloji projelerinde tecrübe biraz da insanların cümlelerinde saklı kalan riski erken duyabilmektir.`
+    ],
+    publicIt: [
+      `${topic} Türkiye'deki kamu BT dünyasının günlük akışı içinde düşünülmelidir. Bir bakanlıkta bilgi işlem dairesi sabah kullanıcı çağrısıyla başlar, öğlen kurumlar arası entegrasyon toplantısına girer, gün sonunda yedekleme raporuna ve güvenlik alarmına bakar. Bağlı kuruluş, taşra, belediye, üniversite veya savunma şirketi aynı başlığı farklı yoğunlukta yaşar.`,
+      `Bu yapıda yazılım ekibi ekranı ve servisi üretir, sistem ekibi sunucu ve sanallaştırmayı taşır, ağ ekibi kurumun damarlarını açık tutar, siber güvenlik ekibi log ve yetki izini takip eder, servis masası ise kullanıcının ilk şikâyetini duyar. ${family} bu ekiplerden hangisine dokunuyorsa işin dili de ona göre değişir; bazen teknik çözüm, bazen protokol, bazen bakım planı, bazen de üst yazı gerekir.`,
+      `ASELSAN benzeri yapılarda kurumsal BT mühendislik, üretim ve güvenlik hassasiyetiyle birlikte yaşar. HAVELSAN benzeri yapılarda yazılım geliştirme, sistem entegrasyonu ve proje teslim kültürü daha belirgin hissedilir. Kamu kurumlarında ise hizmet sürekliliği, mevzuat, veri paylaşımı ve denetlenebilirlik ağır basar. ${topic} bu dünyaların ortak yerinde durur: teknoloji çalışmalı, kayıt kalmalı, sorumluluk belirsiz kalmamalıdır.`,
+      `${topic} iyi yönetildiğinde kurumun iç ritmi rahatlar. Kullanıcı kime başvuracağını bilir, teknik ekip hangi sınırda karar alacağını görür, yönetici üst makama daha sade rapor verir, tedarikçi de neyin kapsam içinde olduğunu tartışmasız anlar. Kamu BT yöneticisinin arka planı bu küçük görünen ama kurumu ayakta tutan düzenlerin toplamından oluşur.`
+    ],
+    project: [
+      `${topic} proje yönetiminde çoğu zaman bir form alanı gibi görünür ama gerçekte ekibin kaderini belirler. İş birimi hızlı sonuç ister, teknik ekip bağımlılıkları gösterir, tedarikçi kapsam sınırını korur, üst yönetim tarih ve bütçe sorar. Proje yöneticisi bu konuşmayı tek bir zemine indirir; ne yapılacak, kim karar verecek, hangi kanıt kabul edilecek ve gecikme olursa kimin işi etkilenecek.`,
+      `${family} net değilse proje ilerlerken huzursuzluk artar. Herkes çalışır ama aynı hedefe çalışmaz. Toplantı notunda karar görünmez, risk kaydı güncellenmez, testin neyi kanıtlayacağı son haftaya kalır. Kamu tarafında bu durum kabul komisyonunda, özel sektörde canlıya geçiş gecesinde patlar. İki dünyada da bedel aynıdır: güven azalır ve ekip enerjisini üretmek yerine açıklama yapmaya harcar.`,
+      `Sahada sağlam proje yöneticisi büyük laflardan çok küçük izleri takip eder. Bir gereksinim cümlesinin ölçülebilir olup olmadığına, bir değişikliğin hangi takvimi bozduğuna, bir tedarikçi vaadinin sözleşmede karşılığının bulunup bulunmadığına bakar. ${topic} burada kuru yönetim tekniği değil, yarın çıkacak tartışmayı bugünden görünür kılan disiplin olur.`,
+      `${topic} doğru kurulduğunda proje yalnız teslim tarihine yaklaşmaz; ekip aynı gerçeğe bakmaya başlar. Kabul günü geldiğinde kimse eski e-postaları aramaz, kararın sahibi bellidir, test sonucu konuşur, riskin ne zaman fark edildiği kayıttadır. İyi proje yönetimi biraz da budur: son günkü gürültüyü ilk haftadaki netlikle azaltmak.`
+    ],
+    leadership: [
+      `${topic} teknik yöneticinin en zor dengesine dokunur. Yönetici ayrıntıyı bilmeden karar veremez, ama her ayrıntıya girerse ekibin nefesini keser. Üst makam kısa cümle ister, uzman ekip teknik gerçeği anlatmak ister, tedarikçi kendi çözümünü savunur, güvenlik ekibi sınır çizer, kullanıcı hizmetin kesilmemesini bekler. Bu odada yöneticinin işi, herkesin dilini aynı karara çevirmektir.`,
+      `${family} gündeme geldiğinde iyi yönetici önce kararın etkisini arar. Bu konu maliyeti mi artırıyor, güvenliği mi etkiliyor, hizmet sürekliliğini mi değiştiriyor, insan yetkinliği mi istiyor, tedarikçiye bağımlılık mı doğuruyor? Teknik ayrıntı saygı görür ama karar ayrıntının içinde kaybolmaz. Kurumun ihtiyacı, uzmanlığın emeği ve üst makamın beklentisi aynı çizgide tutulur.`,
+      `Bir örnekte ekip Kubernetes ister, başka bir örnekte güvenlik SIEM yatırımı savunur, başka bir masada eski sistemin bir yıl daha yaşatılması gerekir. Bunların hiçbiri yalnız teknoloji tercihi değildir. Lisans bütçesi, işletme yetkinliği, bakım modeli, eğitim ihtiyacı, mevzuat ve kriz anındaki sorumluluk aynı anda düşünülür. ${topic} bu yüzden yöneticinin karar kasını büyüten konulardandır.`,
+      `${topic} iyi yönetildiğinde ekip yöneticiden mucize beklemez; netlik bekler. Ne zaman risk alınacağı, ne zaman durulacağı, hangi kararın kayıt altına alınacağı, hangi teknik itirazın üst makama taşınacağı belirginleşir. Büyük kurumlarda saygınlık biraz da bu sakin tutarlılıktan doğar.`
+    ],
+    crisis: [
+      `${topic} kriz anında kendini bir anda gösterir. Telefonlar çalar, izleme ekranında alarm belirir, kullanıcı sosyal medyada veya çağrı merkezinde sesini yükseltir, tedarikçi ilk açıklamayı yapar, yönetici ise etkinin sınırını öğrenmek ister. İlk dakikalarda panik kolaydır; zor olan, az bilgiyle doğru sırayı kurmaktır.`,
+      `${family} yönetilirken önce etkinin alanı bulunur. Hangi hizmet etkilendi, kaç kullanıcı görüyor, veri kaybı var mı, güvenlik şüphesi var mı, geri dönüş yolu açık mı? Bu sorular cevaplanmadan yapılan her açıklama risktir. Bir kesinti yalnız teknik arıza değildir; güven, itibar, denetim ve iş sürekliliği aynı anda hareket eder.`,
+      `Kriz odasında herkes kendi penceresinden haklıdır. Sistemci kaynaklara, ağcı trafiğe, yazılımcı son değişikliğe, güvenlikçi olağandışı davranışa, kullanıcı temsilcisi sahadaki etkiye bakar. ${topic} bu parçaları tek zaman çizelgesinde birleştirdiğinde sorun büyüklüğünü kaybeder; artık karanlık bir gürültü değil, yönetilebilir bir olaydır.`,
+      `${topic} sonrasında kurumun asıl kazancı normale dönmekten fazlasıdır. Alarm eşiği değişir, log saklama düzeni netleşir, yedek tatbikatı planlanır, tedarikçi taahhüdü ölçülür, olay raporu sonraki projeye ders olur. Kriz boşa gitmezse kurum aynı darbeyi ikinci kez daha sakin karşılar.`
+    ],
+    future: [
+      `${topic} bugünün çalışma hayatında küçük işaretlerle başlar. Bir ekip uzaktan çalışmayı kalıcı hale getirir, başka bir kurum bulut maliyetini tartışır, güvenlik ekibi kimliği yeni sınır olarak görür, veri merkezi GPU ve enerji baskısını konuşur. Gelecek çoğu zaman büyük bir duyuru değil, mevcut sistemlerin artık eskisi gibi yetmemesiyle gelir.`,
+      `${family} değerlendirilirken parlak vaatlerden önce kurum baskılarına bakılır. Kullanıcı daha hızlı hizmet ister, mevzuat daha açıklanabilir kayıt bekler, siber saldırılar daha ısrarcı hale gelir, veri hacmi büyür, tedarik zinciri kırılganlaşır. Yeni teknoloji bu baskılardan birini azaltıyorsa değer üretir; yalnız yeni olduğu için gündeme geliyorsa kısa sürede yük olur.`,
+      `Kamu kurumları, savunma şirketleri ve büyük özel sektör yapıları bu değişimi farklı yerlerinden hisseder. Bakanlık için mesele vatandaş hizmetinin kesilmemesi ve verinin korunmasıdır; savunma sanayii için güvenilirlik, gizlilik ve yerli kabiliyet öne çıkar; özel sektör için hız, ölçek ve müşteri deneyimi baskısı daha belirgindir. ${topic} bu farklı gündemleri aynı haritada birleştirir.`,
+      `${topic} doğru okunduğunda tahmin falcılığa dönüşmez. Bugünkü kapasite sorunu yarının bulut kararına, bugünkü güvenlik açığı yarının sıfır güven mimarisine, bugünkü doküman kalabalığı yarının RAG projesine dönüşebilir. Gelecek, bugünün sıkışan yerlerini dikkatle izleyen kurumlara daha erken görünür.`
+    ]
+  };
+  const selected = bodies[category.mode] || [
+    `${topic} kurum hayatında tek başına duran bir kavram değildir; insan, süreç, teknoloji ve karar aynı anda hareket eder.`,
+    `${family} doğru ele alındığında ekipler aynı hedefe bakar, yanlış ele alındığında aynı kelimeler farklı beklentilere dönüşür.`,
+    `Gündelik iş akışında bu konu teknik ayrıntı kadar belge, sorumluluk, bakım ve kullanıcı alışkanlığıyla da ilgilidir.`,
+    `${topic} geride daha net karar, daha iyi kayıt ve daha sakin işletme disiplini bırakıyorsa değer üretmiş demektir.`
+  ];
+  return selected.map(paragraph).join("") + visualFor(category, chapter);
 }
 
 function historyChapter(chapter) {
@@ -989,13 +1034,35 @@ function historyChapter(chapter) {
 
 function techChapter(category, chapter) {
   const topic = cleanTitle(chapter);
-  const key = Object.keys(techDetails).find((item) => normalizeText(topic).includes(normalizeText(item))) || category.mode;
+  const rawTitle = chapter.title;
+  const key = Object.keys(techDetails).find((item) =>
+    normalizeText(rawTitle).includes(normalizeText(item)) || normalizeText(topic).includes(normalizeText(item))
+  ) || category.mode;
   const paragraphs = techDetails[key] || techDetails[category.mode === "ai" ? "Yapay zekâ" : category.mode === "security" ? "Siber izleme" : category.mode === "systems" ? "Donanım" : "Backend ve servis"];
-  const intro = `${topic} başlığı, ${category.title.toLocaleLowerCase("tr")} içinde aynı ailede düşünülmesi gereken parçaları bir araya getirir. Her parça, çalıştığı proje anı ve taşıdığı sorumlulukla birlikte ele alınır.`;
-  const projectUse = `Gerçek bir projede ${topic.toLocaleLowerCase("tr")} çoğu zaman tek başına gündeme gelmez. Yanında bütçe, güvenlik, bakım, insan yetkinliği, tedarikçi desteği ve kabul ölçütü gelir. Bu yüzden konuya ürün kataloğu gibi değil, çalışan hizmetin bir parçası gibi bakmak gerekir.`;
-  const missing = `Bu aile hiç kullanılmadığında ya da yanlış yerde kullanıldığında aksaklık farklı yüzlerle görünür. Bazen kullanıcı yalnız yavaşlık hisseder; bazen veri tutarsız kalır, bazen canlıya geçiş korkulu hale gelir, bazen de güvenlik ekibi olaydan sonra yeterli iz bulamaz. Teknolojinin değeri, tam da bu aksaklığı hangi noktada azalttığıyla anlaşılır.`;
-  const managerView = `Karar masasında ayrıntı bütüne bağlanır. Hangi ekip işletecek, hangi kayıt kanıt sayılacak, hangi metrik izlenecek, hangi durumda geri dönülecek ve hangi kullanıcı grubu etkilenecek soruları netleştiğinde teknoloji kurumun diline girmiş olur.`;
-  return [paragraph(intro), ...paragraphs.map(paragraph), paragraph(projectUse), paragraph(missing), paragraph(managerView)].join("") + visualFor(category, chapter);
+  const sceneByMode = {
+    software: "Bir kamu portalı, e-ticaret ekranı veya kurum içi iş uygulaması açıldığında kullanıcı yalnız formu ve butonu görür; arka tarafta dil, servis, veri, entegrasyon ve teslimat düzeni birlikte çalışır.",
+    systems: "Bir uygulama yavaşladığında ilk şikâyet yazılıma gelir; oysa sorun çoğu zaman işlemci, bellek, disk, ağ, sanallaştırma, enerji veya yedekleme tarafında saklıdır.",
+    security: "Bir güvenlik alarmı düştüğünde olay yalnız saldırı ihtimali değildir; kimlik, yetki, uç nokta, ağ, uygulama, veri ve log aynı anda anlam kazanır.",
+    ai: "Bir yapay zekâ denemesi başladığında odadaki heyecan model adından gelir; projenin kaderini ise veri kalitesi, kaynak gösterme, yetki sınırı, maliyet ve insan onayı belirler."
+  };
+  const bridgeByMode = {
+    software: "Yazılım tarafında iyi karar, teknolojiyi tek başına değil üretim hattındaki rolüyle görür.",
+    systems: "Sistem ve ağ tarafında iyi karar, görünmeyen zeminin hangi hizmeti taşıdığını açık eder.",
+    security: "Siber güvenlik tarafında iyi karar, korkuyu değil kanıtı ve işletilebilir kontrolü büyütür.",
+    ai: "Yapay zekâ tarafında iyi karar, hız vaadini denetlenebilir bilgiyle dengeler."
+  };
+  const closingByMode = {
+    software: `${topic} yanlış yerde seçilirse ilk gün değil, bakım, test, canlıya geçiş ve ekip değişimi sırasında pahalılaşır. Doğru yerde kullanıldığında kodun geçmişi, verinin kalıcılığı, servislerin konuşması ve kullanıcının deneyimi aynı çizgide ilerler.`,
+    systems: `${topic} ihmal edildiğinde kullanıcı bunu çoğu zaman 'sistem yavaş' diye anlatır; fakat kök sebep kapasite, ağ yolu, depolama veya işletme düzenidir. Doğru kurulduğunda yazılımın nefes alacağı güvenilir zemin oluşur.`,
+    security: `${topic} eksik kaldığında kurum olaydan sonra gerçeği bulmakta zorlanır. Doğru kurulduğunda saldırı ihtimali azalır, olay gerçekleşirse de iz, sorumluluk ve müdahale sırası kaybolmaz.`,
+    ai: `${topic} abartıldığında kurum hızlı demo görür ama kalıcı fayda üretemez. Doğru kurulduğunda belge, karar, yazılım ve destek süreçleri hızlanır; insan onayı ve kaynak izi korunur.`
+  };
+  return [
+    paragraph(`${sceneByMode[category.mode] || sceneByMode.software} ${topic} bu akışın içinde belirli bir yükü taşır; adı tek başına değerli değildir, hangi sorunu azalttığı ve hangi sorumluluğu doğurduğu anlaşılınca yerine oturur.`),
+    paragraph(`${paragraphs[0]} ${paragraphs[1] || ""}`),
+    paragraph(`${paragraphs[2] || ""} Gerçek bir projede ${topic.toLocaleLowerCase("tr")} yanında bütçe, güvenlik, bakım, insan yetkinliği, tedarikçi desteği ve kabul ölçütüyle gelir. ${bridgeByMode[category.mode] || bridgeByMode.software}`),
+    paragraph(`${closingByMode[category.mode] || closingByMode.software} Karar masasında hangi ekip işletecek, hangi kayıt kanıt sayılacak, hangi metrik izlenecek ve hangi kullanıcı grubu etkilenecek soruları netleştiğinde konu teknik terim olmaktan çıkar, kurumun çalışma düzenine girer.`)
+  ].join("") + visualFor(category, chapter);
 }
 
 const architectureProfiles = {
