@@ -831,6 +831,93 @@ function section(title, paragraphs) {
   return `<h2>${title}</h2>${paragraphs.map(paragraph).join("")}`;
 }
 
+const routeNarratives = {
+  "kamu-rehberi": [
+    "Kamu tarafında teknoloji çoğu zaman bir ekranla değil, bir ihtiyaç yazısıyla başlar. Bir daire başkanı hizmetin aksadığını söyler, bilgi işlem ekibi mevcut sistemin sınırlarını anlatır, satın alma yaklaşık maliyeti sorar, hukuk birimi kişisel veriye dikkat çeker, üst yönetim ise işin ne zaman vatandaşa dokunacağını bilmek ister. Aynı masada teknik, idari, mali ve hukuki dil yan yana durur; önce o masanın dili sadeleşir.",
+    "İhale ihtiyacı doğru yazılmadan iyi teknik şartname çıkmaz; teknik şartname ölçülebilir kurulmadan kabul komisyonu rahat çalışmaz; kabul netleşmeden de kurum aldığı hizmetin gerçekten işine yarayıp yaramadığını savunamaz. Bir sunucu alımı, bir yazılım geliştirme işi, bir veri paylaşım protokolü veya bir bakım sözleşmesi dışarıdan küçük bir işlem gibi görünür. İçeride ise imza, bütçe, denetim, tedarikçi, kullanıcı ve hizmet sürekliliği birbirine bağlanır.",
+    "Kamuya yeni giren biri bazen resmi yazıyı yavaşlık, ihale sürecini bürokrasi, komisyonu formalite sanabilir. Sahada işler bu kadar basit değildir. Resmi yazı kurum hafızasını tutar; ihale rekabeti ve hesap verebilirliği korur; kabul komisyonu teslim edilen işin gerçekten sözleşmedeki iş olup olmadığını kayıt altına alır. İyi bilgi teknolojileri yöneticisi bu yapıları ezberlemez, hangi riski azalttıklarını bilir.",
+    "İhtiyaç tarifinden teknik şartnameye, yaklaşık maliyetten muayene kabule, protokolden KVKK'ya, lisans envanterinden felaket kurtarmaya kadar kamu BT'nin ana omurgası sırayla açılır. Burada mevzuat maddesi saymaktan çok, bir bakanlıkta, belediyede, üniversitede veya savunma şirketinde teknik kararın nasıl resmî karara dönüştüğü ve masadaki her cümlenin neye temas ettiği izlenir."
+  ],
+  insanlar: [
+    "Teknoloji projelerinde en zor parça çoğu zaman sunucu, kod veya ağ değildir; aynı olaya bakan insanların farklı kaygılarıdır. Yazılımcı değişiklik ister, sistemci istikrar ister, güvenlikçi sınır ister, kullanıcı hız ister, yönetici hesap verebilirlik ister. Herkes haklı bir parçayı tutar ama parçalar tek resme bağlanmazsa toplantı uzar, karar gecikir ve sorun teknikmiş gibi görünürken aslında insan diliyle büyür.",
+    "Kamu personeli riskten kaçıyor gibi görünebilir; çoğu zaman imzanın ağırlığını taşır. Özel sektör ekibi aceleci görünebilir; çoğu zaman pazar baskısını ve müşteri kaybını hisseder. Tedarikçi fazla parlak konuşabilir; çoğu zaman sözleşme kapsamını genişletmeden işi yönetmeye çalışır. Kullanıcı direniyor gibi görünebilir; çoğu zaman işini kaybetmekten, hata yapmaktan veya alıştığı düzeni yitirmekten korkar.",
+    "Teknik cümlelerin arkasında çoğu zaman görünmeyen bir insan hâli vardır. Bir sistemci 'bu ortamı açamayız' dediğinde bazen güvenlik açığını, bazen kapasite yetersizliğini, bazen de daha önce yaşanmış ve kayda geçmemiş bir krizi hatırlıyordur. Bir yazılımcı 'bu istek küçük değil' dediğinde yalnız kod satırını değil, test yükünü, veri etkisini ve canlıya geçiş riskini de anlatmaya çalışıyordur.",
+    "İyi yönetici bu seslerin hangisinin direnç, hangisinin uyarı, hangisinin yorgunluk, hangisinin gerçek risk olduğunu ayırmaya başlar. İnsanlar ve teknoloji başlığı bu yüzden teknik atlasın yumuşak ama belirleyici zeminidir. Çünkü aynı sistemi iki farklı ekip işletebilir; birinde kriz büyür, diğerinde aynı sorun sakin bir bakım kaydına dönüşür."
+  ],
+  "tarihsel-evrim": [
+    "Teknolojinin tarihi yılların ve cihaz adlarının listesi değildir. İlk bilgisayarlar ortaya çıktığında amaç eğlenceli uygulamalar yazmak değildi; savaş hesapları, nüfus sayımı, bilimsel modelleme ve tekrar eden büyük işlemleri daha hızlı yapmaktı. Sonra makine küçüldü, transistor geldi, ana bilgisayar kurum merkezine yerleşti, programlama dilleri makineyle insan işi arasında köprü kurdu. Her yeni adım bir önceki çözümün büyüttüğü yeni soruna cevap verdi.",
+    "Mainframe güvenilir kayıt fikrini doğurdu; kişisel bilgisayar teknolojiyi masaya indirdi; yerel ağlar ofisleri birbirine bağladı; web bilgiyi kurum duvarının dışına taşıdı. Veritabanı raporu mümkün kılınca denetim daha fazla veri istemeye başladı. Web hizmeti hız kazandırınca vatandaş ve müşteri gece de erişim bekledi. Mobil uygulama yaygınlaşınca kimlik, bildirim, güvenlik ve kullanıcı deneyimi cebin içine kadar girdi.",
+    "Sonra bulut, konteyner, DevOps, büyük veri ve siber güvenlik aynı dönemin farklı cevapları olarak büyüdü. Kurumlar artık yalnız uygulama yazmıyor; izliyor, ölçekliyor, yedekliyor, denetliyor, saldırıya hazırlanıyor ve tedarik bağımlılığını yönetiyor. Yapay zekâ da bu zincirin son halkası gibi görünse de aslında eski bir ihtiyacın yeni biçimiyle ilgilidir: çok büyük bilgi yığını içinde anlamlı cevap bulmak.",
+    "İlk bilgisayardan bugüne uzanan çizgi, teknoloji ailesinin neden bu kadar genişlediğini gösterir. Bir kavramın hangi dönemde doğduğunu bilmek, bugünkü projede neden hâlâ yaşadığını anlamayı sağlar. Çünkü kurumlar geçmişi geride bırakmaz; eski kayıt, yeni API, yeni bulut hesabı, eski mevzuat ve yeni güvenlik beklentisi çoğu zaman aynı toplantıda yan yana oturur."
+  ],
+  "kamu-bt": [
+    "Türkiye'de kamu bilgi teknolojileri tek tip bir oda değildir. Cumhurbaşkanlığı düzeyinde strateji ve koordinasyon konuşulurken, bakanlık bilgi işlem dairesinde hizmet sürekliliği, entegrasyon, güvenlik, yazılım bakımı ve kullanıcı desteği aynı gün içinde gündeme gelir. Bağlı kuruluş başka bir öncelikle gelir, taşra teşkilatı farklı bağlantı sorunuyla arar, belediye vatandaş hizmetini düşünür, üniversite kayıt haftasındaki yoğunluğu yönetmeye çalışır.",
+    "Bu dünyanın içinde yazılım ekibi ekran ve servis geliştirir; sistem ekibi sunucu, sanallaştırma, yedekleme ve veri merkezi düzenini taşır; ağ ekibi omurgayı, internet çıkışını, VPN'i ve kurumlar arası hatları yönetir; siber güvenlik ekibi log, yetki, zafiyet ve olay müdahalesine bakar. Servis masası kullanıcının ilk sesini duyar. Envanter ve lisans ekibi görünmez gibi dursa da bütçe ve denetim zamanı kurumun elini güçlendirir.",
+    "Savunma sanayii şirketlerinde tablo biraz daha katmanlıdır. ASELSAN benzeri yapılarda kurumsal BT, üretim ve mühendislik ekiplerinin güvenilir çalışmasını sağlar; HAVELSAN benzeri yapılarda yazılım, sistem entegrasyonu ve proje teslim kültürü daha belirgin hissedilir. Burada yalnız bilgisayar çalışsın diye uğraşılmaz. Güvenlik, süreklilik, kalite, izlenebilirlik ve teslimat disiplini aynı dosyada buluşur.",
+    "Kamu BT yöneticisi olmak isteyen birinin arka planı bu gündelik gerçeklerin içinde kurulur. Hangi ekip ne yapar, kim kime bağlıdır, hangi iş içeride yapılır, hangisi tedarikçiyle yürür, entegrasyon neden yalnız teknik bağlantı değildir, resmî karar teknik mimariyi nasıl etkiler; bütün bu sorular kurum şemasını ezberletmeden, o şemanın içinde teknoloji işinin nasıl yürüdüğünü gösterir."
+  ],
+  "saha-hikayeleri": [
+    "Bazı bilgiler kitapta kuru durur ama toplantı odasında canlanır. Bakanlık entegrasyonunda imza beklenir, banka canlıya geçişinde saat ilerler, savunma üretim hattında parça izi kaybolur, belediyede seçim gecesi sistemin ayakta kalması gerekir. Her hikâyede ekranda küçük görünen bir belirti, arka tarafta yazılım, altyapı, veri, güvenlik ve insan kararına bağlanır.",
+    "Olayın nasıl büyüdüğü, nerede yanlış anlaşıldığı ve hangi kayıtla çözüldüğü adım adım izlenir. Bir tedarikçi 'sorun bizden değil' dediğinde log ne söyler, bir kullanıcı 'ekran açılmıyor' dediğinde ağ ne durumdadır, bir yönetici 'ne zaman düzelir' diye sorduğunda ekip hangi kanıtla konuşur; asıl öğretici olan bu ara cümlelerdir.",
+    "Kamu ve özel sektörün ritmi farklıdır ama kriz anında ihtiyaç benzerdir: doğru bilgi, net sorumluluk, ölçülebilir etki ve uygulanabilir karar. Olaylar gerçek hayattan esinlenen sahneler gibi ilerler. Yaşanmış bir anıyı süslemek yerine, o anının içindeki teknik ve yönetsel ders görünür hale gelir.",
+    "Bir süre sonra okuyanın zihninde ortak bir refleks oluşur. Her parlak çözümün arkasında kabul ölçütü aranır, her kesintide önce etki alanı sorulur, her entegrasyonda veri sahibi ve log izi düşünülür. Deneyim biraz da budur: aynı acıyı yıllarca yaşamadan, başkalarının yaşadığı akışlardan erken sezgi kazanmak."
+  ],
+  "proje-yonetimi": [
+    "Proje yönetimi takvim doldurmakla başlamaz; belirsizliği görünür hale getirmekle başlar. Bir iş birimi 'basit bir ekran' ister, teknik ekip bunun üç sisteme dokunduğunu fark eder, tedarikçi kapsamın dışına taşan işleri işaret eder, üst yönetim tarihe bakar. Proje yöneticisi bu sesleri aynı zemine indirir: hedef ne, başarı nasıl ölçülecek, karar kimde, risk nerede, kabul günü neye bakılacak.",
+    "İyi proje daha ilk haftasında kendini belli eder. Gereksinim cümlesi ölçülebilirdir, kapsamın sınırı konuşulmuştur, bağımlılıklar saklanmamıştır, toplantı notu karar kaydına dönüşür. Kötü projede herkes çalışıyor görünür ama ekipler farklı başarı tanımıyla ilerler. Son hafta gelince test eksik, veri hazırlığı geç, kullanıcı eğitimi belirsiz, tedarikçi teslimi tartışmalı hale gelir.",
+    "Kamu projelerinde bu disiplin daha da önemlidir. Şartname, sözleşme, muayene kabul, resmi yazı ve bütçe savunması proje planının dışında değildir; planın iskeletidir. Özel sektörde hız baskısı daha görünürdür ama orada da kullanıcı deneyimi, gelir kaybı, marka itibarı ve operasyon yükü proje kararlarını belirler. İki dünyada da proje yöneticisinin değeri, ayrıntıları tek gerçek tabloya bağlayabilmesidir.",
+    "Kapsamdan riske, paydaş haritasından test stratejisine, canlıya geçişten proje kapanışına kadar akış sıraya girer. Metodoloji adı ezberlemek yerine, gerçek bir projede hangi cümlenin ileride pahalıya çıkacağı, hangi sessizliğin risk sakladığı ve hangi kaydın kabul gününü kurtaracağı belirginleşir."
+  ],
+  "teknik-yonetici": [
+    "Teknik üst düzey yönetici ayrıntıyı tamamen uzmana bırakıp kenara çekilemez; ama her ayrıntının içine girip ekibin işini de boğamaz. Zor denge buradadır. Üst makam hızlı ve net cümle ister, uzman ekip teknik gerçekliği anlatmak ister, tedarikçi kendi çözümünü savunur, güvenlik ekibi sınır çizer, kullanıcı hizmetin kesilmemesini bekler. Yönetici bu diller arasında tercümanlık yapar.",
+    "Bu görevde karar yalnız doğru teknolojiyi seçmek değildir. Bazen eski sistemi bir yıl daha taşımak, bazen riskli bir canlıya geçişi ertelemek, bazen pahalı görünen yedekliliği savunmak, bazen de ekipten gelen popüler teknoloji talebine mesafe koymak gerekir. Her kararın arkasında maliyet, zaman, güvenlik, insan yetkinliği, mevzuat ve kurum itibarı birlikte durur.",
+    "Teknik yönetici adayının kazanması gereken şey geniş ama ölçülü bir bakıştır. PostgreSQL'in ne işe yaradığını bilmelidir ama veritabanı yöneticisinin yerine geçmeye çalışmamalıdır. SIEM'in neden gerektiğini anlamalıdır ama her alarmı kendisi incelememelidir. Kubernetes, RAG, API Gateway, VPN veya DLP konuşulduğunda bu teknolojilerin kurumda hangi sorumluluğu doğurduğunu ayırt edebilmelidir.",
+    "Üst makama anlatım, ekip kurma, tedarikçi masası, bütçe savunması, kriz iletişimi ve kurum hafızası aynı çizgide ilerler. Büyük kurumlarda yönetici gücü, her şeyi bilmekten çok doğru soruyu doğru zamanda doğru kişiye sorabilmekle ortaya çıkar. Bunun için de teknik kavramların insan, bütçe ve karar tarafıyla birlikte okunması gerekir."
+  ],
+  "kriz-cozum": [
+    "Teknolojik kriz geldiğinde ilk dakika çoğu zaman sisli geçer. Kullanıcı ekranın açılmadığını söyler, izleme sistemi birkaç alarm üretir, tedarikçi beklemeyi önerir, üst yönetim etkiyi sorar. O anda en değerli şey yüksek ses değil, doğrulanmış bilgidir. Hangi hizmet etkilendi, kaç kullanıcı görüyor, veri kaybı var mı, güvenlik şüphesi var mı, geri dönüş yolu açık mı; kriz yönetimi bu sırayla nefes alır.",
+    "Bir veritabanı kilidi yalnız veritabanı meselesi değildir; çağrı merkezine, rapora, ödeme akışına ve kullanıcı güvenine dokunabilir. DNS hatası küçük bir kayıt gibi görünür ama bütün kurum erişilemez hale gelebilir. Yedek dönmüyorsa sorun yalnız teknik değildir; daha önce yapılmayan tatbikatın bedeli o gün ödenir. Krizler teknolojinin görünmeyen borçlarını çok hızlı tahsil eder.",
+    "Kesinti, DDoS, yanlış ortam, dolan disk, eski cache, biriken kuyruk, delinen yetki ve duran üçüncü taraf servis gibi olaylarda önce belirti, sonra etki alanı, sonra teknik kök sebep, sonra kalıcı düzeltme görünür hale gelir. Gereksiz ayrıntı yerine sahada karar aldıran bilgi öne çıkar.",
+    "Krizden sonra kurumun kazanması gereken şey yalnız normale dönüş değildir. Olay raporu yazılır, alarm eşiği güncellenir, sorumluluk matrisi netleşir, yedek tatbikatı planlanır, tedarikçi taahhüdü ölçülür. Aynı olay ikinci kez yaşandığında kurum daha hızlı, daha sakin ve daha kanıtlı davranıyorsa kriz boşa gitmemiştir."
+  ],
+  "buyuk-mimariler": [
+    "Büyük sistemler kullanıcıya tek ekran gibi görünür. Bir kişi ürünü arar, sepete ekler, ödeme yapar, kargo bilgisini görür; ekranda birkaç saniyelik bir yolculuk vardır. Arka tarafta ise CDN, WAF, load balancer, API Gateway, backend servisleri, veritabanı, Redis, Kafka, Elasticsearch, log sistemi, monitoring ve güvenlik kuralları aynı anda çalışır. Mimari tam olarak bu görünmeyen düzenin haritasıdır.",
+    "Trendyol benzeri bir e-ticaret akışı iyi örnektir. Kullanıcının gördüğü ürün kartı ayrı bir servisle, stok bilgisi başka bir kayıtla, ödeme güvenliği başka bir sistemle, kargo takibi başka bir entegrasyonla yaşar. PostgreSQL siparişin resmi kaydını tutarken Redis hızlı oturum ve sepet bilgisini taşır; Kafka ödeme sonrası bildirim, fatura ve kargo olaylarını sıraya alır; Elasticsearch arama ve log incelemeyi hızlandırır.",
+    "Aynı düşünce kamu portalı, banka transferi, hastane randevusu veya savunma üretim izinde de geçerlidir. Bir başvuru formu yalnız form değildir; kimlik doğrulama, yetki, veri paylaşımı, arşiv, denetim izi ve kesinti anında geri dönüş planı ister. Bir üretim parçası yalnız stok kaydı değildir; tedarik zinciri, kalite kanıtı, seri numarası, doküman sürümü ve güvenlik sınırıyla birlikte yaşar.",
+    "Görsel akışlar kutu ezberletmek için değil, karar anında hangi parçanın hangi sorumluluğu taşıdığını hatırlatmak için kullanılır. Mimariyi iyi okuyan kişi ekrandaki hatayı yalnız ekranda aramaz; trafiğin nereden geçtiğini, verinin nerede kalıcı olduğunu, olayın hangi logda iz bıraktığını ve hangi ekibin hangi anda devreye gireceğini bilir."
+  ],
+  "yakin-gelecek": [
+    "Yakın gelecek bir anda gökten düşmez; bugünün kurumlarında büyüyen baskıların içinden çıkar. Pandemi uzaktan çalışmayı hızlandırdı, bulut kapasiteyi esnekleştirdi, siber saldırılar kimlik merkezli güvenliği öne çıkardı, yapay zekâ ofis işlerini ve yazılım üretimini değiştirmeye başladı. Her yenilik bir kolaylık getirirken yeni bir yönetim sorumluluğu da doğurdu.",
+    "Bir bakanlık için gelecek, yalnız yapay zekâ pilotu yapmak değildir; verinin nerede durduğunu, hangi bulutun hangi bağımlılığı doğurduğunu, kritik hizmetin kesinti anında nasıl döneceğini ve vatandaş bilgisinin nasıl korunacağını bilmektir. Bir savunma şirketi için gelecek, GPU kapasitesi kadar tedarik zinciri, yerli kabiliyet, güvenli yazılım ve uzun ömürlü bakım anlamına gelir.",
+    "Önümüzdeki yıllarda edge computing, IoT, sıfır güven, post-kuantum hazırlık, üretken yapay zekâ, ajan sistemleri, enerji verimliliği ve veri egemenliği daha sık aynı masaya gelecek. Bu kavramların her biri tek başına parlak görünebilir. Kurumsal hayatta değerleri, hangi hizmeti daha güvenli, daha hızlı, daha denetlenebilir veya daha sürdürülebilir yaptıklarıyla ölçülür.",
+    "Tahmin yapılırken kehanet dili yerine bugünün kapasite sıkışması, güvenlik riski, mevzuat baskısı, kullanıcı beklentisi ve tedarik bağımlılığı takip edilir. Çünkü yarının büyük teknolojik kararı çoğu zaman bugünkü küçük operasyon sıkıntısının büyümüş halidir."
+  ],
+  "teknoloji-atlasi-yazilim": [
+    "Yazılım ve veri atlası tek tek ürün adı saymak için kurulmaz. Programlama dilleri, web arayüzleri, backend servisleri, API sözleşmeleri, veritabanları, cache, arama motorları, mesaj kuyrukları ve teslimat hatları aynı sistemin farklı görevlerini taşır. Java, Python, C# veya JavaScript birer dil olarak başlar; gerçek projede ekip yetkinliği, bakım süresi, performans, güvenlik ve kurumsal alışkanlıkla birlikte anlam kazanır.",
+    "Bir kamu portalında kullanıcı başvuru formunu doldururken frontend ekranda düzeni sağlar, backend iş kuralını çalıştırır, API başka kurumdan veri alır, PostgreSQL kalıcı kaydı tutar, Redis sık okunan geçici bilgiyi hızlandırır, Kafka yan işleri sıraya alır, Elasticsearch belge ve log aramasını kolaylaştırır. Git ve GitHub kodun geçmişini, CI/CD ise güvenli teslimat akışını taşır.",
+    "Teknik ayrıntı dozunda kalır. Java'nın uzun ömürlü kurumsal sistemlerde neden sevildiği, Python'un veri ve otomasyon işlerinde neden yaygın olduğu, JavaScript'in web deneyimini nasıl taşıdığı anlatılır; ama amaç dil yarıştırmak değildir. Aynı şekilde PostgreSQL ana kayıt defteri, Redis hızlı bellek katmanı, Kafka olay taşıyıcı, Docker paketleme düzeni olarak yerli yerine oturur.",
+    "Yazılım tarafını böyle gruplandırmak zihni rahatlatır. Bir toplantıda her teknoloji aynı seviyede konuşulmaz; bazıları kullanıcı deneyimini, bazıları iş kuralını, bazıları kalıcı veriyi, bazıları teslimat disiplinini ilgilendirir. Atlasın bu parçası, isim kalabalığını iş akışındaki rollere ayırır."
+  ],
+  "teknoloji-atlasi-sistem-ag": [
+    "Sistem, ağ ve donanım tarafı çoğu zaman görünmez çalıştığı için değeri ancak aksadığında anlaşılır. Kullanıcı uygulamayı yavaş sanır; oysa sorun dolan disk, zayıf bellek, yanlış VLAN, doygun internet çıkışı, hatalı DNS, yetersiz yedekleme veya soğutma problemi olabilir. Yazılımın ayakta durduğu zemin sağlam değilse en iyi kod bile sahada güven vermez.",
+    "Bir veri merkezinde rack kabin, sunucu, CPU, RAM, SSD, SAN, NAS, switch, router, firewall, UPS ve soğutma aynı hikâyenin parçalarıdır. Bulutta bu parçalar daha soyut görünür ama kaybolmaz; yalnızca sanal kaynak, servis kotası, bölge seçimi, ağ kuralı ve maliyet metriği olarak karşımıza çıkar. Yönetici için önemli olan, kaynağın fiziksel mi sanal mı olduğundan önce hangi hizmeti taşıdığıdır.",
+    "Sistem ekibi sanallaştırmayı, yedeklemeyi, işletim sistemini ve servis sağlığını izler; ağ ekibi kurumun damarlarını açık tutar; veri merkezi ekibi enerji ve fiziksel sürekliliği korur; güvenlik ekibi bu zemine sınır çizer. Bir kesintide ekiplerin aynı haritaya bakması, çözüm süresini doğrudan etkiler.",
+    "Donanım yazılımdan ayrı bir dünya gibi değil, yazılımın nefes aldığı ortam olarak görünür. CPU neden yetmez, RAM ne zaman dar boğaz olur, NVMe neden fark yaratır, VLAN neden düzen sağlar, VPN neden kapasite ister, Kubernetes neden yalnız yazılım konusu değildir; bütün cevaplar gerçek işletme akışı içinde yerini bulur."
+  ],
+  "teknoloji-atlasi-siber": [
+    "Siber güvenlik tek bir ürün satın alıp rahatlama işi değildir. Kimlik, yetki, ağ, uygulama, veri, uç nokta, log, insan davranışı ve olay müdahalesi birlikte yönetilir. Kurum büyüdükçe yalnız saldırgan sayısı artmaz; kullanıcı, tedarikçi, entegrasyon, bulut hesabı ve eski sistem sayısı da artar. Risk bu kalabalığın arasından doğar.",
+    "Bir saldırı anında SOC analisti alarmı görür, sistemci sunucuyu kontrol eder, ağcı trafiğe bakar, uygulama ekibi log ister, hukuk ve yönetim veri etkisini anlamaya çalışır. SIEM kayıtları bir araya getirir, EDR uç noktadaki davranışı yakalar, WAF web trafiğini süzer, DLP hassas verinin dışarı çıkmasını izler, IAM ve MFA kimliğin gerçekten doğru kişiye ait olup olmadığını güçlendirir.",
+    "Kamu ve savunma dünyasında güvenlik ayrıca hesap verebilirlik meselesidir. KVKK, gizlilik derecesi, denetim izi, yetki onayı, zafiyet yönetimi ve tedarik zinciri güvenliği yalnız teknik ekiplerin gündemi değildir. Bir sistem güvenliyse, yalnız engellediği saldırıyla değil, olay olduğunda neyin ne zaman yaşandığını açıklayabilmesiyle de değer kazanır.",
+    "Siber güvenlik korku diliyle değil, işletme disipliniyle ele alınır. Firewall nerede durur, WAF neyi süzer, SIEM neden log ister, MFA hangi riski azaltır, segmentasyon neden hayat kurtarır, tatbikat neden yapılır; her konu kurumun günlük akışı içinde anlatılır."
+  ],
+  "teknoloji-atlasi-yapay-zeka": [
+    "Yapay zekâ konuşulduğunda ilk cümle çoğu zaman model adı olur; kurumsal projede asıl mesele modelden önce iş akışıdır. Hangi veri kullanılacak, veri güncel mi, hassas bilgi var mı, cevap nasıl denetlenecek, yanlış cevap kime zarar verir, insan onayı nerede devreye girecek; bu sorular net değilse güçlü model bile güvenilir hizmete dönüşmez.",
+    "Makine öğrenmesi geçmiş veriden örüntü çıkarır, üretken yapay zekâ metin ve kod gibi içerikler üretir, embedding metni sayısal benzerlik alanına taşır, RAG kurum dokümanını cevaba bağlar, ajan sistemleri araç kullanarak adım adım iş yapmaya çalışır. Bunlar ayrı sihirler değildir; veri, güvenlik, maliyet, kapasite ve denetimle birlikte çalışan araç aileleridir.",
+    "Bir bakanlık mevzuat arama asistanı kurduğunda mesele yalnız hızlı cevap değildir. Kaynak gösterilmeli, eski mevzuatla yeni karar karışmamalı, kişisel veri modele gereksiz taşınmamalı, cevapların sınırı bilinmelidir. Bir savunma şirketinde yapay zekâ kod yardımında, doküman özetinde veya test otomasyonunda kullanılabilir; fakat güvenlik ve gizlilik sınırı en baştan çizilmelidir.",
+    "Yapay zekâ büyü bozulmadan ama abartıya kapılmadan ele alınır. Modelin ne yaptığı, verinin neden belirleyici olduğu, RAG'in neden kurumsal bilgi için önemli olduğu, GPU maliyetinin neden konuşulduğu ve denetlenebilirliğin neden lüks değil zorunluluk olduğu sırayla görünür hale gelir."
+  ]
+};
+
 function modeIntro(category) {
   const lex = modeLexicon[category.mode];
   return [
@@ -839,15 +926,16 @@ function modeIntro(category) {
     `Başlangıçta bu kalabalık yerli yerine oturur. Kimin hangi kararı taşıdığı, hangi belgenin hangi riski azalttığı, hangi teknik tercihin hangi insan davranışını değiştirdiği görünür hale gelir.`,
     `Teknik şartname kabul komisyonuna, Redis eski veri riskine, SIEM denetim kanıtına, API kurumlar arası sorumluluğa uzanır. Bir başlık bitip diğeri başladığında konu değişmiş gibi görünür; aslında aynı kurumun başka odasına geçilir.`,
     `${lex.stakes}. Kavramların değeri adlarında değil, iş akışında neyi değiştirdiklerinde ortaya çıkar.`,
-    `Bu başlık boyunca ${lex.tech.join(", ")} gibi kavramlar gerekli yerde sahneye girer. Ayrıntı olayın önüne geçmez; olay ayrıntının ne işe yaradığını gösterir.`,
+    `${lex.tech.join(", ")} gibi kavramlar gerekli yerde sahneye girer. Ayrıntı olayın önüne geçmez; olay ayrıntının ne işe yaradığını gösterir.`,
     `Teknoloji araç listesinden çıkar; kurumun çalışma biçimine, toplantı diline, kabul düzenine ve kriz refleksine bağlanır.`
   ];
 }
 
 function routeIntro(category, chapter) {
+  const intro = routeNarratives[category.id] || modeIntro(category);
   return `
-    <p class="opening-line">${modeIntro(category)[0]}</p>
-    ${modeIntro(category).slice(1).map(paragraph).join("")}
+    <p class="opening-line">${intro[0]}</p>
+    ${intro.slice(1).map(paragraph).join("")}
     ${visualFor(category, chapter)}
   `;
 }
@@ -857,14 +945,10 @@ function narrativeChapter(category, chapter) {
   const topic = cleanTitle(chapter);
   const family = firstPhrase(topic);
   return [
-    paragraph(`${topic} başlığı, ${category.title.toLocaleLowerCase("tr")} içinde tek başına duran kuru bir madde değildir. Kurumda bu konu genellikle bir talep, bir toplantı, bir hata, bir denetim sorusu ya da bir teslim tarihiyle görünür hale gelir.`),
-    paragraph(`Günün başında mesele basit sanılabilir: bir ekran yapılacak, bir servis bağlanacak, bir yazı yazılacak veya bir ürün alınacaktır. Fakat iş ilerledikçe ${lex.actors}. Bu yüzden teknik kararın diliyle kurumsal kararın dili aynı cümlede buluşmak zorundadır.`),
-    paragraph(`${family} etrafında ilk bakılacak şey ihtiyaçtır. İhtiyaç doğru yazılmışsa teknik ekip çözümü daraltabilir, satın alma doğru kalemi arayabilir, tedarikçi ne teslim edeceğini bilir, kabul komisyonu da neyi ölçeceğini son gün keşfetmez. İhtiyaç bulanıksa herkes kendi iyi niyetli yorumuyla başka yöne çekilir.`),
-    paragraph(`Sahada en sık görülen hata, konunun yalnız teknik araç gibi ele alınmasıdır. Oysa ${topic.toLocaleLowerCase("tr")} bazen mevzuat sınırına, bazen veri sahibine, bazen yedekleme düzenine, bazen de kullanıcı alışkanlığına dokunur. Bu bağlantılar baştan konuşulmazsa proje ilerler ama kurumun zihni geride kalır.`),
-    paragraph(`Tedarikçi çözümünü anlatırken ekip mimari çizimi inceler, kullanıcı temsilcisi kendi ekranını sorar, güvenlikçi log ve yetki ister, satın alma lisans modeline bakar. Aynı masada beş ayrı gerçek vardır. İyi yönetilen iş, bu gerçekleri birbirine düşürmeden tek karar kaydında toplar.`),
-    paragraph(`Bu noktada teknoloji ayrıntısı gerektiği kadar devreye girer. API varsa hangi sistemle konuştuğu, log varsa hangi olayı kanıtladığı, veritabanı varsa hangi kaydı kalıcı tuttuğu, ağ varsa hangi hizmeti taşıdığı, güvenlik varsa hangi riski azalttığı açıklanır. Ama teknik ayrıntı metnin efendisi değil, olayın aracı olarak kalır.`),
-    paragraph(`${topic} iyi yönetildiğinde kurum yalnız o işi bitirmiş olmaz. Sonraki proje için daha iyi şartname, daha net kabul ölçütü, daha doğru destek modeli ve daha sakin kriz refleksi kazanır. Asıl değer de buradadır: tekrar eden tartışmaları azaltan kurumsal hafıza oluşur.`),
-    paragraph(`Kötü yönetildiğinde ise aynı başlık başka adlarla geri döner. Bir ay sonra performans sorunu, üç ay sonra güvenlik istisnası, yıl sonunda denetim bulgusu, bakım döneminde tedarikçi bağımlılığı olarak karşımıza çıkabilir. Bu yüzden ${category.title.toLocaleLowerCase("tr")} içinde bu konu, yalnız öğrenilecek bilgi değil, erken fark edilecek örüntüdür.`)
+    paragraph(`${topic} konusu kurumda çoğu zaman tek başına, temiz bir başlık olarak gelmez. Sabah kullanıcıdan bir şikâyet düşer, öğlene doğru tedarikçi toplantısı açılır, akşamüstü üst yönetim kısa ve net bir durum cümlesi ister. İlk bakışta mesele bir ekran, bir servis, bir resmi yazı veya küçük bir teknik ayar gibi görünür; iş ilerledikçe ${lex.actors}. Aynı olayın teknik, idari, mali ve insani karşılığı aynı masada buluşur.`),
+    paragraph(`${family} etrafında sağlam ilerlemenin ilk şartı ihtiyacın berrak olmasıdır. İhtiyaç doğru yazılmışsa teknik ekip çözümü daraltır, satın alma doğru kalemi arar, tedarikçi ne teslim edeceğini bilir, kabul komisyonu neyi ölçeceğini son gün keşfetmez. İhtiyaç bulanıksa herkes iyi niyetle başka yöne çekilir. Bir ekip hız ister, diğeri güvenlik sınırı çizer, bir başkası bütçe kalemini savunur; proje ilerliyor gibi görünürken ortak gerçek yavaş yavaş dağılır.`),
+    paragraph(`Sahada en sık görülen hata, ${topic.toLocaleLowerCase("tr")} konusunu yalnız teknik araç veya tek belge gibi ele almaktır. Oysa konu bazen mevzuat sınırına, bazen veri sahibine, bazen yedekleme düzenine, bazen kullanıcı alışkanlığına dokunur. Tedarikçi çözümünü anlatırken ekip mimari çizimi inceler, kullanıcı temsilcisi kendi ekranını sorar, güvenlikçi log ve yetki ister, satın alma lisans modeline bakar. Aynı masada beş ayrı gerçek vardır; iyi yönetilen iş, bu gerçekleri birbirine düşürmeden tek karar kaydında toplar.`),
+    paragraph(`Teknik ayrıntı burada gerektiği kadar devreye girer. API hangi sistemle konuştuğunu, log hangi olayı kanıtladığını, veritabanı hangi kaydı kalıcı tuttuğunu, ağ hangi hizmeti taşıdığını, güvenlik hangi riski azalttığını gösterir. ${topic} iyi yönetildiğinde kurum yalnız o işi bitirmiş olmaz; sonraki proje için daha iyi şartname, daha net kabul ölçütü, daha doğru destek modeli ve daha sakin kriz refleksi kazanır. Kötü yönetildiğinde aynı konu başka adlarla geri döner: performans sorunu, güvenlik istisnası, denetim bulgusu veya bakım döneminde tedarikçi bağımlılığı.`)
   ].join("") + visualFor(category, chapter);
 }
 
@@ -1203,6 +1287,7 @@ function renderPills() {
   els.pills.innerHTML = renderPillPage(initial);
   bindPillButtons();
   renderNav();
+  scrollToPageTop();
 }
 
 function bindPillButtons() {
@@ -1309,6 +1394,7 @@ function renderHome() {
     </section>
   `;
   renderNav();
+  scrollToPageTop();
 }
 
 function renderChapter(id) {
@@ -1341,6 +1427,7 @@ function renderChapter(id) {
     </article>
   `;
   renderNav();
+  scrollToPageTop();
 }
 
 function router() {
@@ -1360,6 +1447,18 @@ function closeMobileSidebar() {
   els.sidebar.classList.remove("open");
 }
 
+function scrollToPageTop() {
+  const jump = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    document.querySelector(".content")?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  };
+  jump();
+  requestAnimationFrame(jump);
+  setTimeout(jump, 80);
+  setTimeout(jump, 220);
+  setTimeout(jump, 420);
+}
+
 function initTheme() {
   const saved = localStorage.getItem("theme") || "dark";
   document.documentElement.dataset.theme = saved;
@@ -1371,12 +1470,28 @@ function toggleTheme() {
   localStorage.setItem("theme", next);
 }
 
+function navigateTo(hash) {
+  if (location.hash === hash) {
+    router();
+    return;
+  }
+  history.pushState(null, "", hash);
+  router();
+}
+
 function init() {
   initTheme();
   els.themeToggle.addEventListener("click", toggleTheme);
   els.menuToggle.addEventListener("click", () => els.sidebar.classList.toggle("open"));
   els.search.addEventListener("input", renderNav);
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest('a[href^="#/"]');
+    if (!link) return;
+    event.preventDefault();
+    navigateTo(link.getAttribute("href"));
+  });
   window.addEventListener("hashchange", router);
+  window.addEventListener("popstate", router);
   router();
 }
 
