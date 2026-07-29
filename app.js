@@ -1735,71 +1735,240 @@ function layeredDiagram(kind, caption, center, rings, labels) {
     </svg>`);
 }
 
-function visualFor(category, chapter) {
-  const title = cleanTitle(chapter);
-  const n = normalizeText(`${chapter.title} ${title}`);
+function timelineDiagram(kind, caption, labels, subline = "") {
+  const points = labels.map((label, index) => {
+    const x = 95 + index * (710 / Math.max(1, labels.length - 1));
+    const y = index % 2 ? 150 : 95;
+    return `<path class="v-line thin" d="M${x} 132 V${y}" fill="none"/><g class="v-node" style="--i:${index}"><circle cx="${x}" cy="${y}" r="13"/><text text-anchor="middle" x="${x}" y="${y + (index % 2 ? 42 : -26)}">${svgLabel(label)}</text></g>`;
+  }).join("");
+  return svgFigure(kind, caption, `
+    <svg viewBox="0 0 900 260" role="img" aria-label="${svgLabel(caption)}">
+      <path class="v-line" d="M85 132 H815" fill="none"/>
+      ${points}
+      ${subline ? `<text class="v-small" text-anchor="middle" x="450" y="232">${svgLabel(subline)}</text>` : ""}
+    </svg>`);
+}
 
-  if (n.includes("donanim") || n.includes("cpu") || n.includes("ram") || n.includes("disk")) {
-    return flowDiagram("visual-datacenter", "Donanımda veri yolu: CPU hesaplar, RAM çalışılan veriyi tutar, disk kalıcı kayıt sağlar, anakart ve ağ parçaları birbirine bağlar.", ["Disk", "RAM", "CPU", "Anakart", "Ağ"], "dar boğaz: CPU, bellek, disk I/O veya ağ kartı");
-  }
-  if (n.includes("isletim sistemi") || n.includes("surec")) {
-    return hubDiagram("visual-os", "İşletim sistemi; süreç, bellek, dosya sistemi, sürücü ve izinleri aynı kaynak hakemliğinde toplar.", "Kernel", ["Süreç", "Bellek", "Dosya", "Sürücü", "İzin"], "uygulama doğrudan donanıma değil işletim sistemi sözleşmesine konuşur");
-  }
-  if (n.includes("terminal") || n.includes("linux")) {
-    return flowDiagram("visual-shell", "Terminal ve Linux hattı: kullanıcı komutu shell'e verir, süreç çalışır, servis veya dosya etkilenir, log kanıt bırakır.", ["Kullanıcı", "Shell", "Komut", "Süreç", "Servis", "Log"], "ssh, systemd, journalctl, chmod ve sudo aynı işletme dilinin parçalarıdır");
-  }
-  if (n.includes("ag temelleri") || n.includes("tcp") || n.includes("dns") || n.includes("http") || n.includes("https")) {
-    return flowDiagram("visual-network", "Web isteğinin yolu: DNS adresi bulur, gateway ve firewall geçişi sınırlar, TLS güveni kurar, load balancer isteği sunucuya dağıtır.", ["DNS", "Gateway", "Firewall", "TLS", "Load Balancer", "Server"], "TCP/IP taşıma düzeni, HTTP uygulama dili, HTTPS güvenli kanaldır");
-  }
-  if (n.includes("git") || n.includes("github")) {
-    return flowDiagram("visual-git", "Git akışı: çalışma alanındaki değişiklik branch ile ayrılır, commit hafıza bırakır, pull request gözden geçirilir, CI/CD canlıya güvenli taşır.", ["Working Tree", "Branch", "Commit", "Pull Request", "CI/CD", "Release"], "versiyon kontrolü ekip hafızasıdır");
-  }
-  if (n.includes("python") || n.includes("fonksiyon") || n.includes("oop") || n.includes("json") || n.includes("programlama")) {
-    return flowDiagram("visual-code", "Programlama düşüncesi: veri alınır, fonksiyonlar işi böler, nesneler sorumluluğu taşır, hata yönetimi ve test kodu üretime hazırlar.", ["Veri", "Fonksiyon", "Nesne", "Hata", "Test", "Paket"], "okunabilir kod, çalışan kodun bakım ömrünü uzatır");
-  }
-  if (n.includes("sql") || n.includes("postgresql")) {
-    return hubDiagram("visual-db", "Veritabanı resmi kaydın merkezidir; tablo, index, transaction, constraint ve yedek aynı güven zincirini kurar.", "PostgreSQL", ["Tablo", "Index", "Transaction", "Constraint", "Backup"], "yanlış sorgu performansı, yanlış transaction veri bütünlüğünü bozar");
-  }
-  if (n.includes("api") || n.includes("rest") || n.includes("backend") || n.includes("web'e") || n.includes("html") || n.includes("jwt") || n.includes("cache") || n.includes("kuyruk")) {
-    return flowDiagram("visual-flow", "Backend akışı: tarayıcıdan gelen istek auth, API, cache, kuyruk, veritabanı ve log katmanlarında anlam kazanır.", ["Browser", "API Gateway", "Auth/JWT", "Service", "Cache/Queue", "DB/Log"], "status code, timeout, retry ve idempotency üretim davranışını belirler");
-  }
-  if (n.includes("docker")) {
-    return flowDiagram("visual-docker", "Docker ilişkisi: Dockerfile imaj tarifini yazar, registry paylaşır, container çalışır, volume ve network üretim davranışını belirler.", ["Dockerfile", "Image", "Registry", "Container", "Volume", "Network"], "container geçicidir; veri, log ve secret ayrıca tasarlanır");
-  }
-  if (n.includes("kubernetes")) {
-    return hubDiagram("visual-k8s", "Kubernetes servis mahallesi: pod çalışır, deployment çoğaltır, service adres verir, ingress dış kapıdır, autoscaling yükü dengeler.", "Cluster", ["Pod", "Deployment", "Service", "Ingress", "HPA"], "limit, probe, namespace ve rollback üretimde hayat kurtarır");
-  }
-  if (n.includes("ci/cd")) {
-    return flowDiagram("visual-cicd", "CI/CD hattı: kod test edilir, artifact üretilir, güvenlik kontrolünden geçer, ortama alınır ve gerekirse rollback yapılır.", ["Commit", "Build", "Test", "Artifact", "Deploy", "Rollback"], "iyi pipeline hızlı olduğu kadar doğru yerde durmayı bilir");
-  }
-  if (n.includes("monitoring") || n.includes("logging") || n.includes("observability") || n.includes("siem") || n.includes("soc") || n.includes("log")) {
-    return flowDiagram("visual-observe", "Gözlemleme zinciri: metrik sistemin nabzını, log olayın hikayesini, trace isteğin yolunu, alarm aksiyon ihtiyacını gösterir.", ["Metric", "Log", "Trace", "SIEM", "Alarm", "Runbook"], "kanıt yoksa kriz hafızaya kalır");
-  }
-  if (n.includes("bulut") || n.includes("aws") || n.includes("google cloud") || n.includes("maliyet") || n.includes("yedekleme") || n.includes("felaket")) {
-    return hubDiagram("visual-cloud", "Bulut mimarisi compute, storage, network, IAM, backup ve cost katmanlarının birlikte yönetilmesidir.", "Cloud", ["Compute", "Storage", "Network", "IAM", "Backup", "Cost"], "region, availability zone, RTO/RPO ve budget alarmı karar dilidir");
-  }
-  if (n.includes("siber") || n.includes("kimlik guvenligi") || n.includes("ag guvenligi") || n.includes("uygulama guvenligi") || n.includes("uc nokta") || n.includes("veri guvenligi") || n.includes("olay mudahalesi") || n.includes("tatbikat")) {
-    return layeredDiagram("visual-security", "Güvenlik diyagramı: veri merkezdedir; kimlik, uygulama, ağ, uç nokta ve izleme katmanları saldırıyı sınırlar ve kanıt üretir.", "Veri", [48, 88, 128], [["IAM/MFA", 220, 70], ["WAF", 680, 70], ["Firewall", 735, 170], ["EDR", 225, 170], ["SIEM/SOC", 450, 245]]);
-  }
-  if (n.includes("makine ogrenmesi") || n.includes("derin ogrenme") || n.includes("sinir") || n.includes("model degerlendirme") || n.includes("veri hazirligi")) {
-    return flowDiagram("visual-ml", "Makine öğrenmesi hattı: veri hazırlanır, özellik çıkarılır, model eğitilir, doğrulanır, izlenir ve gerektiğinde yeniden eğitilir.", ["Veri", "Özellik", "Eğitim", "Validasyon", "Deploy", "İzleme"], "veri sızıntısı ve yanlış metrik modeli sahada yanıltır");
-  }
-  if (n.includes("token") || n.includes("embedding") || n.includes("rag") || n.includes("llm") || n.includes("openai") || n.includes("prompt") || n.includes("ollama") || n.includes("mcp") || n.includes("function calling")) {
-    return flowDiagram("visual-rag", "LLM/RAG akışı: soru parçalanır, embedding ile kaynak aranır, model bağlamla cevap verir, tool çağrısı ve eval kaliteyi görünür kılar.", ["Soru", "Token", "Embedding", "Retrieval", "LLM", "Eval/Tool"], "prompt, kaynak, yetki ve maliyet birlikte izlenir");
-  }
-  if (category.id === "buyuk-mimariler") {
-    return flowDiagram("visual-architecture", "Büyük sistem diyagramı: kullanıcı ekranındaki tek işlem, gateway, güvenlik, servis, veri, kuyruk ve gözlemleme katmanlarına yayılır.", ["Client", "CDN/WAF", "API Gateway", "Service", "DB/Cache", "Queue/Log"], "resmi kayıt, hata yolu ve sorumluluk yolu ayrı ayrı okunur");
-  }
-  if (category.id === "proje-kamu-yonetim") {
-    return flowDiagram("visual-governance", "Kurumsal proje akışı: ihtiyaç değerle başlar, şartname ölçü koyar, tedarikçi teslim eder, kabul kanıt ister, denetim hafıza arar.", ["İhtiyaç", "Şartname", "Tedarikçi", "Test", "Kabul", "Denetim"], "KVKK, SLA, RACI, risk kaydı ve resmi yazı bu hattın güvenlik raylarıdır");
-  }
-  if (category.id === "liderlik-kriz-gelecek") {
-    return flowDiagram("visual-leadership", "Teknik liderlik hattı: sinyal etkiye çevrilir, seçenekler riskle tartılır, karar kayıt altına alınır, ders kalıcı düzeltmeye döner.", ["Sinyal", "Etki", "Seçenek", "Karar", "İletişim", "Ders"], "liderlik teknik kökü saklamadan yönetim diline çevirir");
-  }
-  if (category.id === "mulakat-ve-ust-duzey-hazirlik") {
-    return flowDiagram("visual-interview", "Güçlü mülakat cevabı: tanım, örnek, risk, metrik, işletme ve yönetici cümlesiyle tamamlanır.", ["Tanım", "Örnek", "Risk", "Metrik", "İşletme", "Karar"], "ezber değil düşünce zinciri güven verir");
-  }
-  return flowDiagram("visual-summary", "Bu sayfanın zihinsel özeti: kavram görevini, bağımlılığını, riskini ve kanıtını birlikte düşündüğünde kalıcı hale gelir.", ["Kavram", "Görev", "Bağımlılık", "Risk", "Kanıt", "Karar"], "her teknik terim bir sistem davranışına bağlanır");
+function stackDiagram(kind, caption, labels, subline = "") {
+  const layers = labels.map((label, index) => {
+    const width = 690 - index * 42;
+    const x = 450 - width / 2;
+    const y = 42 + index * 38;
+    return `<g class="v-box" style="--i:${index}"><rect x="${x}" y="${y}" width="${width}" height="32" rx="8"/><text text-anchor="middle" x="450" y="${y + 22}">${svgLabel(label)}</text></g>`;
+  }).join("");
+  return svgFigure(kind, caption, `
+    <svg viewBox="0 0 900 280" role="img" aria-label="${svgLabel(caption)}">
+      ${layers}
+      ${subline ? `<text class="v-small" text-anchor="middle" x="450" y="252">${svgLabel(subline)}</text>` : ""}
+    </svg>`);
+}
+
+function matrixDiagram(kind, caption, cells, subline = "") {
+  const boxes = cells.slice(0, 6).map((label, index) => {
+    const col = index % 3;
+    const row = Math.floor(index / 3);
+    const x = 92 + col * 245;
+    const y = 58 + row * 92;
+    return `<g class="v-box" style="--i:${index}"><rect x="${x}" y="${y}" width="185" height="62" rx="10"/><text text-anchor="middle" x="${x + 92}" y="${y + 38}">${svgLabel(label)}</text></g>`;
+  }).join("");
+  return svgFigure(kind, caption, `
+    <svg viewBox="0 0 900 270" role="img" aria-label="${svgLabel(caption)}">
+      ${boxes}
+      ${subline ? `<text class="v-small" text-anchor="middle" x="450" y="246">${svgLabel(subline)}</text>` : ""}
+    </svg>`);
+}
+
+function splitDiagram(kind, caption, left, right, subline = "") {
+  return svgFigure(kind, caption, `
+    <svg viewBox="0 0 900 280" role="img" aria-label="${svgLabel(caption)}">
+      <g class="v-box" style="--i:0"><rect x="80" y="70" width="250" height="120" rx="12"/><text text-anchor="middle" x="205" y="114">${svgLabel(left[0])}</text><text class="v-small" text-anchor="middle" x="205" y="148">${svgLabel(left[1] || "")}</text></g>
+      <g class="v-box" style="--i:1"><rect x="570" y="70" width="250" height="120" rx="12"/><text text-anchor="middle" x="695" y="114">${svgLabel(right[0])}</text><text class="v-small" text-anchor="middle" x="695" y="148">${svgLabel(right[1] || "")}</text></g>
+      <path class="v-line" d="M330 130 C420 70 480 190 570 130" fill="none"/>
+      ${subline ? `<text class="v-small" text-anchor="middle" x="450" y="236">${svgLabel(subline)}</text>` : ""}
+    </svg>`);
+}
+
+function sceneDiagram(kind, caption, center, labels, subline = "") {
+  const positions = [[150, 75], [375, 45], [620, 75], [185, 178], [450, 185], [690, 178]];
+  const items = labels.slice(0, 6).map((label, index) => {
+    const [x, y] = positions[index];
+    return `<g class="v-box" style="--i:${index}"><rect x="${x}" y="${y}" width="130" height="54" rx="9"/><text text-anchor="middle" x="${x + 65}" y="${y + 33}">${svgLabel(label)}</text></g>`;
+  }).join("");
+  return svgFigure(kind, caption, `
+    <svg viewBox="0 0 900 280" role="img" aria-label="${svgLabel(caption)}">
+      <rect class="v-soft" x="70" y="34" width="760" height="190" rx="18"/>
+      <circle class="v-hub" cx="450" cy="130" r="42"/>
+      <text text-anchor="middle" x="450" y="137">${svgLabel(center)}</text>
+      ${items}
+      ${subline ? `<text class="v-small" text-anchor="middle" x="450" y="258">${svgLabel(subline)}</text>` : ""}
+    </svg>`);
+}
+
+function renderVisualSpec(spec) {
+  const kind = `visual-${spec.type || "scene"}`;
+  if (spec.type === "hub") return hubDiagram(kind, spec.caption, spec.center, spec.nodes, spec.note);
+  if (spec.type === "layers") return layeredDiagram(kind, spec.caption, spec.center, spec.rings || [48, 88, 128], spec.labels);
+  if (spec.type === "timeline") return timelineDiagram(kind, spec.caption, spec.labels, spec.note);
+  if (spec.type === "stack") return stackDiagram(kind, spec.caption, spec.labels, spec.note);
+  if (spec.type === "matrix") return matrixDiagram(kind, spec.caption, spec.labels, spec.note);
+  if (spec.type === "split") return splitDiagram(kind, spec.caption, spec.left, spec.right, spec.note);
+  if (spec.type === "scene") return sceneDiagram(kind, spec.caption, spec.center, spec.labels, spec.note);
+  return flowDiagram(kind, spec.caption, spec.labels, spec.note);
+}
+
+const visualBlueprints = {
+  "asama-1-bilgisayar-temelleri": [
+    { type: "scene", center: "Çalışan Düzen", labels: ["Elektrik", "Donanım", "OS", "Ağ", "Log", "Kullanıcı"], caption: "Bilgisayar temeli, parçaları tek tek saymak değil çalışan düzeni ve bozulunca bıraktığı izi görmektir.", note: "her parça görev, bağımlılık ve belirtiyle anlaşılır" },
+    { type: "hub", center: "Anakart", nodes: ["CPU", "RAM", "NVMe/SSD", "GPU", "NIC", "PSU"], caption: "Kasa içi şehir: anakart yolları açar, CPU hesaplar, RAM çalışma alanı olur, disk kalıcı kayıt tutar.", note: "dar boğaz tek parçada değil veri yolunda da doğar" },
+    { type: "layers", center: "Kernel", labels: [["Process", 220, 78], ["Memory", 680, 78], ["File System", 720, 185], ["Driver", 180, 185], ["Permission", 450, 238]], caption: "İşletim sistemi uygulamayla donanım arasındaki hakemdir; süreç, bellek, dosya ve sürücüyü aynı masada yönetir." },
+    { type: "timeline", labels: ["pwd", "ls", "grep", "tail", "ssh", "journalctl"], caption: "Terminalde düşünmek, sorunu komutlarla adım adım daraltma alışkanlığıdır.", note: "komut satırı süslü ekranı değil kanıtı öne çıkarır" },
+    { type: "stack", labels: ["Uygulama", "systemd servisleri", "Kullanıcı ve grup", "Dosya izinleri", "Paket yöneticisi", "Kernel"], caption: "Linux, kullanıcıdan servise kadar katmanlı bir işletme düzenidir; izin, servis ve log aynı hikayenin parçalarıdır." },
+    { type: "scene", center: "Router", labels: ["Client", "Subnet", "Gateway", "Firewall", "Port", "Server"], caption: "Ağ temeli, paketin yerel ağdan gateway ve firewall üzerinden doğru porta ulaşma hikayesidir.", note: "IP adresi kimlik değil konum bilgisidir" },
+    { type: "flow", labels: ["DNS", "TCP", "TLS", "HTTP", "Server", "Response"], caption: "Web isteği önce adresi bulur, sonra güvenli bağlantı kurar ve HTTP diliyle sunucudan cevap ister.", note: "sertifika, DNS ve routing bozulursa site sağlam olsa da görünmez olur" },
+    { type: "timeline", labels: ["Branch", "Commit", "Push", "Pull Request", "Review", "Merge"], caption: "Git ve GitHub, kodun zaman içindeki hikayesini ekip hafızasına çevirir.", note: "commit geçmişi teknik kararın izidir" },
+    { type: "matrix", labels: ["Tanım", "Benzetme", "Belirti", "Komut", "Log", "Karar"], caption: "Temel mülakat cevabı, kavramı tanım, belirti ve kanıtla aynı küçük tabloda toplar.", note: "ezber yerine olay içinde açıklama güven verir" }
+  ],
+  "asama-2-programlama": [
+    { type: "flow", labels: ["Problem", "Algoritma", "Kod", "Test", "Hata", "Çözüm"], caption: "Programlama, dağınık problemi bilgisayarın izleyebileceği açık adımlara çevirmektir.", note: "iyi kod önce düşünce düzenidir" },
+    { type: "scene", center: "Python", labels: ["Değişken", "Tip", "if", "for", "list/dict", "print/log"], caption: "Python temelleri, veriyi tutup koşul ve döngülerle küçük kararlar aldırma pratiğidir." },
+    { type: "hub", center: "Fonksiyon", nodes: ["Parametre", "Return", "Modül", "Import", "Test"], caption: "Fonksiyon ve modül, kodu okunur küçük sorumluluklara böler.", note: "aynı işi tekrar yazmak yerine isim verip çağırırsın" },
+    { type: "split", left: ["Veri", "state"], right: ["Davranış", "method"], caption: "OOP, veriyle davranışı aynı sorumluluk sınırında tutma disiplinidir.", note: "sınıf her şey değil, doğru sınırdır" },
+    { type: "flow", labels: ["Input", "Validate", "JSON", "Try/Except", "Log", "Output"], caption: "Hata yönetimi ve JSON, sistemin dış dünyadan gelen veriyi güvenle okuyup cevap vermesini sağlar." },
+    { type: "flow", labels: ["Request", "Header", "Body", "Status", "JSON", "Retry"], caption: "API kullanımı, HTTP isteğini sözleşme gibi okuyup hatayı ve cevabı ayrıştırmaktır." },
+    { type: "hub", center: "SQL", nodes: ["Table", "JOIN", "WHERE", "Index", "GROUP BY"], caption: "SQL, kurum hafızasına doğru soruyu sorma dilidir.", note: "yanlış JOIN yanlış karar üretir" },
+    { type: "layers", center: "Transaction", labels: [["ACID", 220, 78], ["Index", 680, 78], ["Constraint", 720, 185], ["Backup", 180, 185], ["Replication", 450, 238]], caption: "PostgreSQL kalıcı kaydın güven zinciridir; transaction, constraint ve yedek aynı güven duvarında durur." },
+    { type: "matrix", labels: ["FastAPI", "Pandas", "NumPy", "PyTorch", "TensorFlow", "venv"], caption: "Python ekosistemi, web servisinden veri analizine ve model eğitimine uzanan araç ailesidir." },
+    { type: "timeline", labels: ["Mini proje", "README", "Test", "Demo", "Log", "Sınırlar"], caption: "Kod portföyü, ne bildiğini çalışan örnek, ölçüm ve dürüst sınırlamalarla gösterir." }
+  ],
+  "asama-3-web-api": [
+    { type: "flow", labels: ["Browser", "DNS", "TLS", "API", "DB", "HTML/JSON"], caption: "Web yolculuğu, tarayıcıdaki küçük isteğin backend ve veritabanı dünyasına uzanmasıdır." },
+    { type: "stack", labels: ["JavaScript davranış", "CSS görünüm", "HTML iskelet", "DOM", "Tarayıcı motoru"], caption: "Frontend üç katmanlıdır: HTML iskeleti kurar, CSS görünüm verir, JavaScript davranış ekler." },
+    { type: "scene", center: "Backend", labels: ["Route", "Controller", "Service", "Repository", "DB", "Log"], caption: "Backend, endpoint'i iş kuralına, iş kuralını kalıcı kayda bağlayan arka ofistir." },
+    { type: "matrix", labels: ["GET", "POST", "PUT", "PATCH", "DELETE", "Status"], caption: "REST tasarımı, kaynaklara doğru HTTP metodu ve okunur durum koduyla sözleşme kazandırır." },
+    { type: "layers", center: "Oturum", labels: [["Cookie", 220, 78], ["JWT", 680, 78], ["OAuth2", 720, 185], ["Role", 180, 185], ["Refresh", 450, 238]], caption: "Kimlik ve oturum mimarisi, kullanıcının kim olduğunu ve hangi kapıdan geçebileceğini belirler." },
+    { type: "split", left: ["Cache", "hız"], right: ["Source of Truth", "doğruluk"], caption: "Redis, cache ve CDN hız kazandırır; ama eski veri riskini ana kayıtla dengede tutmak gerekir." },
+    { type: "flow", labels: ["Event", "Producer", "Kafka", "Consumer", "Retry", "DLQ"], caption: "Mesaj kuyruğu, uzun işleri arkaya alır ve servisleri gevşek bağlı hale getirir." },
+    { type: "hub", center: "Observability", nodes: ["Unit test", "Integration", "Metric", "Log", "Trace"], caption: "Test ve observability, sistemin hem çıkmadan önce hem canlıdayken konuşmasını sağlar." },
+    { type: "flow", labels: ["Dockerfile", "Image", "Compose", "Port", "Volume", "Log"], caption: "Docker geliştirme ortamı, servisi bağımlılıklarıyla paketleyip tekrarlanabilir hale getirir." },
+    { type: "matrix", labels: ["API", "Auth", "Cache", "Queue", "DB", "Scale"], caption: "Web mülakatı, tek endpoint'ten güvenlik, veri, hata ve ölçekleme konuşmasına açılır." }
+  ],
+  "asama-4-ai-temelleri": [
+    { type: "split", left: ["İş problemi", "ölçülebilir hedef"], right: ["Model", "tahmin aracı"], caption: "Yapay zekâ, model büyüsünden önce doğru iş problemi ve doğru veriyle başlar." },
+    { type: "flow", labels: ["Veri", "Özellik", "Model", "Tahmin", "Hata", "Genelleme"], caption: "Makine öğrenmesi, geçmiş veriden örüntü öğrenip yeni durumda makul tahmin üretir." },
+    { type: "stack", labels: ["Çıktı", "Gizli katman", "Aktivasyon", "Ağırlık", "Girdi"], caption: "Sinir ağı, girdiyi katman katman dönüştürerek tahmine yaklaşan hesap makinesidir." },
+    { type: "timeline", labels: ["Topla", "Temizle", "Etiketle", "Train", "Validation", "Test"], caption: "Veri hazırlığı, model eğitiminden önce hatayı ve veri sızıntısını engelleyen mutfaktır." },
+    { type: "flow", labels: ["Metin", "Token", "Embedding", "Vektör", "Benzerlik", "Arama"], caption: "Token ve embedding, metni sayısal uzayda karşılaştırılabilir hale getirir." },
+    { type: "flow", labels: ["Soru", "Chunk", "Vector DB", "Kaynak", "LLM", "Cevap"], caption: "RAG, modeli kurum kaynağına bağlayarak cevabı ezberden değil belgeden kurdurur." },
+    { type: "matrix", labels: ["Accuracy", "Recall", "Bias", "Hallucination", "Latency", "Cost"], caption: "Model değerlendirme yalnız doğruluk değil güven, hız, maliyet ve yanlılık ölçümüdür." },
+    { type: "split", left: ["PyTorch", "araştırma esnekliği"], right: ["TensorFlow", "üretim ekosistemi"], caption: "PyTorch ve TensorFlow, modeli kurma, eğitme ve üretime taşıma için farklı güçlü yollar sunar." },
+    { type: "matrix", labels: ["Tanım", "Veri", "Metrik", "Risk", "Örnek", "Sınır"], caption: "AI mülakatında güçlü cevap, algoritmayı veri ve ölçüm hikayesine bağlar." }
+  ],
+  "asama-5-llm-gelistirme": [
+    { type: "scene", center: "LLM Ürünü", labels: ["Prompt", "Context", "Model", "Tool", "Eval", "Log"], caption: "LLM geliştirme, sohbet kutusunu bağlam, araç, ölçüm ve güvenlikle ürüne çevirmektir." },
+    { type: "flow", labels: ["Messages", "Model", "Tokens", "Response", "Cost", "Log"], caption: "OpenAI API kullanımında mesaj yapısı, model seçimi, token maliyeti ve log birlikte düşünülür." },
+    { type: "matrix", labels: ["Rol", "Bağlam", "Örnek", "Sınır", "Şema", "Test"], caption: "Prompt tasarımı, modele ne yapacağını, neyi yapmayacağını ve çıktıyı nasıl vereceğini anlatır." },
+    { type: "flow", labels: ["Intent", "Schema", "Tool Call", "API", "Result", "Answer"], caption: "Function calling, modelin dış sistemlerle kontrollü ve şemalı konuşmasını sağlar." },
+    { type: "split", left: ["Ollama", "yerel kontrol"], right: ["Bulut model", "yüksek kalite"], caption: "Yerel model seçimi mahremiyet, kapasite, kalite ve işletme maliyeti dengesidir." },
+    { type: "hub", center: "MCP", nodes: ["Client", "Server", "Tool", "Resource", "Auth"], caption: "MCP, modelin araç ve veri kaynaklarına standart bir protokolle bağlanmasını sağlar." },
+    { type: "flow", labels: ["Belge", "Chunk", "Embedding", "Retriever", "Rerank", "Citation"], caption: "Kurumsal RAG, belgeyi parçalar, arar, yeniden sıralar ve cevabı kaynakla bağlar." },
+    { type: "timeline", labels: ["Prompt v1", "Eval", "Deploy", "Trace", "Feedback", "Prompt v2"], caption: "LLMOps, modelin canlıdaki kalitesini sürüm, izleme, eval ve geri bildirimle yönetir." },
+    { type: "layers", center: "LLM", labels: [["System", 220, 78], ["User", 680, 78], ["Context", 720, 185], ["Guardrail", 180, 185], ["Approval", 450, 238]], caption: "LLM güvenliği, talimat, bağlam, araç ve insan onayını ayrı katmanlarda korur." },
+    { type: "matrix", labels: ["Demo", "RAG", "Eval", "Cost", "Security", "README"], caption: "LLM portföyünde güçlü proje, çalışan ekran kadar ölçüm, kaynak, maliyet ve güvenlik sınırı gösterir." }
+  ],
+  "asama-6-devops-bulut": [
+    { type: "split", left: ["Geliştirme", "kod ve test"], right: ["Operasyon", "canlı ve nöbet"], caption: "DevOps, yazan ekiple işleten ekibin aynı hizmet sorumluluğunda buluşmasıdır." },
+    { type: "scene", center: "Container", labels: ["Image", "Registry", "Volume", "Network", "Env", "Log"], caption: "Docker görseli, container'ın etrafındaki kalıcı veri, ağ, ortam ve log kararlarını gösterir." },
+    { type: "hub", center: "Cluster", nodes: ["Pod", "Deployment", "Service", "Ingress", "ConfigMap", "HPA"], caption: "Kubernetes bir container kalabalığını adres, sağlık, ölçek ve sürüm düzenine sokar." },
+    { type: "timeline", labels: ["Commit", "Build", "Test", "Scan", "Deploy", "Rollback"], caption: "CI/CD hattı kodu canlıya taşırken durma ve geri dönüş noktalarını görünür kılar." },
+    { type: "hub", center: "Dashboard", nodes: ["Metric", "Log", "Trace", "Alert", "SLO"], caption: "Monitoring ve logging, üretim ortamının nabzını ve olay hikayesini aynı ekrana taşır." },
+    { type: "layers", center: "Cloud", labels: [["Region", 220, 78], ["AZ", 680, 78], ["VPC", 720, 185], ["IAM", 180, 185], ["Storage", 450, 238]], caption: "Bulut temeli, kaynak kiralamaktan çok region, ağ, IAM ve sorumluluk paylaşımı okumaktır." },
+    { type: "matrix", labels: ["Compute", "Storage", "Network", "IAM", "DB", "Monitor"], caption: "AWS ve Google Cloud farklı adlar kullanır; karar aileleri compute, storage, network ve IAM etrafında döner." },
+    { type: "timeline", labels: ["Backup", "Offsite", "Immutable", "Restore", "RTO", "RPO"], caption: "Felaket kurtarma, yedeğin alınması kadar geri döndürülmesinin prova edilmesidir." },
+    { type: "matrix", labels: ["Tag", "Budget", "Rightsize", "Reserve", "Idle", "Report"], caption: "Bulut maliyeti, kaynak etiketleme, bütçe alarmı ve kullanım optimizasyonu ile yönetilir." },
+    { type: "scene", center: "Production", labels: ["Pipeline", "Pod", "Log", "Alarm", "Rollback", "Postmortem"], caption: "DevOps mülakatı, üretim kokusu taşıyan olay çözme haritasıyla güçlenir." }
+  ],
+  "siber-guvenlik": [
+    { type: "layers", center: "Risk", labels: [["Varlık", 220, 78], ["Tehdit", 680, 78], ["Zafiyet", 720, 185], ["Kontrol", 180, 185], ["Kanıt", 450, 238]], caption: "Siber güvenlik, korku değil varlık, tehdit, zafiyet ve kontrol ilişkisini görünür kılmaktır." },
+    { type: "hub", center: "IAM", nodes: ["MFA", "SSO", "PAM", "Role", "Review"], caption: "Kimlik güvenliği, doğru kişiye doğru zamanda doğru yetkiyi verme disiplinidir." },
+    { type: "scene", center: "DMZ", labels: ["Internet", "Firewall", "WAF", "IDS/IPS", "Segment", "Server"], caption: "Ağ güvenliği, dış trafik ile kritik sunucu arasındaki kapıları ve yangın bölmelerini düzenler." },
+    { type: "matrix", labels: ["Input", "AuthZ", "SQLi", "XSS", "SAST", "DAST"], caption: "Uygulama güvenliği, kötü niyetli girdiyi ve yetki atlamayı kod daha canlıya çıkmadan yakalamaya çalışır." },
+    { type: "hub", center: "Endpoint", nodes: ["EDR", "Patch", "Hardening", "Disk şifre", "Inventory"], caption: "Uç nokta güvenliği, çantadaki laptop ile sunucudaki ajanı aynı envanter aklında toplar." },
+    { type: "flow", labels: ["Log Source", "Collector", "SIEM", "Correlation", "SOC", "Playbook"], caption: "SIEM ve SOC, dağınık logları anlamlı alarma, alarmı olay müdahalesine dönüştürür." },
+    { type: "stack", labels: ["Kişisel veri", "Sınıflandırma", "Maskeleme", "DLP", "Erişim", "Saklama"], caption: "Veri güvenliği, bilginin hassasiyetini belirleyip erişim, maskeleme ve saklama kararına bağlar." },
+    { type: "timeline", labels: ["Detect", "Triage", "Contain", "Eradicate", "Recover", "Lessons"], caption: "Olay müdahalesi, saldırı anında prova edilmiş sakin bir sırayı izler." },
+    { type: "scene", center: "Tatbikat", labels: ["Senaryo", "Rol", "Log", "İletişim", "Rapor", "Aksiyon"], caption: "Siber tatbikat, krizin teknik ve iletişim boşluklarını olay gelmeden gösterir." },
+    { type: "matrix", labels: ["Risk", "Kontrol", "Kanıt", "Etki", "Bütçe", "Mevzuat"], caption: "Siber güvenlik mülakatı, tehdidi iş etkisi ve denetim kanıtıyla anlatınca olgunlaşır." }
+  ],
+  "buyuk-mimariler": [
+    { type: "scene", center: "Tek İşlem", labels: ["CDN", "WAF", "Gateway", "Service", "DB", "Log"], caption: "Büyük mimari, ekrandaki tek işlemin arkasındaki kalabalık hizmet zincirini görmektir." },
+    { type: "flow", labels: ["Arama", "Sepet", "Stok", "Ödeme", "Sipariş", "Kargo"], caption: "E-ticaret siparişi, hız ve tutarlılığın aynı müşteri sözünde birleştiği yolculuktur." },
+    { type: "timeline", labels: ["Intent", "3DS", "Auth", "Capture", "Callback", "Reconcile"], caption: "Ödeme sistemi saniyelik cevap verir ama idempotency ve mutabakatla muhasebe ciddiyetinde çalışır." },
+    { type: "flow", labels: ["Depo", "Barkod", "Aktarma", "Dağıtım", "Teslim", "Bildirim"], caption: "Lojistik takip, paketin fiziksel yolunu dijital olay izlerine çevirir." },
+    { type: "stack", labels: ["Vatandaş ekranı", "Kimlik doğrulama", "Başvuru kaydı", "Object storage", "İş akışı", "Audit log"], caption: "Kamu başvurusu, ekrandaki başarıyı resmi kayıt ve denetim iziyle birleştirir." },
+    { type: "scene", center: "Hasta", labels: ["Randevu", "Doktor", "Kayıt", "Lab", "Yetki", "Audit"], caption: "Hastane sistemi, hız ile mahremiyeti aynı hasta yolculuğunda korur." },
+    { type: "flow", labels: ["Kimlik", "Limit", "Fraud", "Ledger", "Transfer", "Mutabakat"], caption: "Banka transferi, para hareketinde kesinlik, yetki ve kanıt zinciri ister." },
+    { type: "timeline", labels: ["Malzeme", "Seri No", "İstasyon", "Test", "Onay", "İz"], caption: "Savunma üretiminde dijital iz, parçanın geçmişini denetimde anlatabilme gücüdür." },
+    { type: "flow", labels: ["Sensor", "Stream", "Map", "Decision", "Command", "Audit"], caption: "Komuta kontrol sisteminde zaman, verinin kendisi kadar kritik bir karar girdisidir." },
+    { type: "scene", center: "Temsilci", labels: ["IVR", "CRM", "Ticket", "Bilgi bankası", "Kimlik", "SLA"], caption: "Çağrı merkezi mimarisi, müşterinin sesini kurum hafızasına bağlar." },
+    { type: "flow", labels: ["Event", "Preference", "Template", "Queue", "Provider", "Delivery"], caption: "Bildirim sistemi doğru mesajı, doğru kanaldan ve doğru zamanda ulaştırma sanatıdır." },
+    { type: "hub", center: "Oturum", nodes: ["SSO", "OAuth2", "JWT", "Role", "Audit"], caption: "Kimlik ve oturum mimarisi, rahat giriş ile denetlenebilir erişimi dengeler." },
+    { type: "flow", labels: ["Source", "ETL", "Warehouse", "Quality", "Metric", "Dashboard"], caption: "Veri ambarı, dağınık sistem kayıtlarını ortak tanım ve güvenilir rapora dönüştürür." },
+    { type: "split", left: ["Mobil", "offline/retry"], right: ["Backend", "idempotency/API"], caption: "Mobil-backend yolu, kesintili ağda bile işlemin ne durumda olduğunu kullanıcıya dürüstçe göstermelidir." },
+    { type: "layers", center: "Scale", labels: [["CDN", 220, 78], ["WAF", 680, 78], ["Queue", 720, 185], ["Cache", 180, 185], ["DB", 450, 238]], caption: "Yüksek trafik mimarisi, en dar kapıyı bulup kritik kullanıcı yolunu korumaya çalışır." }
+  ],
+  "proje-kamu-yonetim": [
+    { type: "flow", labels: ["İhtiyaç", "Değer", "Kapsam", "Plan", "Kabul", "Fayda"], caption: "Kurumsal proje, fikirden önce hangi değeri üreteceğini netleştirir." },
+    { type: "split", left: ["İstek", "Excel ekranı"], right: ["Gereksinim", "hatalı veriyi azalt"], caption: "İhtiyaç analizi, kullanıcının söylediği çözümün altındaki gerçek derdi bulur." },
+    { type: "matrix", labels: ["Performans", "Güvenlik", "Log", "Yedek", "Eğitim", "Kabul"], caption: "Teknik şartname, dileği ölçülebilir kabul kanıtına dönüştürür." },
+    { type: "hub", center: "RACI", nodes: ["Sorumlu", "Hesap veren", "Danışılan", "Bilgilenen", "Karar"], caption: "Paydaş haritası ve RACI, kimin hangi anda masaya geleceğini netleştirir." },
+    { type: "timeline", labels: ["Varsayım", "Risk", "Tetik", "Aksiyon", "Sorun", "Ders"], caption: "Risk kaydı, gelecekteki tartışmayı bugünden görünür kılar." },
+    { type: "flow", labels: ["Test planı", "UAT", "Smoke", "Go-live", "Rollback", "İletişim"], caption: "Canlıya geçiş, teknik plan kadar kullanıcı ve destek iletişimi de ister." },
+    { type: "matrix", labels: ["SLA", "Bakım", "Sürüm", "Doküman", "Eğitim", "Exit plan"], caption: "Tedarikçi yönetimi, parlak sunumu ölçülebilir hizmet taahhüdüne çevirir." },
+    { type: "hub", center: "CMDB", nodes: ["Lisans", "Sunucu", "Sahip", "Maliyet", "Yama"], caption: "Bütçe ve envanter, kurumun neye sahip olduğunu ve neyi riske attığını gösterir." },
+    { type: "scene", center: "Kamu BT", labels: ["Merkez", "Taşra", "Belediye", "Üniversite", "Protokol", "Bütçe"], caption: "Kamu BT işleyişi teknik çözümü idari belge, bütçe ve sorumluluk sınırıyla yaşatır." },
+    { type: "stack", labels: ["Resmi yazı", "Onay", "KVKK", "Audit log", "Arşiv", "Denetim"], caption: "KVKK ve denetim izi, projenin son süsü değil tasarımın iskeletidir." },
+    { type: "scene", center: "Mülakat Masası", labels: ["Talep sahibi", "Teknik ekip", "Satın alma", "Hukuk", "Güvenlik", "Yönetici"], caption: "Proje ve kamu mülakatında güçlü aday, aynı masadaki farklı dilleri tek akışta anlatır." }
+  ],
+  "liderlik-kriz-gelecek": [
+    { type: "split", left: ["Teknik kök", "node/pod/log"], right: ["Yönetim etkisi", "hizmet/risk/bütçe"], caption: "Teknik lider, ayrıntıyı saklamadan yönetim kararına çevirebilir." },
+    { type: "matrix", labels: ["Etki", "Seçenek", "Risk", "Maliyet", "Öneri", "Sonraki bilgi"], caption: "Üst makama anlatım, teknik ayrıntıyı karar aldıracak sıraya koyar." },
+    { type: "hub", center: "Ekip", nodes: ["Uzmanlık", "Yedeklilik", "Runbook", "Mentorluk", "Nöbet"], caption: "Ekip kurmak, tek kahramanı değil paylaşılmış bilgi ve sorumluluğu büyütmektir." },
+    { type: "timeline", labels: ["Bilgi", "Varsayım", "Risk", "Karar", "Sinyal", "Geri dönüş"], caption: "Karar almak, belirsizliği bitirmek değil geri dönüş yolu açıkken yön seçmektir." },
+    { type: "matrix", labels: ["Capex", "Opex", "TCO", "Risk", "SLA", "Değer"], caption: "Bütçe savunması, fiyatı risk ve iş değeri diline çevirdiğinde güçlenir." },
+    { type: "scene", center: "Kriz Odası", labels: ["Olay kaydı", "Etki", "Roller", "Kanal", "Aksiyon", "Bilgi"], caption: "Kriz yönetimi, ilk dakikada sisin içinde kayıt ve rol düzeni kurmaktır." },
+    { type: "flow", labels: ["Rapor", "Lock", "Queue", "Kullanıcı", "Analiz", "Fix"], caption: "Veritabanı kilidi, teknik beklemeyi kullanıcı ve iş etkisine dönüştürebilir." },
+    { type: "flow", labels: ["DNS", "TTL", "Cert", "Chain", "CDN", "Browser"], caption: "SSL ve DNS krizi, küçük kayıtların bütün hizmet kapısını kapatabileceğini gösterir." },
+    { type: "scene", center: "DDoS", labels: ["Bot", "CDN", "WAF", "Rate limit", "Origin", "İletişim"], caption: "DDoS savunması, kaba kapasiteden çok doğru yerde filtreleme ve iletişim işidir." },
+    { type: "timeline", labels: ["Backup", "Key", "Restore", "Verify", "Open", "Report"], caption: "Yedek dönmüyorsa teknik dosyadan çok prova edilmemiş organizasyon sınanır." },
+    { type: "matrix", labels: ["Timeline", "Impact", "Root cause", "MTTR", "Owner", "Due date"], caption: "Kriz sonrası rapor, olayı kapatmak için değil aynı dersi tekrar ödememek için yazılır." },
+    { type: "layers", center: "AI Ofis", labels: [["Veri", 220, 78], ["Model", 680, 78], ["Onay", 720, 185], ["Policy", 180, 185], ["Audit", 450, 238]], caption: "Yapay zekânın ofise girişi, verimlilik kadar veri sınırı ve insan onayı meselesidir." },
+    { type: "hub", center: "GPU", nodes: ["Enerji", "Soğutma", "Model", "Batching", "Maliyet"], caption: "GPU ve enerji baskısı, yapay zekâ vaadini veri merkezi kapasitesiyle yüzleştirir." },
+    { type: "scene", center: "Egemenlik", labels: ["Veri konumu", "Bulut", "Exit plan", "Tedarik", "Açık standart", "Hukuk"], caption: "Dijital egemenlik, kritik hizmetin hangi altyapı ve bağımlılıkla yaşadığını sormaktır." },
+    { type: "timeline", labels: ["Temel", "Sistem", "Güvenlik", "Veri", "AI", "Liderlik"], caption: "Üst düzey BT rotası, derin teknik bilgiyi doğru soru ve karar sezgisine çevirir." }
+  ],
+  "mulakat-ve-ust-duzey-hazirlik": [
+    { type: "flow", labels: ["Tanım", "Örnek", "Risk", "Metrik", "Ders", "Karar"], caption: "Mülakat cevabı ezber değil, düşünce zinciriyle kurulduğunda güven verir." },
+    { type: "matrix", labels: ["CPU", "RAM", "Disk", "OS", "DNS", "Log"], caption: "Bilgisayar temelleri cevabı, parçaları belirti ve kanıtla aynı tabloda anlatır." },
+    { type: "flow", labels: ["Python", "OOP", "SQL", "API", "Log", "Test"], caption: "Kod mülakatında güçlü aday, yazdığı kodun veri ve dış sistemle ilişkisini gösterir." },
+    { type: "scene", center: "Backend", labels: ["JWT", "REST", "Cache", "Queue", "DB", "Status"], caption: "Web mülakatı, tek isteği auth, cache, kuyruk ve veritabanı konuşmasına açar." },
+    { type: "hub", center: "Production", nodes: ["Linux", "Network", "Docker", "K8s", "Cloud"], caption: "Linux, ağ, Docker, Kubernetes ve bulut soruları üretim sezgisini ölçer." },
+    { type: "timeline", labels: ["Detect", "Contain", "Recover", "Report", "Fix", "Evidence"], caption: "Siber güvenlik mülakatında olay müdahalesi sırası panik yerine disiplin gösterir." },
+    { type: "flow", labels: ["Data", "Embedding", "RAG", "LLM", "Guardrail", "Eval"], caption: "AI mülakatında model, veri, güvenlik, maliyet ve eval aynı cevabın parçalarıdır." },
+    { type: "matrix", labels: ["Requirement", "API", "DB", "Cache", "Queue", "Failure"], caption: "Sistem tasarımı cevabı, teknoloji seçimini gereksinim ve hata davranışıyla gerekçelendirir." },
+    { type: "split", left: ["Teknik karar", "mimari ve risk"], right: ["Yönetim dili", "bütçe ve insan"], caption: "Yöneticilik mülakatında teknik bilgi bütçe, risk, mevzuat ve insan diline çevrilir." },
+    { type: "timeline", labels: ["Komut", "Sistem", "Ekip", "Risk", "Strateji", "Liderlik"], caption: "Kişisel gelişim rotası, teknisyenlik bilgisini stratejik BT liderliği sezgisine taşır." }
+  ]
+};
+
+function visualFor(category, chapter) {
+  const spec = visualBlueprints[category.id]?.[chapter.number - 1];
+  if (spec) return renderVisualSpec(spec);
+  return renderVisualSpec({
+    type: "matrix",
+    labels: ["Kavram", "Görev", "Bağımlılık", "Risk", "Kanıt", "Karar"],
+    caption: "Bu sayfanın zihinsel özeti, kavramı görev, bağımlılık, risk ve kanıtla birlikte düşünmektir.",
+    note: "her teknik terim bir sistem davranışına bağlanır"
+  });
 }
 
 function pillText(index) {
