@@ -1670,6 +1670,28 @@ function articleWordCount(text) {
   return text.replace(/<[^>]*>/g, " ").trim().split(/\s+/).filter(Boolean).length;
 }
 
+function splitLongRead(text, className = "long-read") {
+  const sentences = String(text).match(/[^.!?]+[.!?]+(?:['")\]]+)?|[^.!?]+$/g) || [String(text)];
+  const paragraphs = [];
+  let current = "";
+  let sentenceCount = 0;
+  sentences.forEach((sentence) => {
+    const clean = sentence.trim();
+    if (!clean) return;
+    const next = current ? `${current} ${clean}` : clean;
+    sentenceCount += 1;
+    if (articleWordCount(next) > 170 || sentenceCount >= 7) {
+      if (current) paragraphs.push(current);
+      current = clean;
+      sentenceCount = 1;
+    } else {
+      current = next;
+    }
+  });
+  if (current) paragraphs.push(current);
+  return paragraphs.map((paragraphText) => `<p class="${className}">${paragraphText}</p>`).join("");
+}
+
 function editorialDepthForShortArticle(category, chapter, text) {
   if (articleWordCount(text) >= 700) return "";
   const title = cleanTitle(chapter);
@@ -1713,7 +1735,7 @@ function manualArticle(category, chapter) {
     const supplement = articleSupplements[chapter.id] ? ` ${articleSupplements[chapter.id]}` : "";
     const enrichedText = `${baseText}${supplement}`;
     const depth = editorialDepthForShortArticle(category, chapter, enrichedText);
-    return `<p class="long-read">${enrichedText}</p>${depth ? `<p class="long-read long-read-continuation">${depth}</p>` : ""}`;
+    return `${splitLongRead(enrichedText)}${depth ? splitLongRead(depth, "long-read long-read-continuation") : ""}`;
   }
   return article.map((block) => {
     if (typeof block === "string") return paragraph(block);
@@ -2651,7 +2673,7 @@ function renderNav() {
       return `
         <div class="category-group ${open ? "open" : ""}">
           <button class="category-button" type="button" data-category="${category.id}">
-            <span>${category.order}. ${escapeHtml(category.title)}</span>
+            <span>${escapeHtml(category.title)}</span>
             <small>${category.count} bölüm</small>
           </button>
           <div class="chapter-list">${chapterLinks}</div>
@@ -2729,7 +2751,7 @@ function renderChapter(id) {
   const progress = Math.round(((route.index + 1) / chapters.filter((item) => getCategory(item.categoryId).mode !== "pills").length) * 100);
   els.chapter.innerHTML = `
     <article class="article-card">
-      <p class="kicker">${category.order}. ${escapeHtml(category.title)} / Bölüm ${chapter.number}</p>
+      <p class="kicker">${escapeHtml(category.title)} / Bölüm ${chapter.number}</p>
       <h1>${escapeHtml(chapter.title)}</h1>
       <p class="chapter-subtitle">${escapeHtml(category.summary)}</p>
       <div class="meta-row">

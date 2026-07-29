@@ -433,6 +433,10 @@ p {
   text-indent: 2.1em;
 }
 
+.article-body p.long-read + p.long-read {
+  margin-top: 28px;
+}
+
 .article-body p.long-read::first-letter {
   float: left;
   margin: 0.08em 0.14em 0 0;
@@ -447,6 +451,7 @@ p {
   margin-top: 30px;
 }
 
+.article-body p.long-read:not(:first-of-type)::first-letter,
 .article-body p.long-read-continuation::first-letter {
   float: none;
   margin: 0;
