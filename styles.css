@@ -421,16 +421,18 @@ p {
   line-height: 1.82;
   text-align: justify;
   text-justify: inter-word;
+  text-align-last: left;
+  word-spacing: normal;
   overflow-wrap: break-word;
   hyphens: auto;
 }
 
 .article-body p.long-read {
-  max-width: 74ch;
-  margin-inline: auto;
+  max-width: none;
+  margin-inline: 0;
   font-size: 21px;
   line-height: 1.92;
-  text-indent: 2.1em;
+  text-indent: 0;
 }
 
 .article-body p.long-read + p.long-read {
@@ -1794,7 +1796,7 @@ p {
     max-width: none;
     font-size: 18px;
     line-height: 1.82;
-    text-indent: 1.2em;
+    text-indent: 0;
   }
 
   .article-body p.long-read::first-letter {
