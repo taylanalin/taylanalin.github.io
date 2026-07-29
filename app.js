@@ -1932,13 +1932,167 @@ function publicProjectTableVisual() {
     </svg>`);
 }
 
+function ddosVisualReadable() {
+  return customVisual("ddos-defense-readable", "DDoS savunmasında amaç saldırgan trafiği origin sunucuya varmadan seyreltmek, gerçek kullanıcı yolunu açık tutmak ve iletişimi teknik aksiyonla birlikte yürütmektir.", `
+    <svg viewBox="0 0 980 460" role="img" aria-label="DDoS saldırısı, CDN temizleme, WAF, rate limit, origin koruması ve kriz iletişimi">
+      <defs>
+        <marker id="arrow-ddos-readable" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <path d="M0 0 L8 4 L0 8 Z" fill="currentColor"></path>
+        </marker>
+      </defs>
+      <text x="58" y="54">Saldırı kaynakları</text>
+      <text x="350" y="54">Temizleme ve sınırlama</text>
+      <text x="760" y="54">Korunan servis</text>
+
+      <g class="v-callout danger-box">
+        <rect x="54" y="82" width="188" height="56" rx="10"/>
+        <text x="76" y="108">Bot ağı</text>
+        <text class="v-small" x="76" y="128">çok sayıda sahte istemci</text>
+      </g>
+      <g class="v-callout danger-box">
+        <rect x="54" y="162" width="188" height="56" rx="10"/>
+        <text x="76" y="188">Reflection</text>
+        <text class="v-small" x="76" y="208">başkasının kaynağıyla büyütme</text>
+      </g>
+      <g class="v-callout danger-box">
+        <rect x="54" y="242" width="188" height="56" rx="10"/>
+        <text x="76" y="268">Layer 7 flood</text>
+        <text class="v-small" x="76" y="288">pahalı URL ve login denemesi</text>
+      </g>
+
+      <g class="v-box">
+        <rect x="342" y="118" width="170" height="116" rx="16"/>
+        <text text-anchor="middle" x="427" y="152">CDN Scrubbing</text>
+        <text class="v-small" text-anchor="middle" x="427" y="178">hacmi kenarda emer</text>
+        <text class="v-small" text-anchor="middle" x="427" y="200">kötü trafiği ayıklar</text>
+      </g>
+      <g class="v-box">
+        <rect x="572" y="118" width="154" height="116" rx="16"/>
+        <text text-anchor="middle" x="649" y="152">WAF</text>
+        <text class="v-small" text-anchor="middle" x="649" y="178">rate limit</text>
+        <text class="v-small" text-anchor="middle" x="649" y="200">bot ve imza kuralı</text>
+      </g>
+      <g class="v-box">
+        <rect x="800" y="118" width="128" height="116" rx="16"/>
+        <text text-anchor="middle" x="864" y="152">Origin</text>
+        <text class="v-small" text-anchor="middle" x="864" y="178">API / Web</text>
+        <text class="v-small" text-anchor="middle" x="864" y="200">gizli ve korumalı</text>
+      </g>
+
+      <path class="v-line danger" marker-end="url(#arrow-ddos-readable)" d="M242 110 H320 C330 110 334 128 342 142"/>
+      <path class="v-line danger" marker-end="url(#arrow-ddos-readable)" d="M242 190 H342"/>
+      <path class="v-line danger" marker-end="url(#arrow-ddos-readable)" d="M242 270 H320 C330 270 334 222 342 212"/>
+      <path class="v-line solid" marker-end="url(#arrow-ddos-readable)" d="M512 176 H572"/>
+      <path class="v-line solid" marker-end="url(#arrow-ddos-readable)" d="M726 176 H800"/>
+
+      <g class="v-callout legit-box">
+        <rect x="54" y="342" width="188" height="56" rx="10"/>
+        <text x="76" y="368">Gerçek kullanıcı</text>
+        <text class="v-small" x="76" y="388">az ama değerli trafik</text>
+      </g>
+      <path class="v-line legit" marker-end="url(#arrow-ddos-readable)" d="M242 370 C388 370 470 286 572 224"/>
+      <text class="v-small" x="304" y="350">Temiz trafik aynı koruma kapılarından geçer, origin'e doğrudan açılmaz.</text>
+
+      <g class="v-callout">
+        <rect x="342" y="300" width="184" height="72" rx="10"/>
+        <text x="364" y="328">Ölçüm paneli</text>
+        <text class="v-small" x="364" y="350">RPS, 5xx, latency, bant</text>
+      </g>
+      <g class="v-callout">
+        <rect x="572" y="300" width="226" height="72" rx="10"/>
+        <text x="594" y="328">Kriz iletişimi</text>
+        <text class="v-small" x="594" y="350">durum sayfası, ISP, paydaş</text>
+      </g>
+      <path class="v-line thin" d="M427 234 V300"/>
+      <path class="v-line thin" d="M649 234 V300"/>
+      <text class="v-small" text-anchor="middle" x="490" y="424">Doğru savunma sorusu: saldırı nerede emiliyor, origin nasıl saklanıyor, gerçek kullanıcı yolu nasıl açık kalıyor?</text>
+    </svg>`);
+}
+
+function ddosVisualReadableV2() {
+  return customVisual("ddos-defense-readable", "DDoS savunmasında amaç saldırgan trafiği origin sunucuya varmadan seyreltmek, gerçek kullanıcı yolunu açık tutmak ve iletişimi teknik aksiyonla birlikte yürütmektir.", `
+    <svg viewBox="0 0 760 520" role="img" aria-label="Okunabilir DDoS savunma akışı">
+      <defs>
+        <marker id="arrow-ddos-v2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <path d="M0 0 L7 3.5 L0 7 Z" fill="currentColor"></path>
+        </marker>
+      </defs>
+      <text x="38" y="44">Saldırı kaynakları</text>
+      <text x="274" y="44">Kenar savunması</text>
+      <text x="486" y="44">Uygulama filtresi</text>
+      <text x="650" y="44">Origin</text>
+
+      <g class="v-callout danger-box">
+        <rect x="38" y="78" width="166" height="58" rx="10"/>
+        <text x="56" y="104">Bot ağı</text>
+        <text class="v-small" x="56" y="124">binlerce sahte istemci</text>
+      </g>
+      <g class="v-callout danger-box">
+        <rect x="38" y="164" width="166" height="58" rx="10"/>
+        <text x="56" y="190">Reflection</text>
+        <text class="v-small" x="56" y="210">trafik hacmi büyütülür</text>
+      </g>
+      <g class="v-callout danger-box">
+        <rect x="38" y="250" width="166" height="58" rx="10"/>
+        <text x="56" y="276">Layer 7 flood</text>
+        <text class="v-small" x="56" y="296">pahalı istekler çoğalır</text>
+      </g>
+
+      <g class="v-box">
+        <rect x="268" y="132" width="150" height="112" rx="14"/>
+        <text text-anchor="middle" x="343" y="164">CDN Scrubbing</text>
+        <text class="v-small" text-anchor="middle" x="343" y="190">hacmi kenarda emer</text>
+        <text class="v-small" text-anchor="middle" x="343" y="212">kötü trafiği ayıklar</text>
+      </g>
+      <g class="v-box">
+        <rect x="480" y="132" width="124" height="112" rx="14"/>
+        <text text-anchor="middle" x="542" y="164">WAF</text>
+        <text class="v-small" text-anchor="middle" x="542" y="190">rate limit</text>
+        <text class="v-small" text-anchor="middle" x="542" y="212">bot kuralı</text>
+      </g>
+      <g class="v-box">
+        <rect x="652" y="132" width="82" height="112" rx="14"/>
+        <text text-anchor="middle" x="693" y="164">Origin</text>
+        <text class="v-small" text-anchor="middle" x="693" y="190">API</text>
+        <text class="v-small" text-anchor="middle" x="693" y="212">gizli</text>
+      </g>
+
+      <path class="v-line danger" marker-end="url(#arrow-ddos-v2)" d="M204 107 H238 C252 107 254 146 268 154"/>
+      <path class="v-line danger" marker-end="url(#arrow-ddos-v2)" d="M204 193 H268"/>
+      <path class="v-line danger" marker-end="url(#arrow-ddos-v2)" d="M204 279 H238 C252 279 254 230 268 222"/>
+      <path class="v-line solid" marker-end="url(#arrow-ddos-v2)" d="M418 188 H480"/>
+      <path class="v-line solid" marker-end="url(#arrow-ddos-v2)" d="M604 188 H652"/>
+
+      <g class="v-callout legit-box">
+        <rect x="38" y="362" width="166" height="58" rx="10"/>
+        <text x="56" y="388">Gerçek kullanıcı</text>
+        <text class="v-small" x="56" y="408">korunan temiz yol</text>
+      </g>
+      <path class="v-line legit" marker-end="url(#arrow-ddos-v2)" d="M204 391 C250 360 252 278 268 232"/>
+
+      <g class="v-callout">
+        <rect x="268" y="318" width="150" height="72" rx="10"/>
+        <text x="288" y="346">Ölçüm</text>
+        <text class="v-small" x="288" y="368">RPS, 5xx, latency</text>
+      </g>
+      <g class="v-callout">
+        <rect x="480" y="318" width="166" height="72" rx="10"/>
+        <text x="500" y="346">Kriz iletişimi</text>
+        <text class="v-small" x="500" y="368">ISP, durum sayfası</text>
+      </g>
+      <path class="v-line thin" d="M343 244 V318"/>
+      <path class="v-line thin" d="M542 244 V318"/>
+      <text class="v-small" text-anchor="middle" x="380" y="470">Ana fikir: saldırıyı kenarda em, WAF ile uygulama katmanını süz, origin'i sakla, gerçek kullanıcı yolunu açık tut.</text>
+    </svg>`);
+}
+
 const chapterVisuals = {
   "asama-1-bilgisayar-temelleri-2": hardwareMotherboardVisual,
   "asama-1-bilgisayar-temelleri-6": networkTopologyVisual,
   "asama-1-bilgisayar-temelleri-7": dnsHttpsVisual,
   "asama-6-devops-bulut-3": kubernetesVisual,
   "siber-guvenlik-3": securityZonesVisual,
-  "liderlik-kriz-gelecek-9": ddosVisual,
+  "liderlik-kriz-gelecek-9": ddosVisualReadableV2,
   "proje-kamu-yonetim-11": publicProjectTableVisual
 };
 

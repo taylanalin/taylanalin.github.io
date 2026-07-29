@@ -846,8 +846,25 @@ p {
   padding: 24px;
 }
 
+.article-body .visual-custom {
+  max-width: 980px;
+}
+
 .visual-custom svg {
   min-height: 300px;
+}
+
+.visual-custom text {
+  font-size: 14px;
+  paint-order: stroke;
+  stroke: color-mix(in srgb, var(--paper-2) 78%, black);
+  stroke-width: 2.5px;
+  stroke-linejoin: round;
+}
+
+.visual-custom .v-small {
+  font-size: 12px;
+  stroke-width: 2px;
 }
 
 .visual-custom .v-line,
@@ -919,6 +936,16 @@ p {
   fill: color-mix(in srgb, var(--paper) 34%, var(--paper-2));
   stroke: color-mix(in srgb, var(--accent-2) 44%, var(--line));
   stroke-width: 1.2;
+}
+
+.visual-custom .danger-box rect {
+  fill: color-mix(in srgb, #402326 58%, var(--paper-2));
+  stroke: color-mix(in srgb, #ff7878 48%, var(--line));
+}
+
+.visual-custom .legit-box rect {
+  fill: color-mix(in srgb, #203b2d 62%, var(--paper-2));
+  stroke: color-mix(in srgb, #7be495 50%, var(--line));
 }
 
 .visual-custom .v-chip rect {
