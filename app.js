@@ -3086,96 +3086,120 @@ function illustrationStyle(category, chapter, scene) {
   const seed = visualSeed(`${category.id}-${chapter.id}-${scene}`);
   const hueA = (seed * 17 + category.order * 29) % 360;
   const hueB = (hueA + 74 + chapter.number * 9) % 360;
-  const shift = (seed % 19) - 9;
-  const lift = ((Math.floor(seed / 7) % 17) - 8);
-  const scale = 96 + (seed % 9);
   return [
     `--scene-hue-a:${hueA}`,
     `--scene-hue-b:${hueB}`,
-    `--art-shift:${shift}px`,
-    `--art-lift:${lift}px`,
-    `--art-scale:${scale / 100}`
+    `--lesson-seed:${seed}`
   ].join(";");
 }
 
-function sceneArtwork(scene, motifs) {
-  const marks = motifs.map((item, index) => `<span style="--i:${index}">${escapeHtml(item)}</span>`).join("");
-  const art = {
-    machine: `
-      <div class="art-machine">
-        <i class="chip"></i><i class="bus b1"></i><i class="bus b2"></i><i class="bus b3"></i>
-        <i class="fan"></i><i class="memory m1"></i><i class="memory m2"></i>
-      </div>`,
-    software: `
-      <div class="art-software">
-        <i class="editor"></i><i class="code c1"></i><i class="code c2"></i><i class="terminal"></i><i class="deploy"></i>
-      </div>`,
-    ai: `
-      <div class="art-ai">
-        <i class="brain"></i><i class="halo h1"></i><i class="halo h2"></i><i class="token t1"></i><i class="token t2"></i><i class="doc"></i>
-      </div>`,
-    ops: `
-      <div class="art-ops">
-        <i class="rack r1"></i><i class="rack r2"></i><i class="pipeline"></i><i class="container k1"></i><i class="container k2"></i><i class="container k3"></i>
-      </div>`,
-    security: `
-      <div class="art-security">
-        <i class="shield"></i><i class="wall w1"></i><i class="wall w2"></i><i class="scan"></i><i class="alert"></i>
-      </div>`,
-    institution: `
-      <div class="art-institution">
-        <i class="building"></i><i class="door"></i><i class="service s1"></i><i class="service s2"></i><i class="record"></i>
-      </div>`,
-    governance: `
-      <div class="art-governance">
-        <i class="table"></i><i class="paper p1"></i><i class="paper p2"></i><i class="stamp"></i><i class="seat a"></i><i class="seat b"></i><i class="seat c"></i>
-      </div>`,
-    incident: `
-      <div class="art-incident">
-        <i class="room"></i><i class="screen main"></i><i class="screen side"></i><i class="pulse"></i><i class="runbook"></i>
-      </div>`,
-    interview: `
-      <div class="art-interview">
-        <i class="board"></i><i class="question"></i><i class="answer"></i><i class="profile"></i><i class="note"></i>
-      </div>`
-  }[scene] || "";
-  return `${art}<div class="image-motifs">${marks}</div>`;
+function lessonScenario(category, chapter, labels) {
+  const title = cleanTitle(chapter);
+  const actor = {
+    systems: "operasyon ekibi",
+    software: "geliştirme ekibi",
+    ai: "ürün ve veri ekibi",
+    security: "SOC ve güvenlik ekibi",
+    architecture: "mimari karar masası",
+    project: "proje ve kabul komisyonu",
+    leadership: "teknik lider",
+    interview: "mülakat masası"
+  }[category.mode] || "teknik ekip";
+  const first = labels[0] || firstPhrase(title);
+  const second = labels[1] || "kanıt";
+  return `${actor}, ${title.toLocaleLowerCase("tr")} konusunu ${first} üzerinden başlatır; karar ${second} ve kullanıcı etkisiyle olgunlaşır.`;
 }
 
-function renderIllustration(category, chapter, spec) {
-  const normalized = normalizeVisualSpec(spec);
+function lessonRisk(category, chapter, labels) {
   const title = cleanTitle(chapter);
-  const center = normalized.center || firstPhrase(title);
-  const caption = normalized.caption || "Bu bölümün görsel özeti, kavramı gerçek bir kurum sahnesi içinde okumaya davet eder.";
-  const motifs = illustrationMotifs(category, chapter, normalized);
+  const riskByMode = {
+    systems: "Belirti yalnız makinede aranırsa asıl darboğaz ağ, disk, yetki veya işletim düzeninde saklı kalır.",
+    software: "Sözleşme, test ve log düşünülmezse çalışan kod canlıda kırılgan bir hizmete dönüşür.",
+    ai: "Kaynak, yetki ve değerlendirme net değilse akıcı cevap güvenilir bilgi sanılır.",
+    security: "Yetki, segment ve log bağı koparsa saldırıdan sonra neyin yaşandığı kanıtlanamaz.",
+    architecture: "Ana kayıt, kuyruk, cache ve entegrasyon sınırı karışırsa küçük işlem kurum krizine döner.",
+    project: "Kabul ölçütü ve sorumluluk yazılmazsa son gün teknik tartışma idari krize dönüşür.",
+    leadership: "Karar yalnız teknik ayrıntıda kalırsa maliyet, insan, mevzuat ve güven etkisi görünmez olur.",
+    interview: "Cevap ezbere kalırsa aday kavramı bilir ama sistemi okuyamadığını hissettirir."
+  };
+  return `${riskByMode[category.mode] || "Kavram bağlamından koparsa yanlış teknoloji doğru sorun sanılır."} ${labels[2] ? `${labels[2]} özellikle erken kontrol edilmelidir.` : title}`;
+}
+
+function lessonEvidence(category, labels) {
+  const evidenceByMode = {
+    systems: ["log", "metrik", "servis durumu"],
+    software: ["test sonucu", "API cevabı", "hata logu"],
+    ai: ["kaynak belge", "eval sonucu", "kullanıcı geri bildirimi"],
+    security: ["erişim izi", "SIEM korelasyonu", "olay zaman çizelgesi"],
+    architecture: ["ana kayıt", "trace", "mutabakat"],
+    project: ["kabul kriteri", "karar kaydı", "risk listesi"],
+    leadership: ["etki özeti", "seçenek analizi", "aksiyon sahibi"],
+    interview: ["tanım", "örnek vaka", "ölçüm"]
+  }[category.mode] || ["kanıt", "ölçüm", "karar kaydı"];
+  return [...new Set([...labels.slice(0, 2), ...evidenceByMode])].slice(0, 4);
+}
+
+function lessonTakeaway(category, chapter, labels) {
+  const title = firstPhrase(cleanTitle(chapter));
+  const last = labels.at(-1) || "karar";
+  return `${title} başlığı, ${last} noktasında somutlaşır: iyi okur tanımı değil, akışı ve bozulma davranışını anlatır.`;
+}
+
+function renderLessonVisual(category, chapter, spec) {
+  const normalized = normalizeVisualSpec(spec);
+  const title = chapter.title;
+  const labels = normalized.labels.map(visualTitle).filter(Boolean).slice(0, 6);
+  const safeLabels = labels.length ? labels : illustrationMotifs(category, chapter, normalized);
   const scene = visualSceneFor(category, chapter, normalized);
   const style = illustrationStyle(category, chapter, scene);
-  const mode = category.mode || "systems";
+  const caption = normalized.caption || "Bu bölümün özeti, kavramı olay akışı, risk ve kanıt üzerinden okumaktır.";
+  const scenario = lessonScenario(category, chapter, safeLabels);
+  const risk = lessonRisk(category, chapter, safeLabels);
+  const evidence = lessonEvidence(category, safeLabels);
+  const takeaway = lessonTakeaway(category, chapter, safeLabels);
   return `
-    <figure class="visual-canvas visual-image visual-image-${mode} scene-${scene}" style="${style}">
-      <div class="image-frame" aria-label="${escapeHtml(title)} bölümünü özetleyen illüstrasyon">
-        <div class="image-atmosphere" aria-hidden="true">
-          <span class="image-star s1"></span>
-          <span class="image-star s2"></span>
-          <span class="image-star s3"></span>
-          <span class="image-star s4"></span>
-        </div>
-        <div class="image-landscape" aria-hidden="true">
-          <span class="image-beacon"></span>
-          <span class="image-ridge r1"></span>
-          <span class="image-ridge r2"></span>
-          <span class="image-path"></span>
-        </div>
-        <div class="image-artwork" aria-hidden="true">${sceneArtwork(scene, motifs)}</div>
-        <div class="image-story">
+    <figure class="visual-canvas visual-lesson lesson-${scene}" style="${style}">
+      <div class="lesson-shell">
+        <header class="lesson-head">
           <small>${escapeHtml(displayCategoryTitle(category))} / Bölüm ${chapter.number}</small>
-          <strong>${escapeHtml(center)}</strong>
+          <strong>${escapeHtml(title)}</strong>
           <p>${escapeHtml(caption)}</p>
+        </header>
+        <div class="lesson-board">
+          <section class="lesson-case">
+            <span>Sahne</span>
+            <p>${escapeHtml(scenario)}</p>
+          </section>
+          <ol class="lesson-flow">
+            ${safeLabels.map((label, index) => `
+              <li style="--i:${index}">
+                <b>${String(index + 1).padStart(2, "0")}</b>
+                <strong>${escapeHtml(label)}</strong>
+                <span>${escapeHtml(visualSub(label, index, normalized))}</span>
+              </li>
+            `).join("")}
+          </ol>
+          <section class="lesson-risk">
+            <span>Kırılma Noktası</span>
+            <p>${escapeHtml(risk)}</p>
+          </section>
+          <section class="lesson-evidence">
+            <span>Kanıt</span>
+            <ul>${evidence.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+          </section>
+          <section class="lesson-takeaway">
+            <span>Akılda Kalacak Ders</span>
+            <p>${escapeHtml(takeaway)}</p>
+          </section>
         </div>
       </div>
       <figcaption>${escapeHtml(caption)}</figcaption>
     </figure>
   `;
+}
+
+function renderIllustration(category, chapter, spec) {
+  return renderLessonVisual(category, chapter, spec);
 }
 
 function visualFor(category, chapter) {
