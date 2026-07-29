@@ -39,7 +39,8 @@ const categories = [
       "SQL temeli: tablo, ilişki, JOIN, index ve sorgu düşüncesi",
       "PostgreSQL ile kalıcı kayıt, transaction ve veri bütünlüğü",
       "Python ekosistemi: FastAPI, Pandas, PyTorch ve TensorFlow'a hazırlık",
-      "Kod mülakatı ve portföy: neyi bildiğini çalışır örnekle göstermek"
+      "Kod mülakatı ve portföy: neyi bildiğini çalışır örnekle göstermek",
+      "Veri yapıları ve algoritma sezgisi: array, hash map, stack, queue ve Big O"
     ]
   },
   {
@@ -151,7 +152,8 @@ const categories = [
       "Kimlik, yetki ve oturum mimarisi",
       "Raporlama ve veri ambarı akışı",
       "Mobil uygulama ile backend arasındaki yol",
-      "Yüksek trafikte ölçekleme ve hata yalıtımı"
+      "Yüksek trafikte ölçekleme ve hata yalıtımı",
+      "Veri mühendisliği: ETL, data lake, warehouse, kalite ve katalog"
     ]
   },
   {
@@ -193,7 +195,8 @@ const categories = [
       "Yapay zekânın ofise girişi",
       "Veri merkezlerinde enerji, GPU ve kapasite baskısı",
       "Dijital egemenlik, yarı iletken yarışı ve bulut bağımlılığı",
-      "Üst düzey BT yöneticisi için kişisel rota"
+      "Üst düzey BT yöneticisi için kişisel rota",
+      "ITSM ve değişiklik yönetimi: incident, problem, change, CAB ve release"
     ]
   },
   {
@@ -605,6 +608,20 @@ const techDetails = {
     "Bunu çok hızlı çalışan bir araştırma asistanı gibi düşün. Kaynakları doğru verirsen hız kazandırır; kaynağı, yetkiyi ve insan onayını kaldırırsan yanlış cevabı özgüvenle büyütebilir."
   ]
 };
+
+Object.assign(glossary, {
+  "Big O": "AlgoritmanÄ±n veri bÃ¼yÃ¼dÃ¼kÃ§e zaman veya bellek maliyetinin nasÄ±l arttÄ±ÄŸÄ±nÄ± tarif eden yaklaÅŸÄ±mdÄ±r.",
+  "CAB": "YÃ¼ksek riskli deÄŸiÅŸiklikleri etki, geri dÃ¶nÃ¼ÅŸ ve zamanlama aÃ§Ä±sÄ±ndan deÄŸerlendiren deÄŸiÅŸiklik kuruludur.",
+  "Change": "Ãœretim ortamÄ±nda yapÄ±lacak kontrollÃ¼ teknik veya sÃ¼reÃ§ deÄŸiÅŸikliÄŸidir.",
+  "Data lake": "FarklÄ± formatlardaki ham veya yarÄ± iÅŸlenmiÅŸ veriyi geniÅŸ Ã¶lÃ§ekte tutan veri depolama yaklaÅŸÄ±mÄ±dÄ±r.",
+  "Data warehouse": "Raporlama ve analitik iÃ§in temizlenmiÅŸ, modellenmiÅŸ ve tutarlÄ± veri tutan kurumsal depodur.",
+  "ELT": "Veriyi Ã¶nce hedef depoya yÃ¼kleyip dÃ¶nÃ¼ÅŸÃ¼mÃ¼ hedef ortamda yapan veri iÅŸleme yaklaÅŸÄ±mÄ±dÄ±r.",
+  "ETL": "Veriyi kaynaktan alÄ±p dÃ¶nÃ¼ÅŸtÃ¼rerek hedef sisteme yÃ¼kleyen veri iÅŸleme hattÄ±dÄ±r.",
+  "Incident": "Hizmetin bozulduÄŸu veya kullanÄ±cÄ± etkisinin oluÅŸtuÄŸu olay kaydÄ±dÄ±r.",
+  "ITSM": "BT hizmetlerini incident, problem, change, SLA ve sÃ¼rekli iyileÅŸtirme disipliniyle yÃ¶netme yaklaÅŸÄ±mÄ±dÄ±r.",
+  "Problem": "Tekrar eden veya kritik incident'larÄ±n kÃ¶k nedenini bulmaya odaklanan kayÄ±t ve analiz disiplinidir.",
+  "Release": "DeÄŸiÅŸikliÄŸin kullanÄ±cÄ±ya kontrollÃ¼ paket, iletiÅŸim, izleme ve geri dÃ¶nÃ¼ÅŸ planÄ±yla taÅŸÄ±nmasÄ±dÄ±r."
+});
 
 const pillConcepts = [
   ["API", "iki sistemin belirli kurallarla konuşmasını sağlar", "Kamu portalında başvuru kaydı, kimlik doğrulama ve ödeme farklı servislerdeyse API bu servislerin ortak dilidir."],
@@ -1620,6 +1637,15 @@ const manualArticles = {
   ],
   "mulakat-ve-ust-duzey-hazirlik-10": [
     "Teknisyenlikten stratejik BT liderliğine geçiş, elindeki tornavidayı bırakmak değil, hangi sorunda hangi tornavidanın gerektiğini bilmektir. Derinlik kaybolmaz; perspektif genişler. Kariyerin başında komut öğrenirsin, sonra sistem kurarsın, sonra ekibin nasıl çalıştığını görürsün, en sonunda teknolojinin bütçe, risk ve kurum hedefiyle ilişkisini yönetirsin. Her aşama öncekinin üstüne çıkar. Stratejik liderlik teknikten uzaklaşmak değil, tekniğin etkisini daha geniş okumaktır. Bir veritabanı gecikmesi kullanıcı deneyimidir, bir sertifika takvimi güven yönetimidir, bir bulut faturası mimari karardır, bir yapay zekâ pilotu veri yönetişimi meselesidir. Kişisel rota için her projeden bir teknik ders, bir insan dersi ve bir karar dersi çıkar. Zamanla CV'nin yanında daha değerli bir şey oluşur: sahadan süzülmüş yargı gücü. Mülakatta son söz olarak bunu taşı: Ben araçları öğrenirim, sistemleri okurum, insanları dinlerim, riski görünür yaparım ve kararın kaydını tutarım. Çok üst düzey BT liderliği böyle başlar."
+  ],
+  "asama-2-programlama-11": [
+    "Veri yapıları ve algoritma sezgisi, yazılım dünyasının sessiz iskeletidir. Kodun ekranda çalışması yetmez; veri büyüdüğünde, kullanıcı sayısı arttığında, sorgu sıklaştığında veya bellek daraldığında nasıl davranacağını da bilmek gerekir. Bunu ilk kez bir rapor ekranında çok çıplak görmüştüm. Test ortamında yüz kayıtla göz açıp kapayıncaya kadar çalışan filtre, canlıda yüz binlerce kaydı görünce ağırlaşmıştı. Kod aynı koddu, ama veri artık çocuk parkı değil şehir trafiğiydi. Array hızlı erişim sağlar ama ortadan eleman silmek maliyetlidir; linked list ekleme çıkarma için rahat olabilir ama rastgele erişimde yavaştır; hash map anahtardan değere hızlı gider ama çakışma, bellek ve sıralama davranışı düşünülmelidir; stack son giren ilk çıkar mantığıyla undo, parse ve çağrı yığını gibi yerlerde doğal durur; queue ilk giren ilk çıkar düzeniyle iş kuyruğu, mesaj işleme ve arka plan görevlerinde kullanılır. Tree ve graph ise hiyerarşi ve ilişki dünyasının dilidir; dosya sistemi, organizasyon şeması, rota bulma, dependency ilişkisi ve sosyal ağlar bu gözle okunur. Big O notasyonu burada gösteriş için değil, davranışı kabaca tahmin etmek için vardır. O(1) sabit erişim, O(log n) bölerek arama, O(n) tek tek dolaşma, O(n log n) iyi sıralama sınıfı, O(n²) büyüdükçe can yakan çift döngü demektir. Mülakatta algoritma sorusu geldiğinde yalnız çözümü bulmaya çalışma; veri boyutunu, bellek sınırını, sıralı mı dağınık mı geldiğini, tekrar var mı, arama mı ekleme mi ağır basıyor diye sor. Büyük kurumlarda bu sezgi performans, maliyet ve kullanıcı deneyimine dönüşür. Yanlış veri yapısı bazen pahalı sunucu faturasıdır, bazen kilitlenen ekran, bazen de gece yarısı açılan performans olayıdır."
+  ],
+  "buyuk-mimariler-16": [
+    "Veri mühendisliği, kurumun dağınık hafızasını karar verilebilir hale getirme işidir. Kullanıcı ekranda bir dashboard görür; yönetici grafik üstünden karar verir; ama o grafiğin arkasında çoğu zaman CRM, ERP, çağrı merkezi, ödeme sistemi, log platformu, dosya depoları, üçüncü taraf entegrasyonları ve eski uygulamalardan gelen uzun bir yol vardır. ETL veya ELT bu yolun taşıma düzenidir: veri kaynaktan alınır, dönüştürülür, temizlenir, zenginleştirilir ve data warehouse ya da data lake gibi ortamlara yerleşir. Warehouse daha düzenli, şeması güçlü ve raporlama için hazır bir arşiv gibidir; data lake ise ham ve farklı formatlardaki veriyi daha esnek tutar ama iyi kataloglanmazsa kısa sürede bataklığa dönebilir. Bir kurumda raporlar birbirini tutmuyordu; satış ekibi başka sayı, finans başka sayı, operasyon başka sayı söylüyordu. Sorun dashboard aracı değildi; müşteri, sipariş, iptal, aktif kullanıcı ve gelir tanımları ortak değildi. Veri kalitesi burada teknik kadar yönetişim meselesidir. Data catalog hangi tablonun ne anlama geldiğini, data lineage verinin nereden gelip hangi dönüşümlerden geçtiğini, data quality kuralları boş alan, tekrar, geçersiz değer ve tutarsız tarihleri yakalar. Batch işleme gece büyük veri taşımak için uygundur; stream işleme Kafka benzeri akışlarla olayları neredeyse anlık yakalar. Mülakatta veri mühendisliği anlatırken yalnız 'ETL yaptım' deme; kaynak sistem, dönüşüm, kalite kontrol, katalog, erişim yetkisi, kişisel veri, izleme, yeniden çalıştırma ve hata telafisini birlikte kur. Üst düzey yönetimde veri mimarisi rapor güzelliği değil güvenilir karar altyapısıdır. Yanlış veriyle alınan karar, bazen bozuk sistemden daha pahalıdır."
+  ],
+  "liderlik-kriz-gelecek-16": [
+    "ITSM ve değişiklik yönetimi, teknolojinin gündelik hayatını düzenleyen trafik kurallarıdır. Incident bir hizmet bozulduğunda açılır; amaç kullanıcı etkisini azaltıp hizmeti geri getirmektir. Problem aynı olayın kök nedenini arar; amaç tekrarını engellemektir. Change ise üretim ortamında yapılacak kontrollü değişikliktir; amaç yenilik getirirken sistemi gereksiz riske atmamak. Bu ayrım kağıt üstünde basit görünür ama sahada çok şey değiştirir. Bir ekip her kesintiyi hızlıca kapatıyor, ama aynı kesinti ayda üç kez dönüyordu. Incident çözülüyordu, problem yönetimi yapılmıyordu. Başka bir ekip küçük konfigürasyon değişikliğini kayıt açmadan canlıya aldı; işlem başarılıydı ama sorun çıkınca kim neyi ne zaman değiştirdi bilinmedi. Change management burada yavaşlatıcı bürokrasi değil, kurum hafızasıdır. CAB, yani Change Advisory Board, her küçük işi aylarca bekletmek için değil, yüksek riskli değişikliklerde etkiyi, geri dönüş planını, iletişimi ve bağımlılıkları görünür yapmak için vardır. Release yönetimi ise tek değişikliği değil, kullanıcıya giden sürüm paketini, dokümanı, eğitimi, rollback'i ve monitoring hazırlığını birlikte düşünür. İyi ITSM pratiğinde ticket yalnız iş kuyruğu değil kanıt zinciridir: etki, öncelik, sahip, SLA, aksiyon, karar ve kapanış dersi içerir. Teknik lider bu düzeni kör prosedür haline getirmez; riskli işi kontrol ederken küçük işi boğmayacak esneklik kurar. Mülakatta ITSM sorulduğunda incident, problem, change, CAB, release, SLA, known error, post-implementation review ve configuration management kavramlarını bir olay üzerinden anlat. Büyük kurumda olgunluk, kahramanca müdahale etmekten çok sistemli öğrenmek ve değişikliği iz bırakarak yönetmektir."
   ]
 };
 
@@ -1671,7 +1697,7 @@ function editorialDepthForShortArticle(category, chapter, text) {
   const practiceView = `Bu sayfayı çalışırken kendine küçük bir vaka yaz: kurumda bu konu yüzünden bir sorun çıkmış gibi düşün, ilk alarmı, kullanıcı etkisini, bakacağın üç kanıtı, geçici aksiyonu ve kalıcı düzeltmeyi sırala. Sonra aynı vakayı iki dille anlat: teknik ekibe ayrıntılı, üst yönetime sade. Böyle çalışıldığında bilgi yalnız okunmuş olmaz; mülakatta, kriz odasında ve proje toplantısında kullanılabilir bir refleks haline gelir.`;
   const closingView = `Sonunda ölçü basittir: Bu başlık bittikten sonra okur yalnız terimin adını değil, o terimin gerçek bir kurumda hangi kararı etkilediğini söyleyebilmelidir. Eğer bir kavram bütçe, güvenlik, performans, kullanıcı deneyimi, denetim veya ekip sorumluluğuyla bağ kurmuyorsa anlatım henüz tamamlanmamıştır.`;
   const interviewView = `Mülakatta bu sayfayı cevaba çevirmek istersen önce sade tanım kur, sonra küçük bir gerçek hayat senaryosu anlat, ardından risk ve ölçüm ekle. 'Bunu kullanırım' demek yerine 'şu durumda kullanırım, şu metriğe bakarım, şu hatada geri dönerim, şu güvenlik sınırını koyarım' dediğinde cevap olgunlaşır. Okurun kazanması gereken refleks budur: terimi değil, terimin sistem içindeki davranışını anlatmak.`;
-  return ` ${scene} ${practical} ${fieldStory} ${managerView} ${diagnosticView} ${failureView} ${practiceView} ${closingView} ${interviewView}`;
+  return `${scene} ${practical} ${fieldStory} ${managerView} ${diagnosticView} ${failureView} ${practiceView} ${closingView} ${interviewView}`;
 }
 
 function manualArticle(category, chapter) {
@@ -1686,7 +1712,8 @@ function manualArticle(category, chapter) {
     const baseText = article.join(" ");
     const supplement = articleSupplements[chapter.id] ? ` ${articleSupplements[chapter.id]}` : "";
     const enrichedText = `${baseText}${supplement}`;
-    return `<p class="long-read">${enrichedText}${editorialDepthForShortArticle(category, chapter, enrichedText)}</p>`;
+    const depth = editorialDepthForShortArticle(category, chapter, enrichedText);
+    return `<p class="long-read">${enrichedText}</p>${depth ? `<p class="long-read long-read-continuation">${depth}</p>` : ""}`;
   }
   return article.map((block) => {
     if (typeof block === "string") return paragraph(block);
@@ -1986,6 +2013,68 @@ function publicProjectTableVisual() {
     </svg>`);
 }
 
+function dataStructuresVisual() {
+  return customVisual("data-structures-map", "Veri yapısı seçimi, verinin nasıl büyüdüğünü ve hangi işlemde hız beklendiğini okumaktır.", `
+    <svg viewBox="0 0 900 470" role="img" aria-label="Array, hash map, stack, queue, tree ve graph kullanım haritası">
+      <defs><marker id="arrow-ds" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="currentColor"/></marker></defs>
+      <text x="54" y="48">Soru</text><text x="318" y="48">Uygun yapı</text><text x="664" y="48">Tipik bedel</text>
+      <g class="v-callout"><rect x="50" y="82" width="190" height="60" rx="10"/><text x="70" y="108">Sırayla geziyorum</text><text class="v-small" x="70" y="130">liste, indeks, tarama</text></g>
+      <g class="v-box"><rect x="310" y="82" width="160" height="60" rx="10"/><text text-anchor="middle" x="390" y="118">Array / List</text></g>
+      <g class="v-callout"><rect x="646" y="82" width="190" height="60" rx="10"/><text x="666" y="108">O(1) erişim</text><text class="v-small" x="666" y="130">ortadan silme pahalı</text></g>
+      <path class="v-line solid" marker-end="url(#arrow-ds)" d="M240 112 H310"/><path class="v-line solid" marker-end="url(#arrow-ds)" d="M470 112 H646"/>
+      <g class="v-callout"><rect x="50" y="166" width="190" height="60" rx="10"/><text x="70" y="192">Anahtarla buluyorum</text><text class="v-small" x="70" y="214">kullanıcı id, cache key</text></g>
+      <g class="v-box"><rect x="310" y="166" width="160" height="60" rx="10"/><text text-anchor="middle" x="390" y="202">Hash Map</text></g>
+      <g class="v-callout"><rect x="646" y="166" width="190" height="60" rx="10"/><text x="666" y="192">Ortalama O(1)</text><text class="v-small" x="666" y="214">bellek ve çakışma</text></g>
+      <path class="v-line solid" marker-end="url(#arrow-ds)" d="M240 196 H310"/><path class="v-line solid" marker-end="url(#arrow-ds)" d="M470 196 H646"/>
+      <g class="v-callout"><rect x="50" y="250" width="190" height="60" rx="10"/><text x="70" y="276">Sıra veya geri alma</text><text class="v-small" x="70" y="298">job, undo, parser</text></g>
+      <g class="v-box"><rect x="310" y="250" width="160" height="60" rx="10"/><text text-anchor="middle" x="390" y="286">Stack / Queue</text></g>
+      <g class="v-callout"><rect x="646" y="250" width="190" height="60" rx="10"/><text x="666" y="276">Düzen garantisi</text><text class="v-small" x="666" y="298">yanlış sıra iş bozar</text></g>
+      <path class="v-line solid" marker-end="url(#arrow-ds)" d="M240 280 H310"/><path class="v-line solid" marker-end="url(#arrow-ds)" d="M470 280 H646"/>
+      <g class="v-callout"><rect x="50" y="334" width="190" height="60" rx="10"/><text x="70" y="360">İlişki ve hiyerarşi</text><text class="v-small" x="70" y="382">dosya, rota, bağımlılık</text></g>
+      <g class="v-box"><rect x="310" y="334" width="160" height="60" rx="10"/><text text-anchor="middle" x="390" y="370">Tree / Graph</text></g>
+      <g class="v-callout"><rect x="646" y="334" width="190" height="60" rx="10"/><text x="666" y="360">Arama stratejisi</text><text class="v-small" x="666" y="382">cycle ve maliyet riski</text></g>
+      <path class="v-line solid" marker-end="url(#arrow-ds)" d="M240 364 H310"/><path class="v-line solid" marker-end="url(#arrow-ds)" d="M470 364 H646"/>
+      <text class="v-small" text-anchor="middle" x="450" y="438">Mülakatta önce verinin davranışını sor: arama mı, ekleme mi, sıralama mı, ilişki mi, ölçek mi?</text>
+    </svg>`);
+}
+
+function dataEngineeringVisual() {
+  return customVisual("data-engineering-flow", "Güvenilir rapor, kaynaktan başlayan ve kalite, katalog, yetki ve gözlemleme ile olgunlaşan veri hattının sonucudur.", `
+    <svg viewBox="0 0 940 480" role="img" aria-label="Veri mühendisliği hattı">
+      <defs><marker id="arrow-de" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="currentColor"/></marker></defs>
+      <g class="v-callout"><rect x="34" y="72" width="138" height="62" rx="10"/><text x="54" y="98">Kaynaklar</text><text class="v-small" x="54" y="120">CRM, ERP, log</text></g>
+      <g class="v-box"><rect x="220" y="62" width="132" height="82" rx="12"/><text text-anchor="middle" x="286" y="94">Ingestion</text><text class="v-small" text-anchor="middle" x="286" y="118">batch / stream</text></g>
+      <g class="v-box"><rect x="400" y="62" width="132" height="82" rx="12"/><text text-anchor="middle" x="466" y="94">Transform</text><text class="v-small" text-anchor="middle" x="466" y="118">ETL / ELT</text></g>
+      <g class="v-box"><rect x="580" y="62" width="132" height="82" rx="12"/><text text-anchor="middle" x="646" y="94">Storage</text><text class="v-small" text-anchor="middle" x="646" y="118">lake / warehouse</text></g>
+      <g class="v-callout"><rect x="760" y="72" width="138" height="62" rx="10"/><text x="780" y="98">Tüketim</text><text class="v-small" x="780" y="120">BI, ML, API</text></g>
+      <path class="v-line solid" marker-end="url(#arrow-de)" d="M172 103 H220"/><path class="v-line solid" marker-end="url(#arrow-de)" d="M352 103 H400"/><path class="v-line solid" marker-end="url(#arrow-de)" d="M532 103 H580"/><path class="v-line solid" marker-end="url(#arrow-de)" d="M712 103 H760"/>
+      <rect class="v-zone inner" x="220" y="214" width="492" height="122" rx="16"/>
+      <text x="246" y="248">Güven katmanı</text>
+      <g class="v-callout"><rect x="246" y="270" width="124" height="44" rx="9"/><text text-anchor="middle" x="308" y="298">Quality</text></g>
+      <g class="v-callout"><rect x="392" y="270" width="124" height="44" rx="9"/><text text-anchor="middle" x="454" y="298">Catalog</text></g>
+      <g class="v-callout"><rect x="538" y="270" width="124" height="44" rx="9"/><text text-anchor="middle" x="600" y="298">Lineage</text></g>
+      <path class="v-line thin" d="M466 144 V214"/><path class="v-line thin" d="M646 144 V214"/>
+      <text class="v-small" text-anchor="middle" x="470" y="404">Raporlar tutmuyorsa önce araç değil tanım, kaynak, dönüşüm ve veri kalitesi kontrol edilir.</text>
+    </svg>`);
+}
+
+function itsmVisual() {
+  return customVisual("itsm-change-flow", "ITSM olgunluğu, olayı kapatmakla kalmayıp tekrarını azaltan ve değişikliği iz bırakarak yöneten çalışma düzenidir.", `
+    <svg viewBox="0 0 900 460" role="img" aria-label="Incident, problem, change, CAB ve release ilişkisi">
+      <defs><marker id="arrow-itsm" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="currentColor"/></marker></defs>
+      <g class="v-box"><rect x="56" y="86" width="142" height="72" rx="12"/><text text-anchor="middle" x="127" y="116">Incident</text><text class="v-small" text-anchor="middle" x="127" y="138">hizmeti geri getir</text></g>
+      <g class="v-box"><rect x="266" y="86" width="142" height="72" rx="12"/><text text-anchor="middle" x="337" y="116">Problem</text><text class="v-small" text-anchor="middle" x="337" y="138">kök nedeni bul</text></g>
+      <g class="v-box"><rect x="476" y="86" width="142" height="72" rx="12"/><text text-anchor="middle" x="547" y="116">Change</text><text class="v-small" text-anchor="middle" x="547" y="138">kontrollü değiştir</text></g>
+      <g class="v-box"><rect x="686" y="86" width="142" height="72" rx="12"/><text text-anchor="middle" x="757" y="116">Release</text><text class="v-small" text-anchor="middle" x="757" y="138">kullanıcıya taşı</text></g>
+      <path class="v-line solid" marker-end="url(#arrow-itsm)" d="M198 122 H266"/><path class="v-line solid" marker-end="url(#arrow-itsm)" d="M408 122 H476"/><path class="v-line solid" marker-end="url(#arrow-itsm)" d="M618 122 H686"/>
+      <g class="v-callout"><rect x="174" y="236" width="150" height="70" rx="10"/><text x="196" y="264">SLA</text><text class="v-small" x="196" y="286">etki ve öncelik</text></g>
+      <g class="v-callout"><rect x="374" y="236" width="150" height="70" rx="10"/><text x="396" y="264">CAB</text><text class="v-small" x="396" y="286">riskli değişiklik</text></g>
+      <g class="v-callout"><rect x="574" y="236" width="170" height="70" rx="10"/><text x="596" y="264">PIR / Ders</text><text class="v-small" x="596" y="286">tekrarını azalt</text></g>
+      <path class="v-line thin" d="M127 158 C144 218 190 230 249 236"/><path class="v-line thin" d="M547 158 V236"/><path class="v-line thin" d="M757 158 C744 210 700 226 659 236"/>
+      <text class="v-small" text-anchor="middle" x="450" y="392">Incident yangını söndürür; problem dumanın neden çıktığını bulur; change aynı riski iz bırakarak düzeltir.</text>
+    </svg>`);
+}
+
 function ddosVisualReadable() {
   return customVisual("ddos-defense-readable", "DDoS savunmasında amaç saldırgan trafiği origin sunucuya varmadan seyreltmek, gerçek kullanıcı yolunu açık tutmak ve iletişimi teknik aksiyonla birlikte yürütmektir.", `
     <svg viewBox="0 0 980 460" role="img" aria-label="DDoS saldırısı, CDN temizleme, WAF, rate limit, origin koruması ve kriz iletişimi">
@@ -2141,6 +2230,9 @@ function ddosVisualReadableV2() {
 }
 
 const chapterVisuals = {
+  "asama-2-programlama-11": dataStructuresVisual,
+  "buyuk-mimariler-16": dataEngineeringVisual,
+  "liderlik-kriz-gelecek-16": itsmVisual,
   "asama-1-bilgisayar-temelleri-2": hardwareMotherboardVisual,
   "asama-1-bilgisayar-temelleri-6": networkTopologyVisual,
   "asama-1-bilgisayar-temelleri-7": dnsHttpsVisual,
