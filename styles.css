@@ -998,6 +998,145 @@ p {
   fill: var(--accent-2);
 }
 
+.article-body .visual-rich {
+  max-width: 1120px;
+}
+
+.visual-rich {
+  padding: 28px;
+}
+
+.visual-rich-board {
+  position: relative;
+  min-height: 430px;
+  display: grid;
+  grid-template-columns: minmax(230px, 0.82fr) minmax(0, 1.65fr);
+  gap: 22px;
+  align-items: stretch;
+}
+
+.visual-rich-board::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border: 1px solid color-mix(in srgb, var(--accent-2) 34%, transparent);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.visual-rich-board .visual-board-head,
+.visual-card,
+.visual-board-note {
+  position: relative;
+  z-index: 1;
+}
+
+.visual-board-head {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 330px;
+  padding: 28px;
+  border: 1px solid color-mix(in srgb, var(--accent-2) 38%, var(--line));
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 18% 16%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 34%),
+    color-mix(in srgb, var(--paper) 38%, var(--paper-2));
+}
+
+.visual-board-eyebrow {
+  width: fit-content;
+  margin-bottom: 16px;
+  padding: 5px 9px;
+  border: 1px solid color-mix(in srgb, var(--accent-2) 34%, var(--line));
+  border-radius: 999px;
+  color: var(--accent-2);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.visual-board-head strong {
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.12;
+}
+
+.visual-board-head p {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.62;
+  text-align: left;
+}
+
+.visual-board-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-content: stretch;
+}
+
+.visual-card {
+  min-height: 132px;
+  padding: 15px 16px;
+  border: 1px solid color-mix(in srgb, var(--accent-2) 35%, var(--line));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--paper) 50%, var(--paper-2));
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.13);
+  overflow: visible;
+}
+
+.visual-card strong,
+.visual-card span {
+  display: block;
+}
+
+.visual-card strong {
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.25;
+}
+
+.visual-card span {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.46;
+}
+
+.visual-board-note {
+  grid-column: 1 / -1;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.visual-rich-board-sequence .visual-card,
+.visual-rich-board-pipeline .visual-card,
+.visual-rich-board-process .visual-card {
+  border-left: 4px solid var(--accent-2);
+}
+
+.visual-rich-board-security .visual-card,
+.visual-rich-board-incident .visual-card {
+  border-left: 4px solid color-mix(in srgb, #ff7878 70%, var(--accent));
+}
+
+.visual-rich-board-decision .visual-card,
+.visual-rich-board-governance .visual-card {
+  border-left: 4px solid color-mix(in srgb, #f3c56b 72%, var(--accent));
+}
+
+.visual-rich-board-system .visual-card,
+.visual-rich-board-network .visual-card {
+  border-left: 4px solid color-mix(in srgb, #7be495 68%, var(--accent-2));
+}
+
 .bespoke-visual .v-box {
   animation: cardFloat 5s ease-in-out infinite;
   animation-delay: calc(var(--i, 0) * 180ms);
@@ -1825,6 +1964,36 @@ p {
     padding: 18px;
   }
 
+  .visual-rich {
+    padding: 16px;
+  }
+
+  .visual-rich-board {
+    min-height: auto;
+    gap: 14px;
+  }
+
+  .visual-rich-board::before {
+    inset: 10px;
+  }
+
+  .visual-board-head {
+    min-height: auto;
+    padding: 20px;
+  }
+
+  .visual-board-head strong {
+    font-size: 24px;
+  }
+
+  .visual-board-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .visual-card {
+    min-height: auto;
+  }
+
   .visual-flow svg {
     height: 140px;
   }
@@ -1833,6 +2002,7 @@ p {
   .visual-bars,
   .system-grid,
   .visual-incident,
+  .visual-rich-board,
   .visual-board {
     grid-template-columns: 1fr;
   }

@@ -890,7 +890,7 @@ function termsPanel(html, title) {
     <section class="term-panel">
       <h2>Bu Bölümde Adı Geçen Teknolojiler</h2>
       <dl>
-        ${terms.map((term) => `<div><dt>${term}</dt><dd>${glossary[term]}</dd></div>`).join("")}
+        ${terms.map((term) => `<div><dt>${svgLabel(term)}</dt><dd>${svgLabel(glossary[term])}</dd></div>`).join("")}
       </dl>
     </section>
   `;
@@ -1676,7 +1676,7 @@ function editorialDepthForShortArticle(category, chapter, text) {
   const topic = firstPhrase(chapter.title);
   const terms = detectTerms(`${chapter.title} ${text}`).slice(0, 6);
   const termLine = terms.length
-    ? `${terms.map((term) => `${term}, ${glossary[term]}`).join("; ")}.`
+    ? `${terms.map((term) => `${repairMojibake(term)}, ${repairMojibake(glossary[term])}`).join("; ")}.`
     : `Bu başlıkta önce kavramın görevi, sonra bağlı olduğu sistem, sonra bozulduğunda bıraktığı iz okunur.`;
   const sceneByMode = {
     systems: `Bu konuyu sahada düşünürken gözümün önüne çoğu zaman gece yarısı açılmış bir operasyon ekranı gelir. Bir tarafta CPU, RAM, disk, port, DNS, servis veya log gibi teknik işaretler vardır; diğer tarafta bekleyen kullanıcı, duran rapor ve cevap isteyen yönetici. ${topic} ancak bu iki taraf aynı olayın parçaları olarak görülünce gerçek anlamını kazanır.`,
@@ -1750,10 +1750,34 @@ function svgFigure(kind, caption, svg) {
 }
 
 function svgLabel(text) {
-  return String(text)
+  return repairMojibake(String(text))
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
+}
+
+function repairMojibake(text) {
+  return String(text)
+    .replace(/Ã‡/g, "Ç")
+    .replace(/Ã§/g, "ç")
+    .replace(/ÄŸ/g, "ğ")
+    .replace(/Äž/g, "Ğ")
+    .replace(/Ä±/g, "ı")
+    .replace(/Ä°/g, "İ")
+    .replace(/Ã¶/g, "ö")
+    .replace(/Ã–/g, "Ö")
+    .replace(/ÅŸ/g, "ş")
+    .replace(/Åž/g, "Ş")
+    .replace(/Å\u009F/g, "ş")
+    .replace(/Å\u009E/g, "Ş")
+    .replace(/Ã¼/g, "ü")
+    .replace(/Ãœ/g, "Ü")
+    .replace(/Ã¢/g, "â")
+    .replace(/â€™/g, "'")
+    .replace(/â€œ/g, "\"")
+    .replace(/â€/g, "\"")
+    .replace(/â€“/g, "-")
+    .replace(/â€”/g, "-");
 }
 
 function customVisual(kind, caption, svg) {
@@ -2242,6 +2266,79 @@ const chapterVisuals = {
   "proje-kamu-yonetim-11": publicProjectTableVisual
 };
 
+const chapterVisualSpecs = {
+  "asama-1-bilgisayar-temelleri-2": {
+    type: "system",
+    center: "Anakart",
+    labels: ["CPU", "RAM", "NVMe / SSD", "GPU", "NIC", "PSU", "PCIe", "Chipset"],
+    caption: "Donanım performansı tek bir parçanın hızı değil; işlemci, bellek, disk, ağ kartı, ekran kartı, güç ve veri yollarının aynı anakart üzerinde dengeli çalışmasıdır.",
+    note: "Darboğaz çoğu zaman parçanın kendisinde değil, parçaya giden yolun genişliğinde ve gecikmesinde ortaya çıkar."
+  },
+  "asama-1-bilgisayar-temelleri-6": {
+    type: "network",
+    center: "Paketin Yolu",
+    labels: ["Client", "Subnet", "Switch", "Gateway", "DNS", "Firewall", "NAT", "Server:443"],
+    caption: "Ağ temeli, kullanıcının isteğinin yerel ağdan çıkıp doğru IP, doğru rota, doğru firewall kuralı ve doğru porta ulaşma hikayesidir.",
+    note: "İnternet yok cümlesi teşhis değildir; IP, gateway, DNS, route, firewall ve port sırası tek tek okunur."
+  },
+  "asama-1-bilgisayar-temelleri-7": {
+    type: "sequence",
+    center: "Web İsteği",
+    labels: ["DNS", "TCP Handshake", "TLS", "HTTP Request", "Application", "Response"],
+    caption: "Tarayıcıda adres yazınca önce isim çözülür, sonra bağlantı kurulur, güven doğrulanır ve en son HTTP isteği uygulamaya ulaşır.",
+    note: "Sayfa açılmadığında DNS, sertifika, port, uygulama logu ve durum kodu ayrı ayrı sorgulanır."
+  },
+  "asama-6-devops-bulut-3": {
+    type: "system",
+    center: "Kubernetes",
+    labels: ["Ingress", "Service", "Deployment", "Pod", "Node", "ConfigMap", "Secret", "HPA"],
+    caption: "Kubernetes, container kalabalığını adresleme, sağlık kontrolü, ölçekleme, konfigürasyon ve sürüm yönetimi olan bir üretim düzenine çevirir.",
+    note: "Pod tek başına ezberlenmez; service, rollout, readiness probe ve node kapasitesiyle birlikte anlam kazanır."
+  },
+  "siber-guvenlik-3": {
+    type: "security",
+    center: "Güvenlik Bölgeleri",
+    labels: ["Internet", "CDN / WAF", "Firewall", "DMZ", "App Subnet", "DB Subnet", "IDS / IPS", "SIEM"],
+    caption: "Ağ güvenliği tek büyük duvar değil; internetten veritabanına kadar güven seviyesi, izin, kayıt ve müdahale noktalarının katman katman kurulmasıdır.",
+    note: "İyi güvenlik cevabı firewall var demez; hangi bölgede hangi izin, hangi log ve hangi kaçış planı var diye anlatır."
+  },
+  "liderlik-kriz-gelecek-9": {
+    type: "incident",
+    center: "DDoS Savunması",
+    labels: ["Bot Trafiği", "Gerçek Kullanıcı", "CDN Scrubbing", "WAF", "Rate Limit", "Origin", "Metrik", "Kriz İletişimi"],
+    caption: "DDoS savunmasında saldırgan trafik origin sunucuya varmadan seyreltilir, gerçek kullanıcı yolu açık tutulur ve teknik aksiyon iletişimle birlikte yönetilir.",
+    note: "Sadece kapasite konuşulmaz; filtre nerede, origin nasıl saklanıyor, kim ne zaman bilgilendiriliyor soruları cevaplanır."
+  },
+  "proje-kamu-yonetim-11": {
+    type: "governance",
+    center: "Karar Masası",
+    labels: ["Talep Sahibi", "Teknik Ekip", "Satın Alma", "Hukuk / KVKK", "Güvenlik", "Yönetici", "Kanıt Dosyası", "Kabul Kriteri"],
+    caption: "Büyük kurum projesinde teknik doğruluk kadar paydaş dili, kabul kanıtı, risk, bütçe ve denetim izi aynı masada yönetilir.",
+    note: "Güçlü yönetici farklı dilleri tek hikayeye bağlar: iş değeri, teknik gerçek, mevzuat ve işletme sorumluluğu."
+  },
+  "asama-2-programlama-11": {
+    type: "decision",
+    center: "Veri Yapısı Seçimi",
+    labels: ["Array", "Hash Map", "Stack", "Queue", "Tree", "Graph", "Big O", "Trade-off"],
+    caption: "Veri yapısı seçimi, verinin nasıl büyüdüğünü, hangi işlemin sık yapıldığını ve hangi maliyetin kabul edildiğini okumaktır.",
+    note: "Mülakatta doğru cevap yalnız isim saymaz; arama, ekleme, silme ve bellek maliyetini örnekle açıklar."
+  },
+  "buyuk-mimariler-16": {
+    type: "pipeline",
+    center: "Veri Hattı",
+    labels: ["Source", "ETL / ELT", "Data Lake", "Warehouse", "Quality", "Catalog", "Dashboard", "Governance"],
+    caption: "Güvenilir rapor, kaynaktan başlayan ve kalite, katalog, yetki, gözlemleme ve veri sahipliğiyle olgunlaşan hattın sonucudur.",
+    note: "Veri mühendisliği sadece taşıma işi değildir; tanım birliği, kalite alarmı ve sahiplik olmadan rapor güven vermez."
+  },
+  "liderlik-kriz-gelecek-16": {
+    type: "process",
+    center: "ITSM",
+    labels: ["Incident", "Problem", "Change", "CAB", "Release", "CMDB", "SLA", "Postmortem"],
+    caption: "ITSM olgunluğu olayı kapatmakla kalmaz; tekrarını azaltır, değişikliği iz bırakarak yönetir ve hizmet sözünü ölçülebilir hale getirir.",
+    note: "Incident yangını söndürür, problem kökü arar, change kontrollü değiştirir, CAB riski görünür kılar."
+  }
+};
+
 function flowDiagram(kind, caption, labels, subline = "") {
   const count = labels.length;
   const boxWidth = count > 5 ? 116 : 132;
@@ -2371,16 +2468,136 @@ function sceneDiagram(kind, caption, center, labels, subline = "") {
     </svg>`);
 }
 
+const visualDetails = {
+  CPU: "Komutları yürütür; hız kadar cache, çekirdek ve veri yoluna erişim de belirleyicidir.",
+  RAM: "Çalışan veriyi tutar; yetmediğinde sistem diske taşar ve kullanıcı bunu yavaşlama olarak hisseder.",
+  "NVMe / SSD": "Kalıcı kayıttır; I/O beklemesi arttığında en güçlü işlemci bile sırada kalır.",
+  GPU: "Paralel hesap ve görüntü işlerinde hız kazandırır; AI eğitiminde bellek kapasitesi kritikleşir.",
+  NIC: "Ağ çıkışıdır; paket kaybı, duplex, sürücü ve MTU hataları uygulama hatası gibi görünebilir.",
+  PSU: "Güç hattıdır; kararsızlık bazen yazılım değil voltaj, ısı ve yük davranışından doğar.",
+  PCIe: "Hızlı kartların veri yoludur; GPU, NVMe ve NIC burada aynı otobanı paylaşabilir.",
+  Chipset: "CPU ile çevre birimleri arasındaki trafik düzenidir; anakartın sessiz trafik polisi gibidir.",
+  Client: "İsteği başlatan uçtur; IP, DNS, proxy ve tarayıcı durumu ilk kanıtları verir.",
+  Subnet: "Aynı yerel ağ sınırıdır; hedef yerelde mi yoksa gateway arkasında mı sorusunu cevaplar.",
+  Switch: "Yerel ağdaki cihazları taşır; VLAN ve port durumu yanlışsa paket daha kapıdan çıkamaz.",
+  Gateway: "Yerel ağın çıkış kapısıdır; route, NAT ve dış dünya burada başlar.",
+  DNS: "İsmi IP adresine çevirir; bozulduğunda hizmet ayakta olsa bile bulunamaz.",
+  Firewall: "Kim, nereden, nereye, hangi portla geçebilir sorusunu uygular.",
+  NAT: "Özel adresi dış dünyaya taşır; oturum tablosu dolarsa bağlantı hataları başlar.",
+  "Server:443": "Hedef servistir; port, sertifika ve uygulama logu burada birlikte okunur.",
+  "TCP Handshake": "Bağlantının el sıkışmasıdır; SYN/SYN-ACK/ACK yoksa HTTP konuşması hiç başlamaz.",
+  TLS: "Kimlik ve şifreli kanal kurar; sertifika zinciri hatası uygulama kodundan önce gelir.",
+  "HTTP Request": "Asıl istektir; method, path, header, body ve status kodu sözleşmenin dilidir.",
+  Application: "İş kuralının çalıştığı yerdir; log, trace ve hata kodu gerçek niyeti gösterir.",
+  Response: "Kullanıcının gördüğü sonuçtur; gecikme, durum kodu ve içerik birlikte değerlendirilir.",
+  Ingress: "Cluster'ın dış kapısıdır; host, path ve TLS kararını taşır.",
+  Service: "Pod değişse bile sabit adres sağlar; trafiği doğru pod grubuna yönlendirir.",
+  Deployment: "İstenen pod sayısını ve sürüm davranışını yönetir.",
+  Pod: "Container'ın çalışma birimidir; readiness ve liveness olmadan üretimde güven vermez.",
+  Node: "Pod'ların koştuğu makinedir; CPU, RAM, disk ve network basıncı burada görünür.",
+  ConfigMap: "Ayarı imajdan ayırır; aynı imaj farklı ortamda farklı davranabilir.",
+  Secret: "Parola ve token gibi hassas bilgileri taşır; erişim ve rotasyon disiplini ister.",
+  HPA: "Yük artınca pod sayısını artırır; metrik yanlışsa yanlış anda ölçekler.",
+  Internet: "Güvenilmeyen bölgedir; trafik önce kenarda süzülmelidir.",
+  "CDN / WAF": "Trafiği kenarda karşılar; cache, bot kuralı ve uygulama katmanı koruması sağlar.",
+  DMZ: "Dışa yakın ama iç ağa doğrudan bağlı olmayan tampon bölgedir.",
+  "App Subnet": "Uygulama servislerinin yaşadığı alandır; sadece gerekli kapılar açık kalmalıdır.",
+  "DB Subnet": "En kritik kayıt bölgesidir; doğrudan internet görmemeli, erişim kanıt bırakmalıdır.",
+  "IDS / IPS": "Şüpheli davranışı dinler veya engeller; alarmı bağlamla okumak gerekir.",
+  SIEM: "Logları tek olay hikayesine çevirir; korelasyon ve zaman çizgisi üretir.",
+  "Bot Trafiği": "Hizmeti boğmaya çalışan gereksiz yük oluşturur.",
+  "Gerçek Kullanıcı": "Korunması gereken yoldur; savunma onu da engellerse kriz büyür.",
+  "CDN Scrubbing": "Saldırgan trafiği origin'e ulaşmadan seyreltir.",
+  WAF: "Uygulama katmanındaki kötü istekleri ve bot davranışını süzer.",
+  "Rate Limit": "Bir kaynağın aşırı tüketilmesini sınırlar; fazla sıkıysa gerçek kullanıcıyı da yakar.",
+  Origin: "Asıl sunucudur; IP sızıntısı varsa saldırgan filtreyi atlayabilir.",
+  Metrik: "RPS, hata oranı, latency ve saturation kararın pusulasıdır.",
+  "Kriz İletişimi": "Durum sayfası, paydaş bilgisi ve sağlayıcı eskalasyonu teknik aksiyonla birlikte yürür.",
+  Array: "Sıralı ve indeksli veri tutar; erişim hızlı, araya ekleme maliyetli olabilir.",
+  "Hash Map": "Anahtardan değere hızlı erişir; çakışma ve bellek maliyeti unutulmamalıdır.",
+  Stack: "Son giren ilk çıkar; undo, call stack ve parser işlerinde doğal modeldir.",
+  Queue: "İlk giren ilk çıkar; iş kuyruğu ve mesajlaşmada düzen sağlar.",
+  Tree: "Hiyerarşik arama ve sıralama sağlar; indeks mantığını anlamayı kolaylaştırır.",
+  Graph: "İlişkileri ve yolları anlatır; ağ, yetki, rota ve öneri sistemlerinde karşımıza çıkar.",
+  "Big O": "Veri büyüdükçe maliyetin nasıl arttığını anlatır.",
+  "Trade-off": "Hız, bellek, karmaşıklık ve bakım arasında yapılan bilinçli seçimdir.",
+  Source: "Verinin doğduğu sistemdir; sahiplik ve anlam burada başlar.",
+  "ETL / ELT": "Veriyi taşır ve dönüştürür; hata yönetimi ve tekrar çalışabilirlik ister.",
+  "Data Lake": "Ham ve geniş veri alanıdır; katalog yoksa bataklığa döner.",
+  Warehouse: "Raporlama için düzenlenmiş güvenilir veri katmanıdır.",
+  Quality: "Eksik, çelişkili ve gecikmiş veriyi erken yakalar.",
+  Catalog: "Verinin ne anlama geldiğini ve kimin sahiplendiğini görünür kılar.",
+  Dashboard: "Karar ekranıdır; metrik tanımı yanlışsa güzel grafik yanlış karar üretir.",
+  Governance: "Yetki, kalite, sahiplik ve denetim disiplinini kurar.",
+  Incident: "Hizmet bozulduğunda hızlı toparlanma sürecidir.",
+  Problem: "Tekrar eden olayların kök nedenini arar.",
+  Change: "Canlı sistemi kontrollü değiştirme disiplinidir.",
+  CAB: "Riskli değişiklikleri teknik, iş ve operasyon etkisiyle değerlendirir.",
+  Release: "Değişikliği kullanıcıya çıkarır; rollback ve iletişim planı ister.",
+  CMDB: "Varlık, sahiplik ve bağımlılık hafızasıdır.",
+  SLA: "Hizmet sözünü ölçülebilir hale getirir.",
+  Postmortem: "Olaydan sonra suçlu değil, tekrarını azaltacak ders arar."
+};
+
+function visualDetail(label, index, spec) {
+  const clean = Array.isArray(label) ? label[0] : label;
+  if (visualDetails[clean]) return visualDetails[clean];
+  if (spec.type === "flow") return "Bu adım kendinden önceki çıktıyı alır, sonraki adıma temiz bir sorumluluk devreder.";
+  if (spec.type === "timeline") return "Zaman sırasındaki bu durak, olayın izini ve karar anını görünür kılar.";
+  if (spec.type === "matrix") return "Bu başlık tek başına değil; görev, risk, kanıt ve karar etkisiyle okunur.";
+  if (spec.type === "split") return index === 0 ? "Sol taraf teknik kökü ve ilk nedeni anlatır." : "Sağ taraf iş etkisini ve yönetim kararını görünür kılar.";
+  return "Sistemdeki rolü, hangi parçaya bağlı olduğu ve bozulunca nasıl belirti verdiğiyle anlaşılır.";
+}
+
+function normalizeVisualSpec(spec) {
+  if (spec.type === "hub") return { ...spec, type: "system", labels: spec.nodes || [] };
+  if (spec.type === "layers") return { ...spec, type: "system", labels: (spec.labels || []).map((item) => Array.isArray(item) ? item[0] : item) };
+  if (spec.type === "split") return { ...spec, labels: [spec.left?.[0], spec.right?.[0]].filter(Boolean) };
+  return { ...spec, labels: spec.labels || [] };
+}
+
+function conceptCards(spec) {
+  return spec.labels.map((label, index) => {
+    const title = Array.isArray(label) ? label[0] : label;
+    const sub = Array.isArray(label) ? label[1] : visualDetail(title, index, spec);
+    return `
+      <div class="visual-card" style="--i:${index}">
+        <strong>${svgLabel(title)}</strong>
+        <span>${svgLabel(sub)}</span>
+      </div>
+    `;
+  }).join("");
+}
+
+function visualBoardClass(type) {
+  if (["network", "security", "incident", "pipeline", "process", "sequence", "governance", "decision", "system"].includes(type)) return `visual-rich-board visual-rich-board-${type}`;
+  if (type === "flow") return "visual-rich-board visual-rich-board-sequence";
+  if (type === "timeline") return "visual-rich-board visual-rich-board-process";
+  if (type === "matrix") return "visual-rich-board visual-rich-board-decision";
+  if (type === "stack") return "visual-rich-board visual-rich-board-system";
+  return "visual-rich-board visual-rich-board-system";
+}
+
 function renderVisualSpec(spec) {
-  const kind = `visual-${spec.type || "scene"}`;
-  if (spec.type === "hub") return hubDiagram(kind, spec.caption, spec.center, spec.nodes, spec.note);
-  if (spec.type === "layers") return layeredDiagram(kind, spec.caption, spec.center, spec.rings || [48, 88, 128], spec.labels);
-  if (spec.type === "timeline") return timelineDiagram(kind, spec.caption, spec.labels, spec.note);
-  if (spec.type === "stack") return stackDiagram(kind, spec.caption, spec.labels, spec.note);
-  if (spec.type === "matrix") return matrixDiagram(kind, spec.caption, spec.labels, spec.note);
-  if (spec.type === "split") return splitDiagram(kind, spec.caption, spec.left, spec.right, spec.note);
-  if (spec.type === "scene") return sceneDiagram(kind, spec.caption, spec.center, spec.labels, spec.note);
-  return flowDiagram(kind, spec.caption, spec.labels, spec.note);
+  const normalized = normalizeVisualSpec(spec);
+  const kind = `visual-rich visual-rich-type-${normalized.type || "system"}`;
+  const center = normalized.center || normalized.labels[0] || "Zihinsel Harita";
+  return `
+    <figure class="visual-canvas ${kind}">
+      <div class="${visualBoardClass(normalized.type)}">
+        <div class="visual-board-head">
+          <span class="visual-board-eyebrow">${svgLabel((normalized.type || "system").toUpperCase())}</span>
+          <strong>${svgLabel(center)}</strong>
+          <p>${svgLabel(normalized.caption)}</p>
+        </div>
+        <div class="visual-board-grid">
+          ${conceptCards(normalized)}
+        </div>
+        ${normalized.note ? `<div class="visual-board-note">${svgLabel(normalized.note)}</div>` : ""}
+      </div>
+      <figcaption>${svgLabel(normalized.caption)}</figcaption>
+    </figure>
+  `;
 }
 
 const visualBlueprints = {
@@ -2528,8 +2745,8 @@ const visualBlueprints = {
 };
 
 function visualFor(category, chapter) {
-  const custom = chapterVisuals[chapter.id];
-  if (custom) return custom();
+  const exactSpec = chapterVisualSpecs[chapter.id];
+  if (exactSpec) return renderVisualSpec(exactSpec);
   const spec = visualBlueprints[category.id]?.[chapter.number - 1];
   if (spec) return renderVisualSpec(spec);
   return renderVisualSpec({
