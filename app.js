@@ -1,9 +1,9 @@
 const book = {
   title: "Teknoloji Atlası",
-  kicker: "Mülakat, Saha ve Üst Düzey BT Yönetimi İçin Yol Haritası",
-  subtitle: "Bilgisayar temellerinden yapay zekâ ve bulut yönetimine kadar uzanan konuları, mülakatlarda sorulacak netlikte ve büyük kurumlarda karar aldıracak olgunlukta sıraya koyar.",
+  kicker: "Temel Bilgisayar Okuryazarlığı, Saha Dili ve Karar Rehberi",
+  subtitle: "Tek tek teknoloji ezberletmek yerine bilgisayar, yazılım, ağ, veri, güvenlik, bulut ve yapay zekâ kavramlarının kurum içinde ne işe yaradığını sade bir akışla anlatır.",
   promise:
-    "Okur önce bilgisayarın gerçekten nasıl çalıştığını görür, sonra kodun, ağın, verinin, güvenliğin, yapay zekânın ve yöneticilik kararlarının aynı büyük sistemde nasıl birbirine bağlandığını adım adım izler."
+    "Okur bir teknolojinin adını ezberlemek yerine onun hangi sorunu çözdüğünü, hangi riski taşıdığını, hangi kanıtla izleneceğini ve karar masasında nasıl konuşulacağını öğrenir."
 };
 
 const categories = [
@@ -229,6 +229,31 @@ const categories = [
 categories.forEach((category, index) => {
   category.order = index + 1;
   category.count = category.chapters.length;
+});
+
+const chapterTitleOverrides = {
+  "asama-2-programlama-2": "Programlama dili mantığı: Python örneğiyle temel akış",
+  "asama-2-programlama-9": "Yazılım ekosistemi: framework, veri aracı ve model kütüphanesi ne işe yarar",
+  "asama-4-ai-temelleri-8": "Model geliştirme araçları: araştırma kodundan üretime geçiş",
+  "asama-5-llm-gelistirme-2": "Model API'si kullanımı: mesaj, maliyet, sınır ve kayıt düzeni",
+  "asama-5-llm-gelistirme-5": "Yerel ve bulut modeller: mahremiyet, kapasite ve kalite dengesi",
+  "asama-6-devops-bulut-2": "Container mantığı: uygulamayı taşınabilir paket gibi düşünmek",
+  "asama-6-devops-bulut-3": "Orkestrasyon mantığı: çok sayıda servisi düzenli işletmek",
+  "asama-6-devops-bulut-7": "Bulut servis aileleri: işlem, depolama, ağ, kimlik ve izleme",
+  "siber-guvenlik-2": "Kimlik ve erişim: kullanıcı, rol, onay ve en az yetki",
+  "siber-guvenlik-4": "Uygulama güvenliği: girdi, yetki, bağımlılık ve test disiplini",
+  "buyuk-mimariler-2": "Sipariş sistemi mantığı: arama, sepet, ödeme ve teslimat akışı",
+  "mulakat-ve-ust-duzey-hazirlik-3": "Kod ve veri soruları: dil değil düşünme düzeni anlatmak",
+  "mulakat-ve-ust-duzey-hazirlik-5": "Sistem soruları: Linux, ağ, container ve bulutu aynı olayda okumak",
+  "mulakat-ve-ust-duzey-hazirlik-7": "Yapay zekâ soruları: veri, kaynak, güven ve ölçümle cevap vermek"
+};
+
+Object.entries(chapterTitleOverrides).forEach(([id, title]) => {
+  const match = id.match(/^(.*)-(\d+)$/);
+  if (!match) return;
+  const category = categories.find((item) => item.id === match[1]);
+  const index = Number(match[2]) - 1;
+  if (category?.chapters[index]) category.chapters[index] = title;
 });
 
 const glossary = {
@@ -1740,8 +1765,97 @@ function interviewChapter(category, chapter) {
   ].join("") + visualFor(category, chapter);
 }
 
+function conceptFocus(category) {
+  return {
+    systems: {
+      lens: "bilgisayarın görünmeyen zemini",
+      actor: "sistem ekibi",
+      evidence: ["log", "metrik", "servis durumu", "kullanıcı belirtisi"],
+      warning: "Sorunu tek parçaya yıkmak kolaydır; sağlam okuma, donanım, işletim sistemi, ağ ve izin katmanlarını birlikte düşünür."
+    },
+    software: {
+      lens: "problemi bilgisayarın takip edeceği açık adıma çevirme becerisi",
+      actor: "yazılım ekibi",
+      evidence: ["test sonucu", "API cevabı", "hata logu", "veri kaydı"],
+      warning: "Dil adı tek başına değer üretmez; değer, doğru akış, okunur kod, güvenilir veri ve bakım kolaylığından gelir."
+    },
+    ai: {
+      lens: "veriden faydalı ve denetlenebilir cevap üretme düzeni",
+      actor: "veri ve ürün ekibi",
+      evidence: ["kaynak belge", "değerlendirme sonucu", "kullanıcı geri bildirimi", "maliyet kaydı"],
+      warning: "Modelin akıcı konuşması doğru bildiği anlamına gelmez; kaynak, sınır, ölçüm ve insan onayı birlikte kurulmalıdır."
+    },
+    security: {
+      lens: "görünür riskleri kanıtla yönetme disiplini",
+      actor: "güvenlik ekibi",
+      evidence: ["erişim izi", "alarm korelasyonu", "varlık envanteri", "olay zaman çizelgesi"],
+      warning: "Güvenlik ürün adıyla değil; doğru yetki, doğru sınır, doğru kayıt ve prova edilmiş müdahale ile çalışır."
+    },
+    architecture: {
+      lens: "ekrandaki tek işlemin arkasındaki hizmet zincirini okuma becerisi",
+      actor: "mimari karar masası",
+      evidence: ["ana kayıt", "trace", "mutabakat", "SLA etkisi"],
+      warning: "Büyük sistemlerde cache, kuyruk, veritabanı ve entegrasyon sınırı karışırsa küçük hata büyük etkiye dönüşür."
+    },
+    project: {
+      lens: "teknik işi ölçülebilir değer, sorumluluk ve kabul kanıtına bağlama düzeni",
+      actor: "proje ekibi",
+      evidence: ["kabul kriteri", "karar kaydı", "risk listesi", "teslim tutanağı"],
+      warning: "Kapsam ve kabul baştan netleşmezse teknik tartışma son gün idari krize dönüşür."
+    },
+    leadership: {
+      lens: "teknik ayrıntıyı karar, insan, bütçe ve risk diline çevirebilme yeteneği",
+      actor: "teknik lider",
+      evidence: ["etki özeti", "seçenek analizi", "aksiyon sahibi", "zaman çizelgesi"],
+      warning: "Liderlik her ayrıntıyı ezberlemek değil, doğru soruyu doğru kanıtla sordurabilmektir."
+    },
+    interview: {
+      lens: "ezber yerine düşünme düzenini gösterme pratiği",
+      actor: "aday",
+      evidence: ["tanım", "küçük vaka", "risk", "ölçüm"],
+      warning: "İyi cevap teknoloji adı saymaz; kavramı akış, risk ve kanıtla birlikte anlatır."
+    }
+  }[category.mode] || {
+    lens: "teknolojiyi gerçek iş akışı içinde okuma becerisi",
+    actor: "teknik ekip",
+    evidence: ["kanıt", "ölçüm", "karar kaydı", "kullanıcı etkisi"],
+    warning: "Kavram bağlamından koparsa yanlış teknoloji doğru sorun sanılır."
+  };
+}
+
+function conceptArticle(category, chapter) {
+  const title = chapter.title;
+  const topic = firstPhrase(title);
+  const profile = conceptFocus(category);
+  const detected = detectTerms(`${title} ${category.summary}`).slice(0, 6);
+  const terms = detected.length ? detected : ["API", "Log", "Test", "Risk"].filter((term) => glossary[term]);
+  const termCards = terms
+    .map((term) => `<li><strong>${escapeHtml(term)}</strong><span>${escapeHtml(glossary[term] || "Bu kavram, sistemin görevini ve sınırını anlamaya yardım eder.")}</span></li>`)
+    .join("");
+  const evidence = profile.evidence.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+  return `
+    <h2>Bu Başlıkta Asıl Mesele</h2>
+    <p>${escapeHtml(title)} tek başına bir ürün, komut ya da kütüphane dersi değildir. Bu sayfada amaç, ${escapeHtml(topic)} fikrini ${escapeHtml(profile.lens)} olarak okumaktır. Okur bu başlığı bitirdiğinde ayrıntılı uzmanlık kazanmış gibi davranmayacak; ama kavramın nerede işe yaradığını, hangi soruyu doğurduğunu ve hangi durumda risk oluşturduğunu ayırt edecektir.</p>
+    <p>Örneğin Python, Docker, Kubernetes, RAG, IAM ya da SQL gibi adlar geçtiğinde bunlar uzun bir kursun konusu yapılmaz. Her biri kısa bir işaret olarak ele alınır: hangi problemi kolaylaştırır, hangi yeni sorumluluğu getirir, yanlış yerde kullanılırsa neyi bozar? Temel bilgisayar okuryazarlığı tam burada başlar.</p>
+
+    <h2>Kavram Haritası</h2>
+    <p>${escapeHtml(profile.actor)} bu konuyu masaya aldığında önce tanımı değil, bağlamı netleştirir. Kullanıcı ne yapmaya çalışıyor, veri nerede duruyor, sistem hangi parçaya bağlı, hata olduğunda kimin işi aksıyor? Bu sorular kavramı ezber olmaktan çıkarır.</p>
+    <ul class="concept-list">${termCards}</ul>
+
+    <h2>Sahada Nasıl Okunur?</h2>
+    <p>Sağlam okuma küçük bir olayla yapılır. Bir işlem yavaşlar, bir ekran hata verir, bir rapor yanlış sayı gösterir, bir kullanıcı yetkisiz alana erişemez ya da bir model kaynaksız cevap üretir. Bu anda ilk refleks araç adı söylemek değil; belirtiyi, kapsamı, son değişikliği ve kanıtı sıraya koymaktır.</p>
+    <p>${escapeHtml(profile.warning)} Bu yüzden bu bölümde derin ürün ayrıntısına gömülmeden temel mantık korunur: görev nedir, sınır nedir, risk nedir, kanıt nedir?</p>
+
+    <h2>Bakılacak Kanıtlar</h2>
+    <ul class="evidence-list">${evidence}</ul>
+
+    <h2>Akılda Kalacak Cevap</h2>
+    <p>${escapeHtml(topic)} anlatılırken iyi cevap şu cümle düzenini izler: önce sade tanım, sonra küçük örnek, sonra risk, sonra nasıl doğrulanacağı. Böyle anlatıldığında kişi teknolojiyi ezberlemiş gibi değil, sistemi okuyabiliyormuş gibi konuşur.</p>
+  `;
+}
+
 function contentFor(category, chapter) {
-  return manualArticle(category, chapter);
+  return conceptArticle(category, chapter);
 }
 
 function svgFigure(kind, caption, svg) {
@@ -3409,7 +3523,7 @@ function renderChapter(id) {
         <span>${category.count} bölümlük rota</span>
         <span>%${progress}</span>
       </div>
-      <div class="article-body">${article}${termsPanel(article, chapter.title)}${visualFor(category, chapter)}</div>
+      <div class="article-body">${article}${termsPanel(article, chapter.title)}</div>
       <nav class="bottom-nav" aria-label="Bölüm geçişi">
         ${route.previous ? `<a class="text-button" href="#/chapter/${route.previous.id}">Önceki</a>` : `<a class="text-button" href="#/">Ana sayfa</a>`}
         ${route.next ? `<a class="text-button primary" href="#/chapter/${route.next.id}">Sonraki</a>` : `<a class="text-button primary" href="#/pills">Hap bilgiler</a>`}
