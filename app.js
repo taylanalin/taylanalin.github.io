@@ -27,18 +27,18 @@ const categories = [
   {
     id: "asama-2-programlama",
     title: "2. Aşama: Programlama ve Veri",
-    summary: "Python, algoritmik düşünme, OOP, JSON, API kullanımı, SQL ve PostgreSQL ile üretim seviyesinde yazılım temeli kurar.",
+    summary: "Programlama dillerinin çalışma modeli, algoritmik düşünme, veri tipleri, fonksiyonlar, OOP, JSON, API, SQL ve PostgreSQL ile üretim seviyesinde yazılım temeli kurar.",
     mode: "software",
     chapters: [
       "Programlamaya giriş: problemi bilgisayarın anlayacağı akışa çevirmek",
-      "Python temelleri: değişkenler, tipler, koşullar ve döngüler",
+      "Programlama dillerinin çalışma düzeni: kaynak kod, runtime, değişken ve akış",
       "Fonksiyonlar, modüller ve okunabilir kod alışkanlığı",
       "OOP mantığı: sınıf, nesne, kapsülleme ve tasarım sezgisi",
       "Hata yönetimi, dosya işlemleri, JSON ve veri formatları",
       "API kullanımı: HTTP isteği göndermek, cevap okumak ve hata ayıklamak",
       "SQL temeli: tablo, ilişki, JOIN, index ve sorgu düşüncesi",
       "PostgreSQL ile kalıcı kayıt, transaction ve veri bütünlüğü",
-      "Python ekosistemi: FastAPI, Pandas, PyTorch ve TensorFlow'a hazırlık",
+      "Uygulama ekosistemi: FastAPI, Pandas, PyTorch ve TensorFlow'a hazırlık",
       "Kod mülakatı ve portföy: neyi bildiğini çalışır örnekle göstermek",
       "Veri yapıları ve algoritma sezgisi: array, hash map, stack, queue ve Big O"
     ]
@@ -46,18 +46,18 @@ const categories = [
   {
     id: "asama-3-web-api",
     title: "3. Aşama: Web, API ve Servis Mimarisi",
-    summary: "Frontend, backend, REST API, JWT, Redis, mesaj kuyrukları, test ve servis tasarımıyla modern uygulama akışını anlatır.",
+    summary: "Tarayıcı, arayüz katmanı, backend, REST API, JWT, Redis, mesaj kuyrukları, test ve servis tasarımıyla modern uygulama akışını anlatır.",
     mode: "software",
     chapters: [
       "Web'e giriş: tarayıcıdan backend'e bir isteğin hikâyesi",
-      "HTML, CSS ve JavaScript: ekrandaki deneyimin üç katmanı",
+      "Tarayıcı ve arayüz katmanı: HTML, CSS ve JavaScript",
       "Backend mantığı: endpoint, servis, controller ve iş kuralı",
       "REST API tasarımı: kaynak, metot, durum kodu ve sözleşme",
       "Kimlik ve oturum: JWT, OAuth2, cookie, session ve yetki sınırı",
       "Redis, cache ve CDN: hız kazanırken eski veri riskini yönetmek",
       "Mesaj kuyrukları: Kafka, RabbitMQ ve olay tabanlı çalışma",
       "Test, logging ve observability: sistemin kendi sesini duyabilmesi",
-      "Docker ile geliştirme ortamı ve servis paketleme",
+      "Konteynerle geliştirme ortamı: Docker ve servis paketleme",
       "Web mülakatları: API, güvenlik ve ölçekleme sorularına olgun cevap vermek"
     ]
   },
@@ -74,18 +74,18 @@ const categories = [
       "Token, embedding ve vektör uzayı: metni sayıya çevirmek",
       "RAG mantığı: modeli kurum bilgisiyle konuşturmak",
       "Model değerlendirme: doğruluk, halüsinasyon, bias ve güven",
-      "PyTorch ve TensorFlow: araştırmadan üretime giden araçlar",
+      "Model geliştirme araçları: PyTorch ve TensorFlow",
       "AI mülakatları: kavramı ezberlemeden örnekle açıklamak"
     ]
   },
   {
     id: "asama-5-llm-gelistirme",
     title: "5. Aşama: LLM Geliştirme ve Ajan Sistemleri",
-    summary: "OpenAI API, Ollama, prompt tasarımı, function calling, MCP, ajan araçları, güvenlik ve LLMOps pratiğini anlatır.",
+    summary: "Model API'leri, yerel modeller, prompt tasarımı, function calling, MCP, ajan araçları, güvenlik ve LLMOps pratiğini anlatır.",
     mode: "ai",
     chapters: [
       "LLM geliştirmeye giriş: sohbet kutusundan kurumsal ürüne geçmek",
-      "OpenAI API kullanımı: model seçimi, mesaj yapısı ve maliyet bilinci",
+      "Model API'leri ve sağlayıcı seçimi: mesaj yapısı, sınır ve maliyet bilinci",
       "Prompt tasarımı: rol, bağlam, örnek, sınır ve çıktı şeması",
       "Function calling ve tool use: modelin sistemlerle güvenli konuşması",
       "Ollama ve yerel modeller: mahremiyet, kapasite ve kalite dengesi",
@@ -103,8 +103,8 @@ const categories = [
     mode: "systems",
     chapters: [
       "DevOps'a giriş: yazan ekiple işleten ekibin aynı sorumluluğu taşıması",
-      "Docker: imaj, container, volume, network ve registry",
-      "Kubernetes: pod, deployment, service, ingress ve autoscaling",
+      "Konteyner mantığı: Docker, imaj, volume, network ve registry",
+      "Orkestrasyon mantığı: Kubernetes, pod, deployment, service ve ingress",
       "CI/CD: build, test, artifact, deployment ve rollback",
       "Monitoring ve logging: metrik, alarm, dashboard ve olay takibi",
       "Bulut temelleri: IaaS, PaaS, SaaS, region, availability zone ve IAM",
@@ -207,7 +207,7 @@ const categories = [
     chapters: [
       "Mülakat stratejisi: cevabı ezber değil düşünce zinciriyle kurmak",
       "Bilgisayar temelleri için beklenen sorular ve iyi cevap yapısı",
-      "Python, OOP, SQL ve API sorularında derinlik göstermek",
+      "Programlama, OOP, SQL ve API sorularında derinlik göstermek",
       "Web, backend, JWT, cache ve mesaj kuyruğu soruları",
       "Linux, ağ, Docker, Kubernetes ve bulut soruları",
       "Siber güvenlik ve olay müdahalesi soruları",
@@ -885,20 +885,6 @@ function detectTerms(text) {
   return Object.keys(glossary)
     .filter((term) => new RegExp(`(^|[^A-Za-zÇĞİÖŞÜçğıöşü0-9])${term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([^A-Za-zÇĞİÖŞÜçğıöşü0-9]|$)`, "i").test(normalized))
     .sort((a, b) => a.localeCompare(b, "tr"));
-}
-
-function termsPanel(html, title) {
-  const terms = detectTerms(`${title} ${html}`);
-  if (!terms.length) return "";
-  return `
-    <section class="term-panel">
-      <h2>Kısa Kavram Molası</h2>
-      <p class="term-panel-intro">Metnin akışını bölmeden, bu sayfada karşına çıkan terimleri yerli yerine oturtmak için küçük bir saha sözlüğü.</p>
-      <dl>
-        ${terms.map((term) => `<div><dt>${svgLabel(term)}</dt><dd>${svgLabel(glossary[term])}</dd></div>`).join("")}
-      </dl>
-    </section>
-  `;
 }
 
 function paragraph(text) {
@@ -1687,6 +1673,25 @@ const articleSupplements = {
   "liderlik-kriz-gelecek-15": "Üst düzey BT yöneticiliğine giden rota, her teknolojinin en derin uzmanı olmakla değil, her uzmanlıkla düzgün konuşacak temel ve yargı gücü kazanmakla ilerler. Bir gün Kubernetes rollout sorarsın, ertesi gün KVKK riskini tartışırsın, başka gün bütçe komitesinde bulut maliyetini savunursun, sonra yapay zekâ pilotunun veri sınırını çizersin. Bu genişlik dağınıklık olmamalıdır; düzenli öğrenme sistemi ister. Her ay bir teknik konu, bir mimari vaka, bir kriz raporu, bir yönetim pratiği seçmek bu yüzden işe yarar. Örneğin bir ay load balancer ve TLS, yanında bir sertifika krizi postmortem'i; bir ay PostgreSQL transaction, yanında veri ambarı mimarisi; bir ay RAG, yanında LLM güvenliği; bir ay bütçe savunması, yanında tedarikçi sözleşmesi oku. Zamanla bilgi ezber olmaktan çıkar, sezgiye dönüşür. İyi lider her şeyi bilmez; ama hangi sorunun hangi masada, hangi kanıtla ve hangi risk diliyle konuşulacağını bilir."
 };
 
+const articleOverrides = {
+  "asama-2-programlama-2": [
+    "Programlama dillerini öğrenmeye doğrudan bir dil adıyla başlamak çoğu zaman hızlı hissettirir, ama zemini eksik bırakır. Python, JavaScript, Java, C#, Go ya da başka bir dil; hepsi insana yazdırdığı metni bilgisayarın çalıştırabileceği düzene çevirmenin farklı yollarıdır. Önce bu düzeni görmek gerekir. Kaynak kod insanın niyetini yazdığı metindir; runtime o metnin çalıştığı ortamdır; yorumlayıcı veya derleyici ise yazdığın ifadeleri makinenin yürütebileceği hale getiren aracıdır. Bazı diller kodu çalışırken yorumlar, bazıları önceden derler, bazıları sanal makine üzerinde ara bir dünyada yaşar. Bu ayrımlar ilk gün ayrıntı gibi görünür ama üretimde hata ayıklarken, paket dağıtırken, performans konuşurken ve bağımlılık yönetirken birden gerçek olur. Bir ekipte küçük bir veri dönüştürme işi vardı. İlk kişi bunu Python betiğiyle çözdü, ikinci kişi aynı mantığı JavaScript ile web arayüzüne taşıdı, üçüncü kişi daha sonra işi backend servisine bağladı. Diller değişti ama temel akış aynı kaldı: veriyi al, tipini anla, koşula göre karar ver, tekrar eden işi döngüye bağla, sonucu anlaşılır biçimde üret. İşte bu bölümün ana fikri budur: dil araçtır, programlama düzenli düşünme biçimidir.",
+    "Değişken, bir değere ad vermektir; ama yalnız küçük kutu benzetmesiyle kalırsa eksik anlaşılır. Değişken aynı zamanda niyetin kaydıdır. `x` ile `basvuru_tarihi` aynı makineye benzer görünebilir, fakat ikinci isim yarın kodu okuyacak insana merhamet eder. Tipler değerlerin nasıl davranacağını belirler: sayı ile metin aynı şekilde toplanmaz, tarih ile düz yazı aynı şekilde karşılaştırılmaz, boş değer ile sıfır aynı anlama gelmez. Koşullar yol ayrımıdır; kullanıcı yetkiliyse devam et, alan eksikse dur, tutar sınırı aşıyorsa onay iste. Döngüler tekrar eden işi yorulmadan yürütür; klasördeki dosyaları gez, API'den gelen kayıtları işle, listedeki kullanıcıları kontrol et. Bu dört yapı, değişken, tip, koşul ve döngü, neredeyse bütün dillerde başka kıyafetlerle karşına çıkar. Python burada sade bir kapı açtığı için iyi bir öğrenme dili olabilir; JavaScript tarayıcıyla konuştuğu için web davranışını öğretir; Java ve C# tip sistemi ve kurumsal servis alışkanlığıyla başka bir disiplin verir. Fakat iyi öğrenme, dili putlaştırmaz. Bir örnek veri alır, sınır durumlarını sorar, hata halinde ne olacağını düşünür, sonra hangi dil uygunsa o dille anlatır. Büyük kurumlarda bu bakış çok değerlidir; çünkü yazılım yalnız çalıştığı günle değil, değiştirildiği, izlendiği, paketlendiği ve başka ekip tarafından okunduğu günlerle de sınanır. Bu yüzden programlama dillerinin çalışma düzenini kavrayan kişi, yeni bir dil gördüğünde paniğe kapılmaz; önce değişkeni, tipi, akışı, modülü, hata davranışını ve çalışma ortamını arar. Dilin adı değişse bile düşünmenin omurgası yerinde kalır."
+  ],
+  "asama-2-programlama-9": [
+    "Uygulama ekosistemi, bir dilin etrafında oluşan atölyedir. Dil tek başına çekiç gibidir; işe yarar ama gerçek projede ölçü aleti, mengene, raf, güvenlik gözlüğü ve iş planı da gerekir. FastAPI web servisi yazmayı kolaylaştırır, Pandas veriyi temizleme ve dönüştürmede büyük hız kazandırır, PyTorch ve TensorFlow model geliştirme dünyasında güçlü araçlar sunar. Bunlar genellikle Python çevresinde anılır, ama asıl ders Python övgüsü değildir; ekosistemin nasıl seçileceğini, nasıl sınırlandırılacağını ve nasıl üretime taşınacağını anlamaktır. Bir veri ekibi ilk model denemesini notebook üzerinde yaptı. CSV dosyası okundu, birkaç temizlik adımı uygulandı, model eğitildi, sonuçlar etkileyici göründü. Sonra aynı işin gerçek kullanıcıya API üzerinden cevap vermesi istendiğinde tablo değişti: girdi doğrulanmalıydı, cevap süresi ölçülmeliydi, model dosyası versiyonlanmalıydı, hata olursa anlamlı mesaj dönmeliydi, aynı anda gelen istekler düşünülmeliydi. Araştırma kodu ile yaşayan servis arasındaki mesafe orada görünür oldu.",
+    "Ekosistem seçerken ilk soru 'hangi araç popüler' değil, 'hangi iş hangi disiplinle yaşayacak' olmalıdır. FastAPI endpoint açmayı kolaylaştırır ama kimlik, hata formatı, OpenAPI sözleşmesi, rate limit, log ve test düşünülmezse yalnız hızlı bir demo üretir. Pandas çok esnektir ama büyük veride belleği şişirebilir, tip dönüşümlerini sessizce yapabilir ve rapor hatasını şık bir tablo gibi gösterebilir. PyTorch ve TensorFlow model kurmayı sağlar ama veri hazırlığı, eğitim/validasyon ayrımı, metrik seçimi, tekrar üretilebilirlik ve modelin nasıl servis edileceği çözülmeden tek başına ürün değildir. Paket yöneticisi, sanal ortam, bağımlılık dosyası, sürüm kilidi ve Docker imajı bu yüzden sıkıcı ayrıntılar değil, işin taşınabilirlik sigortasıdır. Bir kütüphane yerel bilgisayarda çalışıp sunucuda çalışmıyorsa sorun çoğu zaman zekâda değil, ortam yönetimindedir. Mülakatta bu başlık geldiğinde araç adlarını yarışa sokmak yerine küçük bir ürün yolu kur: veriyi okurum, tip ve kalite kontrolü yaparım, gerekirse model ya da API katmanı oluştururum, servisi paketlerim, log ve metrik eklerim, bağımlılıkları sürümlerim, beklenmeyen hatada kullanıcıyı karanlıkta bırakmam. Böyle anlatıldığında ekosistem, 'şunu da biliyorum' listesi olmaktan çıkar; çalışan ürüne giden düzenli atölyeye dönüşür."
+  ],
+  "asama-5-llm-gelistirme-2": [
+    "Model API'leriyle çalışmak teknik olarak birkaç satırlık çağrı gibi görünebilir; doğru kullanmak ise ürün disiplini ister. Bir sağlayıcıya mesaj gönderirsin, model cevap üretir, uygulama o cevabı kullanıcıya ya da başka bir sisteme taşır. Dışarıdan bakınca basittir. Fakat kurumsal üründe asıl sorular hemen gelir: Hangi veriyi modele gönderebiliriz, hangi veriyi göndermemeliyiz, cevap beklenen şemada mı dönecek, maliyet hangi işlemle ilişkilendirilecek, model geç cevap verirse kullanıcı ne görecek, kaliteyi neyle ölçeceğiz? OpenAI gibi bulut sağlayıcıları, yerel modeller ya da kurum içi servisler farklı avantajlar ve sınırlar taşır; önemli olan önce kullanım senaryosunu netleştirmektir. Kısa özet mi istiyorsun, yapılandırılmış JSON çıktısı mı, belgeye dayalı cevap mı, sınıflandırma mı, kod yardımı mı? Her iş için aynı model, aynı bağlam, aynı token sınırı ve aynı güvenlik politikası uygun olmayabilir.",
+    "Model API tasarımında mesaj yapısı ürünün omurgasıdır. Sistem talimatı modelin rolünü ve sınırını çizer, kullanıcı mesajı talebi taşır, geliştirici tarafındaki çıktı şeması cevabın işlenebilir olmasını sağlar. Serbest metin demo için hoş olabilir; ama sistem cevabı başka bir iş akışına bağlayacaksa alanlar net, hata davranışı tanımlı ve doğrulama katmanı hazır olmalıdır. Bir ekip ilk prototipte kullanıcıdan gelen her şeyi modele olduğu gibi gönderiyordu. Demo hızlıydı, cevaplar akıcıydı, herkes memnundu. Birkaç hafta sonra hem maliyet grafiği büyüdü hem de kullanıcıların mesaja gereksiz hassas bilgiler yazdığı görüldü. O gün öğrenilen ders basitti: modele ne göndermediğin de en az ne gönderdiğin kadar önemlidir. Bu yüzden veri maskeleme, bağlam kısaltma, timeout, retry, rate limit, loglama, maliyet etiketi ve eval seti baştan düşünülmelidir. Mülakatta model API'leri sorulduğunda yalnız örnek çağrı yazmak yerine bir ürün akışı anlat: girdi temizlenir, bağlam yetki sınırına göre kurulur, model uygun parametrelerle çağrılır, cevap şemaya göre doğrulanır, beklenmeyen formatta kontrollü davranılır, gecikme ve maliyet ölçülür, kalite küçük bir değerlendirme setiyle izlenir. Bu yaklaşım demo geliştiricisini ürün geliştiricisinden ayırır."
+  ],
+  "mulakat-ve-ust-duzey-hazirlik-3": [
+    "Programlama, OOP, SQL ve API sorularında derinlik göstermek tek tek terim ezberlemekle olmaz; aynı küçük iş problemini farklı katmanlarda anlatabilmekle olur. Görüşmeci 'değişken nedir' diye sormayabilir, ama verdiği problemde veriyi nasıl adlandırdığını, tipleri nasıl düşündüğünü, sınır durumlarını fark edip etmediğini dinler. OOP sorusunda sınıf ve nesne tanımı yeterli değildir; sorumluluğu doğru yere koyup koymadığın, kapsülleme ile değişiklik etkisini nasıl sınırladığın önemlidir. SQL sorusunda `JOIN` yazmak başlangıçtır; ilişkiyi yanlış kurarsan raporun nasıl şişeceğini, index'in ne zaman işe yarayıp ne zaman yazma maliyeti doğuracağını anlatmak derinliktir. API sorusunda ise istek atmak değil, timeout, durum kodu, hata gövdesi, yetki, retry ve idempotency gibi üretim ayrıntılarını hatırlamak beklenir.",
+    "İyi cevap yöntemi küçük ama sağlamdır: önce sade tanım, sonra gerçekçi senaryo, sonra trade-off, sonra kanıt. Örneğin bir başvuru sistemi anlatırken kullanıcı form gönderir, backend veriyi doğrular, iş kuralı çalışır, PostgreSQL transaction içinde kayıt oluşur, gerekiyorsa bildirim olayı kuyruğa bırakılır, API uygun durum koduyla döner. Bu akış içinde programlama bilgisi, OOP tasarımı, SQL mantığı ve API disiplini zaten görünür hale gelir. Python biliyorsan bunu örnek dil olarak kullanabilirsin; ama cevap Python reklamına dönmemelidir. Aynı düşünce başka bir dilde de kurulabiliyorsa gerçekten öğrenilmiş demektir. Görüşmede güçlü aday 'bunu kullanırım' demez; 'şu durumda kullanırım, şu riski taşır, şu metrikle izlerim, şu hatada geri dönerim' der. Bu cümle teknik derinliğin en kısa özetidir."
+  ]
+};
+
 function articleWordCount(text) {
   return text.replace(/<[^>]*>/g, " ").trim().split(/\s+/).filter(Boolean).length;
 }
@@ -1823,7 +1828,7 @@ function editorialDepthForShortArticle(category, chapter, text) {
 }
 
 function manualArticle(category, chapter) {
-  const article = manualArticles[chapter.id];
+  const article = articleOverrides[chapter.id] || manualArticles[chapter.id];
   if (!article) {
     return [
       paragraph(`Bu bölüm için bağımsız metin henüz yazılmadı: ${cleanTitle(chapter)}.`),
@@ -3032,7 +3037,7 @@ const visualBlueprints = {
   ],
   "asama-2-programlama": [
     { type: "flow", labels: ["Problem", "Algoritma", "Kod", "Test", "Hata", "Çözüm"], caption: "Programlama, dağınık problemi bilgisayarın izleyebileceği açık adımlara çevirmektir.", note: "iyi kod önce düşünce düzenidir" },
-    { type: "scene", center: "Python", labels: ["Değişken", "Tip", "if", "for", "list/dict", "print/log"], caption: "Python temelleri, veriyi tutup koşul ve döngülerle küçük kararlar aldırma pratiğidir." },
+    { type: "scene", center: "Kod", labels: ["Kaynak", "Runtime", "Tip", "if", "for", "çıktı"], caption: "Programlama dillerinin ortak zemini, veriyi anlamlı akışa çeviren çalışma düzenidir." },
     { type: "hub", center: "Fonksiyon", nodes: ["Parametre", "Return", "Modül", "Import", "Test"], caption: "Fonksiyon ve modül, kodu okunur küçük sorumluluklara böler.", note: "aynı işi tekrar yazmak yerine isim verip çağırırsın" },
     { type: "split", left: ["Veri", "state"], right: ["Davranış", "method"], caption: "OOP, veriyle davranışı aynı sorumluluk sınırında tutma disiplinidir.", note: "sınıf her şey değil, doğru sınırdır" },
     { type: "flow", labels: ["Input", "Validate", "JSON", "Try/Except", "Log", "Output"], caption: "Hata yönetimi ve JSON, sistemin dış dünyadan gelen veriyi güvenle okuyup cevap vermesini sağlar." },
@@ -3067,7 +3072,7 @@ const visualBlueprints = {
   ],
   "asama-5-llm-gelistirme": [
     { type: "scene", center: "LLM Ürünü", labels: ["Prompt", "Context", "Model", "Tool", "Eval", "Log"], caption: "LLM geliştirme, sohbet kutusunu bağlam, araç, ölçüm ve güvenlikle ürüne çevirmektir." },
-    { type: "flow", labels: ["Messages", "Model", "Tokens", "Response", "Cost", "Log"], caption: "OpenAI API kullanımında mesaj yapısı, model seçimi, token maliyeti ve log birlikte düşünülür." },
+    { type: "flow", labels: ["Messages", "Model", "Tokens", "Response", "Cost", "Log"], caption: "Model API'lerinde mesaj yapısı, sağlayıcı seçimi, token maliyeti ve log birlikte düşünülür." },
     { type: "matrix", labels: ["Rol", "Bağlam", "Örnek", "Sınır", "Şema", "Test"], caption: "Prompt tasarımı, modele ne yapacağını, neyi yapmayacağını ve çıktıyı nasıl vereceğini anlatır." },
     { type: "flow", labels: ["Intent", "Schema", "Tool Call", "API", "Result", "Answer"], caption: "Function calling, modelin dış sistemlerle kontrollü ve şemalı konuşmasını sağlar." },
     { type: "split", left: ["Ollama", "yerel kontrol"], right: ["Bulut model", "yüksek kalite"], caption: "Yerel model seçimi mahremiyet, kapasite, kalite ve işletme maliyeti dengesidir." },
@@ -3527,7 +3532,7 @@ function renderChapter(id) {
         <span>${category.count} bölümlük rota</span>
         <span>%${progress}</span>
       </div>
-      <div class="article-body">${article}${termsPanel(article, chapter.title)}</div>
+      <div class="article-body">${article}</div>
       <nav class="bottom-nav" aria-label="Bölüm geçişi">
         ${route.previous ? `<a class="text-button" href="#/chapter/${route.previous.id}">Önceki</a>` : `<a class="text-button" href="#/">Ana sayfa</a>`}
         ${route.next ? `<a class="text-button primary" href="#/chapter/${route.next.id}">Sonraki</a>` : `<a class="text-button primary" href="#/pills">Hap bilgiler</a>`}

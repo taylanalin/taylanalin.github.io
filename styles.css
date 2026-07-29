@@ -531,44 +531,6 @@ p {
   border-top: 1px solid var(--line);
 }
 
-.term-panel {
-  margin-top: 34px;
-  padding-top: 28px;
-  border-top: 1px solid var(--line);
-}
-
-.term-panel-intro {
-  max-width: 720px;
-  margin: 8px 0 0;
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.65;
-}
-
-.term-panel dl {
-  display: grid;
-  gap: 12px;
-  margin: 18px 0 0;
-}
-
-.term-panel dl div {
-  padding: 14px 16px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--paper-2) 72%, transparent);
-}
-
-.term-panel dt {
-  color: var(--accent);
-  font-weight: 800;
-}
-
-.term-panel dd {
-  margin: 6px 0 0;
-  color: var(--muted);
-  line-height: 1.55;
-}
-
 .meta-pill {
   display: inline-flex;
   min-height: 30px;
