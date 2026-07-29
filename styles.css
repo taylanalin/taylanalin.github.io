@@ -443,7 +443,8 @@ p {
   font-weight: 700;
 }
 
-.article-body p.long-read + .visual-canvas {
+.article-body p.long-read + .visual-canvas,
+.article-body .visual-canvas {
   max-width: 820px;
   margin-inline: auto;
 }
@@ -784,7 +785,7 @@ p {
 .visual-canvas text {
   fill: var(--ink);
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI Variable Text", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
 }
 

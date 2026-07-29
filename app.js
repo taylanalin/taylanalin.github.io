@@ -1511,7 +1511,7 @@ const manualArticles = {
     "Mobil uygulama ile backend arasındaki yol kesintili ağ, küçük ekran ve sabırsız kullanıcıyla sınanır. Telefon cebindedir; kurum süreci ise veri merkezi kadar büyüktür. Bir saha uygulaması tünelde bağlantı kaybedince aynı işlemi iki kez göndermişti. Backend bunu ayırt edemedi ve kayıtlar çift oluştu. Mobil dünyada offline durum, retry ve idempotency baştan tasarlanmalıdır. Uygulama kullanıcıya işlemin beklemede mi, gönderildi mi, başarısız mı olduğunu dürüstçe göstermelidir; teknik açıklama istemez, durumunu bilmek ister. JWT oturumu taşır, API Gateway mobil istemciyi servislerden ayırır, cache yavaş bağlantıda deneyimi korur, push notification kullanıcıyı geri çağırır, feature flag yeni sürümü kontrollü açar, hata mesajı paniği azaltır. Mülakatta mobil-backend mimarisi anlatırken offline queue, idempotency key, token yenileme, versiyon uyumluluğu, rate limit, cihaz bildirimi ve güvenli depolama konularını bağla. Yönetici seviyesinde mobil deneyim, kurumun en yakın temas noktasıdır. Backend mükemmel olsa bile kullanıcı asansörde işlem yaparken ne yaşadığını anlamıyorsa deneyim kırılır."
   ],
   "buyuk-mimariler-15": [
-    "Yüksek trafikte ölçekleme, yalnız sunucu eklemek değildir. CDN, WAF, load balancer, cache, kuyruk, veritabanı sınırı, rate limit, autoscaling, gözlemleme ve hata yalıtımı birlikte planlanır. Bir sınav başvuru sistemi ilk saat çökmüştü. Uygulama sunucuları artırılmıştı ama veritabanı tek noktada tıkanmış, dosya yükleme servisi kuyruksuz çalışmış, kullanıcılar sayfayı yeniledikçe yük daha da büyümüştü. Kalabalıkta en dar kapı bütün binanın kaderini belirler. Ölçekleme önce bottleneck arama refleksidir: Hangi katman doyuyor, hangi istek pahalı, hangi veri cache'lenebilir, hangi iş asenkron olabilir, hangi hata izole edilir, sistem kısmi hizmet verebilir mi? Degrade mode bazen hayat kurtarır; örneğin yoğunlukta rapor indirmeyi kapatıp başvuru almayı sürdürmek daha doğru olabilir. Mülakatta yüksek trafik anlatırken tahmini yük, okuma-yazma oranı, cache stratejisi, kuyruk, veritabanı sharding veya replica, backpressure, circuit breaker ve monitoring konularını sırayla kur. Yönetici seviyesinde ölçekleme maliyet ve güvenilirlik kararıdır. Her şeyi sonsuz büyütmek mümkün değildir; önemli olan en kritik kullanıcı yolunu korumak ve dar kapıyı önceden görmektir."
+    "Yüksek trafikte ölçekleme, yalnız sunucu eklemek değildir. CDN, WAF, load balancer, cache, kuyruk, veritabanı sınırı, rate limit, autoscaling, gözlemleme ve hata yalıtımı birlikte planlanır. Bir sınav başvuru sistemi ilk saat çökmüştü. Uygulama sunucuları artırılmıştı ama veritabanı tek noktada tıkanmış, dosya yükleme servisi kuyruksuz çalışmış, kullanıcılar sayfayı yeniledikçe yük daha da büyümüştü. Kalabalıkta en dar kapı bütün binanın kaderini belirler. Ölçekleme önce bottleneck arama refleksidir: Hangi katman doyuyor, hangi istek pahalı, hangi veri cache'lenebilir, hangi iş asenkron olabilir, hangi hata izole edilir, sistem kısmi hizmet verebilir mi? Degrade mode bazen hayat kurtarır; örneğin yoğunlukta rapor indirmeyi kapatıp başvuru almayı sürdürmek daha doğru olabilir. Burada circuit breaker arızalı servise sonsuz istek göndermeyi keser, backpressure sistemi kendi taşıma kapasitesini söylemeye zorlar, rate limit kötüye kullanım ile gerçek yoğunluğu ayırmaya yardım eder, load shedding daha az kritik işleri geçici olarak bırakıp ana kullanıcı yolunu korur. Mülakatta yüksek trafik anlatırken tahmini yük, okuma-yazma oranı, cache stratejisi, kuyruk, veritabanı sharding veya replica, backpressure, circuit breaker ve monitoring konularını sırayla kur. Yönetici seviyesinde ölçekleme maliyet ve güvenilirlik kararıdır. Her şeyi sonsuz büyütmek mümkün değildir; önemli olan en kritik kullanıcı yolunu korumak ve dar kapıyı önceden görmektir."
   ],
   "proje-kamu-yonetim-1": [
     "Kurumsal proje fikri takvime yazılınca başlamaz; hangi değeri üreteceği netleşince başlar. 'Bir ekran yapalım' cümlesi ihtiyaç değildir, sadece isteğin ilk halidir. Bir projede herkes teslim tarihini biliyordu ama başarı ölçütünü bilmiyordu. Son gün sistem açıldı, sunucu çalıştı, kullanıcı giriş yaptı; buna rağmen talep sahibi memnun değildi, çünkü proje hızlandırması gereken işi yalnız dijitalleştirmiş, karar süresini kısaltmamıştı. Değer tanımı yapılmadan biten proje, teknik olarak kapanıp kurumsal olarak açık kalabilir. İyi proje başlangıcı bu yüzden sahici sorular sorar: Bu iş hangi acıyı azaltacak, hangi ölçü değişecek, kim daha az bekleyecek, hangi risk düşecek, hangi rapor güvenilir hale gelecek? Proje yöneticisi burada çevirmen gibi çalışır; iş dili, teknik dil, bütçe dili ve kabul dili aynı hikayeye bağlanır. Mülakatta kurumsal proje sorulduğunda takvimden önce değer hipotezini, paydaşı, ölçütü ve kabul kanıtını anlat. Büyük kurumlarda proje yönetimi toplantı takibi değil, belirsizliği karar verilebilir hale getirme sanatıdır."
@@ -1535,7 +1535,7 @@ const manualArticles = {
     "Tedarikçi yönetimi, toplantıda parlak sunumu dinlemekten ibaret değildir. SLA, bakım süresi, hata önceliği, sürüm takibi, güvenlik yükümlülüğü, doküman, eğitim ve bilgi transferi ölçülebilir olmalıdır. Bir sistem tedarikçiye öyle bağımlıydı ki kurumda kimse temel ayarı bile bilmiyordu. Tedarikçi değişince bilgi de gitmiş oldu; sistem kurumun malıydı ama hafızası dışarıdaydı. Sözleşme yalnız hizmet almaz, kurumsal hafızayı da korumalıdır. İyi yönetici tedarikçiyle kavga etmez, belirsizliği azaltır: Vaat ne, kanıt ne, teslim ne, kapsam dışı ne, kritik personel değişirse bilgi nasıl aktarılır, kaynak kod veya konfigürasyon kime ait, güvenlik olayı olursa bildirim süresi ne? Mülakatta tedarikçi yönetimi anlatırken aylık hizmet raporu, SLA takibi, problem yönetimi, değişiklik kontrolü, dokümantasyon ve çıkış planı kavramlarını bağla. Büyük kurumda tedarikçi ilişkisinin sağlığı, teknolojinin kendisi kadar önemlidir; çünkü dışarıdan alınan hizmet içeride verilen sözün parçası olur."
   ],
   "proje-kamu-yonetim-8": [
-    "Bütçe, lisans ve envanter sıkıcı görünür; ta ki denetim veya yenileme zamanı gelene kadar. Hangi yazılım nerede kurulu, kaç lisans var, hangi sunucu kime ait, hangi cihaz destek dışı, hangi abonelik gerçekten kullanılıyor bilinmiyorsa kurum kendi malını bile sis içinde yönetir. Bir lisans yenilemesinde yıllardır kullanılmayan ürünlere para ödendiği görüldü. Kimse kötü niyetli değildi; envanter dağınıktı. Para bazen teknik eksikten değil, kayıt eksikliğinden akar. Varlık yönetimi iyi yapılırsa güvenlik, bütçe ve kapasite planı birlikte güçlenir. Bilmediğin cihazı yamayamaz, bilmediğin lisansı savunamaz, bilmediğin sunucunun felaket planını yazamazsın. Mülakatta bu başlık geldiğinde CMDB, varlık sahibi, lisans uyumu, kullanım metriği, yenileme takvimi, amortisman, bulut maliyeti ve güvenlik yaması arasında bağ kur. Yönetici seviyesinde bütçe savunması yalnız fiyat listesi değildir; risk azaltma, verimlilik ve sürdürülebilirlik hikayesidir."
+    "Bütçe, lisans ve envanter sıkıcı görünür; ta ki denetim veya yenileme zamanı gelene kadar. Hangi yazılım nerede kurulu, kaç lisans var, hangi sunucu kime ait, hangi cihaz destek dışı, hangi abonelik gerçekten kullanılıyor bilinmiyorsa kurum kendi malını bile sis içinde yönetir. Bir lisans yenilemesinde yıllardır kullanılmayan ürünlere para ödendiği görüldü. Kimse kötü niyetli değildi; envanter dağınıktı. Para bazen teknik eksikten değil, kayıt eksikliğinden akar. Varlık yönetimi iyi yapılırsa güvenlik, bütçe ve kapasite planı birlikte güçlenir. Bilmediğin cihazı yamayamaz, bilmediğin lisansı savunamaz, bilmediğin sunucunun felaket planını yazamazsın. CMDB burada yalnız tablo değildir; varlığın sahibi, iş hizmeti, bağımlılığı, yaşam döngüsü, bakım penceresi, yama durumu ve maliyet merkezi aynı kayıt üzerinde buluşur. Yazılım varlık yönetimi lisans uyumsuzluğu riskini azaltırken, donanım varlık yönetimi kapasite ve yenileme planını görünür yapar; bulutta tag politikası aynı disiplinin yeni yüzüdür. Mülakatta bu başlık geldiğinde CMDB, varlık sahibi, lisans uyumu, kullanım metriği, yenileme takvimi, amortisman, bulut maliyeti ve güvenlik yaması arasında bağ kur. Yönetici seviyesinde bütçe savunması yalnız fiyat listesi değildir; risk azaltma, verimlilik ve sürdürülebilirlik hikayesidir."
   ],
   "proje-kamu-yonetim-9": [
     "Kamu BT işleyişi tek tip değildir. Merkez teşkilat strateji ve standart konuşur, taşra bağlantı ve destek bekler, belediye vatandaş hizmetine odaklanır, üniversite dönemsel yoğunluk yaşar, savunma şirketi güvenilirlik ve gizlilikle çalışır. Bir bakanlık entegrasyonunda teknik bağlantı hazırdı ama resmi protokol tamamlanmamıştı. Özel sektörde küçük bir imza gibi görünen şey, kamuda sorumluluk sınırını çizer. Teknoloji kararı idari karardan ayrı yürümez. Kamu projelerinde bütçe yılı, satın alma usulü, resmi yazışma, veri paylaşım protokolü, arşiv yükümlülüğü, bilgi güvenliği standardı ve denetim izi takvimi etkiler. Bu gerçekliği bilmeyen teknik ekip, çalışan sistemi zamanında canlıya alamayabilir. Mülakatta kamu BT sorulduğunda kurum şemasını ezberlemek yetmez; hangi işin hangi belge, onay, bütçe, ekip ve tedarikçiyle yaşadığını anlat. Yönetici adayına gerçekçilik kazandıran şey, teknik çözümün idari dünyada nasıl nefes aldığını görebilmektir."
@@ -1544,7 +1544,7 @@ const manualArticles = {
     "KVKK, denetim izi ve resmi yazı teknoloji projelerinin dış süsü değildir. Kişisel veri nerede duruyor, kim erişti, hangi amaçla işlendi, ne kadar saklanacak, karar neye dayanıyor? Bunlar proje tasarımının içindedir. Bir rapor ekranı iyi çalışıyordu ama fazla veri gösteriyordu. Kullanıcı işini daha hızlı yapıyordu, kurum ise gereksiz kişisel veri riski taşıyordu. İyi niyet, mevzuat riskini ortadan kaldırmaz. Denetim izi yalnız güvenlik olayı için değil, kararın nasıl alındığını kanıtlamak için de gerekir. Kim onay verdi, hangi sürüm canlıya çıktı, hangi kullanıcı hangi kayda baktı, hangi veri dışarı aktarıldı? Kurumsal hafıza kayıtla oluşur. Karar yazılır, onay saklanır, log tutulur, arşiv düzenlenir. İnsanlar değişir; kurumun hatırlaması için belge gerekir. Mülakatta KVKK ve denetim sorulduğunda veri minimizasyonu, maskeleme, erişim yetkisi, saklama süresi, aydınlatma, log ve resmi onay zincirini birlikte anlat. Üst düzey BT yöneticisi mevzuatı hukuk ekibine havale edip unutmaz; teknik tasarımın mevzuata uygun kanıt üretmesini sağlar."
   ],
   "proje-kamu-yonetim-11": [
-    "Proje ve kamu mülakatlarında adayın sahayı anlayıp anlamadığı hızlı belli olur. Şartname, kabul, bütçe, tedarikçi, KVKK, denetim izi ve kullanıcı desteği kelimelerini aynı hikayede buluşturabiliyorsa yalnız yazılım değil kurum işi de görmüştür. İyi cevap bir toplantı sahnesi kurar: talep sahibi aciliyet anlatır, teknik ekip bağımlılığı gösterir, satın alma usulü sorar, hukuk veri sınırını çizer, güvenlik log ister, destek masası kullanıcı metnini bekler, yönetici karar ister. Aday bu masayı anlatabiliyorsa olgun görünür. Hazırlık için her sürece kanıt sorusu ekle: Bu işin kabul kanıtı ne, risk kaydı nerede, kim onaylıyor, kullanıcı nasıl bilgilendiriliyor, tedarikçi neyi taahhüt ediyor, denetçi geldiğinde hangi belge gösterilecek? Kamu ve kurumsal yönetim dili burada güçlenir. Mülakatta parlak teknoloji isimleri yardımcı olur ama asıl fark, teknolojinin kurum içinde nasıl karar, kayıt ve sorumluluk ürettiğini anlatabilmektir."
+    "Proje ve kamu mülakatlarında adayın sahayı anlayıp anlamadığı hızlı belli olur. Şartname, kabul, bütçe, tedarikçi, KVKK, denetim izi ve kullanıcı desteği kelimelerini aynı hikayede buluşturabiliyorsa yalnız yazılım değil kurum işi de görmüştür. İyi cevap bir toplantı sahnesi kurar: talep sahibi aciliyet anlatır, teknik ekip bağımlılığı gösterir, satın alma usulü sorar, hukuk veri sınırını çizer, güvenlik log ister, destek masası kullanıcı metnini bekler, yönetici karar ister. Aday bu masayı anlatabiliyorsa olgun görünür. Hazırlık için her sürece kanıt sorusu ekle: Bu işin kabul kanıtı ne, risk kaydı nerede, kim onaylıyor, kullanıcı nasıl bilgilendiriliyor, tedarikçi neyi taahhüt ediyor, denetçi geldiğinde hangi belge gösterilecek? Kamu görüşmelerinde muayene kabul, yaklaşık maliyet, bakım sözleşmesi, veri paylaşım protokolü, resmi yazı, SLA ve hizmet sürekliliği gibi kavramları doğru yerde kullanmak güven verir; çünkü bu kelimeler sahada gerçek karar noktalarıdır. Kamu ve kurumsal yönetim dili burada güçlenir. Mülakatta parlak teknoloji isimleri yardımcı olur ama asıl fark, teknolojinin kurum içinde nasıl karar, kayıt ve sorumluluk ürettiğini anlatabilmektir."
   ],
   "liderlik-kriz-gelecek-1": [
     "Teknik liderlik, her ayrıntıyı ezberlemek değil, ayrıntının ne zaman stratejik hale geldiğini sezebilmektir. İyi lider CPU darboğazını yalnız işlemci grafiği olarak görmez; hizmet yavaşlığına, kullanıcı memnuniyetine, kapasite bütçesine ve mimari borca bağlar. Güvenlik açığını yalnız CVE numarasıyla anlatmaz; veri sızıntısı, denetim bulgusu, itibar riski ve kapatma planı olarak çevirir. Bir toplantıda uzmanlar Kubernetes node sorununu anlatıyordu, üst makam hizmet etkisini soruyordu. Kötü lider iki tarafı da yarım bırakır: ya teknik ayrıntıda boğulur ya da teknik kökü saklayıp süslü güven cümleleri kurar. İyi lider iki dili de duyar. Uzmanlara kaynağı sorar, yöneticiye etkiyi ve çözüm penceresini verir: 'Veri kaybı yok, ödeme servisinde gecikme var, on beş dakika içinde kapasiteyi ayırıyoruz, gerekirse son sürümü geri alacağız.' Üst düzey BT yöneticiliği tam da bu çeviri gücüdür. Bu rota teknik bilgiyi insan, bütçe, risk ve gelecek kararlarıyla birleştirir; çünkü büyük kurumda teknoloji, yalnız makinenin değil kurumun çalışma biçiminin parçasıdır."
@@ -1556,10 +1556,10 @@ const manualArticles = {
     "Ekip kurmak CV toplamak değildir. Uzmanlık, güven, yedeklilik ve ölçü gerekir. Tek kahramana bağlı ekip ilk başta hızlı görünür; herkes zor işi kimin çözeceğini bilir, toplantılar kısa sürer, krizlerde o kişi aranır. Sonra bir gün o kişi izne çıkar, hastalanır veya kurumdan ayrılır ve bütün hızın aslında tek noktaya bağlı kırılganlık olduğu anlaşılır. Bir kurumda tek kişi tüm veritabanı bilgisini taşıyordu. İzin gününde performans krizi çıktı ve herkes aynı numarayı aradı. Bilgi paylaşımı yapılmadığında insan kaynağı riski teknik riskten daha keskin hale gelir. İyi lider ekipte derin uzmanlık kadar ortak dil kurar. Runbook yazılır, nöbet devri yapılır, mimari karar kaydedilir, kritik sistemlerin en az iki sahibi olur, genç mühendis yalnız küçük işlerle değil kontrollü sorumlulukla büyütülür. Herkes her şeyi bilmez ama herkes kime, hangi kanıtla, hangi anda gideceğini bilir. Mülakatta ekip yönetimi sorulduğunda insanları motive etmek gibi genel cümlelerle kalma; bilgi yedekliliği, görev dağılımı, mentorluk, ölçülebilir hedef ve olay sonrası öğrenme anlat. Teknik liderlik, insanların birlikte daha az kırılgan sistem kurmasını sağlamaktır."
   ],
   "liderlik-kriz-gelecek-4": [
-    "Karar almak, bütün belirsizlik bitene kadar beklemek değildir. Bazen yüzde yetmiş bilgiyle yön seçersin; ama geri dönüş yolunu ve sorumluluğu açık tutarsın. Bir canlıya geçişte risk vardı. Ekip iki seçenek sundu: erteleme veya sınırlı kullanıcıyla kontrollü açılış. Lider ikinciyi seçti çünkü rollback planı denenmiş, monitoring hazırlanmış, destek ekibi bilgilendirilmişti. Cesaret, hazırlıksız atlamak değildir; hazırlık sayesinde sınırlı risk alabilmektir. Karar kalitesi yalnız sonucun iyi çıkmasıyla ölçülmez. O an hangi bilgi vardı, hangi varsayım kabul edildi, hangi risk sahiplenildi, hangi sinyalde durulacaktı? Bunlar yazılırsa yarın hesap vermek savunma değil öğrenme olur. Mülakatta karar alma sorulduğunda teknik seçenekleri risk, maliyet ve geri dönüş imkanıyla kıyasla. Büyük kurumda hız, risk ve sorumluluk aynı masadadır. Lider her şeyi bilmez; ama kararın nedenini, sınırını ve izleme biçimini netleştirir."
+    "Karar almak, bütün belirsizlik bitene kadar beklemek değildir. Bazen yüzde yetmiş bilgiyle yön seçersin; ama geri dönüş yolunu ve sorumluluğu açık tutarsın. Bir canlıya geçişte risk vardı. Ekip iki seçenek sundu: erteleme veya sınırlı kullanıcıyla kontrollü açılış. Lider ikinciyi seçti çünkü rollback planı denenmiş, monitoring hazırlanmış, destek ekibi bilgilendirilmişti. Cesaret, hazırlıksız atlamak değildir; hazırlık sayesinde sınırlı risk alabilmektir. Karar kalitesi yalnız sonucun iyi çıkmasıyla ölçülmez. O an hangi bilgi vardı, hangi varsayım kabul edildi, hangi risk sahiplenildi, hangi sinyalde durulacaktı? Bunlar yazılırsa yarın hesap vermek savunma değil öğrenme olur. Büyük kurumlarda karar kaydı, mimari karar dokümanı, risk acceptance, change advisory board ve rollback criteria gibi araçlar bu yüzden önemlidir; kararın yalnız kim tarafından değil hangi kanıtla alındığını da gösterir. Mülakatta karar alma sorulduğunda teknik seçenekleri risk, maliyet ve geri dönüş imkanıyla kıyasla. Büyük kurumda hız, risk ve sorumluluk aynı masadadır. Lider her şeyi bilmez; ama kararın nedenini, sınırını ve izleme biçimini netleştirir."
   ],
   "liderlik-kriz-gelecek-5": [
-    "Bütçe savunması fiyat listesi okumak değildir. Yedeklilik neden gerekli, SIEM hangi riski azaltır, GPU kapasitesi hangi iş değerini üretir, lisans yenilemesi yapılmazsa ne olur, bulut maliyeti hangi hızın bedelidir? Maliyet hikayeye bağlanmalıdır. Bir yönetici pahalı görünen yedekleme yatırımını reddetmek üzereydi. Teknik ekip yalnız cihaz markası anlatmak yerine RTO, RPO ve hizmet etkisini gösterdi: 'Bu yatırım olmazsa ana sistem kaybında iki gün durabiliriz; olursa dört saat içinde dönebiliriz, veri kaybı şu aralıkta kalır.' Konu cihaz alımından iş sürekliliğine döndü. Bütçe dili böyle değişir. İyi BT lideri para isterken araç adıyla değil risk ve değerle konuşur. Mülakatta bütçe sorulduğunda toplam sahip olma maliyeti, operasyon yükü, lisans uyumu, güvenlik riski, kapasite planı ve alternatif maliyet kavramlarını bağla. Üst yönetim teknik ayrıntıyı bilmek zorunda değildir; ama kararın iş etkisini görmeye hakkı vardır."
+    "Bütçe savunması fiyat listesi okumak değildir. Yedeklilik neden gerekli, SIEM hangi riski azaltır, GPU kapasitesi hangi iş değerini üretir, lisans yenilemesi yapılmazsa ne olur, bulut maliyeti hangi hızın bedelidir? Maliyet hikayeye bağlanmalıdır. Bir yönetici pahalı görünen yedekleme yatırımını reddetmek üzereydi. Teknik ekip yalnız cihaz markası anlatmak yerine RTO, RPO ve hizmet etkisini gösterdi: 'Bu yatırım olmazsa ana sistem kaybında iki gün durabiliriz; olursa dört saat içinde dönebiliriz, veri kaybı şu aralıkta kalır.' Konu cihaz alımından iş sürekliliğine döndü. Bütçe dili böyle değişir. İyi BT lideri para isterken araç adıyla değil risk ve değerle konuşur. Capex, opex, TCO, amortisman, lisans uyumu, bakım sözleşmesi, bulut tüketimi ve insan kaynağı maliyeti aynı resimde okunmalıdır. Ucuz görünen ürün daha fazla operasyon yükü getiriyorsa toplam sahip olma maliyeti artar; pahalı görünen yönetilen servis, kritik ekip zamanını serbest bırakıyorsa gerçek değer üretebilir. Mülakatta bütçe sorulduğunda toplam sahip olma maliyeti, operasyon yükü, lisans uyumu, güvenlik riski, kapasite planı ve alternatif maliyet kavramlarını bağla. Üst yönetim teknik ayrıntıyı bilmek zorunda değildir; ama kararın iş etkisini görmeye hakkı vardır."
   ],
   "liderlik-kriz-gelecek-6": [
     "Krizde ilk dakika sisli geçer. Kullanıcı bağırır, alarm düşer, tedarikçi bekleyin der, üst yönetim etkiyi sorar, ekip aynı anda hem çözmek hem anlamak ister. Liderin görevi sisin içinde ilk sırayı kurmaktır. İlk karar çoğu zaman teknik çözüm değildir; olay kaydı açmak, etkiyi ölçmek, iletişim kanalını belirlemek, rolleri dağıtmak ve varsayımları gerçeklerden ayırmaktır. Kayıt yoksa kriz bittiğinde bile kurum ne yaşadığını bilemez. İyi kriz yönetiminde tek bir olay kanalı olur, kararlar zaman damgasıyla yazılır, müşteri etkisi periyodik güncellenir, teknik ekip gereksiz toplantı gürültüsünden korunur. Sakinlik kişilik özelliği değil, hazırlık sonucudur. Kim aranacak, hangi metrik okunacak, hangi sistem kapatılacak, kim açıklama yapacak önceden bilinmelidir. Mülakatta kriz yönetimi sorulduğunda 'soğukkanlı olurum' deme; triage, etki analizi, iletişim, karar kaydı, müdahale ve postmortem sırasını anlat. Büyük kurumda kriz, teknolojinin yanında kurum koordinasyonunu da sınar."
@@ -1574,10 +1574,10 @@ const manualArticles = {
     "DDoS baskısı, hizmetin kapısını kalabalıkla tıkama girişimidir. Gerçek kullanıcıyla sahte trafiği ayırmak, kapasiteyi korumak ve iletişimi doğru yapmak gerekir. Bir saldırıda ekip yalnız sunucu artırmaya odaklandı; trafik filtrelenmediği için maliyet büyüdü, hizmet yine zorlandı. DDoS savunması kaba güç değil, doğru yerde süzme işidir. CDN, WAF, rate limit, bot yönetimi, upstream kapasite, anycast koruma, cache stratejisi ve acil iletişim birlikte düşünülür. Her istek uygulama sunucusuna kadar geliyorsa savunma geç başlamış olabilir. Lider saldırı anında teknik ekibe 'daha fazla makine açın' demeden önce trafiğin türünü, hedef endpoint'i, gerçek kullanıcı etkisini ve sağlayıcı desteğini sorar. Kullanıcıya sessiz kalmak da krizin parçasıdır; güvenlik kadar iletişim de yönetilir. Mülakatta DDoS anlatırken tespit, filtreleme, kritik yol koruma, maliyet kontrolü, sağlayıcı eskalasyonu ve olay sonrası kural iyileştirmeyi sırayla kur. Büyük kurumda dayanıklılık, yalnız saldırıyı durdurmak değil hizmet sözünü makul ölçüde korumaktır."
   ],
   "liderlik-kriz-gelecek-10": [
-    "Yedek dönmüyorsa kurumun güven cümlesi sınanır. Herkes 'yedek var' demiş olabilir; gerçek soru restore çalışıyor mu, ne kadar sürüyor, hangi veri kaybediliyor ve kim hangi adımı biliyor sorusudur. Bir tatbikatta yedek dosyası vardı ama şifre anahtarı başka ekipteydi, o ekip de süreçte yoktu. Teknik yedek tamam, organizasyonel yedek eksikti. Felaket kurtarma ekip işi olarak tasarlanmalıdır. RPO, RTO, restore testi, immutable backup, offsite kopya, anahtar yönetimi ve sorumluluk matrisi birlikte okunur. Kriz günü yeni doküman yazılmaz; daha önce prova edilmiş adımlar uygulanır. Mülakatta yedek dönmeme olayını anlatırken panik yerine sıra kur: etkiyi belirle, son sağlam yedeği doğrula, izole ortamda restore dene, veri tutarlılığını kontrol et, uygulamayı kontrollü aç, kullanıcı ve yönetim iletişimini sürdür, olay sonrası eksikleri kapat. Kâğıt üstündeki güven prova edilmezse kriz günü dağılır."
+    "Yedek dönmüyorsa kurumun güven cümlesi sınanır. Herkes 'yedek var' demiş olabilir; gerçek soru restore çalışıyor mu, ne kadar sürüyor, hangi veri kaybediliyor ve kim hangi adımı biliyor sorusudur. Bir tatbikatta yedek dosyası vardı ama şifre anahtarı başka ekipteydi, o ekip de süreçte yoktu. Teknik yedek tamam, organizasyonel yedek eksikti. Felaket kurtarma ekip işi olarak tasarlanmalıdır. RPO, RTO, restore testi, immutable backup, offsite kopya, anahtar yönetimi ve sorumluluk matrisi birlikte okunur. Burada backup job başarı oranı kadar restore success rate, recovery runbook, dependency map, DNS dönüş planı ve uygulama konfigürasyon yedeği de önemlidir; çünkü veritabanı dönse bile uygulama secret'ı, sertifika veya obje depolama izni eksikse hizmet ayağa kalkmaz. Kriz günü yeni doküman yazılmaz; daha önce prova edilmiş adımlar uygulanır. Mülakatta yedek dönmeme olayını anlatırken panik yerine sıra kur: etkiyi belirle, son sağlam yedeği doğrula, izole ortamda restore dene, veri tutarlılığını kontrol et, uygulamayı kontrollü aç, kullanıcı ve yönetim iletişimini sürdür, olay sonrası eksikleri kapat. Kâğıt üstündeki güven prova edilmezse kriz günü dağılır."
   ],
   "liderlik-kriz-gelecek-11": [
-    "Kriz sonrası rapor, yaşananı kapatma evrakı değil öğrenme aracıdır. Zaman çizelgesi, etki, kök neden, müdahale, iletişim ve kalıcı düzeltme açık yazılır. Bir olay raporunda 'sistemsel hata' yazıyordu. Bu cümle hiçbir şeyi öğretmez. Sonra ekip ayrıntıya indi: alarm yoktu, disk dolmuştu, log rotasyonu yanlıştı, sahiplik belirsizdi. Ders ancak isim konunca çıkar. İyi postmortem suçlu aramaz ama sorumluluğu da buharlaştırmaz. Hangi karar gecikti, hangi sinyal kaçtı, hangi doküman eskiydi, hangi test eksikti? Kalıcı düzeltme yapılmazsa olay yalnız ertelenir. Alarm eşiği, test, doküman, eğitim, kapasite değişikliği veya mimari karar raporun sonunda gerçek aksiyona dönüşmelidir. Mülakatta kriz sonrası rapor sorulduğunda blameless kültür, zaman çizelgesi, etki ölçümü, kök neden analizi ve aksiyon takibini anlat. Büyük kurumda iyi rapor kurumu savunmak için değil, kurumu daha dayanıklı yapmak için yazılır."
+    "Kriz sonrası rapor, yaşananı kapatma evrakı değil öğrenme aracıdır. Zaman çizelgesi, etki, kök neden, müdahale, iletişim ve kalıcı düzeltme açık yazılır. Bir olay raporunda 'sistemsel hata' yazıyordu. Bu cümle hiçbir şeyi öğretmez. Sonra ekip ayrıntıya indi: alarm yoktu, disk dolmuştu, log rotasyonu yanlıştı, sahiplik belirsizdi. Ders ancak isim konunca çıkar. İyi postmortem suçlu aramaz ama sorumluluğu da buharlaştırmaz. Hangi karar gecikti, hangi sinyal kaçtı, hangi doküman eskiydi, hangi test eksikti? Kalıcı düzeltme yapılmazsa olay yalnız ertelenir. Alarm eşiği, test, doküman, eğitim, kapasite değişikliği veya mimari karar raporun sonunda gerçek aksiyona dönüşmelidir. İyi raporda timeline, impact, root cause, contributing factors, detection gap, MTTR, action owner ve due date açıkça görünür; aksi halde rapor güzel yazılmış ama yönetilmeyen bir anıya dönüşür. Mülakatta kriz sonrası rapor sorulduğunda blameless kültür, zaman çizelgesi, etki ölçümü, kök neden analizi ve aksiyon takibini anlat. Büyük kurumda iyi rapor kurumu savunmak için değil, kurumu daha dayanıklı yapmak için yazılır."
   ],
   "liderlik-kriz-gelecek-12": [
     "Yapay zekânın ofise girişi sessiz başladı: özet çıkarma, e-posta taslağı, kod yardımı, doküman arama. Sonra soru değişti: Bu araç hangi veriyi görüyor, cevabı kim kontrol ediyor, yanlış öneri kimin kararına dönüşüyor? Bir ekip toplantı notlarını modelle özetliyordu; içinde hassas proje bilgileri ve tedarikçi fiyatları vardı. Kolaylık güzeldi, veri sınırı belirsizdi. Yapay zekâ ofiste verimlilik kadar yönetişim meselesidir. Lider bu konuda yasakçı veya büyülenmiş olmamalı. Kullanım alanı, veri sınıfı, model seçimi, onay noktası, kayıt, eğitim, telif ve güvenlik sınırı birlikte belirlenirse teknoloji faydaya yaklaşır. Kurum içi asistan yapılacaksa hangi belgeleri göreceği, yetkiyi nasıl uygulayacağı, cevabı kaynakla gösterip göstermeyeceği ve kullanıcı hatalı cevabı nasıl bildireceği tasarlanmalıdır. Mülakatta yapay zekâ yönetişimi sorulduğunda fayda ve riski aynı cümlede taşı: üretkenlik artışı, veri sızıntısı, hallucination, insan onayı, audit log ve politika. Üst düzey liderlik, yeni teknolojiyi ne körce engeller ne de kontrolsüz serbest bırakır; kullanımın güvenli yolunu açar."
@@ -1610,13 +1610,13 @@ const manualArticles = {
     "Siber güvenlik mülakatında olgunluk, riskin iş etkisini görmekle anlaşılır. Firewall, WAF, SIEM, EDR, IAM ve DLP kavramlarını ürün listesi gibi değil kontrol ailesi gibi anlat. Firewall ağ geçişini sınırlar, WAF uygulama katmanı saldırılarını azaltır, SIEM logları ilişkilendirir, EDR uç noktada davranış izler, IAM kimlik ve yetkiyi düzenler, DLP hassas verinin yanlış yere gitmesini engellemeye çalışır. Olay müdahalesi sorulursa sırayı koru: tespit, etki analizi, çevreleme, kanıt koruma, temizleme, kurtarma, raporlama ve kalıcı düzeltme. Bu sıra panik yerine disiplin gösterir. Yönetsel cevapta bütçe ve denetim dilini ekle. Hangi kontrol hangi riski azaltıyor, hangi log kanıt sayılır, hangi olay üst makama çıkar, hangi mevzuat bildirimi gerekebilir? Mülakatta güvenlik cevabını bir olay üzerinden kurarsan daha güçlü olur: phishing geldi, hesap ele geçirildi, SIEM alarm verdi, oturum kapatıldı, EDR cihazı izole etti, kullanıcı eğitimi ve koşullu erişim politikası güncellendi. Bu tür cevap seni uzmanlıktan liderliğe taşır."
   ],
   "mulakat-ve-ust-duzey-hazirlik-7": [
-    "Yapay zekâ, RAG, LLM ve MLOps sorularında moda kelimeler kolay tuzaktır. Güçlü cevap model, veri, kaynak, değerlendirme, maliyet ve güvenlik sınırını birlikte kurar. Bir RAG sorusunda belge toplama, temizleme, chunking, embedding, vector search, retrieval, kaynak gösterme ve eval akışını anlat. Sonra prompt injection, yetki filtresi, hassas veri maskeleme ve cevap bulamazsa durma davranışını ekle. İşte o zaman cevap demo seviyesini geçer. LLMOps sorulursa model canlıya çıktıktan sonraki hayatı konuş: prompt versiyonu, model değişikliği, cevap kalitesi, kullanıcı geri bildirimi, maliyet, latency, güvenlik olayı ve eval seti. Yapay zekâ ürünü de yaşayan sistemdir. Mülakatta 'LLM her şeyi çözer' havasına girme; sınırlarını söyle. Halüsinasyon olabilir, kaynak yanlış seçilebilir, maliyet büyüyebilir, yetki uygulanmazsa veri sızabilir. Üst düzey aday yapay zekâyı büyülü ekran değil, izlenebilir ve yönetilebilir ürün olarak anlatır."
+    "Yapay zekâ, RAG, LLM ve MLOps sorularında moda kelimeler kolay tuzaktır. Güçlü cevap model, veri, kaynak, değerlendirme, maliyet ve güvenlik sınırını birlikte kurar. Bir RAG sorusunda belge toplama, temizleme, chunking, embedding, vector search, retrieval, kaynak gösterme ve eval akışını anlat. Sonra prompt injection, yetki filtresi, hassas veri maskeleme ve cevap bulamazsa durma davranışını ekle. İşte o zaman cevap demo seviyesini geçer. LLMOps sorulursa model canlıya çıktıktan sonraki hayatı konuş: prompt versiyonu, model değişikliği, cevap kalitesi, kullanıcı geri bildirimi, maliyet, latency, güvenlik olayı ve eval seti. Aday ayrıca fine-tuning ile RAG farkını bilmelidir: RAG güncel kurumsal kaynağı cevaba taşır, fine-tuning davranış ve üslup kalıbını güçlendirebilir ama her belge güncellemesini modele öğretmek için sihirli yol değildir. Guardrail, structured output, tool calling, human-in-the-loop ve rate limit kavramları da üretim kalitesinin parçasıdır. Yapay zekâ ürünü de yaşayan sistemdir. Mülakatta 'LLM her şeyi çözer' havasına girme; sınırlarını söyle. Halüsinasyon olabilir, kaynak yanlış seçilebilir, maliyet büyüyebilir, yetki uygulanmazsa veri sızabilir. Üst düzey aday yapay zekâyı büyülü ekran değil, izlenebilir ve yönetilebilir ürün olarak anlatır."
   ],
   "mulakat-ve-ust-duzey-hazirlik-8": [
-    "Sistem tasarımı mülakatı büyük resmi tahtada kurma sınavıdır. Önce gereksinimi sor, sonra kullanıcı akışını çiz, sonra veri modelini, API'leri, cache'i, kuyruğu, güvenliği, gözlemlemeyi ve ölçeklemeyi ekle. Bir aday URL kısaltma sistemi tasarlarken önce veritabanına atladı. Başka aday okuma-yazma oranını, kısa kod üretimini, çakışma riskini, redirect hızını, cache'i, rate limit'i, kötüye kullanım riskini ve analytics ihtiyacını konuştu. İkinci aday sistemi gerçekten tasarlıyordu. Tahtada mükemmel çizim arama; kararlarını gerekçelendir. Nerede tutarlılık, nerede hız, nerede basitlik, nerede maliyet seçtin? Her bileşen bir soruna cevap vermeli. Kuyruk neden var, cache neyi hızlandırıyor, veritabanı hangi resmi kaydı tutuyor, log hangi olayı kanıtlıyor? Mülakatta iyi sistem tasarımı cevabı, belirsizliği parçalara ayırır ve seçtiği bedelleri açıkça söyler."
+    "Sistem tasarımı mülakatı büyük resmi tahtada kurma sınavıdır. Önce gereksinimi sor, sonra kullanıcı akışını çiz, sonra veri modelini, API'leri, cache'i, kuyruğu, güvenliği, gözlemlemeyi ve ölçeklemeyi ekle. Bir aday URL kısaltma sistemi tasarlarken önce veritabanına atladı. Başka aday okuma-yazma oranını, kısa kod üretimini, çakışma riskini, redirect hızını, cache'i, rate limit'i, kötüye kullanım riskini ve analytics ihtiyacını konuştu. İkinci aday sistemi gerçekten tasarlıyordu. Tahtada mükemmel çizim arama; kararlarını gerekçelendir. Nerede tutarlılık, nerede hız, nerede basitlik, nerede maliyet seçtin? Her bileşen bir soruna cevap vermeli. Kuyruk neden var, cache neyi hızlandırıyor, veritabanı hangi resmi kaydı tutuyor, log hangi olayı kanıtlıyor? CAP theorem, eventual consistency, strong consistency, partitioning, replication, hot key, cold start ve single point of failure gibi terimleri ezber diye değil, tasarım tercihinin bedeli olarak kullan. Mülakatta iyi sistem tasarımı cevabı, belirsizliği parçalara ayırır ve seçtiği bedelleri açıkça söyler."
   ],
   "mulakat-ve-ust-duzey-hazirlik-9": [
-    "Yöneticilik mülakatında teknik bilgi karar diline çevrilmelidir. Bütçe, risk, insan, tedarikçi, mevzuat ve iş sürekliliği aynı cevapta yer bulur. Bir aday Kubernetes yatırımını savunurken 'modern teknoloji' dedi ve zayıf kaldı. Başka aday dağıtım hızı, hata yalıtımı, ekip yetkinliği, işletme maliyeti, güvenlik politikası, geçiş riski ve geri dönüş planını anlattı. Yönetim dili ikinci cevaptadır. Bu görüşmelerde bilmediğini saklama, sınırlandır: 'Bu konuda uzman görüşü alırım; karar için şu metriklere bakarım, riski şu belgeyle görünür yaparım' demek olgun lider refleksidir. Yönetici mülakatında kriz deneyimi sorulursa yalnız sonucu değil süreci anlat: etki nasıl ölçüldü, kimler toplandı, hangi karar alındı, iletişim nasıl yapıldı, olaydan ne öğrenildi? Üst düzey aday, teknolojiyi kurumun para, zaman, güven ve insan düzenine bağlayabilen adaydır."
+    "Yöneticilik mülakatında teknik bilgi karar diline çevrilmelidir. Bütçe, risk, insan, tedarikçi, mevzuat ve iş sürekliliği aynı cevapta yer bulur. Bir aday Kubernetes yatırımını savunurken 'modern teknoloji' dedi ve zayıf kaldı. Başka aday dağıtım hızı, hata yalıtımı, ekip yetkinliği, işletme maliyeti, güvenlik politikası, geçiş riski ve geri dönüş planını anlattı. Yönetim dili ikinci cevaptadır. Bu görüşmelerde bilmediğini saklama, sınırlandır: 'Bu konuda uzman görüşü alırım; karar için şu metriklere bakarım, riski şu belgeyle görünür yaparım' demek olgun lider refleksidir. Yönetici mülakatında kriz deneyimi sorulursa yalnız sonucu değil süreci anlat: etki nasıl ölçüldü, kimler toplandı, hangi karar alındı, iletişim nasıl yapıldı, olaydan ne öğrenildi? Stratejik cevaplarda OKR, KPI, SLA, risk appetite, vendor lock-in, TCO, governance ve compliance gibi kelimeler yerli yerinde kullanılmalıdır; bunlar süslü yönetim dili değil, teknik kararın kurum hedefiyle temas ettiği noktalardır. Üst düzey aday, teknolojiyi kurumun para, zaman, güven ve insan düzenine bağlayabilen adaydır."
   ],
   "mulakat-ve-ust-duzey-hazirlik-10": [
     "Teknisyenlikten stratejik BT liderliğine geçiş, elindeki tornavidayı bırakmak değil, hangi sorunda hangi tornavidanın gerektiğini bilmektir. Derinlik kaybolmaz; perspektif genişler. Kariyerin başında komut öğrenirsin, sonra sistem kurarsın, sonra ekibin nasıl çalıştığını görürsün, en sonunda teknolojinin bütçe, risk ve kurum hedefiyle ilişkisini yönetirsin. Her aşama öncekinin üstüne çıkar. Stratejik liderlik teknikten uzaklaşmak değil, tekniğin etkisini daha geniş okumaktır. Bir veritabanı gecikmesi kullanıcı deneyimidir, bir sertifika takvimi güven yönetimidir, bir bulut faturası mimari karardır, bir yapay zekâ pilotu veri yönetişimi meselesidir. Kişisel rota için her projeden bir teknik ders, bir insan dersi ve bir karar dersi çıkar. Zamanla CV'nin yanında daha değerli bir şey oluşur: sahadan süzülmüş yargı gücü. Mülakatta son söz olarak bunu taşı: Ben araçları öğrenirim, sistemleri okurum, insanları dinlerim, riski görünür yaparım ve kararın kaydını tutarım. Çok üst düzey BT liderliği böyle başlar."
@@ -1632,7 +1632,7 @@ function manualArticle(category, chapter) {
     ].join("");
   }
   if (article.every((block) => typeof block === "string")) {
-    return `<p class="long-read">${article.join(" ")}</p>` + visualFor(category, chapter);
+    return `<p class="long-read">${article.join(" ")}</p>`;
   }
   return article.map((block) => {
     if (typeof block === "string") return paragraph(block);
@@ -1668,68 +1668,138 @@ function svgFigure(kind, caption, svg) {
   `;
 }
 
+function svgLabel(text) {
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function flowDiagram(kind, caption, labels, subline = "") {
+  const count = labels.length;
+  const boxWidth = count > 5 ? 116 : 132;
+  const gap = (820 - count * boxWidth) / Math.max(1, count - 1);
+  const start = 40;
+  const centerY = 125;
+  const boxes = labels.map((label, index) => {
+    const x = start + index * (boxWidth + gap);
+    const y = index % 2 ? 105 : 70;
+    const textX = x + boxWidth / 2;
+    const textY = y + 42;
+    return `<g class="v-box" style="--i:${index}"><rect x="${x}" y="${y}" width="${boxWidth}" height="76" rx="10"/><text text-anchor="middle" x="${textX}" y="${textY}">${svgLabel(label)}</text></g>`;
+  }).join("");
+  const path = labels.slice(0, -1).map((_, index) => {
+    const x1 = start + index * (boxWidth + gap) + boxWidth;
+    const y1 = (index % 2 ? 105 : 70) + 38;
+    const x2 = start + (index + 1) * (boxWidth + gap);
+    const y2 = ((index + 1) % 2 ? 105 : 70) + 38;
+    return `M${x1} ${y1} C${x1 + 28} ${y1} ${x2 - 28} ${y2} ${x2} ${y2}`;
+  }).join(" ");
+  return svgFigure(kind, caption, `
+    <svg viewBox="0 0 900 260" role="img" aria-label="${svgLabel(caption)}">
+      <path class="v-line" d="${path}" fill="none"/>
+      ${boxes}
+      ${subline ? `<text class="v-small" text-anchor="middle" x="450" y="228">${svgLabel(subline)}</text>` : ""}
+    </svg>`);
+}
+
+function hubDiagram(kind, caption, center, nodes, subline = "") {
+  const positions = [
+    [450, 55],
+    [705, 100],
+    [650, 205],
+    [250, 205],
+    [195, 100],
+    [450, 210]
+  ];
+  const nodeSvg = nodes.slice(0, 6).map((label, index) => {
+    const [x, y] = positions[index];
+    return `<path class="v-line thin" d="M450 132 L${x} ${y}" fill="none"/><g class="v-node" style="--i:${index}"><circle cx="${x}" cy="${y}" r="16"/><text text-anchor="middle" x="${x}" y="${y + 42}">${svgLabel(label)}</text></g>`;
+  }).join("");
+  return svgFigure(kind, caption, `
+    <svg viewBox="0 0 900 280" role="img" aria-label="${svgLabel(caption)}">
+      ${nodeSvg}
+      <circle class="v-hub" cx="450" cy="132" r="44"/>
+      <text text-anchor="middle" x="450" y="139">${svgLabel(center)}</text>
+      ${subline ? `<text class="v-small" text-anchor="middle" x="450" y="262">${svgLabel(subline)}</text>` : ""}
+    </svg>`);
+}
+
+function layeredDiagram(kind, caption, center, rings, labels) {
+  return svgFigure(kind, caption, `
+    <svg viewBox="0 0 900 280" role="img" aria-label="${svgLabel(caption)}">
+      ${rings.map((radius) => `<circle class="v-ring" cx="450" cy="135" r="${radius}"/>`).join("")}
+      <circle class="v-hub" cx="450" cy="135" r="40"/>
+      <text text-anchor="middle" x="450" y="142">${svgLabel(center)}</text>
+      ${labels.map(([label, x, y], index) => `<g class="v-node" style="--i:${index}"><circle cx="${x}" cy="${y}" r="12"/><text text-anchor="middle" x="${x}" y="${y + 36}">${svgLabel(label)}</text></g>`).join("")}
+    </svg>`);
+}
+
 function visualFor(category, chapter) {
   const title = cleanTitle(chapter);
-  const n = normalizeText(title);
-  if (chapter.number === 1 && category.mode !== "pills") {
-    return svgFigure("visual-map", `${category.title} için ana ilişki haritası: konu, kişi, kanıt ve karar aynı akışta okunur.`, `
-      <svg viewBox="0 0 900 260" role="img" aria-label="${category.title} ilişki haritası">
-        <path class="v-line" d="M90 160 C220 60 320 210 450 130 S650 45 805 145" fill="none"/>
-        <g class="v-node" style="--i:0"><circle cx="90" cy="160" r="10"/><text x="55" y="210">İhtiyaç</text></g>
-        <g class="v-node" style="--i:1"><circle cx="290" cy="145" r="10"/><text x="260" y="70">Kişi</text></g>
-        <g class="v-node" style="--i:2"><circle cx="500" cy="110" r="10"/><text x="466" y="205">Kanıt</text></g>
-        <g class="v-node" style="--i:3"><circle cx="805" cy="145" r="10"/><text x="772" y="80">Karar</text></g>
-      </svg>`);
+  const n = normalizeText(`${chapter.title} ${title}`);
+
+  if (n.includes("donanim") || n.includes("cpu") || n.includes("ram") || n.includes("disk")) {
+    return flowDiagram("visual-datacenter", "Donanımda veri yolu: CPU hesaplar, RAM çalışılan veriyi tutar, disk kalıcı kayıt sağlar, anakart ve ağ parçaları birbirine bağlar.", ["Disk", "RAM", "CPU", "Anakart", "Ağ"], "dar boğaz: CPU, bellek, disk I/O veya ağ kartı");
   }
-  if (category.mode === "architecture" && (n.includes("sipariş") || n.includes("ödeme") || n.includes("başvuru"))) {
-    return svgFigure("visual-flow", "Kullanıcının tek işlemi; güvenlik, iş kuralı, veri, kuyruk ve izleme katmanlarından geçer.", `
-      <svg viewBox="0 0 900 280" role="img" aria-label="Büyük sistem akışı">
-        <g class="v-box" style="--i:0"><rect x="40" y="95" width="125" height="70" rx="10"/><text x="72" y="135">Ekran</text></g>
-        <g class="v-box" style="--i:1"><rect x="220" y="95" width="125" height="70" rx="10"/><text x="247" y="135">Gateway</text></g>
-        <g class="v-box" style="--i:2"><rect x="400" y="95" width="125" height="70" rx="10"/><text x="430" y="135">Servis</text></g>
-        <g class="v-box" style="--i:3"><rect x="580" y="45" width="125" height="70" rx="10"/><text x="612" y="85">Veri</text></g>
-        <g class="v-box" style="--i:4"><rect x="580" y="155" width="125" height="70" rx="10"/><text x="606" y="195">Kuyruk</text></g>
-        <g class="v-box" style="--i:5"><rect x="760" y="95" width="105" height="70" rx="10"/><text x="790" y="135">Log</text></g>
-        <path class="v-line" d="M165 130 H220 M345 130 H400 M525 130 C555 130 555 80 580 80 M525 130 C555 130 555 190 580 190 M705 80 C735 80 735 130 760 130 M705 190 C735 190 735 130 760 130" fill="none"/>
-      </svg>`);
+  if (n.includes("isletim sistemi") || n.includes("surec")) {
+    return hubDiagram("visual-os", "İşletim sistemi; süreç, bellek, dosya sistemi, sürücü ve izinleri aynı kaynak hakemliğinde toplar.", "Kernel", ["Süreç", "Bellek", "Dosya", "Sürücü", "İzin"], "uygulama doğrudan donanıma değil işletim sistemi sözleşmesine konuşur");
   }
-  if (category.mode === "software" && n.includes("programlama")) {
-    return svgFigure("visual-language-family", "Diller ayrı ezber değil; kurumun bakım ömrüne, ekip yetkinliğine ve ürün ailesine göre seçilen araçlardır.", `
-      <svg viewBox="0 0 900 250" role="img" aria-label="Programlama dili ailesi">
-        ${["Java", "Python", "C#", "JavaScript"].map((label, i) => `<g class="v-box" style="--i:${i}"><rect x="${80 + i * 205}" y="${80 + (i % 2) * 24}" width="150" height="78" rx="12"/><text x="${120 + i * 205}" y="${126 + (i % 2) * 24}">${label}</text></g>`).join("")}
-        <path class="v-line" d="M155 185 H750" fill="none"/><text class="v-small" x="315" y="220">ekip, bakım, güvenlik, ölçek</text>
-      </svg>`);
+  if (n.includes("terminal") || n.includes("linux")) {
+    return flowDiagram("visual-shell", "Terminal ve Linux hattı: kullanıcı komutu shell'e verir, süreç çalışır, servis veya dosya etkilenir, log kanıt bırakır.", ["Kullanıcı", "Shell", "Komut", "Süreç", "Servis", "Log"], "ssh, systemd, journalctl, chmod ve sudo aynı işletme dilinin parçalarıdır");
   }
-  if (category.mode === "software" && (n.includes("arama") || n.includes("log"))) {
-    return svgFigure("visual-search", "Logstash toplar, Elasticsearch arar, Kibana görünür kılar.", `
-      <svg viewBox="0 0 900 240" role="img" aria-label="Log ve arama hattı">
-        <path class="v-line" d="M70 120 H250 H430 H610 H790" fill="none"/>
-        ${["Log", "Logstash", "Elasticsearch", "Kibana"].map((label, i) => `<g class="v-box" style="--i:${i}"><rect x="${35 + i * 205}" y="82" width="145" height="76" rx="11"/><text x="${62 + i * 205}" y="126">${label}</text></g>`).join("")}
-      </svg>`);
+  if (n.includes("ag temelleri") || n.includes("tcp") || n.includes("dns") || n.includes("http") || n.includes("https")) {
+    return flowDiagram("visual-network", "Web isteğinin yolu: DNS adresi bulur, gateway ve firewall geçişi sınırlar, TLS güveni kurar, load balancer isteği sunucuya dağıtır.", ["DNS", "Gateway", "Firewall", "TLS", "Load Balancer", "Server"], "TCP/IP taşıma düzeni, HTTP uygulama dili, HTTPS güvenli kanaldır");
   }
-  if (category.mode === "systems" && (n.includes("donanım") || n.includes("veri merkezi"))) {
-    return svgFigure("visual-datacenter", "Yazılımın arkasındaki gerçek zemin: işlem, bellek, depolama, ağ, enerji ve soğutma.", `
-      <svg viewBox="0 0 900 260" role="img" aria-label="Veri merkezi bileşenleri">
-        ${["CPU", "RAM", "Disk", "Ağ", "UPS"].map((label, i) => `<g class="v-box" style="--i:${i}"><rect x="${65 + i * 160}" y="${70 + (i % 2) * 40}" width="110" height="75" rx="10"/><text x="${96 + i * 160}" y="${115 + (i % 2) * 40}">${label}</text></g>`).join("")}
-        <path class="v-line" d="M120 200 H760" fill="none"/>
-      </svg>`);
+  if (n.includes("git") || n.includes("github")) {
+    return flowDiagram("visual-git", "Git akışı: çalışma alanındaki değişiklik branch ile ayrılır, commit hafıza bırakır, pull request gözden geçirilir, CI/CD canlıya güvenli taşır.", ["Working Tree", "Branch", "Commit", "Pull Request", "CI/CD", "Release"], "versiyon kontrolü ekip hafızasıdır");
   }
-  if (category.mode === "security" && (n.includes("giriş") || n.includes("kimlik") || n.includes("ağ güvenliği"))) {
-    return svgFigure("visual-security", "Güvenlik katmanları aynı veriyi farklı risklerden korur.", `
-      <svg viewBox="0 0 900 260" role="img" aria-label="Siber güvenlik katmanları">
-        <circle class="v-ring" cx="450" cy="130" r="46"/><circle class="v-ring" cx="450" cy="130" r="86"/><circle class="v-ring" cx="450" cy="130" r="126"/>
-        <text x="423" y="137">Veri</text>
-        <text x="190" y="75">Kimlik</text><text x="645" y="75">Ağ</text><text x="175" y="205">Uç nokta</text><text x="645" y="205">İzleme</text>
-      </svg>`);
+  if (n.includes("python") || n.includes("fonksiyon") || n.includes("oop") || n.includes("json") || n.includes("programlama")) {
+    return flowDiagram("visual-code", "Programlama düşüncesi: veri alınır, fonksiyonlar işi böler, nesneler sorumluluğu taşır, hata yönetimi ve test kodu üretime hazırlar.", ["Veri", "Fonksiyon", "Nesne", "Hata", "Test", "Paket"], "okunabilir kod, çalışan kodun bakım ömrünü uzatır");
   }
-  if (category.mode === "ai" && (n.includes("rag") || n.includes("embedding") || n.includes("yapay zekâ"))) {
-    return svgFigure("visual-rag", "Kurumsal yapay zekâda cevap, modelin genel bilgisinden çok seçilmiş kaynağa bağlandığında değer kazanır.", `
-      <svg viewBox="0 0 900 260" role="img" aria-label="RAG akışı">
-        ${["Soru", "Kaynak", "Vektör arama", "Model", "Cevap"].map((label, i) => `<g class="v-box" style="--i:${i}"><rect x="${40 + i * 170}" y="${85 + (i % 2) * 35}" width="125" height="68" rx="10"/><text x="${65 + i * 170}" y="${126 + (i % 2) * 35}">${label}</text></g>`).join("")}
-        <path class="v-line" d="M165 120 C245 120 245 155 335 155 S435 85 505 85 S610 155 675 155 S760 120 845 120" fill="none"/>
-      </svg>`);
+  if (n.includes("sql") || n.includes("postgresql")) {
+    return hubDiagram("visual-db", "Veritabanı resmi kaydın merkezidir; tablo, index, transaction, constraint ve yedek aynı güven zincirini kurar.", "PostgreSQL", ["Tablo", "Index", "Transaction", "Constraint", "Backup"], "yanlış sorgu performansı, yanlış transaction veri bütünlüğünü bozar");
   }
-  return "";
+  if (n.includes("api") || n.includes("rest") || n.includes("backend") || n.includes("web'e") || n.includes("html") || n.includes("jwt") || n.includes("cache") || n.includes("kuyruk")) {
+    return flowDiagram("visual-flow", "Backend akışı: tarayıcıdan gelen istek auth, API, cache, kuyruk, veritabanı ve log katmanlarında anlam kazanır.", ["Browser", "API Gateway", "Auth/JWT", "Service", "Cache/Queue", "DB/Log"], "status code, timeout, retry ve idempotency üretim davranışını belirler");
+  }
+  if (n.includes("docker")) {
+    return flowDiagram("visual-docker", "Docker ilişkisi: Dockerfile imaj tarifini yazar, registry paylaşır, container çalışır, volume ve network üretim davranışını belirler.", ["Dockerfile", "Image", "Registry", "Container", "Volume", "Network"], "container geçicidir; veri, log ve secret ayrıca tasarlanır");
+  }
+  if (n.includes("kubernetes")) {
+    return hubDiagram("visual-k8s", "Kubernetes servis mahallesi: pod çalışır, deployment çoğaltır, service adres verir, ingress dış kapıdır, autoscaling yükü dengeler.", "Cluster", ["Pod", "Deployment", "Service", "Ingress", "HPA"], "limit, probe, namespace ve rollback üretimde hayat kurtarır");
+  }
+  if (n.includes("ci/cd")) {
+    return flowDiagram("visual-cicd", "CI/CD hattı: kod test edilir, artifact üretilir, güvenlik kontrolünden geçer, ortama alınır ve gerekirse rollback yapılır.", ["Commit", "Build", "Test", "Artifact", "Deploy", "Rollback"], "iyi pipeline hızlı olduğu kadar doğru yerde durmayı bilir");
+  }
+  if (n.includes("monitoring") || n.includes("logging") || n.includes("observability") || n.includes("siem") || n.includes("soc") || n.includes("log")) {
+    return flowDiagram("visual-observe", "Gözlemleme zinciri: metrik sistemin nabzını, log olayın hikayesini, trace isteğin yolunu, alarm aksiyon ihtiyacını gösterir.", ["Metric", "Log", "Trace", "SIEM", "Alarm", "Runbook"], "kanıt yoksa kriz hafızaya kalır");
+  }
+  if (n.includes("bulut") || n.includes("aws") || n.includes("google cloud") || n.includes("maliyet") || n.includes("yedekleme") || n.includes("felaket")) {
+    return hubDiagram("visual-cloud", "Bulut mimarisi compute, storage, network, IAM, backup ve cost katmanlarının birlikte yönetilmesidir.", "Cloud", ["Compute", "Storage", "Network", "IAM", "Backup", "Cost"], "region, availability zone, RTO/RPO ve budget alarmı karar dilidir");
+  }
+  if (n.includes("siber") || n.includes("kimlik guvenligi") || n.includes("ag guvenligi") || n.includes("uygulama guvenligi") || n.includes("uc nokta") || n.includes("veri guvenligi") || n.includes("olay mudahalesi") || n.includes("tatbikat")) {
+    return layeredDiagram("visual-security", "Güvenlik diyagramı: veri merkezdedir; kimlik, uygulama, ağ, uç nokta ve izleme katmanları saldırıyı sınırlar ve kanıt üretir.", "Veri", [48, 88, 128], [["IAM/MFA", 220, 70], ["WAF", 680, 70], ["Firewall", 735, 170], ["EDR", 225, 170], ["SIEM/SOC", 450, 245]]);
+  }
+  if (n.includes("makine ogrenmesi") || n.includes("derin ogrenme") || n.includes("sinir") || n.includes("model degerlendirme") || n.includes("veri hazirligi")) {
+    return flowDiagram("visual-ml", "Makine öğrenmesi hattı: veri hazırlanır, özellik çıkarılır, model eğitilir, doğrulanır, izlenir ve gerektiğinde yeniden eğitilir.", ["Veri", "Özellik", "Eğitim", "Validasyon", "Deploy", "İzleme"], "veri sızıntısı ve yanlış metrik modeli sahada yanıltır");
+  }
+  if (n.includes("token") || n.includes("embedding") || n.includes("rag") || n.includes("llm") || n.includes("openai") || n.includes("prompt") || n.includes("ollama") || n.includes("mcp") || n.includes("function calling")) {
+    return flowDiagram("visual-rag", "LLM/RAG akışı: soru parçalanır, embedding ile kaynak aranır, model bağlamla cevap verir, tool çağrısı ve eval kaliteyi görünür kılar.", ["Soru", "Token", "Embedding", "Retrieval", "LLM", "Eval/Tool"], "prompt, kaynak, yetki ve maliyet birlikte izlenir");
+  }
+  if (category.id === "buyuk-mimariler") {
+    return flowDiagram("visual-architecture", "Büyük sistem diyagramı: kullanıcı ekranındaki tek işlem, gateway, güvenlik, servis, veri, kuyruk ve gözlemleme katmanlarına yayılır.", ["Client", "CDN/WAF", "API Gateway", "Service", "DB/Cache", "Queue/Log"], "resmi kayıt, hata yolu ve sorumluluk yolu ayrı ayrı okunur");
+  }
+  if (category.id === "proje-kamu-yonetim") {
+    return flowDiagram("visual-governance", "Kurumsal proje akışı: ihtiyaç değerle başlar, şartname ölçü koyar, tedarikçi teslim eder, kabul kanıt ister, denetim hafıza arar.", ["İhtiyaç", "Şartname", "Tedarikçi", "Test", "Kabul", "Denetim"], "KVKK, SLA, RACI, risk kaydı ve resmi yazı bu hattın güvenlik raylarıdır");
+  }
+  if (category.id === "liderlik-kriz-gelecek") {
+    return flowDiagram("visual-leadership", "Teknik liderlik hattı: sinyal etkiye çevrilir, seçenekler riskle tartılır, karar kayıt altına alınır, ders kalıcı düzeltmeye döner.", ["Sinyal", "Etki", "Seçenek", "Karar", "İletişim", "Ders"], "liderlik teknik kökü saklamadan yönetim diline çevirir");
+  }
+  if (category.id === "mulakat-ve-ust-duzey-hazirlik") {
+    return flowDiagram("visual-interview", "Güçlü mülakat cevabı: tanım, örnek, risk, metrik, işletme ve yönetici cümlesiyle tamamlanır.", ["Tanım", "Örnek", "Risk", "Metrik", "İşletme", "Karar"], "ezber değil düşünce zinciri güven verir");
+  }
+  return flowDiagram("visual-summary", "Bu sayfanın zihinsel özeti: kavram görevini, bağımlılığını, riskini ve kanıtını birlikte düşündüğünde kalıcı hale gelir.", ["Kavram", "Görev", "Bağımlılık", "Risk", "Kanıt", "Karar"], "her teknik terim bir sistem davranışına bağlanır");
 }
 
 function pillText(index) {
@@ -1929,7 +1999,7 @@ function renderChapter(id) {
         <span>${category.count} bölümlük rota</span>
         <span>%${progress}</span>
       </div>
-      <div class="article-body">${article}${termsPanel(article, chapter.title)}</div>
+      <div class="article-body">${article}${termsPanel(article, chapter.title)}${visualFor(category, chapter)}</div>
       <nav class="bottom-nav" aria-label="Bölüm geçişi">
         ${route.previous ? `<a class="text-button" href="#/chapter/${route.previous.id}">Önceki</a>` : `<a class="text-button" href="#/">Ana sayfa</a>`}
         ${route.next ? `<a class="text-button primary" href="#/chapter/${route.next.id}">Sonraki</a>` : `<a class="text-button primary" href="#/pills">Hap bilgiler</a>`}
