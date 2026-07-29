@@ -1263,6 +1263,620 @@ function storyChapter(category, chapter) {
   ].join("") + visualFor(category, chapter);
 }
 
+const manualArticles = {
+  "asama-1-bilgisayar-temelleri-1": [
+    "Bilgisayarı ilk kez gerçekten anlamaya başladığım gün, kasanın kapağı açıktı ve kimse ekrandaki hatadan söz etmiyordu. Herkes anakarta, diske, güç kablosuna, fana bakıyordu. O an şunu öğrenirsin: bilgisayar bir kutu değil, küçük bir şehir gibidir. Elektrik gelir, yollar açılır, bellek çalışır, işlemci hesap yapar, disk hatırlar, işletim sistemi bu kalabalığı sıraya koyar.",
+    "Bu bölümün amacı parça ezberletmek değil, teknik dünyaya bakışını değiştirmektir. Bir mülakatta CPU sorulunca yalnız çekirdek sayısı söyleyen aday başka, CPU'nun iş kuyruğu, bellek ve diskle ilişkisini anlatan aday bambaşka görünür. Büyük kurumlarda da fark buradan başlar; ekrandaki yavaşlığı yalnız yazılıma yüklemeyen kişi, sistemin tamamını okumaya başlamıştır.",
+    "Yolun başında en değerli alışkanlık şudur: her teknolojiye 'hangi işi yapıyor, hangi parçaya bağlı, bozulursa kim etkilenir?' diye bakmak. Bu soru seni ezberden çıkarır, mühendis gibi düşündürür."
+  ],
+  "asama-1-bilgisayar-temelleri-2": [
+    "CPU'yu kurumun en hızlı ama en sabırsız memuru gibi düşün. Önüne gelen işi parçalar, hesaplar, sıradakine geçer. RAM masanın üstüdür; o anda çalışılan evrak oradadır. Disk arşivdir; kapattığında bile bilgi orada kalır. Anakart ise bu odaların koridorudur. Koridor dar, masa küçük, arşiv yavaşsa en zeki memur bile mucize yaratamaz.",
+    "Bir veri merkezinde ilk defa disk arızası gördüğümde kimse dramatik konuşmadı; ışığın rengine, RAID durumuna, yedek saatine baktılar. Donanım uzmanlığı biraz da paniği ölçülebilir işarete çevirmektir. CPU yüzde kaçta, RAM swap'e düşmüş mü, disk I/O bekliyor mu, ağ kartında hata var mı? Bunlar kullanıcının 'sistem dondu' cümlesinin arkasındaki gerçek sorulardır.",
+    "Mülakatlarda donanım sorusu basit görünür ama derinlik arar. İyi cevap, parçaları saymakla kalmaz; video işleme, veritabanı, yapay zekâ eğitimi ve web sunucusu gibi farklı yüklerde hangi parçanın neden kritikleştiğini anlatır."
+  ],
+  "asama-1-bilgisayar-temelleri-3": [
+    "İşletim sistemi, binanın görünmeyen idare amiri gibidir. Kim hangi odayı kullanacak, hangi dosyaya erişecek, hangi iş önce çalışacak, hangi cihazla nasıl konuşulacak, hepsini o düzenler. Uygulama geliştirirken işletim sistemini unutmak kolaydır; ta ki süreç kilitlenene, bellek şişene veya dosya izni yüzünden servis açılmayana kadar.",
+    "Bir gece canlı sistemde servis başlamıyordu. Kod değişmemişti, veritabanı ayaktaydı, ağ açıktı. Sorun küçük bir izin hatasıydı; servis kullanıcısı log dosyasına yazamıyordu. O olay bana işletim sisteminin nazik ama kesin bir hakem olduğunu öğretti. Senin niyetinle değil, verdiğin izinle ilgilenir.",
+    "Süreç, thread, bellek, dosya sistemi ve sürücü kavramları bu yüzden teorik değildir. Bunları anlayan kişi hata ayıklarken daha kısa yol yürür; anlamayan kişi aynı odada dönüp durur."
+  ],
+  "asama-1-bilgisayar-temelleri-4": [
+    "Terminal ilk başta soğuk görünür; siyah ekran, kısa komutlar, hataya yer bırakmayan bir dil. Ama bir süre sonra terminalin aslında en dürüst arayüz olduğunu fark edersin. Grafik ekran sana hikâye anlatır, terminal çoğu zaman gerçeği söyler: dosya burada mı, servis çalışıyor mu, port açık mı, log ne yazmış?",
+    "İyi bir sistemciyi terminalde izlemek marangozu atölyede izlemek gibidir. Gereksiz hareket yoktur. `tail` ile log akar, `grep` ile iz bulunur, `ps` ile süreç görülür, `ssh` ile uzak makineye girilir. Her komut küçük bir el feneridir; karanlık sistem odasında yolu o fenerlerle bulursun.",
+    "Mülakatta terminal bilgisi sorulduğunda komut listesi okumak yerine bir arıza hikâyesi anlat: uygulama cevap vermiyor, önce process'e bakarım, sonra portu kontrol ederim, sonra logun son satırlarını okurum. Bu cevap, gerçekten sahaya yaklaşabildiğini gösterir."
+  ],
+  "asama-1-bilgisayar-temelleri-5": [
+    "Linux'u öğrenmek, sunucu odasının anahtarını almak gibidir. Web servisleri, veritabanları, konteynerler, güvenlik araçları ve otomasyonların büyük bölümü bu dünyanın üzerinde yaşar. Linux bilmeyen yazılımcı kod yazabilir; ama kodu üretim ortamında kimin, hangi kullanıcıyla, hangi izinle, hangi servis olarak çalıştırdığını anlamakta zorlanır.",
+    "Bir kurumda küçük bir servis duruyordu. Geliştirici 'bende çalışıyor' dedi, sistemci servis dosyasını açtı, çalışma dizinini ve kullanıcı yetkisini gösterdi. Sorun kodda değil, Linux servis tanımındaydı. İşte Linux böyle öğretir: uygulama yalnız dosya değildir; kullanıcı, izin, ortam değişkeni, log ve servis yaşam döngüsüdür.",
+    "Kullanıcılar, gruplar, `chmod`, `systemctl`, paket yöneticisi ve log dizinleri ezber değil, işletme refleksidir. Bunları bilen aday, büyük kurumların gerçek çalışma zeminine daha yakın durur."
+  ],
+  "asama-1-bilgisayar-temelleri-6": [
+    "Ağ temelleri, bilgisayarların birbirine nasıl selam verdiğini anlamaktır. IP adresi ev adresi gibidir, port kapı numarasıdır, subnet mahalle sınırıdır, gateway şehir dışına çıkan ana yoldur. Routing ise paketin hangi yoldan gideceğine karar veren trafik bilgisidir.",
+    "Bir ofiste herkes 'internet yok' diyordu. Oysa internet vardı; belirli bir VLAN'daki makineler gateway'e ulaşamıyordu. Sorun dünyayla bağlantı değil, binanın içindeki yönlendirmeydi. Ağ böyle bir alandır: dışarıdan tek sorun görünür, içeride katman katman ayrılır.",
+    "TCP/IP, port, subnet ve routing öğrenirken hedefin ağ mühendisi olmak zorunda değil. Ama bir API çalışmıyorsa bunun koddan mı, DNS'ten mi, firewall'dan mı, rotadan mı kaynaklandığını ayıracak kadar ağ bilmek her teknik kariyeri güçlendirir."
+  ],
+  "asama-1-bilgisayar-temelleri-7": [
+    "Tarayıcıya bir adres yazdığında küçük bir sefer başlar. Önce DNS'e sorulur: bu isim hangi IP'ye gidiyor? Sonra bağlantı kurulur, HTTPS ile güvenli kanal açılır, sunucu isteği alır, cevap döner, tarayıcı sayfayı çizer. Kullanıcı bir saniyelik bekleme görür; arkada küçük bir lojistik operasyon vardır.",
+    "Bir kamu portalı sabah açılmadığında herkes uygulama çöktü sandı. Uygulama ayaktaydı, veritabanı sağlıklıydı, sorun süresi dolmuş sertifikaydı. HTTPS'in o küçük kilit simgesi yalnız süs değil; güvenin teknik karşılığıdır. DNS kaydı, TTL, sertifika zinciri ve HTTP durum kodları bu yüzden sahada hayatidir.",
+    "Mülakatta bu konuyu anlatırken bir isteğin yolculuğunu hikâye et. Alan adı çözülür, TCP bağlantısı kurulur, TLS el sıkışması yapılır, HTTP isteği gider, cevap koduyla döner. Bu akışı anlatabilen kişi web'i yalnız ekran sanmaz."
+  ],
+  "asama-1-bilgisayar-temelleri-8": [
+    "Git, kodun hafızasıdır; GitHub ise o hafızanın ekip masasına açılmış halidir. Bir projede en tehlikeli cümlelerden biri 'kim değiştirdi hatırlamıyorum'dur. Git bu cümleyi zayıflatır. Commit, branch ve pull request yalnız komut değil, ekip içinde güven kurma biçimidir.",
+    "Bir canlıya geçişte hata çıktı. Panik büyümeden Git geçmişine bakıldı, son değişiklik bulundu, pull request tartışması okundu, rollback kararı verildi. O gün Git'in sadece geliştirici aracı olmadığını gördüm; doğru kullanıldığında kriz kısaltan kurumsal hafızadır.",
+    "İyi Git kullanımı küçük commit, anlamlı mesaj, temiz branch, kod inceleme ve geri dönüş planı demektir. Mülakatta `merge conflict` anlatırken bile insan ilişkisini unutma: iki kişi aynı satıra dokunduğunda teknik araç kadar iletişim de gerekir."
+  ],
+  "asama-1-bilgisayar-temelleri-9": [
+    "Temel kavramlar mülakatta çoğu zaman adayın sesini ölçmek için sorulur. 'RAM nedir?' sorusu kolaydır; ama aday RAM'i çalışma masası, disk'i arşiv, CPU'yu işlemci memur gibi anlatıp sonra performans örneğine bağlayabiliyorsa konuşma derinleşir.",
+    "Ben iyi adayların ortak bir alışkanlığını gördüm: bilmedikleri yerde dururlar ama bildikleri kısmı düzenli anlatırlar. 'Bunu ezbere söylemeyeyim, ama şöyle kontrol ederim' cümlesi bazen özgüvenli uydurmadan daha güçlüdür. Teknik dünya her şeyi bilenleri değil, doğru kanıta yürüyenleri sever.",
+    "Bu bölümde kazanılacak refleks basit: tanım ver, örnek kur, sınırı söyle, arıza halinde neye bakacağını anlat. Böyle cevap veren kişi temel konularda bile üst seviye olgunluk gösterir."
+  ],
+  "asama-2-programlama-1": [
+    "Programlama, bilgisayara emir yağdırmak değil, dağınık bir problemi adım adım yürünebilir hale getirmektir. İlk yıllarda herkes dili öğrenmeye çalışır; yıllar geçince asıl meselenin değişken adı, sınır koşulu, veri şekli ve okunabilir akış olduğunu anlarsın.",
+    "Bir stajyerin yazdığı küçük betik bir birimin üç saatlik işini beş dakikaya indirmişti. Kod çok parlak değildi ama problem doğru anlaşılmıştı: Excel dosyasını oku, hatalı satırı ayır, sonucu raporla. Programlama böyle başlar; küçük bir sıkıntıyı disiplinli bir akışa çevirirsin.",
+    "Mülakatta iyi programcı yalnız syntax bilmez. Problemi böler, varsayımlarını söyler, test örneği verir, hata ihtimalini düşünür. Kod satırları bu düşüncenin kaydıdır."
+  ],
+  "asama-2-programlama-2": [
+    "Python'un güzelliği, yeni başlayan kişiyi fazla tökezletmeden düşünceye yaklaştırmasıdır. Değişkenler isimlendirilmiş kutular, koşullar yol ayrımları, döngüler tekrar eden işlerdir. Basit görünürler ama bütün büyük sistemlerin içinde bu küçük taşlar vardır.",
+    "Bir otomasyon işinde yüzlerce dosyanın adı değiştirilecek, içinden belirli alanlar okunacak, sonuç bir CSV'ye yazılacaktı. Python burada ağır bir mühendislik gösterisi yapmadı; sade bir yardımcı gibi işi aldı ve bitirdi. Bazen iyi araç, seni kendisiyle uğraştırmayan araçtır.",
+    "Temel Python sorularında amaç `for` döngüsünü ezbere duymak değildir. Adayın veriyi nasıl tuttuğu, koşulu nasıl netleştirdiği, boş liste veya hatalı tip gelince ne yapacağı görülmek istenir."
+  ],
+  "asama-2-programlama-3": [
+    "Fonksiyon yazmak, koda küçük sorumluluk odaları açmaktır. Her şey tek dosyada, tek blokta durduğunda kod ilk gün hızlı ilerler; üçüncü hafta kimse nereye dokunacağını bilemez. Fonksiyonlar ve modüller yazılımın nefes alma aralıklarıdır.",
+    "Bir bakım projesinde yüzlerce satırlık bir fonksiyon gördüm; içinde e-posta gönderiyor, veritabanı yazıyor, dosya siliyor, rapor hazırlıyordu. Hata çıktığında herkes o fonksiyonun etrafında dolaşıyordu. Parçalara ayırınca yalnız kod değil, ekip de rahatladı.",
+    "Okunabilir kod iyi niyet meselesi değildir; kurumsal zorunluluktur. Bir gün senin yazdığın kodu gece nöbetindeki başka biri okuyacak. O kişiye küçük bir iyilik yap: isimleri açık seç, fonksiyonları kısa tut, modülü sorumluluğuna göre ayır."
+  ],
+  "asama-2-programlama-4": [
+    "OOP'yi ilk öğrenenlerin çoğu her şeyi sınıfa çevirmek ister. Sonra gerçek projede öğrenirsin: iyi nesne tasarımı gösterişli kalıtım ağacı değil, sorumluluğu doğru yerde tutma sanatıdır. Sınıf, ilgili veriyle davranışı aynı sınır içinde topluyorsa değerlidir.",
+    "Bir ödeme akışında `Payment`, `Invoice`, `Customer` ve `Refund` sınıfları yalnız teknik adlar değildir; iş dünyasının kavramlarıdır. Yanlış sınır çizilirse iade işlemi fatura kodunu bozar, müşteri güncellemesi ödeme geçmişine dokunur. OOP burada düzen sağlar.",
+    "Mülakatta kapsülleme, kalıtım, polimorfizm sorulursa tanım ver ama orada kalma. Bir servis büyüdüğünde hangi tasarımın bakım maliyetini azalttığını anlat. Tecrübe, soyut kavramı somut acıya bağlayabilmektir."
+  ],
+  "asama-2-programlama-5": [
+    "Hata yönetimi, yazılımın kibri bırakıp dünyanın kusurlu olduğunu kabul etmesidir. Dosya olmayabilir, JSON bozuk gelebilir, ağ kopabilir, kullanıcı beklenen alanı boş bırakabilir. İyi kod yalnız güzel günde değil, kötü günde de anlaşılır davranır.",
+    "Bir entegrasyon gecesinde karşı sistem bazen sayı, bazen metin gönderiyordu. Kod ilk başta patladı; sonra gelen veriyi doğrulayan, hatalı kaydı ayıran ve loglayan küçük bir katman eklendi. Kriz, veri formatının sözleşme kadar önemli olduğunu öğretti.",
+    "JSON basittir ama hafife alınmaz. Alan adı, tip, tarih formatı, boş değer ve sürüm değişikliği konuşulmadan entegrasyon yapılmaz. Mülakatta bu konuyu anlatırken 'hatalı veri gelirse ne yaparım?' sorusunu mutlaka cevapla."
+  ],
+  "asama-2-programlama-6": [
+    "API kullanmak, başka bir sistemin kapısını çalmaktır. Kapıyı doğru adrese çalman, doğru kimlikle gitmen, cevabı anlaman ve kapı açılmazsa neden açılmadığını okuyabilmen gerekir. HTTP isteği göndermek teknik olarak kolaydır; üretim kalitesinde kullanmak daha dikkatli iştir.",
+    "Bir ekip entegrasyonun çalışmadığını söylüyordu. Sorun karşı tarafta sanıldı; sonra görüldü ki hata kodu okunmuyor, her başarısız cevap aynı genel mesaja düşüyordu. API cevaplarını iyi okumayan sistem, karşı taraf konuşsa bile duymayan insan gibidir.",
+    "Mülakatta API kullanımı sorulursa `requests.get` örneği yetmez. Timeout, retry, auth header, durum kodu, rate limit ve loglama konuş. Böylece yalnız istek atan değil, entegrasyonu yaşatabilecek biri gibi görünürsün."
+  ],
+  "asama-2-programlama-7": [
+    "SQL öğrenmek, kurumun hafızasına soru sormayı öğrenmektir. Tablo raf, satır kayıt, kolon özellik, JOIN ise ayrı raflardaki bilgiyi anlamlı biçimde birleştirme sanatıdır. Yanlış JOIN bazen yanlış rapordan daha tehlikelidir; çünkü rakam doğruymuş gibi görünür.",
+    "Bir raporda başvuru sayıları iki kat görünüyordu. Kimse veritabanının bozuk olduğunu düşünmedi; sorguya bakıldı ve bire-çok ilişki yanlış bağlanmıştı. SQL böyle öğretir: veri yalan söylemez ama sen yanlış sorarsan yanlış cevap üretir.",
+    "Mülakatta index sorusu gelirse sadece hızlandırır deme. Hangi sorguyu hızlandırır, yazma maliyetini nasıl etkiler, neden her kolona index konmaz, query plan ne işe yarar? Bu ayrıntılar seni ezberden çıkarır."
+  ],
+  "asama-2-programlama-8": [
+    "PostgreSQL, birçok kurumda ana defterdir. Sipariş, başvuru, ödeme, envanter veya personel kaydı burada duruyorsa sistemin gerçeği de buradadır. Bu yüzden veritabanı yalnız geliştiricinin bağlantı string'i değildir; denetim, yedek, yetki ve tutarlılık meselesidir.",
+    "Bir gece veri aktarımı yapılırken transaction kullanılmadığı için kayıtların yarısı geçmiş, yarısı kalmıştı. Ekran ilk bakışta çalışıyor görünüyordu ama kurumun hafızası ikiye bölünmüştü. Transaction kavramı o gün ders kitabından çıkıp masaya oturdu.",
+    "PostgreSQL anlatırken ACID, constraint, foreign key, index ve backup kavramlarını iş etkisiyle bağla. Veri bütünlüğü bozulduğunda sorun teknik kalmaz; rapora, faturaya, vatandaş işlemine ve yöneticinin güvenine dokunur."
+  ],
+  "asama-2-programlama-9": [
+    "Python ekosistemi büyük bir atölye gibidir. FastAPI ile servis yazarsın, Pandas ile veriyi yoğurursun, PyTorch ve TensorFlow ile model denersin. Ama atölyedeki her alet aynı işe yaramaz; iyi geliştirici hangi aleti ne zaman eline alacağını bilir.",
+    "Bir veri ekibi ilk model denemesini notebook'ta yaptı, sonuç etkileyiciydi. Sonra aynı işi API haline getirmek, loglamak, versiyonlamak ve zamanında cevap döndürmek gerekti. Araştırma kodu ile üretim servisi arasındaki mesafe orada görünür oldu.",
+    "Bu başlık hazırlık başlığıdır: Python temelini sağlam tut, veri yapısını oku, API yazmayı öğren, sonra yapay zekâ araçlarına geç. Temeli zayıf olan kişi güçlü kütüphaneyi de oyuncak gibi kullanır."
+  ],
+  "asama-2-programlama-10": [
+    "Portföy, 'biliyorum' cümlesinin çalışan karşılığıdır. Küçük ama tamamlanmış bir proje, yarım bırakılmış on parlak fikirden daha değerlidir. API'si olan, veritabanı kullanan, README'si düzgün, hata durumları düşünülmüş bir proje mülakatta senin adına konuşur.",
+    "Bir aday basit bir görev takip uygulaması göstermişti. Tasarım büyüleyici değildi ama migration dosyaları vardı, testler çalışıyordu, API hataları anlamlıydı, Docker ile kalkıyordu. O proje şunu söylüyordu: bu kişi yalnız kod yazmamış, kodun yaşayacağı ortamı düşünmüş.",
+    "Kod mülakatına hazırlanırken her projeye küçük bir hikâye yaz: problem neydi, nasıl böldün, hangi teknolojiyi neden seçtin, nerede zorlandın, neyi farklı yapardın? Bu hikâye seni CV satırından çıkarıp sahici adaya çevirir."
+  ],
+  "asama-3-web-api-1": [
+    "Web isteği küçük bir yolculuktur: tarayıcı adresi çözer, güvenli bağlantı kurar, backend'e seslenir, cevap alır ve ekranda bir dünya kurar. Kullanıcı yalnız butona basar; mühendis o butonun arkasındaki yolu görür.",
+    "Bir kurum portalında başvuru butonu çalışmıyordu. Önce frontend suçlandı, sonra API, sonra veritabanı. Gerçek sebep CORS ayarında yapılan küçük bir değişiklikti. Web böyle öğretir: ekranın gördüğü hata, arka taraftaki zincirin herhangi bir halkasından gelebilir.",
+    "Bu başlıkta hedef, tarayıcıdan backend'e kadar isteğin hikâyesini anlatabilmektir. Bu hikâyeyi bilen kişi debugging yaparken rastgele değil, katman katman ilerler."
+  ],
+  "asama-3-web-api-2": [
+    "HTML iskeleti kurar, CSS o iskelete duruş verir, JavaScript sahneye hareket getirir. İyi frontend, yalnız güzel görünen ekran değildir; kullanıcının ne yapacağını sezdiği, hata olunca kaybolmadığı, yavaş ağda bile sabrını tüketmeyen deneyimdir.",
+    "Bir başvuru formunda kırmızı uyarı metni vardı ama ekran okuyucu onu duymuyordu. Tasarım ekibi için küçük görünen bu eksik, görme engelli kullanıcı için kapalı kapıydı. Frontend uzmanlığı burada başlar: piksel kadar erişilebilirlik de önemlidir.",
+    "Mülakatta HTML-CSS-JS anlatırken üç katmanı ayır. HTML anlam, CSS düzen, JavaScript davranış üretir. Bu ayrımı temiz kuran aday frameworklerden önce web'in kendisini anladığını gösterir."
+  ],
+  "asama-3-web-api-3": [
+    "Backend, kurumun iş kurallarının mutfağıdır. Ekranda tek bir 'Kaydet' butonu görünür; arkada yetki kontrolü, doğrulama, veri yazma, bildirim, log ve hata yönetimi sırayla çalışır.",
+    "Bir ödeme ekranında frontend doğru çalışıyordu ama backend aynı isteği iki kez işleyip çift kayıt açıyordu. Sorun tasarımdaydı: idempotency düşünülmemişti. Backend yazmak, gelen isteğe cevap vermekten çok daha fazlasıdır; sonuçların güvenilirliğini korumaktır.",
+    "Endpoint, controller ve servis ayrımını anlatırken restoran mutfağı örneği işe yarar. Garson siparişi alır, mutfak iş kuralını uygular, kasa kaydı tutar. Herkes aynı işi yaparsa mutfak karışır."
+  ],
+  "asama-3-web-api-4": [
+    "REST API, sistemler arasındaki anlaşma dilidir. Kaynaklar adlandırılır, HTTP metotları niyeti söyler, durum kodları sonucu açıklar. İyi API, karşı ekibin tahmin yapmasına gerek bırakmaz.",
+    "Bir entegrasyonda her hata 200 OK dönüyordu; gövdede küçük bir `success:false` alanı vardı. Karşı sistem bunu başarı sandı ve işler sessizce birikti. Durum kodları süs değildir; operasyonun erken uyarı sistemidir.",
+    "REST tasarımı sorulunca kaynak, metot, status code, pagination, versioning ve hata formatını birlikte anlat. API sözleşmesi iyi yazılırsa ekipler birbirinin niyetini daha az okumaya çalışır."
+  ],
+  "asama-3-web-api-5": [
+    "Kimlik ve oturum, dijital binanın kapılarıdır. JWT, OAuth2, cookie ve session farklı anahtar türleri gibi çalışır. Hepsi kapı açabilir; ama hangi kapıya, ne kadar süreyle, hangi iz bırakılarak açtığı asıl meseledir.",
+    "Bir uygulamada token süresi çok uzundu. Kullanıcı rahat ediyordu ama ele geçirilen bir token günlerce geçerli kalıyordu. Güvenlik çoğu zaman konforla pazarlık eder; iyi mimar bu pazarlığı görünür yapar.",
+    "Mülakatta JWT anlatırken imza, süre, refresh, saklama yeri ve iptal stratejisini konuş. 'Stateless' kelimesi güzel durur ama yetki sınırı yanlışsa güzel kelime kötü olayı kurtarmaz."
+  ],
+  "asama-3-web-api-6": [
+    "Redis, cache ve CDN hızın farklı yüzleridir. Ama hız her zaman masum değildir; eski fiyat göstermek, yanlış stok sunmak veya süresi dolmuş oturumu yaşatmak kullanıcı güvenini kırabilir.",
+    "Bir kampanya gününde ürün kartları çok hızlı açılıyordu ama fiyat değişikliği cache'ten dolayı geç yansıyordu. Teknik ekip sistemi hızlandırmıştı, operasyon ekibi krizi yaşıyordu. Cache tasarımı bu yüzden iş kuralıyla birlikte yapılır.",
+    "Bu başlığı anlatırken hangi verinin cache'e uygun olmadığını söyleyebilmek önemlidir. Ana kayıt nerede, cache ne zaman temizlenir, TTL kaçtır, invalidation nasıl yapılır? Olgun cevap burada başlar."
+  ],
+  "asama-3-web-api-7": [
+    "Mesaj kuyruğu, işleri elden ele bekletmeden sıraya alan banttır. Ödeme olur, fatura, bildirim, kargo ve raporlama kendi zamanında çalışır. Servisler birbirinin nefesini tutmadan ilerler.",
+    "Bir sistemde kuyruk görünmez biçimde büyümüş, kullanıcıya bildirimler saatler sonra gitmişti. Uygulama ayaktaydı ama iş süreci gecikiyordu. Kuyruklar böyle tuhaftır; kapı açıktır, içeride sıra uzamıştır.",
+    "Kafka ve RabbitMQ anlatırken yalnız hız veya ölçek değil, retry, dead-letter, ordering, idempotency ve izleme konuş. Mesaj mimarisi güvenilirlik disiplinidir."
+  ],
+  "asama-3-web-api-8": [
+    "Test, logging ve observability sistemin kendi hakkında konuşmasını sağlar. Test gelecekteki kırılmayı erken yakalar, log geçmişe ışık tutar, metrik şu anki nabzı gösterir.",
+    "Bir hata yalnız canlıda çıkıyordu. Loglarda kullanıcı id yoktu, trace yoktu, metrikler genel ortalamayı gösteriyordu. Ekip sorunu saatlerce aradı. O gün herkes şunu gördü: iz bırakmayan sistem, kendi savunmasını yapamayan sistemdir.",
+    "Mülakatta observability anlatırken üçlü ayrımı kur: log olay anlatır, metrik sayı verir, trace yolculuğu gösterir. Bunlar birlikte olursa karanlık azalır."
+  ],
+  "asama-3-web-api-9": [
+    "Docker geliştirme ortamını daha taşınabilir hale getirir. Yeni gelen geliştiricinin günlerce kurulumla uğraşması yerine servisler tek komutla kalkabilir. Bu, ekip hızına doğrudan etki eder.",
+    "Bir projede 'bende çalışıyor' cümlesi o kadar sık duyuluyordu ki sonunda herkesin ortamı container ile eşitlendi. Cümle tamamen ölmedi ama sesi azaldı. Docker'ın küçük mucizesi budur: ortam farkını tartışma konusu olmaktan çıkarır.",
+    "Docker anlatırken image, container, volume, network ve registry kavramlarını bir geliştirme hikâyesine bağla. Container kalıcı veri yeri değildir; bu ayrımı bilen aday üretime daha yakın düşünür."
+  ],
+  "asama-3-web-api-10": [
+    "Web mülakatları genellikle adayın uçtan uca düşünebilmesini ölçer. Bir istek nereden gelir, nasıl doğrulanır, nerede cache'lenir, hata nasıl döner, trafik artınca ne olur? Bu sorular tek tek değil, aynı akışın parçalarıdır.",
+    "İyi aday, API tasarımını anlatırken güvenliği unutmaz; cache anlatırken tutarlılığı söyler; Docker anlatırken log ve secret konusunu açar. Görüşmeci çoğu zaman tam da bu geçişleri dinler.",
+    "Cevap verirken küçük bir sistem seç: kullanıcı giriş yapar, ürün arar, sepete ekler, ödeme yapar. Sonra her teknolojiyi bu hikâyede yerine koy. Böylece cevap ezber değil mimari okuma gibi duyulur."
+  ],
+  "asama-4-ai-temelleri-1": [
+    "Yapay zekâya sağlıklı giriş, model büyüsünü biraz söndürmekle başlar. Model önemlidir ama iş problemi, veri kalitesi, insan onayı ve yanlış kararın bedeli daha önemlidir. Demo etkileyebilir; üretim sistemi hesap sorar.",
+    "Bir kurumda belge özetleme denemesi çok beğenilmişti. Sonra model eski yönetmeliğe dayanarak cevap verdi. Herkes şunu öğrendi: yapay zekâ hızlı konuşur ama kaynağın güncelliğini sen sağlamazsan hızlıca yanlış yere götürür.",
+    "Bu başlıkta amaç korkmak veya büyülenmek değil. Yapay zekâyı, veriyle karar arasına giren güçlü ama denetlenmesi gereken bir araç olarak okumaktır."
+  ],
+  "asama-4-ai-temelleri-2": [
+    "Makine öğrenmesi, bilgisayara her kuralı tek tek yazmak yerine örneklerden örüntü buldurmaktır. Geçmiş veriyi verir, hedefi gösterir, modelin yeni durumda tahmin yapmasını beklersin.",
+    "Bir çağrı merkezinde hangi taleplerin gecikeceği tahmin edilmek isteniyordu. İlk model iyi görünüyordu ama eğitim verisinde gelecekte bilinmeyecek alanlar vardı. Buna veri sızıntısı denir; sınavda cevap anahtarını çaktırmadan masaya koymak gibidir.",
+    "Mülakatta makine öğrenmesi anlatırken eğitim, test, validation, overfitting ve feature kavramlarını iş örneğine bağla. Model başarısı yalnız skor değil, gerçek hayatta doğru genelleme yapabilmesidir."
+  ],
+  "asama-4-ai-temelleri-3": [
+    "Derin öğrenme ve sinir ağları çok katmanlı temsil öğrenme işidir. Görüntü, ses ve metin gibi karmaşık verilerde gücünü buradan alır. Ama katman sayısı arttıkça sorumluluk da artar: veri, maliyet ve açıklanabilirlik masaya gelir.",
+    "Bir görüntü sınıflandırma projesinde model laboratuvarda çok başarılıydı, sahada düştü. Çünkü eğitim görselleri düzenli ışıkta, saha görselleri tozlu ve eğikti. Model dünyayı değil, gördüğü verinin alışkanlığını öğrenmişti.",
+    "Sinir ağı anlatırken ağırlık, loss, optimizer ve backpropagation kavramlarını basitleştir; sonra mutlaka veri çeşitliliğine gel. Derin model kötü veriyi affetmez, sadece daha pahalı öğrenir."
+  ],
+  "asama-4-ai-temelleri-4": [
+    "Veri hazırlığı yapay zekânın mutfak temizliğidir; kimse fotoğrafını paylaşmaz ama yemek orada belirlenir. Eksik alan, yanlış etiket, tekrar kayıt, dengesiz sınıf ve veri sızıntısı modeli sessizce bozar.",
+    "Bir projede modelin başarısı çok yüksekti. Sonra anlaşıldı ki aynı kişinin kayıtları hem eğitim hem test tarafına düşmüş. Model genelleme yapmamış, tanıdığı örneği yeniden görmüştü. Güzel skor bir anda utandırıcı hale geldi.",
+    "Bu başlıkta uzmanlık, veriye şüpheyle ama saygıyla bakmaktır. Temizlik, etiketleme, train-test ayrımı ve kalite kontrol yapılmadan model eğitmek, temeli atılmamış binaya kat çıkmaya benzer."
+  ],
+  "asama-4-ai-temelleri-5": [
+    "Token, modelin metni küçük parçalara ayırma biçimidir. Embedding ise metni anlam benzerliği kurulabilecek sayısal uzaya taşır. İnsan cümle okur; model sayılarla ilişki kurar.",
+    "Bir kurum asistanında kullanıcı 'izin dilekçesi' arıyordu, belgede 'mazeret başvurusu' yazıyordu. Kelime aynı değildi ama anlam yakındı. Embedding burada klasik aramadan ayrılır; aynı kelimeyi değil, yakın anlamı bulmaya çalışır.",
+    "Mülakatta token ve embedding anlatırken maliyeti de unutma. Uzun belge daha çok token, daha çok gecikme ve maliyet demektir. Anlam araması güçlüdür ama belge parçalama kötü yapılırsa doğru cevabı yanlış rafta arar."
+  ],
+  "asama-4-ai-temelleri-6": [
+    "RAG, modele kurumun raflarından belge getirip 'cevabını buna dayanarak ver' demektir. Güzel tarafı şudur: model her şeyi ezberlemek zorunda kalmaz. Riskli tarafı da şudur: yanlış rafı getirirsen yanlış cevap daha inandırıcı olur.",
+    "Bir mevzuat asistanında model doğru üslupta ama eski genelgeye göre cevap veriyordu. Sorun modelde değil, arama ve belge güncelliğindeydi. RAG projeleri böyle öğretir: cevap kalitesi, retrieval kalitesiyle başlar.",
+    "İyi RAG tasarımı belge toplama, chunking, embedding, arama, kaynak gösterme ve değerlendirmeyi birlikte düşünür. Sadece PDF yüklemekle kurumsal bilgi asistanı yapılmaz."
+  ],
+  "asama-4-ai-temelleri-7": [
+    "Model değerlendirme, yapay zekâya duyulan heyecanı ölçülebilir zemine indirir. Doğruluk, halüsinasyon, bias, tutarlılık ve insan onayı konuşulmadan model güvenilir hizmete dönüşmez.",
+    "Bir chatbot pilotunda kullanıcılar cevapları beğeniyordu ama uzmanlar kaynakların yarısının zayıf olduğunu fark etti. Memnuniyet tek başına başarı değildir; özellikle kamu, sağlık, finans ve savunma gibi alanlarda yanlış cevap pahalıdır.",
+    "Değerlendirme seti hazırlamak sıkıcı görünür ama projenin sigortasıdır. Hangi sorular kritik, hangi cevap kabul edilebilir, model ne zaman 'bilmiyorum' demeli? Bunlar yazılmadan üretime çıkmak kumardır."
+  ],
+  "asama-4-ai-temelleri-8": [
+    "PyTorch ve TensorFlow araştırma fikrini çalışan modele çevirmek için kullanılan güçlü araçlardır. Notebook'ta deneme yapmak kolaydır; aynı modeli izlenen, sürümlenen, tekrar üretilebilir hale getirmek ayrı iştir.",
+    "Bir ekip PyTorch ile iyi sonuç aldı ama modeli başka makinede çalıştırınca bağımlılık farkı yüzünden sonuçlar değişti. Araştırma defteriyle üretim düzeni arasındaki mesafe burada ortaya çıkar.",
+    "Bu araçları öğrenirken tensor, dataset, dataloader, eğitim döngüsü ve model kaydetme konularını gerçek küçük projeyle çalış. Kütüphane adını bilmek değil, deneyin tekrar edilebilir olması seni güçlendirir."
+  ],
+  "asama-4-ai-temelleri-9": [
+    "AI mülakatında en kötü tuzak, moda kelimeleri arka arkaya dizmektir. 'RAG, embedding, transformer' demek kolaydır; bunların hangi problemi çözdüğünü ve nerede kırıldığını anlatmak daha değerlidir.",
+    "İyi aday küçük bir örnek kurar: kurum belgeleri var, kullanıcı soru soruyor, belgeler parçalanıyor, embedding üretiliyor, en yakın parçalar geliyor, model cevap veriyor, kaynak gösteriliyor, cevap değerlendiriliyor. Görüşmeci bu akışta gerçek anlayışı duyar.",
+    "Cevaplarında daima üçlü denge kur: teknik mekanizma, veri riski, iş etkisi. Yapay zekâ alanında olgunluk, heyecanı söndürmeden denetim kurabilmektir."
+  ],
+  "asama-5-llm-gelistirme-1": [
+    "LLM geliştirme, sohbet kutusuna güzel prompt yazmaktan çok daha geniştir. Kurumsal üründe kullanıcı kim, model hangi veriye erişiyor, cevap nerede loglanıyor, yanlış cevap kime zarar verir, maliyet nasıl izlenir soruları gelir.",
+    "Bir demo odasında herkes modelin akıcı cevabına hayran kalmıştı. Sonra güvenlik ekibi tek soru sordu: bu cevap hangi belgeye dayanıyor? O soru odanın havasını değiştirdi. LLM ürünleri şiir gibi konuşabilir ama kurumda kanıt ister.",
+    "Bu rota, modeli büyülü danışman değil kontrollü bileşen olarak ele alır. Sohbetten ürüne geçiş, kaynak, yetki, araç, değerlendirme ve insan onayıyla olur."
+  ],
+  "asama-5-llm-gelistirme-2": [
+    "OpenAI API kullanmak teknik olarak birkaç satırdır; doğru kullanmak ürün disiplinidir. Model seçimi, mesaj yapısı, token maliyeti, çıktı formatı, retry ve hata yönetimi baştan düşünülür.",
+    "Bir ekip her kullanıcı mesajını olduğu gibi modele gönderiyordu. Maliyet hızla büyüdü, bazı hassas bilgiler de gereksiz yere dışarı gidiyordu. API entegrasyonu burada ders verdi: modele ne göndermediğin de en az ne gönderdiğin kadar önemlidir.",
+    "Mülakatta API anlatırken yalnız çağrı örneği verme. Sistem mesajı, response schema, rate limit, timeout, logging, maliyet alarmı ve veri maskeleme konuş. Bu ayrıntılar demo geliştiricisini ürün geliştiricisinden ayırır."
+  ],
+  "asama-5-llm-gelistirme-3": [
+    "Prompt tasarımı, modele bağırarak daha iyi cevap alma sanatı değildir. Rol, bağlam, örnek, sınır, çıktı biçimi ve başarısızlık davranışı netleştirilir. İyi prompt, iyi iş talimatına benzer.",
+    "Bir asistan sürekli uzun cevap veriyordu. Prompt'a 'kısa cevap ver' yazıldı, düzelmedi. Sonra çıktı şeması, hedef kullanıcı, örnek cevap ve kaynak zorunluluğu eklendi. Model sonunda kurumun istediği ritme yaklaştı.",
+    "Prompt mülakatında güçlü cevap, deneme yanılmayı sistematik hale getirmektir. Versiyon tut, örnek setle değerlendir, kötü cevabı kaydet, prompt'u kanıtla iyileştir. Prompt da yazılım gibi yönetilir."
+  ],
+  "asama-5-llm-gelistirme-4": [
+    "Function calling ve tool use, modelin yalnız konuşmasını değil, iş yapmasını sağlar. Takvimden uygun saat bulabilir, veritabanından kayıt çekebilir, hesaplama yapabilir. Ama iş yapma yetkisi gelince risk de büyür.",
+    "Bir ajan yanlış yorumladığı talep yüzünden gereksiz kayıt açıyordu. Model zeki görünüyordu ama araç yetkisi fazla genişti. Tool use dersini sert verir: modelin niyetini değil, izinlerini tasarlarsın.",
+    "İyi tasarımda araç şeması dar, doğrulama açık, hassas işlem insan onayına bağlıdır. Mülakatta bunu anlatan aday LLM'i oyuncak değil, kontrollü otomasyon bileşeni olarak gördüğünü gösterir."
+  ],
+  "asama-5-llm-gelistirme-5": [
+    "Ollama ve yerel modeller mahremiyet ve deneme özgürlüğü sağlar. Kurum içi belgelerle çalışırken dış API kullanmak istemeyebilirsin; yerel model burada cazip görünür. Ama yerel çalıştırmak sorumluluğu da yerelleştirir.",
+    "Bir ekip yerel modeli kurdu, ilk hafta mutluydu. İkinci hafta GPU yetmedi, üçüncü hafta kalite farkı tartışıldı, dördüncü hafta model güncelleme süreci soruldu. Yerel model kararının teknik olduğu kadar işletme kararı olduğu anlaşıldı.",
+    "Ollama anlatırken mahremiyet, gecikme, donanım, model lisansı, kalite ve bakım dengesini kur. Yerel model romantizmi güzel olabilir; kurumda sürdürülebilirlik daha güzeldir."
+  ],
+  "asama-5-llm-gelistirme-6": [
+    "MCP mantığı, modellerin araçlara ve veri kaynaklarına daha düzenli bağlanması fikridir. Modelin her entegrasyon için ayrı ayrı yamalanması yerine, araçların daha anlaşılır bir sözleşmeyle sunulması hedeflenir.",
+    "Bir kurumda asistan dosya sistemi, issue sistemi ve doküman arşiviyle konuşmak istiyordu. Her bağlantı ayrı yazıldığında bakım zorlaştı. Standart bağlama fikri burada değer kazandı: araçların ne yaptığı, hangi izinle çalıştığı ve nasıl kayıt bıraktığı net olmalıydı.",
+    "MCP gibi yaklaşımları anlatırken moda kelimeye kapılma. Asıl konu güvenli araç çağırma, yetki sınırı, gözlemlenebilirlik ve ajanların kurum sistemleriyle sorumlu biçimde çalışmasıdır."
+  ],
+  "asama-5-llm-gelistirme-7": [
+    "Kurumsal RAG tasarımı, belgeyi yükleyip modele okutmak değildir. Belge nereden geliyor, güncel mi, kim görebilir, nasıl parçalanacak, hangi embedding modeli kullanılacak, cevapta kaynak gösterilecek mi? Bütün bu sorular tasarımın parçasıdır.",
+    "Bir bilgi asistanı gizli dokümanı yetkisiz kullanıcıya özetlediğinde sorun modelde değil, retrieval katmanındaydı. Yetki filtresi aramadan önce uygulanmalıydı. Kurumsal RAG'de güvenlik sonradan eklenen şerit değil, yolun kendisidir.",
+    "İyi RAG sistemi kaynak gösterir, bilmiyorsa durur, kalite setiyle ölçülür, belge güncellemelerini takip eder. Böyle sistem yöneticinin önüne demo değil, işletilebilir ürün olarak çıkar."
+  ],
+  "asama-5-llm-gelistirme-8": [
+    "LLMOps, LLM ürününün canlıda yaşama disiplinidir. Prompt değişti mi, model versiyonu ne oldu, cevap kalitesi düştü mü, maliyet arttı mı, kullanıcı hangi cevabı beğenmedi? Bunlar izlenmezse ürün sis içinde yürür.",
+    "Bir asistan ilk ay iyiydi, ikinci ay cevapları uzamaya başladı. Kimse prompt değişikliğini kaydetmemişti. Küçük bir ayar, kullanıcı deneyimini bozmuştu. Sürümleme ve değerlendirme bu yüzden lüks değildir.",
+    "LLMOps anlatırken eval set, tracing, feedback, maliyet metriği, prompt versiyonu ve güvenlik olaylarını birlikte konuş. Model canlıya çıktıktan sonra proje bitmez; asıl hayatı başlar."
+  ],
+  "asama-5-llm-gelistirme-9": [
+    "LLM güvenliği, modelin iyi niyetli görünmesine aldanmamaktır. Prompt injection, veri sızıntısı, aşırı yetkili araçlar ve kaynak manipülasyonu gerçek risklerdir. Model nazik konuşabilir ama sistem sınırı teknik olarak çizilmelidir.",
+    "Bir kullanıcı belgeye 'önceki talimatları unut' yazmıştı; model bu metni talimat sandı. İnsan için komik görünen şey sistem için güvenlik açığıydı. RAG ve ajan sistemlerinde içerik ile talimat ayrımı hayati hale gelir.",
+    "Güvenli tasarımda hassas veri maskelenir, araç yetkileri dar tutulur, kaynaklar doğrulanır, kritik işlem insan onayından geçer. Mülakatta bunu söyleyen aday yapay zekâyı gerçek dünyaya indirmiş olur."
+  ],
+  "asama-5-llm-gelistirme-10": [
+    "LLM portföyünde küçük demo yapmak kolaydır; denetlenebilir sistem göstermek zordur. Görüşmeci artık yalnız sohbet ekranı görmek istemez. Kaynak nerede, eval nasıl, maliyet ne, güvenlik sınırı nasıl çizildi diye sorar.",
+    "Güçlü bir portföy projesi şöyle görünür: belgeler yüklenir, chunk'lanır, embedding üretilir, arama yapılır, cevap kaynakla döner, kullanıcı geri bildirim verir, hatalı cevap kaydedilir. Basit ama tam bir akış.",
+    "Mülakatta kendi projenin zayıf yerini de söyle. 'Burada reranking eklerdim, burada yetki filtresini güçlendirirdim' cümlesi olgunluk gösterir. Kusursuz demo değil, öğrenebilen mühendis güven verir."
+  ],
+  "asama-6-devops-bulut-1": [
+    "DevOps, yazan ekiple işleten ekip arasındaki duvarı inceltme kültürüdür. Kod canlıda çalışmıyorsa 'benim işim bitti' cümlesi eksiktir. Teslimat, izleme, geri dönüş ve sorumluluk aynı hikâyeye bağlanır.",
+    "Bir projede geliştirici ekip cuma akşamı kodu bıraktı, operasyon ekibi gece hata aradı. Sonra ortak pipeline, ortak log ve ortak nöbet düzeni kuruldu. DevOps'un adı havalıdır ama özü basittir: acıyı tek ekibe yıkma.",
+    "Bu başlıkta araçlardan önce zihniyet gelir. Docker, Kubernetes ve CI/CD ancak ekip aynı sorumluluğu paylaşıyorsa değer üretir."
+  ],
+  "asama-6-devops-bulut-2": [
+    "Docker imajı tarif, container çalışan yemek gibidir. Volume kalıcı malzeme dolabı, network servislerin konuştuğu koridor, registry ise paketlerin depolandığı raf olur. Bu benzetme basit ama üretimde çok işe yarar.",
+    "Bir servis container içinde güzel çalışıyordu ama loglar container silinince kayboluyordu. Ekip ilk kez şunu gördü: container geçicidir, kanıt kalıcı yerde tutulmalıdır. Docker kolaylık getirir ama işletme disiplinini iptal etmez.",
+    "Mülakatta Docker anlatırken image-container farkı, Dockerfile katmanları, volume, port mapping ve registry akışını küçük bir servis üzerinden kur. Cevap anında somutlaşır."
+  ],
+  "asama-6-devops-bulut-3": [
+    "Kubernetes, container kalabalığını şehir düzenine sokar. Pod ev, deployment apartman planı, service adres defteri, ingress dış kapı, autoscaling ise yoğunluk artınca yeni daire açma refleksidir.",
+    "Bir ekip Kubernetes'e geçti ama resource limit koymadı. Bir servis fazla bellek yiyince komşularını da etkiledi. Platform büyüyünce komşuluk hukuku gerekir; limit, health check ve namespace bu yüzden önemlidir.",
+    "Kubernetes mülakatında komut ezberi yerine işletme konuş. Servis nasıl deploy edilir, health check neyi korur, rollback nasıl yapılır, log nereden okunur, cluster maliyeti nasıl izlenir?"
+  ],
+  "asama-6-devops-bulut-4": [
+    "CI/CD hattı yazılımın üretim bandıdır. Kod gelir, test edilir, paketlenir, ortama alınır, gerekirse geri döndürülür. İyi pipeline hızlı olduğu kadar durmayı da bilir.",
+    "Bir pipeline test başarısız olduğu halde deploy'a izin veriyordu. Herkes otomasyon var sanıyordu ama otomasyon yanlış kapıyı açıyordu. CI/CD'nin değeri yalnız çalışmasında değil, doğru yerde durmasındadır.",
+    "Build, test, artifact, deployment ve rollback kavramlarını bir canlıya geçiş gecesi gibi anlat. Böylece pipeline soyut YAML dosyası olmaktan çıkar, kurumun güvenlik kemeri olur."
+  ],
+  "asama-6-devops-bulut-5": [
+    "Monitoring ve logging, üretim ortamının dili kulağıdır. Metrik sayı verir, log olay anlatır, dashboard tabloyu toplar, alarm dikkat ister. Bunlar yoksa sistem ancak kullanıcı bağırınca fark edilir.",
+    "Bir disk dolmuştu ama alarm eşiği yanlış ayarlanmıştı. Sistem günlerce fısıldadı, kimse duymadı; sonunda bağırdı. Monitoring'in görevi sistem bağırmadan önce fısıltıyı yakalamaktır.",
+    "İyi alarm az ama anlamlıdır. Her şeyi alarm yapmak ekibi kör eder; hiçbir şeyi alarm yapmamak kurumu sağır eder. Denge burada uzmanlık ister."
+  ],
+  "asama-6-devops-bulut-6": [
+    "Bulut temelleri, başkasının bilgisayarını kiralamaktan ibaret değildir. Region, availability zone, IAM, network, storage ve managed servisler doğru seçilmezse hızla gelen kolaylık hızla gelen karmaşaya dönüşür.",
+    "Bir ekip birkaç tıklamayla ortam kurdu, ay sonunda fatura geldiğinde herkes mimariyi yeniden okumaya başladı. Bulutta kapasite almak kolaydır; kapasiteyi yönetmek asıl iştir.",
+    "IaaS, PaaS ve SaaS ayrımını anlatırken sorumluluk paylaşımını vurgula. Bulut sağlayıcı her şeyi üstlenmez; erişim, veri, yapılandırma ve maliyet hâlâ senin masandadır."
+  ],
+  "asama-6-devops-bulut-7": [
+    "AWS ve Google Cloud farklı isimler kullanır ama benzer sorulara cevap verir: nerede compute çalışacak, veri nerede duracak, ağ nasıl kurulacak, kim erişecek, nasıl izlenecek?",
+    "Bir projede managed database seçildi ve ekip bakım yükünden kurtuldu. Başka bir projede aynı seçim maliyet ve veri konumu yüzünden tartışma yarattı. Bulut servislerinde doğru cevap bağlama göre değişir.",
+    "Mülakatta sağlayıcı adı yarıştırma. Compute, storage, network, IAM, managed database ve monitoring ailelerini anlat; sonra hangi ihtiyaca hangi servis mantığının uyduğunu göster."
+  ],
+  "asama-6-devops-bulut-8": [
+    "Yedekleme, felaket günü hatırlanacak bir sigorta değildir; düzenli prova isteyen bir kas hafızasıdır. Yedek var demek yetmez, geri dönebiliyor musun? Asıl soru budur.",
+    "Bir kurumda yedekler yıllarca başarıyla alınmış görünüyordu. İlk geri dönüş denemesinde kritik dosyaların eksik olduğu anlaşıldı. Kâğıt üstündeki güven o gün çöktü. Tatbikat yapılmayan yedek, umut dosyasıdır.",
+    "RPO, RTO, offsite yedek, immutable backup ve restore testi kavramlarını öğren. İş sürekliliği, teknik planın yönetim masasına çevrilmiş halidir."
+  ],
+  "asama-6-devops-bulut-9": [
+    "Bulut maliyeti sessiz büyür. Bugün açılan küçük test makinesi, unutulan disk, gereksiz log saklama ve yanlış ölçekleme ay sonunda bütçe toplantısında konuşur.",
+    "Bir ekip performans sorununu daha büyük makineyle çözdü. Sorun geçti ama fatura katlandı. Sonra sorgu iyileştirildi, cache düzenlendi, kapasite küçüldü. Bulut sana kaynak verir; akıl hâlâ senden beklenir.",
+    "Maliyet planında etiketleme, bütçe alarmı, rightsizing, reserved capacity ve kapanma politikaları önemlidir. Hızın faturası yönetilemiyorsa teknik başarı yönetim başarısına dönüşmez."
+  ],
+  "asama-6-devops-bulut-10": [
+    "DevOps mülakatında görüşmeci üretim kokusu arar. Pipeline gördün mü, log okudun mu, rollback yaptın mı, alarm gürültüsüyle uğraştın mı, container neden düştü baktın mı?",
+    "İyi cevap küçük bir olay anlatır. Deploy çıktı, hata oranı yükseldi, metrik görüldü, log incelendi, rollback yapıldı, kök neden yazıldı. Bu hikâye, araç adlarından daha çok güven verir.",
+    "Üretim ortamını gerçekten işletmiş gibi konuşmak için her teknolojiyi olayla bağla. Docker paketler, Kubernetes yaşatır, CI/CD taşır, monitoring haber verir, ekip karar alır."
+  ],
+  "siber-guvenlik-1": [
+    "Siber güvenlik korku satmak değil, riski görünür hale getirmektir. İyi güvenlikçi her şeye hayır diyen kişi değildir; hangi kapının neden kapalı kalması gerektiğini, hangisinin hangi kayıtla açılabileceğini anlatan kişidir.",
+    "Bir kurumda herkes firewall alınınca güvende olduğunu sanıyordu. İlk olayda asıl açığın paylaşılan yönetici parolası olduğu ortaya çıktı. Güvenlik ürünle başlamaz; kimlik, süreç, kayıt ve sorumlulukla başlar.",
+    "Bu rotada güvenliği tek başına teknik kale gibi değil, yaşayan kurum düzeni gibi okuyacağız. İnsan davranışı, ağ sınırı, uygulama hatası ve denetim izi aynı masada duracak."
+  ],
+  "siber-guvenlik-2": [
+    "Kimlik güvenliği, dijital kurumun anahtar disiplinidir. IAM kimin kim olduğunu, MFA gerçekten o kişi olup olmadığını, SSO geçişi nasıl sadeleştireceğini, PAM ise güçlü hesapların nasıl dizginleneceğini anlatır.",
+    "Bir ayrılan personelin hesabı açık kalmıştı; aylar sonra raporda hâlâ işlem yaptığı görüldü. Ortada kötü niyet olmayabilir ama kontrol eksikliği tek başına risktir. Least privilege bu yüzden kibar bir öneri değil, işletme kuralıdır.",
+    "Mülakatta kimlik anlatırken yaşam döngüsünü söyle: işe giriş, rol atama, yetki onayı, düzenli gözden geçirme ve ayrılışta kapatma. Güvenlik çoğu zaman kapıyı açmaktan çok kapıyı zamanında kapatmaktır."
+  ],
+  "siber-guvenlik-3": [
+    "Ağ güvenliği, trafiğin nereden gelip nereye gidebileceğini belirler. Firewall kapı görevlisi, WAF uygulama girişindeki kontrol masası, IDS/IPS şüpheli hareketi fark eden göz, segmentasyon ise binayı yangın bölmelerine ayıran plandır.",
+    "Bir zararlı yazılım tek kullanıcı cihazından sunucu ağına kadar ilerledi çünkü ağ düz bir ova gibiydi. Segmentasyon olsaydı ilerleme erken duracaktı. Güvenlikte amaç saldırı hiç olmayacak sanmak değil, olduğunda yayılmasını sınırlamaktır.",
+    "Zero Trust cümlesi havalıdır ama özü nettir: kimse varsayılan olarak güvenilir değildir. Kimlik doğrulanır, cihaz durumu kontrol edilir, erişim ihtiyaca göre verilir, kayıt tutulur."
+  ],
+  "siber-guvenlik-4": [
+    "Uygulama güvenliği, hatayı kullanıcıdan önce bulma çabasıdır. OWASP listeleri kuru madde değildir; SQL injection, XSS, broken access control gibi açıklar gerçek para, veri ve itibar kaybına dönüşebilir.",
+    "Bir form alanı yalnız metin bekliyordu ama doğrulama sunucu tarafında yapılmamıştı. Test ortamında küçük görünen bu eksik, canlıda veri sızıntısı riski üretti. Güvenli kod, iyi niyetli kullanıcıya göre değil kötü niyetli denemeye göre yazılır.",
+    "SAST, DAST ve dependency taraması araçtır; asıl disiplin geliştirici refleksidir. Girdi doğrulama, yetki kontrolü, secret saklama ve hata mesajı tasarımı kodun doğal parçası olmalıdır."
+  ],
+  "siber-guvenlik-5": [
+    "Uç nokta güvenliği, kurumun en dağınık sınırını yönetir: kullanıcı cihazları ve sunucular. EDR davranışı izler, hardening gereksiz kapıları kapatır, patch yönetimi bilinen açıkları azaltır.",
+    "Bir laptop güncelleme almadığı için eski bir açıkla ele geçirildi. Sunucu odası kilitliydi ama kurumun kapısı çantada taşınan cihazdan açıldı. Modern güvenlikte sınır yalnız veri merkezi değildir.",
+    "Bu başlıkta cihaz envanteri kritik hale gelir. Hangi cihaz var, kimin üzerinde, hangi sürümde, hangi güvenlik ajanı çalışıyor? Bilmediğin şeyi koruyamazsın."
+  ],
+  "siber-guvenlik-6": [
+    "Log, SIEM ve SOC güvenliğin hafızası ve dikkatidir. Tek bir başarısız giriş önemsiz olabilir; aynı kullanıcıdan farklı ülkelerden gelen denemeler, dosya hareketi ve olağandışı trafik birleşince olay görünür olur.",
+    "Bir olayda herkes 'ne zaman başladı?' diye sordu. Log saklama süresi kısa olduğu için ilk iz kaybolmuştu. O gün SIEM ekranından çok, log politikasının değeri anlaşıldı.",
+    "SOC iyi çalışıyorsa alarmı olaya çevirir, olayı önceliklendirir, ekibe anlaşılır görev verir. Mülakatta bu hattı anlatırken gürültü azaltma ve olay zenginleştirme kavramlarını unutma."
+  ],
+  "siber-guvenlik-7": [
+    "Veri güvenliği, hangi bilginin ne kadar hassas olduğunu bilmekle başlar. Sınıflandırma yoksa herkes kendi sezgisine göre davranır; bu da kurumda görünmez risk üretir.",
+    "Bir rapor iyi niyetle dış paydaşla paylaşılmıştı ama içinde maskelenmemiş kişisel veri vardı. Kimse saldırıya uğramamıştı; yine de olay güvenlik ve KVKK meselesine dönüştü. Güvenlik bazen niyeti değil sonucu tartar.",
+    "DLP, maskeleme ve erişim kontrolü ancak veri sahibi belliyse anlam kazanır. Hangi veri kimindir, kim görebilir, ne kadar saklanır, nasıl anonimleşir? Bu sorular yöneticinin de sorusudur."
+  ],
+  "siber-guvenlik-8": [
+    "Olay müdahalesi, saldırı anında kahramanlık gösterisi değil, önceden prova edilmiş sakinliktir. Tespit, çevreleme, temizleme ve öğrenme sırayla ilerler; sırayı kaybedersen gürültü büyür.",
+    "Bir fidye yazılımı şüphesinde ilk refleks herkesin makinesini kapatmasıydı. Sonra delil kaybı ve yayılım analizi tartışıldı. Olay müdahalesinde hız önemlidir ama kör hız bazen kanıtı yok eder.",
+    "İyi olay raporu suçlu aramaz; zaman çizelgesi, etki, kök neden, alınan aksiyon ve kalıcı düzeltmeyi yazar. Krizden öğrenmeyen kurum aynı dersi daha pahalıya tekrar eder."
+  ],
+  "siber-guvenlik-9": [
+    "Siber tatbikat, yangın merdivenini yangın çıkmadan denemektir. Masa başı senaryo bile ekibin kimin kimi arayacağını, hangi loga bakacağını, üst makama ne söyleyeceğini gösterir.",
+    "Bir tatbikatta teknik ekip hazırdı ama iletişim planı yoktu. Hizmet etkisi sorulduğunda herkes farklı sayı verdi. Güvenlik krizi yalnız teknik değil, anlatım krizidir de.",
+    "Farkındalık eğitimleri de korkutma seansı olmamalıdır. Kullanıcıya suçlu gibi davranırsan saklar; doğru davranışı kolaylaştırırsan erken haber verir."
+  ],
+  "siber-guvenlik-10": [
+    "Siber güvenlik mülakatında iyi aday tehditleri ezberden saymaz; riski iş etkisine bağlar. 'SQL injection veri sızıntısına yol açabilir' der, sonra bunu log, WAF, güvenli kod ve testle nasıl azaltacağını anlatır.",
+    "Yönetsel görüşmede aynı cevap başka dile döner: hangi risk kabul edilebilir, hangisi bütçe ister, hangi kontrol denetimde kanıt olur, olay olursa kim konuşur? Güvenlik uzmanı teknik bilir; güvenlik lideri kurum diline çevirir.",
+    "Hazırlanırken her güvenlik kavramına bir olay ekle. Kimlik, ağ, uygulama, uç nokta, veri ve SOC başlıklarını gerçek senaryolarla anlatırsan cevapların kuru liste olmaktan çıkar."
+  ],
+  "buyuk-mimariler-1": [
+    "Mimari okuryazarlık, ekrandaki tek işlemin arkasındaki kalabalığı görmektir. Kullanıcı butona basar; CDN, WAF, load balancer, API Gateway, servisler, veritabanı, cache, kuyruk ve log sistemi aynı anda küçük roller oynar.",
+    "Bir mimari çizimde kutular güzel duruyordu ama kimse verinin resmi kaydının nerede olduğunu söyleyemedi. O anda çizimin süs olduğu anlaşıldı. İyi mimari görsel, kriz anında yol tarif eder.",
+    "Bu rotada amaç ezbere kutu dizmek değil. Her sistemde kullanıcı yolunu, veri yolunu, hata yolunu ve sorumluluk yolunu ayrı ayrı okuyacağız."
+  ],
+  "buyuk-mimariler-2": [
+    "Trendyol benzeri sipariş yolculuğunda kullanıcı ürün arar, sepete ekler, ödeme yapar, kargoyu bekler. Arkada arama servisi, stok, kampanya, ödeme, bildirim ve lojistik entegrasyonu birlikte çalışır.",
+    "Bir kampanya gününde arama hızlıydı ama stok senkronu gecikti. Kullanıcı aldığı ürünü sonra iptal mesajıyla gördü. Büyük e-ticarette hız kadar tutarlılık da müşteri güvenidir.",
+    "Bu mimaride PostgreSQL resmi siparişi, Redis sepeti, Kafka olayları, Elasticsearch aramayı taşır. Her parçanın görevi karışırsa kriz kimin sorumluluğunda tartışması başlar."
+  ],
+  "buyuk-mimariler-3": [
+    "Ödeme sistemi saniyelerle çalışır ama muhasebe defteri kadar ciddi olmalıdır. Kullanıcı sonuç görmek ister; kurum paranın gerçekten alınıp alınmadığını, tek mi çift mi işlendiğini ve itirazda hangi kanıtın sunulacağını bilmek zorundadır.",
+    "Bir timeout olayında banka parayı çekmiş, uygulama siparişi oluşturamamıştı. Sorun saniyelikti ama etkisi finansaldı. Idempotency, mutabakat ve log bu yüzden ödeme mimarisinin kalbidir.",
+    "Ödeme anlatırken fraud kontrolü, 3D Secure, callback, transaction kaydı ve bildirim ayrımını kur. Hız istenir ama doğruluk hızdan değerlidir."
+  ],
+  "buyuk-mimariler-4": [
+    "Lojistik takip mimarisi, paketin fiziksel yolunu dijital izlerle görünür yapar. Depo, kargo şirketi, çağrı merkezi ve müşteri aynı gerçeğe bakamazsa küçük gecikme büyük güven sorununa dönüşür.",
+    "Bir kargo entegrasyonu saatlerce eski durum dönüyordu. Kullanıcı paket kayıp sandı, çağrı merkezi yanlış bilgi verdi, operasyon geç fark etti. Takip sistemi yalnız konum değil, iletişim düzenidir.",
+    "Burada olay akışı önemlidir: paket hazırlandı, teslim edildi, yola çıktı, dağıtıma geçti. Her olay kayıt, bildirim ve sorgulama tarafında iz bırakmalıdır."
+  ],
+  "buyuk-mimariler-5": [
+    "Kamu kapısı başvuru akışı dijital evrak odası gibidir. Vatandaş form doldurur, kimlik doğrular, belge yükler; kurum ise başvurunun zamanını, sahibini, eklerini ve işlem durumunu kanıtlamak zorundadır.",
+    "Bir başvuru sisteminde dosya yüklenmiş ama resmi kayıtla bağlanmamıştı. Ekran başarılı diyordu, arşiv sessizdi. Kamu sistemlerinde ekrandaki başarı, kayıt başarısıyla birleşmelidir.",
+    "Bu mimaride kimlik doğrulama, KVKK, object storage, PostgreSQL, iş akışı ve log birlikte düşünülür. Hızlı form yapmak kolaydır; hesap verebilir başvuru sistemi kurmak uzmanlık ister."
+  ],
+  "buyuk-mimariler-6": [
+    "Hastane randevu sistemi, teknik gecikmenin koridorda insana dönüştüğü yerdir. Bir ekran yavaşlarsa yalnız performans metriği bozulmaz; hasta bekler, doktor aksar, kayıt masası gerilir.",
+    "Bir yoğun günde randevu sorguları cache'siz çalışıyor ve veritabanını yoruyordu. Teknik çözüm basitti ama mahremiyet sınırı dikkat istiyordu. Sağlık sistemlerinde hız ile gizlilik birlikte yürür.",
+    "Bu mimaride hasta kaydı, erişim logu, yetki, laboratuvar entegrasyonu ve bildirimler hassastır. Her veri herkesin değildir; her hızlandırma da güvenlikten bağımsız değildir."
+  ],
+  "buyuk-mimariler-7": [
+    "Banka transferi mimarisi, hız ile kesinliğin en sert pazarlığıdır. Para hareketinde 'yaklaşık doğru' diye bir konfor yoktur. Bakiye, yetki, fraud, mutabakat ve bildirim aynı çizgide ilerler.",
+    "Bir transferde bildirim gitmemişti ama para geçmişti. Kullanıcı işlemin olmadığını sandı ve tekrar denedi. Arka planda idempotency ve kullanıcı iletişimi eksikse teknik başarı güven üretmeyebilir.",
+    "Bu sistemi anlatırken ACID, audit log, fraud sinyali, iki aşamalı onay ve mutabakat kavramlarını bağla. Bankacılıkta mimari aynı zamanda güven sözleşmesidir."
+  ],
+  "buyuk-mimariler-8": [
+    "Savunma üretiminde dijital iz, bir parçanın geçmişini anlatabilme gücüdür. Hangi malzeme geldi, kim onayladı, hangi istasyondan geçti, hangi doküman sürümüyle üretildi? Sorular teknik olduğu kadar stratejiktir.",
+    "Bir parça üzerinde kalite sorunu çıktığında kayıtlar eksikse herkes hafızasına döner. Hafıza iyi niyetlidir ama denetim hafıza kabul etmez. Seri numarası, doküman versiyonu ve erişim izi bu yüzden kritiktir.",
+    "Bu mimaride güvenlik, kalite ve üretim ayrılmaz. Veriyi korurken üretimi yavaşlatmamak; iz bırakırken gereksiz bürokrasi üretmemek gerçek ustalıktır."
+  ],
+  "buyuk-mimariler-9": [
+    "Komuta kontrol ve simülasyon sistemlerinde gecikme, karar değerini doğrudan etkiler. Ekrandaki küçük noktanın arkasında sensör, mesajlaşma, harita, yetki ve kayıt vardır.",
+    "Bir tatbikatta veri birkaç saniye geç geliyordu. Laboratuvarda önemsiz görünen gecikme, karar senaryosunda büyük fark yarattı. Gerçek zamanlı sistemlerde zaman da verinin parçasıdır.",
+    "Bu mimaride Kafka benzeri olay akışları, düşük gecikmeli ağ, yetki kontrolü ve monitoring birlikte çalışır. Güvenilir ekran, kaynağı ve gecikmesi bilinen ekrandır."
+  ],
+  "buyuk-mimariler-10": [
+    "Çağrı merkezi ve CRM entegrasyonu, kullanıcının sesini kurum hafızasına bağlar. Temsilci geçmişi görmezse aynı soruyu yeniden sorar; sistemler konuşmazsa müşteri kurumun iç dağınıklığını duyar.",
+    "Bir çağrıda temsilci ödeme kaydını göremediği için kullanıcıyı yanlış yönlendirdi. Ödeme sistemi çalışıyordu, CRM güncel değildi. Entegrasyon gecikmesi müşteri deneyiminde güven kaybına dönüştü.",
+    "Bu mimaride telefon altyapısı, CRM, ticket, bilgi bankası, kimlik doğrulama ve raporlama birlikte tasarlanır. Çağrı merkezi teknik mimarinin insan sesidir."
+  ],
+  "buyuk-mimariler-11": [
+    "Gerçek zamanlı bildirim sistemi kurumun zilidir. Doğru kişiye, doğru zamanda, doğru kanaldan çalarsa hayat kolaylaşır; gereksiz veya yanlış çalarsa herkes duymamayı öğrenir.",
+    "Bir bildirim kuyruğu birikti ve randevu hatırlatmaları geç gitti. Sistem teknik olarak çalışıyordu ama iş değeri kaçmıştı. Bildirimde zamanlama içeriğin yarısıdır.",
+    "Bu mimaride olay üretimi, kuyruk, kanal seçimi, retry, kayıt ve kullanıcı tercihi önemlidir. Aynı bildirimi beş kez göndermek de hiç göndermemek kadar kötüdür."
+  ],
+  "buyuk-mimariler-12": [
+    "Kimlik, yetki ve oturum mimarisi dijital binanın kartlı geçişidir. Kullanıcı bir kez giriş yapmak ister; kurum kimin hangi kapıdan geçtiğini bilmek zorundadır.",
+    "Bir yetki hatasında kullanıcı kendi biriminin dışındaki raporu görebiliyordu. Kimse sistemi kırmamıştı; rol tasarımı gevşekti. Güvenlik olayları bazen saldırı değil, yanlış kolaylık yüzünden doğar.",
+    "SSO, MFA, OAuth2, JWT, rol ve log birlikte düşünülür. Oturum mimarisi iyi kurulursa kullanıcı rahat eder, denetçi de iz bulur."
+  ],
+  "buyuk-mimariler-13": [
+    "Raporlama ve veri ambarı akışı, yöneticinin tek ekranda gördüğü sayının arkasındaki uzun yolu anlatır. Kaynak sistem, ETL, veri ambarı, kalite kontrol ve dashboard aynı zincirdedir.",
+    "Bir yönetim raporunda iki birim aynı kavramı farklı sayıyordu. Biri başvuru oluşturma tarihini, diğeri onay tarihini esas almıştı. Veri ambarında teknik temizlik kadar kavram birliği de gerekir.",
+    "Bu mimaride veri sözlüğü, lineage, güncelleme zamanı ve kalite kontrolleri önemlidir. Güzel grafik, yanlış tanımı saklıyorsa karar ekranı değil dekor olur."
+  ],
+  "buyuk-mimariler-14": [
+    "Mobil uygulama ile backend arasındaki yol kesintili ağ, küçük ekran ve sabırsız kullanıcıyla sınanır. Telefon cebindedir; kurum süreci ise veri merkezi kadar büyüktür.",
+    "Bir saha uygulaması tünelde bağlantı kaybedince aynı işlemi iki kez göndermişti. Backend bunu ayırt edemedi. Mobil dünyada offline durum, retry ve idempotency baştan tasarlanmalıdır.",
+    "JWT, API Gateway, cache, push notification ve hata mesajı mobil deneyimin görünmeyen parçalarıdır. Kullanıcı teknik açıklama istemez; işlemin ne durumda olduğunu bilmek ister."
+  ],
+  "buyuk-mimariler-15": [
+    "Yüksek trafikte ölçekleme, yalnız sunucu eklemek değildir. CDN, WAF, load balancer, cache, kuyruk, veritabanı sınırı ve hata yalıtımı birlikte planlanır.",
+    "Bir sınav başvuru sistemi ilk saat çöktü. Uygulama sunucuları artırılmıştı ama veritabanı tek noktada tıkanmıştı. Kalabalıkta en dar kapı bütün binanın kaderini belirler.",
+    "Ölçekleme anlatırken bottleneck arama refleksini göster. Hangi katman doyuyor, hangi iş asenkron olabilir, hangi hata izole edilir, degrade mode var mı? Büyük sistem sorusu böyle olgunlaşır."
+  ],
+  "proje-kamu-yonetim-1": [
+    "Kurumsal proje fikri takvime yazılınca başlamaz; hangi değeri üreteceği netleşince başlar. 'Bir ekran yapalım' cümlesi ihtiyaç değildir, sadece isteğin ilk halidir.",
+    "Bir projede herkes teslim tarihini biliyordu ama başarı ölçütünü bilmiyordu. Son gün sistem çalıştı, kullanıcı memnun kalmadı. Değer tanımı yapılmadan biten proje, teknik olarak kapanıp kurumsal olarak açık kalabilir.",
+    "Proje yöneticisi burada çevirmen gibi çalışır: iş dili, teknik dil, bütçe dili ve kabul dili aynı hikâyeye bağlanır."
+  ],
+  "proje-kamu-yonetim-2": [
+    "İhtiyaç analizi, kullanıcının söylediğini aynen yazmak değildir. Kullanıcı çoğu zaman çözüm tarif eder; analistin işi alttaki ihtiyacı bulmaktır.",
+    "Bir birim 'Excel yükleme ekranı' istiyordu. Görüşmeler sonunda asıl ihtiyacın hatalı veri girişini azaltmak olduğu anlaşıldı. Çözüm ekran değil, doğrulama kuralları ve entegrasyondu.",
+    "Kapsam iyi çizilirse ekip rahatlar. Neyin yapılacağı kadar neyin yapılmayacağı da yazılmalıdır; aksi halde proje büyürken kimse büyüdüğünü kabul etmez."
+  ],
+  "proje-kamu-yonetim-3": [
+    "Teknik şartname, tedarikçiye dilek değil ölçülebilir sözleşme diliyle konuşmalıdır. 'Hızlı çalışacak' belirsizdir; 'şu yükte şu sürede cevap verecek' ölçüdür.",
+    "Bir kabul toplantısında taraflar aynı cümleyi farklı anlamıştı. Tedarikçi teslim ettim dedi, kurum beklediğim bu değildi dedi. Sorun kötü niyet değil, kötü yazılmış kabul ölçütüydü.",
+    "Teslim kanıtı baştan düşünülür: test sonucu, ekran kaydı, log, performans raporu, doküman, eğitim tutanağı. Kabul günü hafıza değil kanıt konuşmalıdır."
+  ],
+  "proje-kamu-yonetim-4": [
+    "Paydaş haritası projedeki görünmez kuvvetleri gösterir. Karar kimde, kim etkilenecek, kim itiraz edebilir, kim onay vermeden iş ilerlemez? Bunları bilmeden plan yapmak sisli yolda hızlanmaktır.",
+    "Bir projede teknik ekip hazırdı ama hukuk onayı unutulmuştu. Canlıya geçiş haftası veri paylaşım protokolü masaya geldi ve takvim durdu. Paydaş geç fark edilirse takvim bedel öder.",
+    "RACI matrisi sıkıcı tablo gibi görünür ama kriz anında hayat kurtarır. Sorumlu, hesap veren, danışılan ve bilgilendirilen kişi karışmazsa toplantı sayısı azalır."
+  ],
+  "proje-kamu-yonetim-5": [
+    "Risk kaydı, kötümserlik defteri değildir; gelecekteki tartışmayı bugünden görünür kılma aracıdır. Varsayım doğrulanmazsa risk olur, risk gerçekleşirse sorun kaydına döner.",
+    "Bir entegrasyon için 'karşı kurum zamanında hazır olur' varsayımı yazılmamıştı. Olmayınca herkes şaşırmış gibi yaptı. Oysa sürpriz değildi; sadece kayıtsızdı.",
+    "Kapsam kayması genellikle küçük iyiliklerle başlar. 'Şunu da ekleyelim' cümlesi masumdur; etkisi takvim, test, bütçe ve kabul üzerinde görünür yapılmalıdır."
+  ],
+  "proje-kamu-yonetim-6": [
+    "Test stratejisi son hafta hataları toplama işi değildir. Ne test edilecek, kim test edecek, veri nasıl hazırlanacak, hata hangi öncelikle kapanacak, canlıya geçişte geri dönüş nasıl olacak baştan yazılır.",
+    "Bir canlıya geçişte rollback planı vardı ama kimse denememişti. Geri dönüş gerektiğinde plan kâğıtta kaldı. Test edilmeyen geri dönüş yolu, acil çıkış kapısının kilitli olması gibidir.",
+    "İletişim planı da teknik plan kadar önemlidir. Kullanıcı ne zaman bilgilendirilecek, destek masası ne söyleyecek, yönetici hangi metrikle karar verecek? Canlıya geçiş sessizce yapılmaz."
+  ],
+  "proje-kamu-yonetim-7": [
+    "Tedarikçi yönetimi, toplantıda parlak sunumu dinlemekten ibaret değildir. SLA, bakım süresi, hata önceliği, sürüm takibi, doküman ve bilgi transferi ölçülebilir olmalıdır.",
+    "Bir sistem tedarikçiye bağımlıydı; kurumda kimse temel ayarı bile bilmiyordu. Tedarikçi değişince bilgi de gitmiş oldu. Sözleşme yalnız hizmet almaz, kurumsal hafızayı da korumalıdır.",
+    "İyi yönetici tedarikçiyle kavga etmez, belirsizliği azaltır. Vaat ne, kanıt ne, teslim ne, kapsam dışı ne? Bu sorular ilişkiyi de işi de temizler."
+  ],
+  "proje-kamu-yonetim-8": [
+    "Bütçe, lisans ve envanter sıkıcı görünür; ta ki denetim veya yenileme zamanı gelene kadar. Hangi yazılım nerede kurulu, kaç lisans var, hangi sunucu kime ait bilinmiyorsa kurum kendi malını bile sis içinde yönetir.",
+    "Bir lisans yenilemesinde yıllardır kullanılmayan ürünlere para ödendiği görüldü. Kimse kötü niyetli değildi; envanter dağınıktı. Para bazen teknik eksikten değil, kayıt eksikliğinden akar.",
+    "Varlık yönetimi iyi yapılırsa güvenlik, bütçe ve kapasite planı güçlenir. Bilmediğin cihazı yamayamaz, bilmediğin lisansı savunamazsın."
+  ],
+  "proje-kamu-yonetim-9": [
+    "Kamu BT işleyişi tek tip değildir. Merkez strateji konuşur, taşra bağlantı ve destek bekler, belediye vatandaş hizmetine odaklanır, üniversite dönemsel yoğunluk yaşar, savunma şirketi güvenilirlik ve gizlilikle çalışır.",
+    "Bir bakanlık entegrasyonunda teknik bağlantı hazırdı ama resmi protokol tamamlanmamıştı. Özel sektörde küçük bir imza gibi görünen şey, kamuda sorumluluk sınırını çizer. Teknoloji kararı idari karardan ayrı yürümez.",
+    "Bu başlık yönetici adayına gerçekçilik kazandırır. Kurum şemasını ezberlemek yetmez; hangi işin hangi belge, bütçe, ekip ve tedarikçiyle yaşadığını görmek gerekir."
+  ],
+  "proje-kamu-yonetim-10": [
+    "KVKK, denetim izi ve resmi yazı teknoloji projelerinin dış süsü değildir. Kişisel veri nerede duruyor, kim erişti, hangi amaçla işlendi, karar neye dayanıyor? Bunlar proje tasarımının içindedir.",
+    "Bir rapor ekranı iyi çalışıyordu ama fazla veri gösteriyordu. Kullanıcı işini daha hızlı yapıyordu, kurum gereksiz kişisel veri riski taşıyordu. İyi niyet, mevzuat riskini ortadan kaldırmaz.",
+    "Kurumsal hafıza kayıtla oluşur. Karar yazılır, onay saklanır, log tutulur, arşiv düzenlenir. İnsanlar değişir; kurumun hatırlaması için belge gerekir."
+  ],
+  "proje-kamu-yonetim-11": [
+    "Proje ve kamu mülakatlarında adayın sahayı anlayıp anlamadığı hızlı belli olur. Şartname, kabul, bütçe, tedarikçi ve KVKK kelimelerini yan yana getirebiliyorsa yalnız yazılım değil kurum işi de görmüştür.",
+    "İyi cevap bir toplantı sahnesi kurar: talep sahibi aciliyet anlatır, teknik ekip bağımlılığı gösterir, satın alma usulü sorar, hukuk veri sınırını çizer, yönetici karar ister. Aday bu masayı anlatabiliyorsa olgun görünür.",
+    "Hazırlık için her sürece kanıt sorusu ekle. Bu işin kabul kanıtı ne, risk kaydı nerede, kim onaylıyor, kullanıcı nasıl bilgilendiriliyor? Kamu ve kurumsal yönetim dili burada güçlenir."
+  ],
+  "liderlik-kriz-gelecek-1": [
+    "Teknik liderlik, her ayrıntıyı ezberlemek değil, ayrıntının ne zaman stratejik hale geldiğini sezebilmektir. Lider CPU darboğazını da bütçe diline, güvenlik açığını da itibar riskine çevirebilir.",
+    "Bir toplantıda uzmanlar Kubernetes node sorununu anlatıyordu, üst makam hizmet etkisini soruyordu. İyi lider iki dili de duydu: teknik kökü saklamadı, yöneticiye etki ve çözüm penceresi verdi.",
+    "Bu rota teknik bilgiyi insan, bütçe, risk ve gelecek kararlarıyla birleştirir. Üst düzey BT yöneticiliği tam da bu çeviri gücüdür."
+  ],
+  "liderlik-kriz-gelecek-2": [
+    "Üst makama teknik meseleyi sade anlatmak, ayrıntıyı yok etmek değildir. Ayrıntıyı doğru sıraya koyup karar aldıracak hale getirmektir: etki, seçenek, risk, maliyet, öneri.",
+    "Bir kesintide yöneticiye 'veritabanı lock bekliyor' dendiğinde oda sessizleşti. Aynı bilgi 'ödeme ekranında kullanıcıların yüzde 20'si bekliyor, veri kaybı yok, iki çözüm seçeneğimiz var' diye verilince karar mümkün oldu.",
+    "Sadelik dürüstlükle birlikte yürür. Bilinmeyeni saklamak güveni kırar; bilinmeyeni sınırlandırıp ne zaman netleşeceğini söylemek liderliktir."
+  ],
+  "liderlik-kriz-gelecek-3": [
+    "Ekip kurmak CV toplamak değildir. Uzmanlık, güven, yedeklilik ve ölçü gerekir. Tek kahramana bağlı ekip hızlı görünebilir ama uzun vadede kırılgandır.",
+    "Bir kurumda tek kişi tüm veritabanı bilgisini taşıyordu. İzin günü kriz çıktı ve herkes o kişiyi aradı. Bilgi paylaşımı yapılmadığında insan kaynağı riski teknik riskten daha keskin hale gelir.",
+    "İyi lider ekipte derin uzmanlık kadar ortak dil de kurar. Herkes her şeyi bilmez ama herkes kime, hangi kanıtla, hangi anda gideceğini bilir."
+  ],
+  "liderlik-kriz-gelecek-4": [
+    "Karar almak, bütün belirsizlik bitene kadar beklemek değildir. Bazen yüzde yetmiş bilgiyle yön seçersin; ama geri dönüş yolunu ve sorumluluğu açık tutarsın.",
+    "Bir canlıya geçişte risk vardı. Ekip iki seçenek sundu: erteleme veya sınırlı kullanıcıyla kontrollü açılış. Lider ikinciyi seçti çünkü rollback planı denenmişti. Cesaret, hazırlıksız atlamak değildir.",
+    "Hız, risk ve sorumluluk birlikte düşünülür. Kararın neden alındığı yazılırsa yarın hesap vermek savunma değil öğrenme olur."
+  ],
+  "liderlik-kriz-gelecek-5": [
+    "Bütçe savunması fiyat listesi okumak değildir. Yedeklilik neden gerekli, SIEM hangi riski azaltır, GPU kapasitesi hangi iş değerini üretir, lisans yenilemesi yapılmazsa ne olur? Maliyet hikâyeye bağlanmalıdır.",
+    "Bir yönetici pahalı görünen yedekleme yatırımını reddetmek üzereydi. Teknik ekip RTO, RPO ve hizmet etkisini anlattı; konu cihaz alımından iş sürekliliğine döndü. Bütçe dili böyle değişir.",
+    "İyi BT lideri para isterken araç adıyla değil risk ve değerle konuşur. Bu, üst yönetimin de doğru karar vermesini sağlar."
+  ],
+  "liderlik-kriz-gelecek-6": [
+    "Krizde ilk dakika sisli geçer. Kullanıcı bağırır, alarm düşer, tedarikçi bekleyin der, üst yönetim etkiyi sorar. Liderin görevi sisin içinde ilk sırayı kurmaktır.",
+    "İlk karar çoğu zaman teknik çözüm değildir; kayıt açmak, etkiyi ölçmek, iletişim kanalını belirlemek ve varsayımları ayırmaktır. Kayıt yoksa kriz bittiğinde bile kurum ne yaşadığını bilemez.",
+    "Kriz yönetiminde sakinlik kişilik özelliği değil, hazırlık sonucudur. Kim aranacak, hangi metrik okunacak, hangi sistem kapatılacak, kim açıklama yapacak önceden bilinmelidir."
+  ],
+  "liderlik-kriz-gelecek-7": [
+    "Veritabanı kilidi küçük bir teknik terim gibi görünür ama canlı sistemde kuyruk, ödeme, rapor ve çağrı merkezi etkisine dönüşebilir. Yavaş sorgu bazen bütün kurumun ritmini düşürür.",
+    "Bir rapor sorgusu gündüz çalıştırılmış ve ana tabloyu kilitlemişti. Rapor isteyen birim haklıydı, operasyon haklıydı, kullanıcı da haklıydı. Çözüm suçlu bulmak değil, rapor mimarisini yeniden düşünmekti.",
+    "Bu krizde bakılacak yerler bellidir: aktif sorgular, lock bekleyen işlemler, index durumu, transaction süresi ve son değişiklikler. Veritabanı krizi kanıtla konuşmayı sever."
+  ],
+  "liderlik-kriz-gelecek-8": [
+    "SSL sertifikası ve DNS hatası küçük kayıt işi gibi görünür; bozulduğunda bütün kurum kapısız kalır. Kullanıcı için tek gerçek vardır: site açılmıyor.",
+    "Bir sertifika süresi hafta sonu dolmuştu. Uygulama ayaktaydı, veritabanı sağlamdı, ama tarayıcı güvenmiyordu. Güven zinciri kırılınca çalışan sistem çalışmıyor gibi görünür.",
+    "Bu olaylarda TTL, sertifika bitiş tarihi, chain, DNS resolver ve CDN ayarları kontrol edilir. Basit görünen altyapı kayıtları takvimle ve izlemeyle yönetilmelidir."
+  ],
+  "liderlik-kriz-gelecek-9": [
+    "DDoS baskısı, hizmetin kapısını kalabalıkla tıkama girişimidir. Gerçek kullanıcıyla sahte trafiği ayırmak, kapasiteyi korumak ve iletişimi doğru yapmak gerekir.",
+    "Bir saldırıda ekip yalnız sunucu artırmaya odaklandı; trafik filtrelenmediği için maliyet büyüdü, hizmet yine zorlandı. DDoS savunması kaba güç değil, doğru yerde süzme işidir.",
+    "WAF, CDN, rate limit, upstream kapasite ve olay iletişimi birlikte düşünülür. Kullanıcıya sessiz kalmak da krizin parçasıdır; güvenlik kadar iletişim de yönetilir."
+  ],
+  "liderlik-kriz-gelecek-10": [
+    "Yedek dönmüyorsa kurumun güven cümlesi sınanır. Herkes 'yedek var' demiş olabilir; gerçek soru restore çalışıyor mu, ne kadar sürüyor, hangi veri kaybediliyor sorusudur.",
+    "Bir tatbikatta yedek dosyası vardı ama şifre anahtarı başka ekipteydi, o ekip de süreçte yoktu. Teknik yedek tamam, organizasyonel yedek eksikti. Felaket kurtarma ekip işi olarak tasarlanmalıdır.",
+    "Bu başlıkta RPO, RTO, restore testi ve sorumluluk matrisi birlikte okunur. Kâğıt üstündeki güven, prova edilmezse kriz günü dağılır."
+  ],
+  "liderlik-kriz-gelecek-11": [
+    "Kriz sonrası rapor, yaşananı kapatma evrakı değil öğrenme aracıdır. Zaman çizelgesi, etki, kök neden, müdahale, iletişim ve kalıcı düzeltme açık yazılır.",
+    "Bir olay raporunda 'sistemsel hata' yazıyordu. Bu cümle hiçbir şeyi öğretmez. Sonra ekip ayrıntıya indi: alarm yoktu, disk dolmuştu, log rotasyonu yanlıştı, sahiplik belirsizdi. Ders ancak isim konunca çıkar.",
+    "Kalıcı düzeltme yapılmazsa olay yalnız ertelenir. Alarm eşiği, test, doküman, eğitim veya mimari değişiklik raporun sonunda gerçek aksiyona dönüşmelidir."
+  ],
+  "liderlik-kriz-gelecek-12": [
+    "Yapay zekânın ofise girişi sessiz başladı: özet çıkarma, e-posta taslağı, kod yardımı, doküman arama. Sonra soru değişti: bu araç hangi veriyi görüyor, cevabı kim kontrol ediyor?",
+    "Bir ekip toplantı notlarını modelle özetliyordu; içinde hassas proje bilgileri vardı. Kolaylık güzeldi, veri sınırı belirsizdi. Yapay zekâ ofiste verimlilik kadar yönetişim meselesidir.",
+    "Lider bu konuda yasakçı veya büyülenmiş olmamalı. Kullanım alanı, veri sınıfı, onay noktası, eğitim ve denetim birlikte belirlenirse teknoloji faydaya yaklaşır."
+  ],
+  "liderlik-kriz-gelecek-13": [
+    "Veri merkezlerinde enerji ve GPU baskısı, yapay zekâ çağının somut tarafıdır. Model konuşurken arka tarafta elektrik, soğutma, tedarik ve kapasite planı çalışır.",
+    "Bir yapay zekâ pilotu başarılı oldu ama üretime alınacak GPU kapasitesi yoktu. Demo ucuz, sürekli hizmet pahalı çıktı. Teknik lider, heyecanın faturasını baştan görmelidir.",
+    "Enerji verimliliği, donanım tedariği, model boyutu ve kullanım yoğunluğu aynı planın parçasıdır. Büyük kurumda kapasite yalnız teknik metrik değil stratejik varlıktır."
+  ],
+  "liderlik-kriz-gelecek-14": [
+    "Dijital egemenlik, verinin ve kritik hizmetlerin kimin altyapısında, hangi hukuki sınırda ve hangi tedarik zinciriyle yaşadığını sormaktır. Bulut bağımlılığı bu yüzden yalnız teknik tercih değildir.",
+    "Bir kurum kritik verisini taşıyacağı bulut için performansa bakmış ama veri konumu ve çıkış stratejisini geç konuşmuştu. Sonra karar stratejik tartışmaya döndü. Teknoloji seçimi bazen ülke, sektör ve tedarik boyutuna çıkar.",
+    "Yarı iletken yarışı ve GPU tedariki de aynı resimdedir. Lider gelecek planı yaparken yalnız bugünkü fiyatı değil, yarın erişilebilirliği ve bağımlılığı da düşünür."
+  ],
+  "liderlik-kriz-gelecek-15": [
+    "Üst düzey BT yöneticisi için kişisel rota geniş ama dağınık olmamalıdır. Temel bilgisayar, yazılım, ağ, güvenlik, veri, bulut ve yapay zekâ konularını karar verecek kadar bilmek gerekir.",
+    "En iyi yöneticiler her konunun uzmanı gibi davranmaz; uzmanla konuşacak kadar bilir, doğru soruyu sorar, riski anlar, kararı kayıt altına alır. Bu alçakgönüllü yetkinlik büyük kurumlarda çok değerlidir.",
+    "Kişisel rota için her ay bir teknik derinlik, bir yönetim pratiği, bir kriz raporu ve bir mimari okuma seç. Zamanla bilgi ansiklopedi değil pusula haline gelir."
+  ],
+  "mulakat-ve-ust-duzey-hazirlik-1": [
+    "Mülakat stratejisi ezber listesini daha hızlı okumak değildir. İyi aday cevabı küçük bir düşünce zinciriyle kurar: tanım, örnek, risk, ölçüm ve öğrenilen ders.",
+    "Bir görüşmede aday Docker'ı tanımladı ama nerede kullanacağını anlatamadı. Başka aday basit bir deployment hikâyesi anlattı; imaj, container, log ve rollback doğal biçimde geçti. İkinci cevap daha az süslüydü ama daha güven vericiydi.",
+    "Her başlık için kendine şu alıştırmayı yap: bunu beş yaşındaki çocuğa nasıl anlatırım, stajyere nasıl anlatırım, genel müdüre nasıl anlatırım? Üç seviyede anlatabilen kişi gerçekten anlamaya yaklaşır."
+  ],
+  "mulakat-ve-ust-duzey-hazirlik-2": [
+    "Bilgisayar temelleri soruları adayın zemininin sağlamlığını ölçer. CPU, RAM, disk, işletim sistemi, süreç, ağ ve DNS konularında sade ama ilişkili cevap beklenir.",
+    "İyi cevap şuna benzer: kullanıcı yavaşlık görüyor; önce CPU ve bellek metriklerine, sonra disk I/O'ya, sonra ağ gecikmesine, sonra uygulama loguna bakarım. Bu sıra mülakatta deneyim kokusu taşır.",
+    "Temel konularda gösteriş yapma. Basit kavramı doğru örnekle anlatmak, karmaşık terimi yanlış yerde kullanmaktan daha güçlüdür."
+  ],
+  "mulakat-ve-ust-duzey-hazirlik-3": [
+    "Python, OOP, SQL ve API soruları adayın üretim yapıp yapamayacağını gösterir. Değişken ve döngü temelidir; ama okunabilir kod, veri bütünlüğü ve hata yönetimi asıl farkı yaratır.",
+    "Bir cevapta küçük proje hikâyesi kullan: Python ile veri okudum, PostgreSQL'e transaction içinde yazdım, REST API ile dış sisteme bildirdim, hata olursa logladım. Bu akış dört konuyu tek sahnede toplar.",
+    "Derinlik göstermek için sınırları söyle. OOP her yerde gerekmez, SQL yanlış JOIN ile yanıltır, API timeout ister, Python hızlı geliştirme sağlar ama paket ve ortam yönetimi ister."
+  ],
+  "mulakat-ve-ust-duzey-hazirlik-4": [
+    "Web ve backend sorularında görüşmeci uçtan uca akış duymak ister. Tarayıcı isteği, API Gateway, auth, backend, cache, kuyruk, veritabanı ve cevap kodu aynı yolculukta yer alır.",
+    "JWT sorulduğunda güvenliği; cache sorulduğunda eski veri riskini; kuyruk sorulduğunda idempotency ve retry'ı anmak cevabı güçlendirir. İyi aday teknolojiye yanında taşıdığı sorunla birlikte bakar.",
+    "Hazırlık için bir e-ticaret sipariş akışını tahtada çiz. Sonra her soruyu bu akışta yerine koy. Böylece cevaplar birbirinden kopuk değil, mimari bütünlük içinde gelir."
+  ],
+  "mulakat-ve-ust-duzey-hazirlik-5": [
+    "Linux, ağ, Docker, Kubernetes ve bulut soruları üretim ortamı sezgisini ölçer. Bu başlıklarda teorik tanım kadar arıza anında neye bakacağını söylemek önemlidir.",
+    "Bir aday 'pod restart ediyor' sorusunda image, environment variable, resource limit, readiness probe ve log kontrolünü sırayla anlattı. Cevap komut ezberi değildi; olay çözme düzeniydi.",
+    "Bulut sorusunda maliyeti unutma. Teknik ekip ölçeklenmeyi sever; yönetici ay sonunda faturayı görür. İyi cevap ikisini aynı cümlede taşır."
+  ],
+  "mulakat-ve-ust-duzey-hazirlik-6": [
+    "Siber güvenlik mülakatında olgunluk, riskin iş etkisini görmekle anlaşılır. Firewall, WAF, SIEM, EDR, IAM ve DLP kavramlarını ürün listesi gibi değil kontrol ailesi gibi anlat.",
+    "Olay müdahalesi sorulursa sırayı koru: tespit, etki analizi, çevreleme, temizleme, kurtarma, raporlama ve kalıcı düzeltme. Bu sıra panik yerine disiplin gösterir.",
+    "Yönetsel cevapta bütçe ve denetim dilini ekle. Hangi kontrol hangi riski azaltıyor, hangi log kanıt sayılır, hangi olay üst makama çıkar? Bu sorular seni uzmanlıktan liderliğe taşır."
+  ],
+  "mulakat-ve-ust-duzey-hazirlik-7": [
+    "Yapay zekâ, RAG, LLM ve MLOps sorularında moda kelimeler kolay tuzaktır. Güçlü cevap model, veri, kaynak, değerlendirme, maliyet ve güvenlik sınırını birlikte kurar.",
+    "Bir RAG sorusunda belge toplama, chunking, embedding, retrieval, kaynak gösterme ve eval akışını anlat. Sonra prompt injection ve yetki filtresini ekle. İşte o zaman cevap demo seviyesini geçer.",
+    "LLMOps sorulursa model canlıya çıktıktan sonraki hayatı konuş: prompt versiyonu, cevap kalitesi, kullanıcı geri bildirimi, maliyet ve güvenlik olayı. Yapay zekâ ürünü de yaşayan sistemdir."
+  ],
+  "mulakat-ve-ust-duzey-hazirlik-8": [
+    "Sistem tasarımı mülakatı büyük resmi tahtada kurma sınavıdır. Önce gereksinimi sor, sonra kullanıcı akışını çiz, sonra veri modelini, API'leri, cache'i, kuyruğu, güvenliği ve ölçeklemeyi ekle.",
+    "Bir aday URL kısaltma sistemi tasarlarken önce veritabanına atladı. Başka aday okuma-yazma oranını, kısa kod üretimini, çakışma riskini, cache ve rate limit'i konuştu. İkinci aday sistemi gerçekten tasarlıyordu.",
+    "Tahtada mükemmel çizim arama; kararlarını gerekçelendir. Nerede tutarlılık, nerede hız, nerede basitlik, nerede maliyet seçtin? Sistem tasarımı bu tercihleri görünür yapmaktır."
+  ],
+  "mulakat-ve-ust-duzey-hazirlik-9": [
+    "Yöneticilik mülakatında teknik bilgi karar diline çevrilmelidir. Bütçe, risk, insan, tedarikçi, mevzuat ve iş sürekliliği aynı cevapta yer bulur.",
+    "Bir aday Kubernetes yatırımını savunurken 'modern teknoloji' dedi ve zayıf kaldı. Başka aday dağıtım hızı, hata yalıtımı, ekip yetkinliği, işletme maliyeti ve geçiş riskini anlattı. Yönetim dili ikinci cevaptadır.",
+    "Bu görüşmelerde bilmediğini saklama, sınırlandır. 'Bu konuda uzman görüşü alırım; karar için şu metriklere bakarım' demek olgun bir lider refleksidir."
+  ],
+  "mulakat-ve-ust-duzey-hazirlik-10": [
+    "Teknisyenlikten stratejik BT liderliğine geçiş, elindeki tornavidayı bırakmak değil, hangi sorunda hangi tornavidanın gerektiğini bilmektir. Derinlik kaybolmaz; perspektif genişler.",
+    "Kariyerin başında komut öğrenirsin, sonra sistem kurarsın, sonra ekibin nasıl çalıştığını görürsün, en sonunda teknolojinin bütçe, risk ve kurum hedefiyle ilişkisini yönetirsin. Her aşama öncekinin üstüne çıkar.",
+    "Kişisel rota için her projeden bir teknik ders, bir insan dersi ve bir karar dersi çıkar. Zamanla CV'nin yanında daha değerli bir şey oluşur: sahadan süzülmüş yargı gücü."
+  ]
+};
+
+function manualArticle(category, chapter) {
+  const article = manualArticles[chapter.id];
+  if (!article) {
+    return [
+      paragraph(`Bu bölüm için bağımsız metin henüz yazılmadı: ${cleanTitle(chapter)}.`),
+      paragraph("Eski şablon anlatımı özellikle devre dışı bırakıldı; böylece eksik sayfalar gözden kaçmaz.")
+    ].join("");
+  }
+  return article.map((block) => {
+    if (typeof block === "string") return paragraph(block);
+    if (block.type === "heading") return `<h2>${escapeHtml(block.text)}</h2>`;
+    if (block.type === "list") return `<ul>${block.items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+    return paragraph(block.text);
+  }).join("") + visualFor(category, chapter);
+}
+
 function interviewChapter(category, chapter) {
   const topic = cleanTitle(chapter);
   const focus = firstPhrase(topic);
@@ -1277,15 +1891,7 @@ function interviewChapter(category, chapter) {
 }
 
 function contentFor(category, chapter) {
-  if (chapter.number === 1) return routeIntro(category, chapter);
-  if (category.mode === "history") return historyChapter(chapter);
-  if (["software", "systems", "security", "ai"].includes(category.mode)) return techChapter(category, chapter);
-  if (category.mode === "interview") return interviewChapter(category, chapter);
-  if (category.id === "liderlik-kriz-gelecek" && chapter.number >= 6 && chapter.number <= 12) return narrativeChapter({ ...category, mode: "crisis" }, chapter);
-  if (category.id === "liderlik-kriz-gelecek" && chapter.number >= 13) return narrativeChapter({ ...category, mode: "future" }, chapter);
-  if (category.mode === "architecture") return architectureChapter(category, chapter);
-  if (category.mode === "story") return storyChapter(category, chapter);
-  return narrativeChapter(category, chapter);
+  return manualArticle(category, chapter);
 }
 
 function svgFigure(kind, caption, svg) {
