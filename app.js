@@ -1675,6 +1675,273 @@ function svgLabel(text) {
     .replace(/>/g, "&gt;");
 }
 
+function customVisual(kind, caption, svg) {
+  return svgFigure(`visual-custom ${kind}`, caption, svg);
+}
+
+function networkTopologyVisual() {
+  return customVisual("network-topology", "Bir web isteği, istemcinin yerel ağından çıkar; gateway, NAT ve firewall kararlarından geçer; internette doğru sunucunun doğru portuna ulaşır.", `
+    <svg viewBox="0 0 900 420" role="img" aria-label="Subnet, gateway, firewall, routing ve port ilişkisini gösteren ağ topolojisi">
+      <defs>
+        <marker id="arrow-net" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+          <path d="M0 0 L10 5 L0 10 Z" fill="currentColor"></path>
+        </marker>
+      </defs>
+      <rect class="v-zone" x="34" y="46" width="342" height="232" rx="18"/>
+      <text x="58" y="78">Yerel ağ: 192.168.1.0/24</text>
+      <text class="v-small" x="58" y="102">Aynı subnet içindeki cihazlar önce birbirini yerelde arar.</text>
+
+      <g class="v-box">
+        <rect x="64" y="140" width="118" height="76" rx="10"/>
+        <text text-anchor="middle" x="123" y="169">İstemci</text>
+        <text class="v-small" text-anchor="middle" x="123" y="194">192.168.1.24</text>
+      </g>
+      <g class="v-box">
+        <rect x="228" y="140" width="112" height="76" rx="10"/>
+        <text text-anchor="middle" x="284" y="169">Switch</text>
+        <text class="v-small" text-anchor="middle" x="284" y="194">yerel dağıtım</text>
+      </g>
+      <g class="v-box">
+        <rect x="418" y="118" width="132" height="100" rx="12"/>
+        <text text-anchor="middle" x="484" y="150">Gateway</text>
+        <text class="v-small" text-anchor="middle" x="484" y="176">Router</text>
+        <text class="v-small" text-anchor="middle" x="484" y="198">192.168.1.1</text>
+      </g>
+      <g class="v-box">
+        <rect x="596" y="118" width="128" height="100" rx="12"/>
+        <text text-anchor="middle" x="660" y="150">Firewall</text>
+        <text class="v-small" text-anchor="middle" x="660" y="176">NAT + kural</text>
+        <text class="v-small" text-anchor="middle" x="660" y="198">443 izinli mi?</text>
+      </g>
+      <path class="v-cloud" d="M757 162 C755 126 790 106 818 124 C830 92 882 102 879 145 C910 152 905 205 868 208 L786 208 C742 207 729 174 757 162 Z"/>
+      <text text-anchor="middle" x="821" y="163">İnternet</text>
+      <text class="v-small" text-anchor="middle" x="821" y="187">route seçimi</text>
+
+      <g class="v-box">
+        <rect x="704" y="270" width="152" height="82" rx="12"/>
+        <text text-anchor="middle" x="780" y="300">Web sunucusu</text>
+        <text class="v-small" text-anchor="middle" x="780" y="324">203.0.113.10</text>
+        <text class="v-small" text-anchor="middle" x="780" y="344">TCP 443</text>
+      </g>
+
+      <path class="v-line solid" marker-end="url(#arrow-net)" d="M182 178 H228"/>
+      <path class="v-line solid" marker-end="url(#arrow-net)" d="M340 178 C370 178 386 168 418 168"/>
+      <path class="v-line solid" marker-end="url(#arrow-net)" d="M550 168 H596"/>
+      <path class="v-line solid" marker-end="url(#arrow-net)" d="M724 168 C742 168 746 166 758 164"/>
+      <path class="v-line solid" marker-end="url(#arrow-net)" d="M825 208 C827 245 810 260 780 270"/>
+      <path class="v-line return" marker-end="url(#arrow-net)" d="M704 330 C520 384 220 350 122 216"/>
+
+      <g class="v-callout">
+        <rect x="58" y="304" width="176" height="64" rx="10"/>
+        <text x="76" y="330">Subnet</text>
+        <text class="v-small" x="76" y="352">Aynı mahalle mi?</text>
+      </g>
+      <g class="v-callout">
+        <rect x="258" y="304" width="176" height="64" rx="10"/>
+        <text x="276" y="330">Gateway</text>
+        <text class="v-small" x="276" y="352">Mahalleden çıkış kapısı.</text>
+      </g>
+      <g class="v-callout">
+        <rect x="458" y="304" width="176" height="64" rx="10"/>
+        <text x="476" y="330">Firewall</text>
+        <text class="v-small" x="476" y="352">Kim, nereye, hangi port?</text>
+      </g>
+      <text class="v-small" text-anchor="middle" x="450" y="394">Sorun ararken “internet yok” deme; IP, gateway, DNS, firewall, route ve port sırasını takip et.</text>
+    </svg>`);
+}
+
+function hardwareMotherboardVisual() {
+  return customVisual("hardware-board", "Donanımda performans tek bir parçanın hızı değil; CPU, RAM, disk, ekran kartı, ağ kartı ve güç hattının aynı anakart üzerinde uyumlu çalışmasıdır.", `
+    <svg viewBox="0 0 900 420" role="img" aria-label="Anakart üzerinde CPU, RAM, NVMe, GPU, ağ kartı ve veri yolları">
+      <defs>
+        <marker id="arrow-hw" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+          <path d="M0 0 L10 5 L0 10 Z" fill="currentColor"></path>
+        </marker>
+      </defs>
+      <rect class="v-board" x="72" y="38" width="756" height="308" rx="24"/>
+      <text x="98" y="74">Anakart: şehir planı ve veri yolları</text>
+      <g class="v-chip">
+        <rect x="392" y="118" width="128" height="104" rx="14"/>
+        <text text-anchor="middle" x="456" y="158">CPU</text>
+        <text class="v-small" text-anchor="middle" x="456" y="184">komut yürütür</text>
+      </g>
+      <g class="v-slot">
+        <rect x="590" y="86" width="32" height="172" rx="8"/>
+        <rect x="636" y="86" width="32" height="172" rx="8"/>
+        <rect x="682" y="86" width="32" height="172" rx="8"/>
+        <text x="586" y="286">RAM slotları</text>
+        <text class="v-small" x="586" y="308">çalışma masası</text>
+      </g>
+      <g class="v-chip">
+        <rect x="180" y="126" width="120" height="78" rx="12"/>
+        <text text-anchor="middle" x="240" y="158">NVMe / SSD</text>
+        <text class="v-small" text-anchor="middle" x="240" y="184">kalıcı kayıt</text>
+      </g>
+      <g class="v-slot">
+        <rect x="180" y="254" width="344" height="34" rx="8"/>
+        <text text-anchor="middle" x="352" y="278">PCIe veri yolu: GPU, hızlı kartlar, genişleme</text>
+      </g>
+      <g class="v-chip">
+        <rect x="594" y="304" width="128" height="56" rx="10"/>
+        <text text-anchor="middle" x="658" y="327">NIC</text>
+        <text class="v-small" text-anchor="middle" x="658" y="348">ağ çıkışı</text>
+      </g>
+      <g class="v-chip">
+        <rect x="92" y="260" width="62" height="74" rx="10"/>
+        <text text-anchor="middle" x="123" y="292">PSU</text>
+        <text class="v-small" text-anchor="middle" x="123" y="316">güç</text>
+      </g>
+      <path class="v-line solid" marker-end="url(#arrow-hw)" d="M520 164 H590"/>
+      <path class="v-line solid" marker-end="url(#arrow-hw)" d="M392 170 H300"/>
+      <path class="v-line solid" marker-end="url(#arrow-hw)" d="M456 222 V254"/>
+      <path class="v-line solid" marker-end="url(#arrow-hw)" d="M520 196 C610 228 660 252 658 304"/>
+      <path class="v-line power" d="M154 296 C250 342 568 380 658 360"/>
+      <text class="v-small" x="316" y="112">Darboğaz çoğu zaman parçanın kendisinde değil, parçaya giden yoldadır.</text>
+      <text class="v-small" text-anchor="middle" x="450" y="392">CPU hesaplar; RAM eldeki işi tutar; disk saklar; anakart ve veri yolları hepsinin birbirine ne kadar hızlı konuşacağını belirler.</text>
+    </svg>`);
+}
+
+function dnsHttpsVisual() {
+  return customVisual("dns-https", "Tarayıcıda adres yazınca tek olay yaşanmaz; DNS adı IP’ye çevirir, TCP yolu açar, TLS güveni kurar, HTTP asıl isteği taşır.", `
+    <svg viewBox="0 0 900 420" role="img" aria-label="DNS, TCP, TLS ve HTTP web isteği sırası">
+      <defs>
+        <marker id="arrow-web" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor"></path></marker>
+      </defs>
+      <g class="v-lane"><line x1="112" y1="82" x2="112" y2="332"/><text text-anchor="middle" x="112" y="58">Tarayıcı</text></g>
+      <g class="v-lane"><line x1="310" y1="82" x2="310" y2="332"/><text text-anchor="middle" x="310" y="58">DNS Resolver</text></g>
+      <g class="v-lane"><line x1="548" y1="82" x2="548" y2="332"/><text text-anchor="middle" x="548" y="58">Sunucu</text></g>
+      <g class="v-lane"><line x1="748" y1="82" x2="748" y2="332"/><text text-anchor="middle" x="748" y="58">Sertifika Zinciri</text></g>
+      <path class="v-line solid" marker-end="url(#arrow-web)" d="M112 104 H310"/>
+      <text class="v-small" x="132" y="94">1. example.com kim?</text>
+      <path class="v-line return" marker-end="url(#arrow-web)" d="M310 146 H112"/>
+      <text class="v-small" x="156" y="138">2. 203.0.113.10</text>
+      <path class="v-line solid" marker-end="url(#arrow-web)" d="M112 188 H548"/>
+      <text class="v-small" x="248" y="178">3. TCP handshake: SYN, SYN/ACK, ACK</text>
+      <path class="v-line solid" marker-end="url(#arrow-web)" d="M112 232 H548"/>
+      <path class="v-line thin" marker-end="url(#arrow-web)" d="M548 224 H748"/>
+      <text class="v-small" x="244" y="222">4. TLS: sertifika, anahtar değişimi, şifreli kanal</text>
+      <path class="v-line solid" marker-end="url(#arrow-web)" d="M112 276 H548"/>
+      <text class="v-small" x="248" y="266">5. HTTP GET /api/orders</text>
+      <path class="v-line return" marker-end="url(#arrow-web)" d="M548 318 H112"/>
+      <text class="v-small" x="264" y="310">6. 200 OK veya hatanın gerçek ipucu</text>
+      <g class="v-callout"><rect x="626" y="114" width="196" height="70" rx="10"/><text x="646" y="142">HTTPS kilidi</text><text class="v-small" x="646" y="164">Sadece şifre değil, kimlik kanıtı.</text></g>
+      <text class="v-small" text-anchor="middle" x="450" y="382">Sayfa açılmadığında uygulamadan önce DNS, TCP, TLS ve HTTP sırasını ayırmak teşhisi hızlandırır.</text>
+    </svg>`);
+}
+
+function kubernetesVisual() {
+  return customVisual("kubernetes-cluster", "Kubernetes, tek tek container başlatmaktan çok; trafiği, sağlığı, ölçeği, konfigürasyonu ve sürüm değişimini aynı cluster düzeninde yönetir.", `
+    <svg viewBox="0 0 900 430" role="img" aria-label="Kubernetes cluster, ingress, service, deployment, pod ve node ilişkisi">
+      <defs><marker id="arrow-k8s" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor"></path></marker></defs>
+      <rect class="v-zone" x="248" y="46" width="604" height="308" rx="20"/>
+      <text x="274" y="78">Kubernetes Cluster</text>
+      <g class="v-box"><rect x="58" y="154" width="130" height="72" rx="12"/><text text-anchor="middle" x="123" y="184">Kullanıcı</text><text class="v-small" text-anchor="middle" x="123" y="206">HTTPS</text></g>
+      <g class="v-box"><rect x="282" y="126" width="122" height="68" rx="10"/><text text-anchor="middle" x="343" y="154">Ingress</text><text class="v-small" text-anchor="middle" x="343" y="176">dış kapı</text></g>
+      <g class="v-box"><rect x="444" y="126" width="122" height="68" rx="10"/><text text-anchor="middle" x="505" y="154">Service</text><text class="v-small" text-anchor="middle" x="505" y="176">sabit adres</text></g>
+      <g class="v-box"><rect x="622" y="82" width="168" height="54" rx="10"/><text text-anchor="middle" x="706" y="115">Deployment</text></g>
+      <rect class="v-zone inner" x="610" y="166" width="206" height="144" rx="14"/>
+      <text x="632" y="194">Node A</text>
+      <g class="v-pod"><rect x="634" y="216" width="70" height="48" rx="10"/><text text-anchor="middle" x="669" y="246">Pod</text></g>
+      <g class="v-pod"><rect x="724" y="216" width="70" height="48" rx="10"/><text text-anchor="middle" x="759" y="246">Pod</text></g>
+      <rect class="v-zone inner" x="366" y="232" width="188" height="88" rx="14"/>
+      <text x="388" y="260">Node B</text>
+      <g class="v-pod"><rect x="456" y="268" width="70" height="36" rx="9"/><text text-anchor="middle" x="491" y="292">Pod</text></g>
+      <g class="v-callout"><rect x="278" y="240" width="126" height="66" rx="10"/><text x="296" y="266">ConfigMap</text><text class="v-small" x="296" y="288">ayar</text></g>
+      <g class="v-callout"><rect x="278" y="316" width="126" height="54" rx="10"/><text x="296" y="348">Secret</text></g>
+      <g class="v-callout"><rect x="610" y="326" width="206" height="54" rx="10"/><text x="632" y="358">HPA: yük artarsa pod çoğaltır</text></g>
+      <path class="v-line solid" marker-end="url(#arrow-k8s)" d="M188 190 H282"/>
+      <path class="v-line solid" marker-end="url(#arrow-k8s)" d="M404 160 H444"/>
+      <path class="v-line solid" marker-end="url(#arrow-k8s)" d="M566 160 C604 170 622 196 650 216"/>
+      <path class="v-line solid" marker-end="url(#arrow-k8s)" d="M566 170 C624 198 708 206 742 216"/>
+      <path class="v-line thin" marker-end="url(#arrow-k8s)" d="M706 136 V216"/>
+      <path class="v-line thin" marker-end="url(#arrow-k8s)" d="M404 272 H456"/>
+      <text class="v-small" text-anchor="middle" x="450" y="402">Mülakatta “pod nedir?” sorusu aslında adresleme, sağlık kontrolü, rollout ve ölçek davranışını birlikte anlatmanı bekler.</text>
+    </svg>`);
+}
+
+function securityZonesVisual() {
+  return customVisual("security-zones", "Ağ güvenliği, tek büyük duvar değil; internetten veritabanına kadar her bölgede farklı güven, farklı kayıt ve farklı izin seviyesidir.", `
+    <svg viewBox="0 0 900 420" role="img" aria-label="WAF, firewall, DMZ, uygulama subneti, veritabanı subneti ve SIEM ilişkisi">
+      <defs><marker id="arrow-sec" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor"></path></marker></defs>
+      <rect class="v-zone" x="42" y="70" width="150" height="212" rx="16"/><text text-anchor="middle" x="117" y="106">İnternet</text>
+      <rect class="v-zone" x="226" y="70" width="156" height="212" rx="16"/><text text-anchor="middle" x="304" y="106">Edge</text>
+      <rect class="v-zone" x="416" y="70" width="156" height="212" rx="16"/><text text-anchor="middle" x="494" y="106">DMZ</text>
+      <rect class="v-zone" x="606" y="70" width="112" height="212" rx="16"/><text text-anchor="middle" x="662" y="106">App</text>
+      <rect class="v-zone" x="748" y="70" width="112" height="212" rx="16"/><text text-anchor="middle" x="804" y="106">DB</text>
+      <g class="v-box"><rect x="70" y="148" width="94" height="58" rx="10"/><text text-anchor="middle" x="117" y="182">Trafik</text></g>
+      <g class="v-box"><rect x="252" y="126" width="104" height="50" rx="10"/><text text-anchor="middle" x="304" y="157">CDN/WAF</text></g>
+      <g class="v-box"><rect x="252" y="204" width="104" height="50" rx="10"/><text text-anchor="middle" x="304" y="235">Firewall</text></g>
+      <g class="v-box"><rect x="444" y="148" width="100" height="58" rx="10"/><text text-anchor="middle" x="494" y="181">Reverse Proxy</text></g>
+      <g class="v-box"><rect x="622" y="148" width="80" height="58" rx="10"/><text text-anchor="middle" x="662" y="181">API</text></g>
+      <g class="v-box"><rect x="764" y="148" width="80" height="58" rx="10"/><text text-anchor="middle" x="804" y="181">DB</text></g>
+      <path class="v-line solid" marker-end="url(#arrow-sec)" d="M164 176 H252"/>
+      <path class="v-line solid" marker-end="url(#arrow-sec)" d="M356 176 H444"/>
+      <path class="v-line solid" marker-end="url(#arrow-sec)" d="M544 176 H622"/>
+      <path class="v-line solid" marker-end="url(#arrow-sec)" d="M702 176 H764"/>
+      <path class="v-line danger" d="M117 206 C168 258 234 270 304 254"/>
+      <text class="v-small" x="232" y="300">WAF saldırı desenini, firewall bağlantı kuralını, segmentasyon ise hasarın yayılmasını sınırlar.</text>
+      <g class="v-callout"><rect x="226" y="318" width="188" height="58" rx="10"/><text x="246" y="344">IDS/IPS sensörü</text><text class="v-small" x="246" y="364">Şüpheli davranışı dinler.</text></g>
+      <g class="v-callout"><rect x="452" y="318" width="188" height="58" rx="10"/><text x="472" y="344">SIEM</text><text class="v-small" x="472" y="364">Logları olay hikayesine çevirir.</text></g>
+      <path class="v-line thin" marker-end="url(#arrow-sec)" d="M494 206 C500 278 514 300 546 318"/>
+      <path class="v-line thin" marker-end="url(#arrow-sec)" d="M304 254 C316 286 330 304 320 318"/>
+      <text class="v-small" text-anchor="middle" x="450" y="402">İyi güvenlik cevabı “firewall var” demez; hangi bölgede hangi izin, hangi log ve hangi kaçış planı var diye anlatır.</text>
+    </svg>`);
+}
+
+function ddosVisual() {
+  return customVisual("ddos-defense", "DDoS savunmasında amaç saldırgan trafiği origin sunucuya varmadan seyreltmek, gerçek kullanıcı yolunu açık tutmak ve iletişimi teknik aksiyonla birlikte yürütmektir.", `
+    <svg viewBox="0 0 900 410" role="img" aria-label="DDoS saldırısı, CDN temizleme, rate limit, WAF ve origin koruması">
+      <defs><marker id="arrow-ddos" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor"></path></marker></defs>
+      <g class="v-node"><circle cx="82" cy="92" r="18"/><text x="118" y="98">Bot ağı</text></g>
+      <g class="v-node"><circle cx="76" cy="158" r="15"/><text x="112" y="164">Sahte istek</text></g>
+      <g class="v-node"><circle cx="100" cy="224" r="17"/><text x="136" y="230">Reflection</text></g>
+      <g class="v-node legit"><circle cx="96" cy="318" r="16"/><text x="132" y="324">Gerçek kullanıcı</text></g>
+      <g class="v-box"><rect x="300" y="112" width="156" height="116" rx="16"/><text text-anchor="middle" x="378" y="148">CDN Scrubbing</text><text class="v-small" text-anchor="middle" x="378" y="174">trafik temizleme</text><text class="v-small" text-anchor="middle" x="378" y="198">coğrafi yayılım</text></g>
+      <g class="v-box"><rect x="514" y="112" width="138" height="116" rx="16"/><text text-anchor="middle" x="583" y="148">WAF</text><text class="v-small" text-anchor="middle" x="583" y="174">rate limit</text><text class="v-small" text-anchor="middle" x="583" y="198">bot kuralı</text></g>
+      <g class="v-box"><rect x="718" y="112" width="120" height="116" rx="16"/><text text-anchor="middle" x="778" y="148">Origin</text><text class="v-small" text-anchor="middle" x="778" y="174">API / Web</text><text class="v-small" text-anchor="middle" x="778" y="198">korunur</text></g>
+      <path class="v-line danger" marker-end="url(#arrow-ddos)" d="M118 92 C186 92 230 126 300 142"/>
+      <path class="v-line danger" marker-end="url(#arrow-ddos)" d="M112 158 C196 156 238 164 300 170"/>
+      <path class="v-line danger" marker-end="url(#arrow-ddos)" d="M136 224 C210 228 242 208 300 196"/>
+      <path class="v-line solid" marker-end="url(#arrow-ddos)" d="M456 170 H514"/>
+      <path class="v-line solid" marker-end="url(#arrow-ddos)" d="M652 170 H718"/>
+      <path class="v-line legit" marker-end="url(#arrow-ddos)" d="M112 318 C250 318 410 284 584 228"/>
+      <g class="v-callout"><rect x="292" y="276" width="184" height="60" rx="10"/><text x="312" y="302">Ölçüm</text><text class="v-small" x="312" y="322">RPS, hata oranı, latency</text></g>
+      <g class="v-callout"><rect x="520" y="276" width="220" height="60" rx="10"/><text x="540" y="302">Kriz iletişimi</text><text class="v-small" x="540" y="322">durum sayfası, paydaş, ISP</text></g>
+      <text class="v-small" text-anchor="middle" x="450" y="382">Liderlik sorusu kapasiteden ibaret değildir: filtre nerede, origin nasıl saklanıyor, kim ne zaman bilgilendiriliyor?</text>
+    </svg>`);
+}
+
+function publicProjectTableVisual() {
+  return customVisual("project-table", "Kamu ve büyük kurum projelerinde aynı masada farklı diller konuşulur; güçlü yönetici bu dilleri kabul kriteri, risk, bütçe ve kanıt üzerinden tek hikayede buluşturur.", `
+    <svg viewBox="0 0 900 410" role="img" aria-label="Kamu BT proje toplantısı masası, paydaşlar ve kanıt dosyası">
+      <ellipse class="v-table" cx="450" cy="200" rx="250" ry="112"/>
+      <g class="v-chair"><rect x="390" y="146" width="120" height="70" rx="12"/><text text-anchor="middle" x="450" y="176">Kanıt dosyası</text><text class="v-small" text-anchor="middle" x="450" y="198">kabul, log, risk</text></g>
+      <g class="v-callout"><rect x="86" y="70" width="154" height="62" rx="10"/><text x="106" y="96">Talep sahibi</text><text class="v-small" x="106" y="116">iş değeri</text></g>
+      <g class="v-callout"><rect x="360" y="38" width="154" height="62" rx="10"/><text x="380" y="64">Teknik ekip</text><text class="v-small" x="380" y="84">mimari ve işletim</text></g>
+      <g class="v-callout"><rect x="656" y="70" width="154" height="62" rx="10"/><text x="676" y="96">Satın alma</text><text class="v-small" x="676" y="116">sözleşme ve bütçe</text></g>
+      <g class="v-callout"><rect x="84" y="282" width="154" height="62" rx="10"/><text x="104" y="308">Hukuk / KVKK</text><text class="v-small" x="104" y="328">veri sınırı</text></g>
+      <g class="v-callout"><rect x="360" y="316" width="154" height="62" rx="10"/><text x="380" y="342">Güvenlik</text><text class="v-small" x="380" y="362">kontrol ve denetim</text></g>
+      <g class="v-callout"><rect x="656" y="282" width="154" height="62" rx="10"/><text x="676" y="308">Yönetici</text><text class="v-small" x="676" y="328">karar ve öncelik</text></g>
+      <path class="v-line thin" d="M240 102 C310 132 352 148 390 164"/>
+      <path class="v-line thin" d="M437 100 V146"/>
+      <path class="v-line thin" d="M656 102 C600 132 548 148 510 164"/>
+      <path class="v-line thin" d="M238 312 C318 276 360 236 390 206"/>
+      <path class="v-line thin" d="M437 316 V216"/>
+      <path class="v-line thin" d="M656 312 C590 274 546 236 510 206"/>
+      <text class="v-small" text-anchor="middle" x="450" y="392">Proje mülakatında en iyi cevap “şunu yaparız” değil; kim etkilenecek, nasıl kabul edeceğiz, hangi kanıtla yöneteceğiz cevabıdır.</text>
+    </svg>`);
+}
+
+const chapterVisuals = {
+  "asama-1-bilgisayar-temelleri-2": hardwareMotherboardVisual,
+  "asama-1-bilgisayar-temelleri-6": networkTopologyVisual,
+  "asama-1-bilgisayar-temelleri-7": dnsHttpsVisual,
+  "asama-6-devops-bulut-3": kubernetesVisual,
+  "siber-guvenlik-3": securityZonesVisual,
+  "liderlik-kriz-gelecek-9": ddosVisual,
+  "proje-kamu-yonetim-11": publicProjectTableVisual
+};
+
 function flowDiagram(kind, caption, labels, subline = "") {
   const count = labels.length;
   const boxWidth = count > 5 ? 116 : 132;
@@ -1961,6 +2228,8 @@ const visualBlueprints = {
 };
 
 function visualFor(category, chapter) {
+  const custom = chapterVisuals[chapter.id];
+  if (custom) return custom();
   const spec = visualBlueprints[category.id]?.[chapter.number - 1];
   if (spec) return renderVisualSpec(spec);
   return renderVisualSpec({

@@ -842,6 +842,119 @@ p {
   animation: visualTrace 8s linear infinite;
 }
 
+.visual-custom {
+  padding: 24px;
+}
+
+.visual-custom svg {
+  min-height: 300px;
+}
+
+.visual-custom .v-line,
+.visual-custom .v-line.solid,
+.visual-custom .v-line.thin,
+.visual-custom .v-line.return,
+.visual-custom .v-line.power,
+.visual-custom .v-line.danger,
+.visual-custom .v-line.legit {
+  stroke-dasharray: none;
+  animation: none;
+  color: color-mix(in srgb, var(--accent-2) 78%, white);
+}
+
+.visual-custom .v-line.solid {
+  stroke-width: 3.2;
+}
+
+.visual-custom .v-line.return {
+  stroke: color-mix(in srgb, var(--accent) 62%, var(--muted));
+  stroke-width: 2.4;
+  opacity: 0.72;
+}
+
+.visual-custom .v-line.power {
+  stroke: color-mix(in srgb, #f3c56b 72%, var(--accent));
+  stroke-width: 2.4;
+  opacity: 0.78;
+}
+
+.visual-custom .v-line.danger {
+  stroke: color-mix(in srgb, #ff6b6b 74%, var(--accent));
+  stroke-width: 3;
+  opacity: 0.86;
+}
+
+.visual-custom .v-line.legit {
+  stroke: color-mix(in srgb, #7be495 76%, var(--accent-2));
+  stroke-width: 3.2;
+}
+
+.visual-custom .v-zone,
+.visual-custom .v-board,
+.visual-custom .v-cloud,
+.visual-custom .v-table {
+  fill: color-mix(in srgb, var(--paper-2) 86%, black);
+  stroke: color-mix(in srgb, var(--accent-2) 46%, var(--line));
+  stroke-width: 1.5;
+}
+
+.visual-custom .v-zone.inner {
+  fill: color-mix(in srgb, var(--paper-2) 76%, black);
+  stroke-dasharray: 7 6;
+}
+
+.visual-custom .v-board {
+  fill: color-mix(in srgb, #17231d 58%, var(--paper-2));
+}
+
+.visual-custom .v-cloud {
+  fill: color-mix(in srgb, #203044 70%, var(--paper-2));
+}
+
+.visual-custom .v-callout rect,
+.visual-custom .v-chip rect,
+.visual-custom .v-slot rect,
+.visual-custom .v-pod rect,
+.visual-custom .v-chair rect {
+  fill: color-mix(in srgb, var(--paper) 34%, var(--paper-2));
+  stroke: color-mix(in srgb, var(--accent-2) 44%, var(--line));
+  stroke-width: 1.2;
+}
+
+.visual-custom .v-chip rect {
+  fill: color-mix(in srgb, #233b3b 64%, var(--paper-2));
+}
+
+.visual-custom .v-slot rect {
+  fill: color-mix(in srgb, #2d2f3d 62%, var(--paper-2));
+}
+
+.visual-custom .v-pod rect {
+  fill: color-mix(in srgb, #243a31 68%, var(--paper-2));
+}
+
+.visual-custom .v-table {
+  fill: color-mix(in srgb, #25313d 72%, var(--paper-2));
+}
+
+.visual-custom .v-lane line {
+  stroke: color-mix(in srgb, var(--accent-2) 34%, var(--line));
+  stroke-width: 2;
+  stroke-dasharray: 5 7;
+}
+
+.visual-custom .v-node circle {
+  animation: none;
+}
+
+.visual-custom .v-node.legit circle {
+  fill: color-mix(in srgb, #7be495 72%, var(--paper-2));
+}
+
+.visual-custom marker path {
+  fill: var(--accent-2);
+}
+
 .bespoke-visual .v-box {
   animation: cardFloat 5s ease-in-out infinite;
   animation-delay: calc(var(--i, 0) * 180ms);
