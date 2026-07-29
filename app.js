@@ -1670,28 +1670,6 @@ function articleWordCount(text) {
   return text.replace(/<[^>]*>/g, " ").trim().split(/\s+/).filter(Boolean).length;
 }
 
-function splitLongRead(text, className = "long-read") {
-  const sentences = String(text).match(/[^.!?]+[.!?]+(?:['")\]]+)?|[^.!?]+$/g) || [String(text)];
-  const paragraphs = [];
-  let current = "";
-  let sentenceCount = 0;
-  sentences.forEach((sentence) => {
-    const clean = sentence.trim();
-    if (!clean) return;
-    const next = current ? `${current} ${clean}` : clean;
-    sentenceCount += 1;
-    if (articleWordCount(next) > 170 || sentenceCount >= 7) {
-      if (current) paragraphs.push(current);
-      current = clean;
-      sentenceCount = 1;
-    } else {
-      current = next;
-    }
-  });
-  if (current) paragraphs.push(current);
-  return paragraphs.map((paragraphText) => `<p class="${className}">${paragraphText}</p>`).join("");
-}
-
 function editorialDepthForShortArticle(category, chapter, text) {
   if (articleWordCount(text) >= 700) return "";
   const title = cleanTitle(chapter);
@@ -1735,7 +1713,7 @@ function manualArticle(category, chapter) {
     const supplement = articleSupplements[chapter.id] ? ` ${articleSupplements[chapter.id]}` : "";
     const enrichedText = `${baseText}${supplement}`;
     const depth = editorialDepthForShortArticle(category, chapter, enrichedText);
-    return `${splitLongRead(enrichedText)}${depth ? splitLongRead(depth, "long-read long-read-continuation") : ""}`;
+    return `<p class="long-read">${enrichedText}</p>${depth ? `<p class="long-read long-read-continuation">${depth}</p>` : ""}`;
   }
   return article.map((block) => {
     if (typeof block === "string") return paragraph(block);
