@@ -2550,16 +2550,24 @@ function visualDetail(label, index, spec) {
 }
 
 function normalizeVisualSpec(spec) {
-  if (spec.type === "hub") return { ...spec, type: "system", labels: spec.nodes || [] };
-  if (spec.type === "layers") return { ...spec, type: "system", labels: (spec.labels || []).map((item) => Array.isArray(item) ? item[0] : item) };
+  if (spec.type === "hub") return { ...spec, labels: spec.nodes || [] };
+  if (spec.type === "layers") return { ...spec, labels: (spec.labels || []).map((item) => Array.isArray(item) ? item[0] : item) };
   if (spec.type === "split") return { ...spec, labels: [spec.left?.[0], spec.right?.[0]].filter(Boolean) };
   return { ...spec, labels: spec.labels || [] };
 }
 
+function visualTitle(label) {
+  return Array.isArray(label) ? label[0] : label;
+}
+
+function visualSub(label, index, spec) {
+  return Array.isArray(label) && label[1] ? label[1] : visualDetail(visualTitle(label), index, spec);
+}
+
 function conceptCards(spec) {
   return spec.labels.map((label, index) => {
-    const title = Array.isArray(label) ? label[0] : label;
-    const sub = Array.isArray(label) ? label[1] : visualDetail(title, index, spec);
+    const title = visualTitle(label);
+    const sub = visualSub(label, index, spec);
     return `
       <div class="visual-card" style="--i:${index}">
         <strong>${svgLabel(title)}</strong>
@@ -2569,32 +2577,212 @@ function conceptCards(spec) {
   }).join("");
 }
 
-function visualBoardClass(type) {
-  if (["network", "security", "incident", "pipeline", "process", "sequence", "governance", "decision", "system"].includes(type)) return `visual-rich-board visual-rich-board-${type}`;
-  if (type === "flow") return "visual-rich-board visual-rich-board-sequence";
-  if (type === "timeline") return "visual-rich-board visual-rich-board-process";
-  if (type === "matrix") return "visual-rich-board visual-rich-board-decision";
-  if (type === "stack") return "visual-rich-board visual-rich-board-system";
-  return "visual-rich-board visual-rich-board-system";
+function visualHeader(spec, center) {
+  return `
+    <div class="visual-story-head">
+      <span>${svgLabel((spec.type || "scene").toUpperCase())}</span>
+      <strong>${svgLabel(center)}</strong>
+      <p>${svgLabel(spec.caption)}</p>
+    </div>
+  `;
+}
+
+function visualNote(note) {
+  return note ? `<div class="visual-story-note">${svgLabel(note)}</div>` : "";
+}
+
+function renderFlowVisual(spec, center) {
+  const labels = spec.labels.slice(0, 8);
+  return `
+    <div class="visual-story visual-flowline">
+      ${visualHeader(spec, center)}
+      <div class="flowline-track">
+        ${labels.map((label, index) => `
+          <div class="flowline-step" style="--i:${index}">
+            <b>${index + 1}</b>
+            <strong>${svgLabel(visualTitle(label))}</strong>
+            <span>${svgLabel(visualSub(label, index, spec))}</span>
+          </div>
+        `).join("")}
+      </div>
+      ${visualNote(spec.note)}
+    </div>
+  `;
+}
+
+function renderTimelineVisual(spec, center) {
+  return `
+    <div class="visual-story visual-roadmap">
+      ${visualHeader(spec, center)}
+      <ol class="roadmap-list">
+        ${spec.labels.slice(0, 8).map((label, index) => `
+          <li style="--i:${index}">
+            <b>${String(index + 1).padStart(2, "0")}</b>
+            <strong>${svgLabel(visualTitle(label))}</strong>
+            <span>${svgLabel(visualSub(label, index, spec))}</span>
+          </li>
+        `).join("")}
+      </ol>
+      ${visualNote(spec.note)}
+    </div>
+  `;
+}
+
+function renderStackVisual(spec, center) {
+  return `
+    <div class="visual-story visual-layercake">
+      ${visualHeader(spec, center)}
+      <div class="layercake-stack">
+        ${spec.labels.slice(0, 8).map((label, index) => `
+          <div class="layercake-row" style="--i:${index}">
+            <strong>${svgLabel(visualTitle(label))}</strong>
+            <span>${svgLabel(visualSub(label, index, spec))}</span>
+          </div>
+        `).join("")}
+      </div>
+      ${visualNote(spec.note)}
+    </div>
+  `;
+}
+
+function renderSplitVisual(spec, center) {
+  const left = spec.left || [spec.labels[0] || "Sol taraf", visualSub(spec.labels[0] || "Sol taraf", 0, spec)];
+  const right = spec.right || [spec.labels[1] || "Sağ taraf", visualSub(spec.labels[1] || "Sağ taraf", 1, spec)];
+  return `
+    <div class="visual-story visual-contrast">
+      ${visualHeader(spec, center)}
+      <div class="contrast-panels">
+        <section>
+          <small>Teknik kök</small>
+          <strong>${svgLabel(left[0])}</strong>
+          <p>${svgLabel(left[1] || visualDetail(left[0], 0, spec))}</p>
+        </section>
+        <section>
+          <small>Karar etkisi</small>
+          <strong>${svgLabel(right[0])}</strong>
+          <p>${svgLabel(right[1] || visualDetail(right[0], 1, spec))}</p>
+        </section>
+      </div>
+      ${visualNote(spec.note)}
+    </div>
+  `;
+}
+
+function renderPieVisual(spec, center) {
+  const labels = spec.labels.slice(0, 6);
+  return `
+    <div class="visual-story visual-pieboard">
+      ${visualHeader(spec, center)}
+      <div class="pie-layout">
+        <div class="pie-chart" aria-hidden="true"></div>
+        <div class="pie-legend">
+          ${labels.map((label, index) => `
+            <div style="--i:${index}">
+              <i></i>
+              <strong>${svgLabel(visualTitle(label))}</strong>
+              <span>${svgLabel(visualSub(label, index, spec))}</span>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+      ${visualNote(spec.note)}
+    </div>
+  `;
+}
+
+function renderSceneVisual(spec, center) {
+  const labels = spec.labels.slice(0, 8);
+  return `
+    <div class="visual-story visual-scene-board">
+      ${visualHeader(spec, center)}
+      <div class="scene-stage">
+        <div class="scene-core">
+          <strong>${svgLabel(center)}</strong>
+          <span>${svgLabel(spec.note || "Bu sahnede kavramlar aynı olayın farklı rolleri olarak okunur.")}</span>
+        </div>
+        <div class="scene-items">
+          ${labels.map((label, index) => `
+            <div class="scene-item" style="--i:${index}">
+              <strong>${svgLabel(visualTitle(label))}</strong>
+              <span>${svgLabel(visualSub(label, index, spec))}</span>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderNetworkVisual(spec, center) {
+  return `
+    <div class="visual-story visual-network-map">
+      ${visualHeader(spec, center)}
+      <div class="network-map">
+        ${spec.labels.slice(0, 8).map((label, index) => `
+          <div class="network-hop" style="--i:${index}">
+            <strong>${svgLabel(visualTitle(label))}</strong>
+            <span>${svgLabel(visualSub(label, index, spec))}</span>
+          </div>
+        `).join("")}
+      </div>
+      ${visualNote(spec.note)}
+    </div>
+  `;
+}
+
+function renderSecurityVisual(spec, center) {
+  return `
+    <div class="visual-story visual-security-map">
+      ${visualHeader(spec, center)}
+      <div class="security-zones">
+        ${spec.labels.slice(0, 8).map((label, index) => `
+          <section style="--i:${index}">
+            <strong>${svgLabel(visualTitle(label))}</strong>
+            <span>${svgLabel(visualSub(label, index, spec))}</span>
+          </section>
+        `).join("")}
+      </div>
+      ${visualNote(spec.note)}
+    </div>
+  `;
+}
+
+function renderGovernanceVisual(spec, center) {
+  return `
+    <div class="visual-story visual-tabletop">
+      ${visualHeader(spec, center)}
+      <div class="tabletop">
+        <div class="tabletop-center">${svgLabel(center)}</div>
+        ${spec.labels.slice(0, 8).map((label, index) => `
+          <div class="tabletop-seat" style="--i:${index}">
+            <strong>${svgLabel(visualTitle(label))}</strong>
+            <span>${svgLabel(visualSub(label, index, spec))}</span>
+          </div>
+        `).join("")}
+      </div>
+      ${visualNote(spec.note)}
+    </div>
+  `;
 }
 
 function renderVisualSpec(spec) {
   const normalized = normalizeVisualSpec(spec);
-  const kind = `visual-rich visual-rich-type-${normalized.type || "system"}`;
+  const type = normalized.type || "scene";
+  const kind = `visual-varied visual-varied-${type}`;
   const center = normalized.center || normalized.labels[0] || "Zihinsel Harita";
+  let body = "";
+  if (["flow", "sequence", "pipeline", "process"].includes(type)) body = renderFlowVisual(normalized, center);
+  else if (type === "timeline") body = renderTimelineVisual(normalized, center);
+  else if (type === "stack" || type === "layers") body = renderStackVisual(normalized, center);
+  else if (type === "split") body = renderSplitVisual(normalized, center);
+  else if (type === "matrix" || type === "decision") body = renderPieVisual(normalized, center);
+  else if (type === "network") body = renderNetworkVisual(normalized, center);
+  else if (type === "security" || type === "incident") body = renderSecurityVisual(normalized, center);
+  else if (type === "governance") body = renderGovernanceVisual(normalized, center);
+  else body = renderSceneVisual(normalized, center);
   return `
     <figure class="visual-canvas ${kind}">
-      <div class="${visualBoardClass(normalized.type)}">
-        <div class="visual-board-head">
-          <span class="visual-board-eyebrow">${svgLabel((normalized.type || "system").toUpperCase())}</span>
-          <strong>${svgLabel(center)}</strong>
-          <p>${svgLabel(normalized.caption)}</p>
-        </div>
-        <div class="visual-board-grid">
-          ${conceptCards(normalized)}
-        </div>
-        ${normalized.note ? `<div class="visual-board-note">${svgLabel(normalized.note)}</div>` : ""}
-      </div>
+      ${body}
       <figcaption>${svgLabel(normalized.caption)}</figcaption>
     </figure>
   `;
