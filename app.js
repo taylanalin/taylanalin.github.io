@@ -1,194 +1,140 @@
 const book = {
   title: "Teknoloji Atlası",
-  kicker: "Kamu, Yazılım ve Gelecek İçin Saha Kitabı",
-  subtitle: "Kamu kurumlarında, savunma sanayiinde ve büyük ölçekli şirketlerde karşılaşılan yazılım, altyapı, siber güvenlik, veri ve yapay zekâ meselelerini aynı çalışma hayatının içinde sıraya koyar.",
+  kicker: "Mülakat, Saha ve Üst Düzey BT Yönetimi İçin Yol Haritası",
+  subtitle: "Bilgisayar temellerinden yapay zekâ ve bulut yönetimine kadar uzanan konuları, mülakatlarda sorulacak netlikte ve büyük kurumlarda karar aldıracak olgunlukta sıraya koyar.",
   promise:
-    "Bir sabah kullanıcı ekranı açılmaz, öğleden sonra tedarikçi toplantısı başlar, akşam kabul tutanağı masaya gelir. Aynı günün içinde kod, kurum, insan, bütçe ve mimari birbirine bağlanır."
+    "Okur önce bilgisayarın gerçekten nasıl çalıştığını görür, sonra kodun, ağın, verinin, güvenliğin, yapay zekânın ve yöneticilik kararlarının aynı büyük sistemde nasıl birbirine bağlandığını adım adım izler."
 };
 
 const categories = [
   {
-    id: "kamu-rehberi",
-    title: "Kamu Rehberi",
-    summary: "İhale, resmi yazı, kabul komisyonu, protokol, denetim, veri güvenliği ve kurumsal hafıza.",
-    mode: "public",
+    id: "asama-1-bilgisayar-temelleri",
+    title: "1. Aşama: Bilgisayar Temelleri",
+    summary: "Donanım, işletim sistemi, Linux, terminal, ağ mantığı, DNS, HTTP, Git ve GitHub ile teknik zemini kurar.",
+    mode: "systems",
     chapters: [
-      "Kamu rehberine giriş: kurumun dili, imzanın ağırlığı",
-      "İhtiyacın doğru tarif edilmesi",
-      "Teknik şartname ve ölçülebilir kabul",
-      "Yaklaşık maliyet, piyasa araştırması ve bütçe savunması",
-      "Muayene, kabul ve teslim kanıtları",
-      "Resmi yazı, olur, onay ve karar izi",
-      "Protokol, veri paylaşımı ve kurumlar arası sınır",
-      "Kişisel veri, KVKK ve bilgi güvenliği sorumluluğu",
-      "Denetim izi, arşiv ve kurumsal hafıza",
-      "Tedarikçi yönetimi, bakım ve destek",
-      "Lisans, envanter ve varlık disiplini",
-      "Acil durum, yedekleme ve iş sürekliliği",
-      "Taşra teşkilatı, merkez ve saha gerçekliği",
-      "Kamu yöneticisinin toplantı dili",
-      "Kamu BT yöneticisi için bütün resim"
+      "Yola giriş: bilgisayarı parça listesi değil çalışan düzen olarak görmek",
+      "Bilgisayar donanımı: CPU, RAM, disk, anakart ve veri yolu",
+      "İşletim sistemi mantığı: süreç, bellek, dosya sistemi ve sürücü",
+      "Terminal kullanımı: komut satırında düşünmeyi öğrenmek",
+      "Linux kullanımı: kullanıcılar, izinler, servisler ve paket yönetimi",
+      "Ağ temelleri: TCP/IP, port, subnet, gateway ve routing",
+      "DNS, HTTP ve HTTPS: web isteğinin görünmeyen yolculuğu",
+      "Git ve GitHub: versiyon kontrolü, branch, pull request ve ekip hafızası",
+      "Teknik mülakat zemini: temel kavramları ezberden açıklamaya çevirmek"
     ]
   },
   {
-    id: "insanlar",
-    title: "İnsanlar ve Teknoloji",
-    summary: "Teknik insanların görünen cümleleri, iç baskıları, direnç sebepleri ve karar anındaki gerçek dertleri.",
-    mode: "people",
+    id: "asama-2-programlama",
+    title: "2. Aşama: Programlama ve Veri",
+    summary: "Python, algoritmik düşünme, OOP, JSON, API kullanımı, SQL ve PostgreSQL ile üretim seviyesinde yazılım temeli kurar.",
+    mode: "software",
     chapters: [
-      "İnsanlar ve teknoloji: söylenen cümlenin arkasındaki ihtiyaç",
-      "Kamu personelinin güvenlik ve sorumluluk kaygısı",
-      "Özel sektör teknik ekibinin hız ve performans baskısı",
-      "Yazılımcı, sistemci, ağcı ve güvenlikçinin aynı olaya bakışı",
-      "Tedarikçi sunumunda parlayan cümlelerin arkasını okumak",
-      "Üst makam, saha ekibi ve kullanıcı arasında tercüman olmak",
-      "Değişime direnç: tembellik değil çoğu zaman korunma refleksi",
-      "Toplantı psikolojisi ve sessiz kalan riskler",
-      "Başarıyı sahiplenen, hatayı dağıtan organizasyonlar",
-      "Teknik borcun insan davranışına dönüşmesi",
-      "Kriz anında karakter, görev ve iletişim",
-      "İyi ekip kültürünün kurumsal hafızaya dönüşmesi"
+      "Programlamaya giriş: problemi bilgisayarın anlayacağı akışa çevirmek",
+      "Python temelleri: değişkenler, tipler, koşullar ve döngüler",
+      "Fonksiyonlar, modüller ve okunabilir kod alışkanlığı",
+      "OOP mantığı: sınıf, nesne, kapsülleme ve tasarım sezgisi",
+      "Hata yönetimi, dosya işlemleri, JSON ve veri formatları",
+      "API kullanımı: HTTP isteği göndermek, cevap okumak ve hata ayıklamak",
+      "SQL temeli: tablo, ilişki, JOIN, index ve sorgu düşüncesi",
+      "PostgreSQL ile kalıcı kayıt, transaction ve veri bütünlüğü",
+      "Python ekosistemi: FastAPI, Pandas, PyTorch ve TensorFlow'a hazırlık",
+      "Kod mülakatı ve portföy: neyi bildiğini çalışır örnekle göstermek"
     ]
   },
   {
-    id: "tarihsel-evrim",
-    title: "Teknolojinin Tarihsel Evrimi",
-    summary: "İlk bilgisayardan bugünün bulut, mobil, siber güvenlik ve yapay zekâ dünyasına kronolojik yolculuk.",
-    mode: "history",
+    id: "asama-3-web-api",
+    title: "3. Aşama: Web, API ve Servis Mimarisi",
+    summary: "Frontend, backend, REST API, JWT, Redis, mesaj kuyrukları, test ve servis tasarımıyla modern uygulama akışını anlatır.",
+    mode: "software",
     chapters: [
-      "Teknoloji tarihine giriş: hesap ihtiyacından kurum zekâsına",
-      "İlk bilgisayarlar: savaş, sayım ve hız ihtiyacı",
-      "Transistor ve mainframe: güvenilir makine kurumun merkezine giriyor",
-      "Programlama dillerinin doğuşu: makineye iş dili öğretmek",
-      "Unix, dosya sistemi ve çok kullanıcılı dünya",
-      "İlişkisel veritabanı ve SQL: kurum hafızasının düzenlenmesi",
-      "Mikroişlemci, kişisel bilgisayar ve grafik arayüz",
-      "Yerel ağlar, Ethernet ve client-server düzeni",
-      "Web'in doğuşu: HTTP, HTML, URL ve tarayıcı",
-      "Açık kaynak, Linux ve internetin üretim kültürü",
-      "E-ticaret, arama motorları ve veri ekonomisi",
-      "Sanal makine, bulut ve kullandıkça öde mantığı",
-      "Akıllı telefon, mobil uygulama ve sürekli kullanıcı beklentisi",
-      "Büyük veri, log analizi ve olay tabanlı mimari",
-      "DevOps, konteyner ve Kubernetes dönemi",
-      "Siber güvenliğin kurumsal yönetime dönüşmesi",
-      "Üretken yapay zekâ, RAG ve ajan sistemleri",
-      "Dijital egemenlik, yarı iletken yarışı ve yakın gelecek"
+      "Web'e giriş: tarayıcıdan backend'e bir isteğin hikâyesi",
+      "HTML, CSS ve JavaScript: ekrandaki deneyimin üç katmanı",
+      "Backend mantığı: endpoint, servis, controller ve iş kuralı",
+      "REST API tasarımı: kaynak, metot, durum kodu ve sözleşme",
+      "Kimlik ve oturum: JWT, OAuth2, cookie, session ve yetki sınırı",
+      "Redis, cache ve CDN: hız kazanırken eski veri riskini yönetmek",
+      "Mesaj kuyrukları: Kafka, RabbitMQ ve olay tabanlı çalışma",
+      "Test, logging ve observability: sistemin kendi sesini duyabilmesi",
+      "Docker ile geliştirme ortamı ve servis paketleme",
+      "Web mülakatları: API, güvenlik ve ölçekleme sorularına olgun cevap vermek"
     ]
   },
   {
-    id: "kamu-bt",
-    title: "Türkiye'de Kamu BT Birimleri",
-    summary: "Cumhurbaşkanlığı, bakanlıklar, bağlı kurumlar, belediyeler, üniversiteler ve savunma şirketlerinde BT işleyişi.",
-    mode: "publicIt",
+    id: "asama-4-ai-temelleri",
+    title: "4. Aşama: Yapay Zekâ Temelleri",
+    summary: "Makine öğrenmesi, derin öğrenme, sinir ağları, token, embedding, RAG ve model değerlendirmeyi zemine oturtur.",
+    mode: "ai",
     chapters: [
-      "Kamu BT dünyasına giriş: merkez, taşra, şirket ve hizmet",
-      "Cumhurbaşkanlığı ve merkezi dijital dönüşüm koordinasyonu",
-      "Bakanlık bilgi işlem dairesinin gerçek işi",
-      "Genel müdürlük, bağlı kuruluş ve taşra BT ilişkisi",
-      "Belediye ve üniversite bilgi işleminde günlük işletme",
-      "ASELSAN benzeri savunma şirketinde kurumsal BT",
-      "HAVELSAN benzeri yazılım ve sistem entegrasyonu kültürü",
-      "Yazılım geliştirme, entegrasyon ve veri ekipleri",
-      "Sistem, sanallaştırma, veri merkezi ve yedekleme ekibi",
-      "Ağ, güvenlik duvarı, internet çıkışı ve kurumun damarları",
-      "Siber güvenlik biriminin günlük ritmi",
-      "Servis masası, kullanıcı desteği ve beklenti yönetimi",
-      "Lisans, envanter, varlık ve tedarik disiplini",
-      "İş sürekliliği, felaket kurtarma ve tatbikat",
-      "Kamu BT yöneticisinin kazanması gereken arka plan"
+      "Yapay zekâya giriş: model büyüsünü iş probleminden ayırmak",
+      "Makine öğrenmesi mantığı: veri, özellik, hedef ve genelleme",
+      "Derin öğrenme ve sinir ağları: katmanlar, ağırlıklar ve eğitim",
+      "Veri hazırlığı: temizlik, etiketleme, bölme ve sızıntı riskleri",
+      "Token, embedding ve vektör uzayı: metni sayıya çevirmek",
+      "RAG mantığı: modeli kurum bilgisiyle konuşturmak",
+      "Model değerlendirme: doğruluk, halüsinasyon, bias ve güven",
+      "PyTorch ve TensorFlow: araştırmadan üretime giden araçlar",
+      "AI mülakatları: kavramı ezberlemeden örnekle açıklamak"
     ]
   },
   {
-    id: "saha-hikayeleri",
-    title: "Kamu ve Özel Sektörden Teknolojik Hikâyeler",
-    summary: "Gerçek hayattan esinlenen, öğretici ve toplantı havasını hissettiren teknoloji öyküleri.",
-    mode: "story",
+    id: "asama-5-llm-gelistirme",
+    title: "5. Aşama: LLM Geliştirme ve Ajan Sistemleri",
+    summary: "OpenAI API, Ollama, prompt tasarımı, function calling, MCP, ajan araçları, güvenlik ve LLMOps pratiğini anlatır.",
+    mode: "ai",
     chapters: [
-      "Hikâyelere giriş: toplantı kokusundan sistem okumak",
-      "Bakanlık entegrasyonunda imza bekleyen karar",
-      "Savunma üretim hattında kaybolan parça izi",
-      "Komuta kontrol projesinde kabul provası",
-      "Bankada cuma akşamı canlıya geçiş",
-      "Kargo firmasının API krizi",
-      "Belediyede seçim gecesi bilgi işlem nöbeti",
-      "Üniversitede kayıt haftası ve kapasite baskısı",
-      "Çağrı merkezinden gelen ilk teknik sinyal",
-      "KVKK toplantısında yeniden çizilen veri akışı",
-      "Tedarikçi sunumunda parlayan ama ölçülmeyen vaat",
-      "Veri aktarım gecesinde bekleyen ekip",
-      "Saha ekibinin söylemediği gerçek",
-      "Kapanış toplantısında kalan ders"
+      "LLM geliştirmeye giriş: sohbet kutusundan kurumsal ürüne geçmek",
+      "OpenAI API kullanımı: model seçimi, mesaj yapısı ve maliyet bilinci",
+      "Prompt tasarımı: rol, bağlam, örnek, sınır ve çıktı şeması",
+      "Function calling ve tool use: modelin sistemlerle güvenli konuşması",
+      "Ollama ve yerel modeller: mahremiyet, kapasite ve kalite dengesi",
+      "MCP mantığı: araçları, veriyi ve ajanları standart bağlamak",
+      "Kurumsal RAG tasarımı: belge toplama, chunking, arama ve kaynak gösterme",
+      "LLMOps: değerlendirme seti, izleme, sürümleme ve geri bildirim döngüsü",
+      "LLM güvenliği: prompt injection, veri sızıntısı ve insan onayı",
+      "LLM mülakatları ve portföy: küçük demo değil denetlenebilir sistem göstermek"
     ]
   },
   {
-    id: "proje-yonetimi",
-    title: "Proje Yönetimi",
-    summary: "Kamu ve özel sektörde proje yöneticisi olacak kişiyi süreç, risk, kabul ve iletişim disiplinine hazırlar.",
-    mode: "project",
+    id: "asama-6-devops-bulut",
+    title: "6. Aşama: DevOps ve Bulut",
+    summary: "Docker, Kubernetes, CI/CD, monitoring, AWS, Google Cloud, yedekleme, maliyet ve üretim işletimi üzerine kurulur.",
+    mode: "systems",
     chapters: [
-      "Proje yönetimine giriş: işi formdan çıkarıp akışa çevirmek",
-      "Kapsam, hedef ve başarı ölçütünün kurulması",
-      "Paydaş haritası, karar makamı ve sorumluluk matrisi",
-      "İş analizi, kullanıcı hikâyesi ve gereksinim netliği",
-      "Plan, takvim, bağımlılık ve kritik yol",
-      "Risk, varsayım ve sorun kaydı",
-      "Değişiklik yönetimi ve kapsam kayması",
-      "Tedarikçi performansı ve sözleşme takibi",
-      "Test stratejisi, hata yönetimi ve kabul hazırlığı",
-      "Canlıya geçiş planı, geri dönüş ve iletişim",
-      "Kalite, dokümantasyon ve proje hafızası",
-      "Bütçe, kaynak ve kapasite yönetimi",
-      "Agile, Scrum, Kanban ve kamu gerçekliği",
-      "Kriz anında proje yöneticisinin tutumu",
-      "Proje kapanışı ve devre alma",
-      "İyi proje yöneticisinin karar kası"
+      "DevOps'a giriş: yazan ekiple işleten ekibin aynı sorumluluğu taşıması",
+      "Docker: imaj, container, volume, network ve registry",
+      "Kubernetes: pod, deployment, service, ingress ve autoscaling",
+      "CI/CD: build, test, artifact, deployment ve rollback",
+      "Monitoring ve logging: metrik, alarm, dashboard ve olay takibi",
+      "Bulut temelleri: IaaS, PaaS, SaaS, region, availability zone ve IAM",
+      "AWS ve Google Cloud: compute, storage, network ve managed servisler",
+      "Yedekleme, felaket kurtarma ve iş sürekliliği tatbikatı",
+      "Bulut maliyeti ve kapasite planı: hızın faturasını yönetmek",
+      "DevOps mülakatları: üretim ortamını gerçekten işletmiş gibi konuşmak"
     ]
   },
   {
-    id: "teknik-yonetici",
-    title: "Teknik Üst Düzey Yönetici Notları",
-    summary: "Yönetici dili, ekip psikolojisi, üst makam, tedarikçi, bütçe, risk ve karar alma.",
-    mode: "leadership",
+    id: "siber-guvenlik",
+    title: "Siber Güvenlik ve Güvenilirlik",
+    summary: "Kimlik, ağ güvenliği, uygulama güvenliği, SIEM, SOC, olay müdahalesi, KVKK ve güvenlik kültürünü işletilebilir hale getirir.",
+    mode: "security",
     chapters: [
-      "Teknik yöneticiliğe giriş: ayrıntıyı boğmadan bütünü görmek",
-      "Üst makama teknik meseleyi sade anlatmak",
-      "Ekip kurmak: uzmanlık, güven ve ölçü",
-      "Karar almak: hız, risk ve geri dönüş yolu",
-      "Tedarikçiyle masaya oturmak",
-      "Bütçeyi savunmak ve maliyeti görünür kılmak",
-      "Krizde iletişim ve sorumluluk",
-      "Mimari kararların organizasyona etkisi",
-      "Güvenlik, mevzuat ve iş sürekliliğini aynı masaya almak",
-      "Kurum hafızası oluşturan yönetici davranışı",
-      "Yenilik, pilot proje ve kontrollü yaygınlaştırma",
-      "Üst düzey BT yöneticisi için kişisel rota"
-    ]
-  },
-  {
-    id: "kriz-cozum",
-    title: "Teknolojik Krizler ve Çözümleri",
-    summary: "Kesinti, veri kaybı, siber saldırı, performans çöküşü ve itibar krizlerinde pratik lider refleksi.",
-    mode: "crisis",
-    chapters: [
-      "Krizlere giriş: ilk dakika, ilk karar, ilk kayıt",
-      "Veritabanı kilidi ve yavaş sorgu",
-      "SSL sertifikası, DNS ve erişim kesintisi",
-      "Yanlış ortamın canlı sanılması",
-      "DDoS baskısı ve trafik savunması",
-      "Yedek dönmüyor: kâğıt üstündeki güvenin çökmesi",
-      "Disk doldu ama kimse görmedi",
-      "Cache eski fiyat gösterdi",
-      "Mesaj kuyruğu birikti ve işler geride kaldı",
-      "Yetki matrisi delindi",
-      "Üçüncü taraf servis durdu",
-      "Kriz sonrası olay raporu ve kalıcı düzeltme"
+      "Siber güvenliğe giriş: korku değil görünür risk yönetimi",
+      "Kimlik güvenliği: IAM, MFA, SSO, PAM ve least privilege",
+      "Ağ güvenliği: firewall, IDS/IPS, WAF, segmentasyon ve Zero Trust",
+      "Uygulama güvenliği: OWASP, güvenli kod, SAST, DAST ve dependency riski",
+      "Uç nokta güvenliği: EDR, hardening, patch ve cihaz yönetimi",
+      "Log, SIEM ve SOC: alarmdan olaya giden karar hattı",
+      "Veri güvenliği: sınıflandırma, DLP, maskeleme ve KVKK",
+      "Olay müdahalesi: tespit, çevreleme, temizleme ve ders çıkarma",
+      "Siber tatbikat, farkındalık ve yönetim raporu",
+      "Siber güvenlik mülakatları: riski teknik ve yönetsel dille anlatmak"
     ]
   },
   {
     id: "buyuk-mimariler",
-    title: "Büyük Projeler ve Mimari Görseller",
-    summary: "Trendyol benzeri e-ticaret, banka, kamu portalı, savunma ve sağlık sistemlerinin arka planı.",
+    title: "Büyük Sistemler ve Mimari Okuryazarlık",
+    summary: "E-ticaret, banka, kamu portalı, sağlık, savunma ve gerçek zamanlı sistemleri uçtan uca okuyacak mimari refleks kazandırır.",
     mode: "architecture",
     chapters: [
       "Mimariye giriş: ekrandaki tek işlem, arkadaki büyük akış",
@@ -209,99 +155,63 @@ const categories = [
     ]
   },
   {
-    id: "yakin-gelecek",
-    title: "Yakın Geçmiş ve Gelecek",
-    summary: "Son yılların büyük kırılmaları ve önümüzdeki döneme dair temkinli teknik öngörüler.",
-    mode: "future",
+    id: "proje-kamu-yonetim",
+    title: "Proje, Kamu ve Kurumsal Yönetim",
+    summary: "İhtiyaç analizi, şartname, kabul, bütçe, tedarikçi, proje yönetimi ve kamu BT işleyişini sahadaki haliyle anlatır.",
+    mode: "project",
     chapters: [
-      "Yakın geçmişe giriş: hızlanan teknoloji, yavaş değişen kurum",
-      "Pandemi ve uzaktan çalışma altyapısı",
-      "Bulutun olgunlaşması ve dijital egemenlik tartışması",
-      "Sıfır güven, kimlik merkezli güvenlik ve yeni sınır",
+      "Kurumsal projeye giriş: fikri takvime değil değere bağlamak",
+      "İhtiyaç analizi ve kapsam: istekle gereksinimi ayırmak",
+      "Teknik şartname, ölçülebilir kabul ve teslim kanıtı",
+      "Paydaş haritası, RACI ve karar makamı",
+      "Risk, varsayım, sorun kaydı ve kapsam kayması",
+      "Test stratejisi, canlıya geçiş, rollback ve iletişim",
+      "Tedarikçi yönetimi, SLA, bakım ve sözleşme takibi",
+      "Bütçe, lisans, envanter ve varlık yönetimi",
+      "Kamu BT işleyişi: merkez, taşra, belediye, üniversite ve savunma şirketi",
+      "KVKK, denetim izi, resmi yazı ve kurumsal hafıza",
+      "Proje ve kamu mülakatları: süreçleri sahada yaşamış gibi anlatmak"
+    ]
+  },
+  {
+    id: "liderlik-kriz-gelecek",
+    title: "Teknik Liderlik, Kriz ve Gelecek",
+    summary: "Üst düzey BT yöneticiliği, ekip dili, kriz yönetimi, teknoloji stratejisi, dijital egemenlik ve gelecek ajandasını birleştirir.",
+    mode: "leadership",
+    chapters: [
+      "Teknik liderliğe giriş: ayrıntıyı bilip bütünü yönetmek",
+      "Üst makama teknik meseleyi sade ve dürüst anlatmak",
+      "Ekip kurmak: uzmanlık, güven, yedeklilik ve ölçü",
+      "Karar almak: hız, risk, geri dönüş yolu ve sorumluluk",
+      "Bütçe savunması: maliyeti risk ve değer diliyle anlatmak",
+      "Krizlere giriş: ilk dakika, ilk karar, ilk kayıt",
+      "Veritabanı kilidi ve yavaş sorgu",
+      "SSL sertifikası, DNS ve erişim kesintisi",
+      "DDoS baskısı ve trafik savunması",
+      "Yedek dönmüyor: kâğıt üstündeki güvenin çökmesi",
+      "Kriz sonrası olay raporu, kök neden analizi ve kalıcı düzeltme",
       "Yapay zekânın ofise girişi",
       "Veri merkezlerinde enerji, GPU ve kapasite baskısı",
-      "Edge computing, IoT ve sahada karar",
-      "Low-code, no-code ve gölge BT riski",
-      "Yarı iletken yarışı ve tedarik bağımlılığı",
-      "Kuantum hazırlığı ve uzun ömürlü verinin korunması",
-      "Önümüzdeki beş yılın kurum ajandası",
-      "Geleceği tahmin etmek için bugünün baskısını okumak"
+      "Dijital egemenlik, yarı iletken yarışı ve bulut bağımlılığı",
+      "Üst düzey BT yöneticisi için kişisel rota"
     ]
   },
   {
-    id: "teknoloji-atlasi-yazilim",
-    title: "Teknoloji Atlası: Yazılım ve Veri",
-    summary: "Programlama dilleri, web, backend, API, veritabanı, cache, arama, kuyruk ve DevOps ailesi.",
-    mode: "software",
+    id: "mulakat-ve-ust-duzey-hazirlik",
+    title: "Mülakat ve Üst Düzey Hazırlık",
+    summary: "Bilgisayar, yazılım, sistem, siber güvenlik, yapay zekâ ve yöneticilik konularını soru-cevap refleksine dönüştürür.",
+    mode: "interview",
     chapters: [
-      "Yazılım ve veri atlasına giriş: parçaları ailelere ayırmak",
-      "Programlama dilleri: Java, Python, C#, JavaScript",
-      "Web arayüzü: HTML, CSS, TypeScript, React ve Vue",
-      "Backend ve servis mantığı: Node.js, Java, .NET ve Python",
-      "API ve entegrasyon sözleşmeleri: REST, GraphQL ve API Gateway",
-      "Veritabanı ailesi: PostgreSQL, SQL ve kalıcı kayıt",
-      "Hız ve geçici veri katmanı: Redis, cache ve CDN",
-      "Arama ve log analizi: Elasticsearch, Logstash ve Kibana",
-      "Mesajlaşma ve olay akışı: Kafka ve RabbitMQ",
-      "Paketleme, teslimat ve ekip hafızası: Docker, Git, GitHub ve CI/CD",
-      "Yazılım atlasını büyük projede birlikte okumak"
-    ]
-  },
-  {
-    id: "teknoloji-atlasi-sistem-ag",
-    title: "Teknoloji Atlası: Sistem, Ağ ve Donanım",
-    summary: "Sunucu, işlemci, bellek, disk, ağ, sanallaştırma, veri merkezi, yedekleme ve işletim omurgası.",
-    mode: "systems",
-    chapters: [
-      "Sistem, ağ ve donanım atlasına giriş: yazılımın fiziksel zemini",
-      "Bilgisayar donanımı: CPU, RAM, disk ve anakart",
-      "Sunucu donanımı: rack, blade, HCI ve kurumsal kapasite",
-      "Depolama sistemleri: SAN, NAS, RAID, SSD ve NVMe",
-      "Ağ temeli: switch, router, VLAN, subnet ve omurga",
-      "İnternet kapısı: DNS, DHCP, NAT, VPN ve sertifika",
-      "Trafik yönetimi: Nginx, reverse proxy ve load balancer",
-      "Sanallaştırma: VMware, Hyper-V, KVM ve kaynak paylaşımı",
-      "Platform işletimi: Docker, Kubernetes ve servis sağlığı",
-      "Veri merkezi: kabin, enerji, UPS, jeneratör ve soğutma",
-      "Yedekleme, felaket kurtarma ve monitoring"
-    ]
-  },
-  {
-    id: "teknoloji-atlasi-siber",
-    title: "Teknoloji Atlası: Siber Güvenlik",
-    summary: "Kimlik, yetki, firewall, WAF, EDR, SIEM, SOC, zafiyet, KVKK, olay müdahalesi ve güvenlik kültürü.",
-    mode: "security",
-    chapters: [
-      "Siber güvenlik atlasına giriş: riskin görünür hale gelmesi",
-      "Kimlik güvenliği: IAM, MFA, SSO ve PAM",
-      "Ağ güvenliği: firewall, IDS/IPS, WAF ve segmentasyon",
-      "Uç nokta güvenliği: EDR, antivirüs, hardening ve cihaz yönetimi",
-      "Zafiyet ve yama yönetimi",
-      "Log, SIEM ve SOC: alarmdan olaya giden hat",
-      "Veri güvenliği: sınıflandırma, DLP, KVKK ve maskeleme",
-      "Uygulama güvenliği: OWASP, güvenli kod ve test",
-      "Olay müdahalesi: tespit, çevreleme, temizleme ve öğrenme",
-      "Tedarik zinciri güvenliği",
-      "Siber tatbikat ve güvenlik kültürü"
-    ]
-  },
-  {
-    id: "teknoloji-atlasi-yapay-zeka",
-    title: "Teknoloji Atlası: Yapay Zekâ",
-    summary: "Makine öğrenmesi, üretken yapay zekâ, LLM, embedding, RAG, ajanlar, MLOps ve denetlenebilirlik.",
-    mode: "ai",
-    chapters: [
-      "Yapay zekâ atlasına giriş: model değil iş akışı",
-      "Makine öğrenmesi, derin öğrenme ve üretken modeller",
-      "Veri hazırlığı, kalite ve yönetişim",
-      "LLM ve prompt kullanımı",
-      "Embedding ve vektör arama",
-      "RAG ve kurumsal bilgi asistanları",
-      "Ajan sistemleri ve araç kullanımı",
-      "Model değerlendirme: doğruluk ve halüsinasyon",
-      "MLOps, LLMOps ve model yaşam döngüsü",
-      "GPU, maliyet ve kapasite planı",
-      "Yapay zekâ güvenliği, etik ve denetlenebilirlik"
+      "Mülakat stratejisi: cevabı ezber değil düşünce zinciriyle kurmak",
+      "Bilgisayar temelleri için beklenen sorular ve iyi cevap yapısı",
+      "Python, OOP, SQL ve API sorularında derinlik göstermek",
+      "Web, backend, JWT, cache ve mesaj kuyruğu soruları",
+      "Linux, ağ, Docker, Kubernetes ve bulut soruları",
+      "Siber güvenlik ve olay müdahalesi soruları",
+      "Yapay zekâ, RAG, LLM ve MLOps soruları",
+      "Sistem tasarımı mülakatı: büyük resmi tahtada kurmak",
+      "Yöneticilik mülakatı: bütçe, risk, insan ve karar dili",
+      "Kişisel gelişim rotası: teknisyenlikten stratejik BT liderliğine"
     ]
   },
   {
@@ -469,10 +379,156 @@ const modeLexicon = {
     actors: "veri ekibi, hukuk, iş birimi, mimar, güvenlik ekibi, model sağlayıcı ve kullanıcı birlikte tasarım yapar",
     stakes: "doğru denetlenmeyen yapay zekâ hızlı cevap verir ama yanlış kararın sorumluluğunu ortada bırakabilir",
     tech: ["LLM", "RAG", "MLOps", "GPU", "Vector Database", "Embedding", "Object storage"]
+  },
+  interview: {
+    scene: "mülakat ve üst düzey hazırlıkta bilgi, ezberlenen tanımdan çıkıp örnekle savunulan düşünceye dönüşür",
+    actors: "aday, teknik değerlendirici, yönetici, insan kaynakları, ekip lideri ve bazen kurumun gerçek ihtiyacı aynı konuşmada görünür hale gelir",
+    stakes: "kavramı bilmek yetmez; nerede kullanıldığını, neyi bozabileceğini ve nasıl işletileceğini anlatamayan aday güven veremez",
+    tech: ["Python", "SQL", "REST", "Docker", "Kubernetes", "SIEM", "RAG", "PostgreSQL"]
   }
 };
 
 const techDetails = {
+  "Terminal": [
+    "Terminal, bilgisayarla süslü ekranları aradan çıkararak konuşma yoludur. Dosya aramak, servis durumuna bakmak, log izlemek, Git komutu çalıştırmak veya uzak sunucuya bağlanmak çoğu zaman burada başlar.",
+    "Komut satırını bilen kişi sistemin nabzını daha hızlı tutar. `pwd`, `ls`, `cd`, `cat`, `grep`, `tail`, `ps`, `kill`, `ssh` gibi komutlar kuru ezber değil, sorun anında yol bulma aracıdır.",
+    "Mülakatta terminal sorusu çoğu zaman adayın gerçekten üretim ortamı görüp görmediğini anlamaya yarar. İyi cevap, komut adını saymakla kalmaz; hangi durumda hangi komutun kanıt ürettiğini anlatır."
+  ],
+  "Linux": [
+    "Linux, modern sunucu dünyasının sessiz ana zemini gibidir. Web servisleri, veritabanları, konteyner platformları, ağ araçları ve güvenlik sistemleri çoğu kurumda Linux üzerinde nefes alır.",
+    "Kullanıcı, grup, izin, servis, paket, log ve dosya sistemi mantığı anlaşılmadan Linux yalnız siyah ekran gibi görünür. Oysa iyi sistemci için `/var/log`, `systemd`, `chmod`, `sudo`, paket yöneticisi ve shell betikleri günlük işin haritasıdır.",
+    "Üst düzey kurumlarda Linux bilgisi yalnız komut kullanmak değildir; kim neye erişebilir, servis nasıl izlenir, güncelleme nasıl planlanır, değişiklik nasıl geri alınır sorularını sakin cevaplayabilmektir."
+  ],
+  "İşletim sistemi": [
+    "İşletim sistemi, donanım ile uygulama arasındaki düzenleyicidir. CPU zamanını süreçlere paylaştırır, belleği yönetir, dosya sistemini sunar, sürücülerle donanıma ulaşır ve kullanıcıya güvenli çalışma alanı açar.",
+    "Bir program yavaşladığında mesele yalnız kod olmayabilir; süreç bekliyor, bellek şişiyor, disk I/O tıkanıyor veya işletim sistemi kaynakları başka işlere dağıtıyor olabilir. Bu yüzden temel işletim sistemi bilgisi yazılımcıya da yöneticilik adayına da gerekir.",
+    "Mülakatta iyi cevap, işletim sistemini 'Windows veya Linux' diye değil, kaynak yöneten ve uygulamalara kontrollü ortam sağlayan ana katman olarak anlatır."
+  ],
+  "DNS": [
+    "DNS, kullanıcıların hatırladığı alan adlarını makinelerin anlayacağı IP adreslerine çeviren rehberdir. Bir web sitesine girildiğinde ilk yolculuk çoğu zaman görünmez biçimde DNS ile başlar.",
+    "A kaydı, CNAME, TTL, resolver, authoritative server ve cache kavramları küçük ayrıntı gibi durur; fakat yanlış DNS kaydı bütün hizmeti erişilemez gösterebilir. Sertifika, CDN ve load balancer kararları da DNS ile birlikte düşünülür.",
+    "Krizde DNS bilen kişi paniği azaltır: sorun uygulamada mı, alan adı çözümlemesinde mi, TTL yüzünden eski kayıt mı dönüyor, yalnız belirli bölgeler mi etkileniyor sorularını sıraya koyar."
+  ],
+  "Python": [
+    "Python, öğrenmesi yumuşak ama kullanım alanı çok geniş bir dildir. Değişkenler, döngüler ve fonksiyonlarla başlar; otomasyon, web servisleri, veri analizi ve yapay zekâ işlerine kadar uzanır.",
+    "İyi Python yazmak yalnız çalışır kod yazmak değildir. Okunabilir fonksiyonlar kurmak, istisnaları doğru yakalamak, modülleri ayırmak, sanal ortam kullanmak, bağımlılıkları yönetmek ve test edilebilir tasarım yapmak gerekir.",
+    "Mülakatta Python sorusu çoğu zaman adayın temel akış kurma becerisini ölçer. Güçlü cevap, liste işlemlerinden OOP'ye, JSON okumadan API çağrısına kadar küçük parçaları gerçek bir iş senaryosuna bağlar."
+  ],
+  "OOP": [
+    "OOP, dünyayı nesne diye paketleyip her şeyi sınıfa boğmak değildir. Asıl mesele veriyle davranışı anlamlı sınırlar içinde tutmak, değişiklik geldiğinde kodun tamamının dağılmasını önlemektir.",
+    "Sınıf, nesne, kapsülleme, kalıtım ve polimorfizm kavramları ancak örnekle anlam kazanır. Bir ödeme servisi, kullanıcı oturumu veya envanter kaydı tasarlanırken hangi sorumluluğun hangi sınıfta kalacağı mimari kaliteyi belirler.",
+    "İyi aday OOP anlatırken jargonla oyalanmaz; yanlış soyutlamanın kodu nasıl ağırlaştırdığını, doğru soyutlamanın ise bakım ve test yükünü nasıl azalttığını açıklar."
+  ],
+  "JSON": [
+    "JSON, sistemlerin birbirine veri taşırken kullandığı sade ve yaygın formattır. Web API cevapları, yapılandırma dosyaları, log parçaları ve entegrasyon mesajları çoğu zaman JSON olarak akar.",
+    "Basit görünmesi aldatıcıdır. Alan adları, veri tipleri, zorunlu alanlar, null değerler, tarih formatı ve geriye uyumluluk konuşulmadan JSON sözleşmesi kırılgan hale gelir.",
+    "Mülakatta JSON'u bilen aday yalnız süslü parantezi tarif etmez; bir API cevabını nasıl parse edeceğini, hatalı alan geldiğinde ne yapacağını ve sürüm değişikliğini nasıl yöneteceğini anlatır."
+  ],
+  "SQL": [
+    "SQL, kurum hafızasına soru sorma dilidir. Tablo, satır, kolon, ilişki, JOIN, WHERE, GROUP BY ve index kavramları raporun, ekranın ve denetimin arkasındaki gerçek kayda bağlanır.",
+    "Kötü SQL yalnız yavaş sorgu üretmez; yanlış JOIN ile sayıları şişirir, eksik transaction ile veriyi tutarsız bırakır, index düşünülmeden yazıldığında canlı sistemi yorar. Bu yüzden SQL, yazılımcı için de yönetici için de kritik okuryazarlıktır.",
+    "İyi cevap, 'SELECT biliyorum' seviyesini geçer. Aday transaction ne zaman gerekir, index neyi hızlandırır, migration nasıl yönetilir ve PostgreSQL gibi sistemlerde kalıcı kayıt neden ana defterdir sorularını örnekle açıklar."
+  ],
+  "PostgreSQL": [
+    "PostgreSQL, açık kaynak dünyasının güçlü kurumsal veritabanlarından biridir. Transaction, index, constraint, view, JSONB, replication ve extension desteğiyle hem klasik kayıt hem modern uygulama ihtiyaçlarını taşır.",
+    "Bir kurumda PostgreSQL yalnız tablo saklamaz; siparişin, başvurunun, ödeme kaydının, personel bilgisinin ve denetim izinin ana gerçeğini tutar. Bu yüzden backup, migration, yetki ve performans konusu yazılımın dışına taşar.",
+    "Mülakatta PostgreSQL'i anlatırken ACID, transaction, index ve query plan kavramlarını iş etkisiyle bağlamak gerekir. Çünkü veri kaybı olduğunda teknik ayrıntı bir anda yönetim krizine dönüşür."
+  ],
+  "REST API": [
+    "REST API, kaynakları HTTP üzerinden okunur, oluşturulur, güncellenir ve silinir hale getiren yaygın servis yaklaşımıdır. GET, POST, PUT, PATCH ve DELETE metotları doğru kullanıldığında ekipler aynı sözleşmeye bakar.",
+    "İyi API yalnız endpoint listesi değildir. Durum kodları, hata mesajı, sayfalama, versiyonlama, rate limit, kimlik doğrulama ve idempotency konuşulmadan API üretim ortamında sorun çıkarır.",
+    "Mülakatta iyi cevap, 'REST nedir?' sorusunu bir kullanıcı kayıt akışı üzerinden anlatır: istek gelir, doğrulanır, yetki kontrol edilir, veri yazılır, anlamlı durum kodu döner ve log izi kalır."
+  ],
+  "JWT": [
+    "JWT, kimlik ve bazı yetki bilgilerini imzalı token içinde taşıyan formattır. Mikroservislerde ve stateless API tasarımlarında sık görülür çünkü her istekle birlikte doğrulanabilir bilgi taşır.",
+    "JWT kolaylık sağlar ama dikkat ister. Token süresi, refresh akışı, imza algoritması, gizli anahtar yönetimi, fazla bilgi koymama ve iptal stratejisi düşünülmezse güvenlik açığı doğar.",
+    "İyi teknik cevap JWT'yi sihirli oturum çözümü gibi satmaz; cookie, session, OAuth2 ve SSO ile nerede birleştiğini, hangi riskleri artırdığını ve nasıl izlenmesi gerektiğini anlatır."
+  ],
+  "Docker": [
+    "Docker, uygulamayı bağımlılıklarıyla birlikte taşınabilir bir imaja dönüştürür. Geliştiricide çalışan kodun test ve üretim ortamında başka davranma ihtimalini azaltır.",
+    "Image, container, volume, network, registry ve Dockerfile kavramları birlikte düşünülür. Container kalıcı veri deposu değildir; log, secret ve volume kararları baştan verilmelidir.",
+    "Mülakatta Docker bilen aday 'konteyner sanal makine değildir' ayrımını yapar ve küçük bir servisin nasıl paketlenip registry'ye gönderileceğini anlatabilir."
+  ],
+  "Kubernetes": [
+    "Kubernetes, çok sayıda konteyneri bir kümede çalıştırmak, izlemek, ölçeklemek ve bozulan parçayı yeniden ayağa kaldırmak için kullanılır. Pod, deployment, service, ingress ve config map temel yapı taşlarıdır.",
+    "Kubernetes gücü kadar işletme yükü de getirir. Kaynak limitleri, health check, secret yönetimi, rollout, rollback, observability ve cluster maliyeti düşünülmezse platform çözüm değil yeni karmaşa olur.",
+    "Üst düzey kurumlarda Kubernetes sorusu teknolojiyi kurmaktan çok işletmeyi anlamaya bakar: kim yönetecek, hangi servis aday, hangi metrik izlenecek, hata anında geri dönüş nasıl yapılacak?"
+  ],
+  "Bulut": [
+    "Bulut, sunucu almamak değildir; kapasiteyi hizmet olarak tüketmek ve bunun güvenlik, maliyet, ağ, kimlik ve operasyon sorumluluğunu doğru yönetmektir.",
+    "IaaS, PaaS, SaaS, region, availability zone, object storage, managed database ve IAM kavramları bulut mimarisinin karar dilidir. AWS ve Google Cloud farklı ürün adları sunsa da temel sorular benzerdir.",
+    "Bulut mülakatında güçlü cevap, 'ölçeklenir' demekle kalmaz; maliyet alarmı, yedekleme, veri egemenliği, erişim yetkisi ve felaket kurtarma tasarımını da konuşur."
+  ],
+  "RAG": [
+    "RAG, büyük dil modelinin cevabını kurum belgeleri, veritabanı kayıtları veya bilgi tabanından getirilen bağlamla güçlendirme yaklaşımıdır. Amaç modelin her şeyi ezbere bilmesini beklemek değil, doğru kaynağa bakmasını sağlamaktır.",
+    "İyi RAG tasarımında belge toplama, temizleme, chunking, embedding, vektör arama, reranking, kaynak gösterme ve cevap değerlendirme birlikte çalışır. Yalnız PDF yükleyip sohbet ekranı açmak kurumsal çözüm sayılmaz.",
+    "Mülakatta RAG anlatırken en kritik cümle şudur: model cevap üretir, fakat kaynak seçimi, yetki sınırı, güncellik ve halüsinasyon kontrolü sistem tasarımının sorumluluğudur."
+  ],
+  "OpenAI API": [
+    "OpenAI API, büyük dil modellerini uygulama akışlarına bağlamak için kullanılır. Mesaj yapısı, model seçimi, token maliyeti, çıktı formatı ve hata yönetimi üretim kalitesini belirler.",
+    "Basit demo ile kurumsal kullanım arasında fark büyüktür. Loglama, gizli bilgi filtreleme, rate limit, retry, değerlendirme seti, insan onayı ve model değişikliği stratejisi kurulmadan API entegrasyonu kırılgan kalır.",
+    "İyi geliştirici API'yi yalnız çağırmaz; cevabın ne zaman güvenilir sayılacağını, hangi verinin modele gitmeyeceğini ve maliyetin nasıl izleneceğini de tasarlar."
+  ],
+  "MCP": [
+    "MCP, modelin araçlara ve veri kaynaklarına daha standart biçimde bağlanmasını hedefleyen bir bağlama mantığıdır. Model tek başına konuşmak yerine dosya, sistem, servis veya iş aracıyla kontrollü etkileşime geçebilir.",
+    "Bu yaklaşım ajan sistemlerinde önemlidir çünkü araç çağırma, yetki sınırı, veri kaynağı ve işlem kaydı da konuşmanın parçası olur. Modelin neye eriştiği ve hangi işlemi yaptığı denetlenebilir kalmalıdır.",
+    "Yönetici açısından MCP gibi yaklaşımların değeri, yapay zekâyı gösterişli sohbetten çıkarıp iş akışına, güvenli araca ve kayıtlı aksiyona bağlamasıdır."
+  ],
+  "Git": [
+    "Git, kodun zaman içindeki hikâyesini tutar. Hangi satır ne zaman değişti, kim değiştirdi, hangi dalda denendi ve hangi sürümde canlıya çıktı soruları Git olmadan kişisel hafızaya kalır.",
+    "GitHub bu hafızayı ekip çalışmasına çevirir. Pull request, code review, issue, branch protection ve action yapıları kodun yalnız yazılmasını değil, gözden geçirilmesini ve kontrollü teslim edilmesini sağlar.",
+    "Mülakatta Git bilen aday `commit`, `branch`, `merge`, `rebase` ve conflict kavramlarını komut listesi gibi değil, ekip düzeni ve geri dönüş güvenliği olarak anlatır."
+  ],
+  "CI/CD": [
+    "CI/CD, yazılımın el yordamıyla ortama kopyalanmasını üretim hattına dönüştürür. Kod depoya girer, testler çalışır, paket hazırlanır, uygun ortama kontrollü biçimde alınır.",
+    "Bu hatta otomasyon kadar durma noktaları da önemlidir. Test başarısızsa dağıtım durmalı, güvenlik taraması bulgu üretirse ekip görmeli, canlıya geçişte rollback yolu açık olmalıdır.",
+    "İyi cevap CI/CD'yi yalnız hız olarak anlatmaz; kalite kapısı, denetim izi, sürüm bilgisi ve kriz anında hangi değişikliğin geri alınacağını bilme disiplini olarak konumlandırır."
+  ],
+  "Docker": [
+    "Docker, uygulamayı bağımlılıklarıyla birlikte paketleyerek çalışacağı ortamı daha öngörülebilir hale getirir. Kod, kütüphane, çalışma zamanı ve yapılandırma tek imaj fikrinde buluşur.",
+    "Container geçici çalışır; kalıcı veri, secret, network ve log stratejisi ayrıca tasarlanmalıdır. Bu ayrım anlaşılmazsa geliştirme kolaylığı üretim ortamında veri ve güvenlik riskine dönüşebilir.",
+    "İyi aday Docker anlatırken imaj ile container farkını, Dockerfile mantığını, volume kullanımını ve registry üzerinden dağıtım akışını sade bir örnekle kurar."
+  ],
+  "Redis": [
+    "Redis, veriyi bellek içinde tutarak çok hızlı okuma yazma sağlayan bir sistemdir. Oturum, sepet, geçici sayaç, rate limit ve kısa süreli cache senaryolarında sık kullanılır.",
+    "Hızın bedeli veri ömrünü doğru yönetmektir. TTL, invalidation, ana kayıt ile cache ayrımı ve bellek kapasitesi düşünülmeden Redis eski veya eksik bilgi gösteren sessiz bir risk haline gelebilir.",
+    "Mülakatta Redis'i iyi anlatmak, 'hızlıdır' demekten fazlasıdır; hangi verinin Redis'e uygun olmadığını söyleyebilmek asıl olgunluk işaretidir."
+  ],
+  "AWS": [
+    "AWS ve Google Cloud gibi bulut sağlayıcıları compute, storage, network, database, IAM ve observability hizmetlerini yönetilebilir servisler olarak sunar. İsimler değişse de temel mimari sorular aynıdır.",
+    "Bulutta hız kazanmak kolaydır; maliyeti, erişim yetkisini, veri konumunu, yedeklemeyi ve felaket kurtarmayı yönetmek disiplin ister. Yanlış IAM kuralı veya açık storage bucket teknik tercihi bir anda güvenlik olayına çevirebilir.",
+    "İyi cevap sağlayıcı fanatikliği yapmaz. Hangi iş yükü için hangi servis seçilir, managed servis ne kazandırır, vendor lock-in nerede başlar ve maliyet nasıl izlenir sorularına dengeli bakar."
+  ],
+  "Monitoring": [
+    "Monitoring, sistemin nabzını düzenli ölçme işidir. CPU, bellek, disk, hata oranı, yanıt süresi, kuyruk uzunluğu ve kullanıcı etkisi görülmeden sistem sağlıklı mı hasta mı anlaşılmaz.",
+    "Log, metrik ve trace birlikte okunursa olayın yalnız nerede patladığı değil, nasıl ilerlediği de anlaşılır. Alarm eşiği yanlışsa ekip ya sürekli gereksiz uyarı alır ya da gerçek krizi geç fark eder.",
+    "Yönetici için monitoring, teknik ekran değil karar aracıdır. Hangi hizmet etkileniyor, kaç kullanıcı görüyor, SLA riski var mı ve ne zaman üst makama bilgi verilmeli soruları buradan beslenir."
+  ],
+  "Makine öğrenmesi": [
+    "Makine öğrenmesi, açıkça kural yazmak yerine veriden örüntü öğrenme yaklaşımıdır. Model geçmiş örneklerden ilişki çıkarır ve yeni veride tahmin yapmaya çalışır.",
+    "İyi makine öğrenmesi projesi algoritmadan önce veriyle başlar. Hedef değişken doğru mu, veri sızıntısı var mı, eğitim ve test ayrımı temiz mi, model gerçekten genelliyor mu soruları cevaplanmalıdır.",
+    "Mülakatta güçlü aday doğruluk oranı söylemekle yetinmez; overfitting, validation, feature engineering, bias ve yanlış kararın iş etkisini konuşur."
+  ],
+  "Derin öğrenme": [
+    "Derin öğrenme, çok katmanlı sinir ağlarıyla veriden temsil öğrenmeye çalışır. Görüntü, ses, metin ve karmaşık örüntülerde gücünü bu temsil öğrenme kabiliyetinden alır.",
+    "Katman, ağırlık, aktivasyon, loss, optimizer ve backpropagation kavramları işin matematik omurgasıdır. Fakat kurum projesinde veri kalitesi, GPU maliyeti ve izlenebilirlik en az mimari kadar önemlidir.",
+    "İyi açıklama, sinir ağını büyülü kutu gibi anlatmaz; eğitilen parametrelerin verideki ilişkilere göre güncellendiğini ve kötü veriyle iyi model beklenmeyeceğini açıklar."
+  ],
+  "Embedding": [
+    "Embedding, metin, belge veya başka bir nesneyi anlam benzerliği kurulabilecek sayısal vektöre çevirir. Böylece sistem aynı kelimeyi aramadan, benzer anlamdaki içerikleri bulabilir.",
+    "Kurumsal RAG sistemlerinde embedding doğru belgeyi bulmanın temel adımıdır. Chunk boyutu, dil, alan terimleri, güncellik ve yetki filtresi yanlışsa modelin cevabı da zayıf kaynağa yaslanır.",
+    "Mülakatta embedding anlatırken 'metni sayıya çevirir' cümlesi başlangıçtır; asıl olgunluk bu sayısal temsilin arama, öneri, sınıflandırma ve RAG içinde nasıl kullanıldığını göstermektir."
+  ],
+  "LLM": [
+    "LLM, büyük metin kütleleri üzerinde eğitilmiş ve dil örüntülerini kullanarak cevap üreten model ailesidir. Metin yazabilir, özetleyebilir, kod önerebilir ve konuşma akışını takip edebilir.",
+    "Fakat LLM güvenilir kaynak sistemi değildir. Bağlamı yanlışsa ikna edici biçimde yanlış cevap verebilir, hassas veriyi uygunsuz işleyebilir veya araç kullanımında sınırları zorlayabilir.",
+    "İyi LLM geliştirme, prompt yazmanın ötesine geçer: veri sınırı, kaynak gösterme, değerlendirme, maliyet, loglama, insan onayı ve güvenli araç kullanımı birlikte tasarlanır."
+  ],
+  "Ollama": [
+    "Ollama, yerel modelleri geliştirici makinesinde veya kurum içi ortamda denemeyi kolaylaştıran bir araçtır. Mahremiyet, gecikme ve bağımsız deneme açısından yararlı olabilir.",
+    "Yerel model kullanmak otomatik olarak daha iyi çözüm anlamına gelmez. Model kalitesi, donanım kapasitesi, güncelleme, güvenlik, lisans ve bakım sorumluluğu kurumun üzerinde kalır.",
+    "Mülakatta Ollama konuşulurken güçlü cevap şudur: yerel model bir seçenek olabilir, ama hangi veri için, hangi kalite eşiğinde, hangi GPU maliyetiyle ve hangi güvenlik sınırıyla kullanılacağı netleşmelidir."
+  ],
   "Programlama dilleri": [
     "Programlama dili, kurumun fikirlerini çalışan sisteme çeviren ana ifade biçimidir. Java uzun ömürlü kurumsal servislerde, C# özellikle Microsoft ekosisteminde ve masaüstü/iç iş uygulamalarında, Python veri, otomasyon ve yapay zekâ işlerinde, JavaScript ise web arayüzünden sunucu tarafına kadar geniş bir alanda görülür.",
     "Dil seçimi yalnız hız tablosuyla yapılmaz. Mevcut ekibin yetkinliği, kurumun eski kodu, tedarikçi havuzu, güvenlik gereksinimi, bakım süresi, lisans modeli ve işe alım piyasası birlikte değerlendirilir. Yanlış dil seçimi ilk ayda değil, üçüncü yıl bakım talebi geldiğinde pahalılaşır.",
@@ -1207,10 +1263,26 @@ function storyChapter(category, chapter) {
   ].join("") + visualFor(category, chapter);
 }
 
+function interviewChapter(category, chapter) {
+  const topic = cleanTitle(chapter);
+  const focus = firstPhrase(topic);
+  return [
+    paragraph(`${topic} başlığına mülakat odasında girildiğinde asıl ölçülen şey yalnız doğru terimi bilmek değildir. Değerlendirici çoğu zaman adayın düşünme düzenini dinler: problemi nasıl parçalıyor, bilinmeyeni nasıl sınırlıyor, örneği nasıl kuruyor, riski fark edince cümlesini nasıl düzeltiyor? İyi cevap, aceleyle söylenen parlak tanımdan çok, sakin kurulmuş küçük bir sistem gibidir.`),
+    paragraph(`${focus} için güçlü cevap üç katmanda ilerler. Önce kavram sade tanımlanır; sonra gerçek bir kullanım senaryosuna bağlanır; en sonda da sınırı ve riski söylenir. Örneğin Redis sorulursa yalnız "hızlıdır" demek yetmez. Hangi veriyi cache'e koyacağını, eski veri riskini nasıl yöneteceğini, ana kayıtla cache arasındaki farkı ve izleme metriğini anlatmak gerekir.`),
+    paragraph(`Teknik mülakatta adayın güven vermesi, her soruya ansiklopedi gibi cevap vermesine bağlı değildir. Bazen "bu ayrıntıyı ezbere söylemeyeyim, ama üretim ortamında şöyle kontrol ederim" diyebilmek daha değerlidir. Çünkü büyük kurumlarda kimse her şeyi zihninde taşımıyor; değerli olan doğru soruyu sormak, doğru kanıta bakmak ve yanlış varsayımı erken yakalamaktır.`),
+    paragraph(`Üst düzey hazırlıkta aynı konu başka bir dile çevrilir. ${focus} yalnız teknik tercih değilse bütçe, insan kaynağı, güvenlik, tedarikçi bağımlılığı, bakım modeli ve hizmet sürekliliğiyle birlikte anlatılır. Bir yöneticilik görüşmesinde Docker veya RAG anlatırken bile konuşma sonunda "bunu kim işletecek, nasıl ölçeceğiz, hata olursa nasıl döneceğiz?" sorularına dokunmak gerekir.`),
+    paragraph(`Bu başlık için iyi çalışma yöntemi kısa ama düzenlidir: bir paragraf tanım, bir somut örnek, bir hata senaryosu, bir metrik, bir de yönetici cümlesi hazırlanır. Böyle çalışınca cevap ezber gibi durmaz; adayın sahayı görmüş, en azından sahayı doğru hayal etmeyi öğrenmiş olduğu anlaşılır.`),
+    paragraph(`${topic} sonunda okurun kazanması gereken refleks şudur: Her teknik soruya önce net tanım, sonra akış, sonra risk, sonra kanıt. Bu dört adım korunursa bilgisayar temellerinden LLMOps'a kadar çok farklı başlıklar aynı olgunlukla anlatılabilir.`)
+  ].join("") + visualFor(category, chapter);
+}
+
 function contentFor(category, chapter) {
   if (chapter.number === 1) return routeIntro(category, chapter);
   if (category.mode === "history") return historyChapter(chapter);
   if (["software", "systems", "security", "ai"].includes(category.mode)) return techChapter(category, chapter);
+  if (category.mode === "interview") return interviewChapter(category, chapter);
+  if (category.id === "liderlik-kriz-gelecek" && chapter.number >= 6 && chapter.number <= 12) return narrativeChapter({ ...category, mode: "crisis" }, chapter);
+  if (category.id === "liderlik-kriz-gelecek" && chapter.number >= 13) return narrativeChapter({ ...category, mode: "future" }, chapter);
   if (category.mode === "architecture") return architectureChapter(category, chapter);
   if (category.mode === "story") return storyChapter(category, chapter);
   return narrativeChapter(category, chapter);

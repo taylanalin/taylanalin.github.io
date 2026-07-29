@@ -1,10 +1,12 @@
 # Teknoloji Atlası
 
-HTML, CSS ve JavaScript ile hazırlanmış koyu temalı statik okuma arşivi.
+HTML, CSS ve JavaScript ile hazırlanmış koyu temalı statik teknoloji okuma arşivi.
 
 ## İçerik Yapısı
 
-Site 15 ana başlık, 185 uzun okuma bölümü ve 500 rastgele hap bilgi sayfasından oluşur. Her hap bilgi sayfasında 10 açıklayıcı not bulunur; toplam hap bilgi havuzu 5000 maddedir.
+Site 11 ana eğitim rotası, 119 uzun okuma bölümü ve 500 rastgele hap bilgi sayfasından oluşur. Her hap bilgi sayfasında 10 açıklayıcı not bulunur; toplam hap bilgi havuzu 5000 maddedir.
+
+Ana rota bilgisayar temelleriyle başlar; programlama, web/API, yapay zekâ, LLM geliştirme, DevOps ve bulut, siber güvenlik, büyük sistem mimarileri, proje/kamu yönetimi ve mülakat hazırlığıyla devam eder. Amaç yalnız terim öğretmek değil; okuyucuyu bilgisayar ve yazılım mühendisliği mülakatlarında güçlü cevap verecek, aynı zamanda büyük kurumların bilgi teknolojileri birimlerinde karar alabilecek seviyeye taşımaktır.
 
 Bölümler tek tek HTML dosyası olarak üretilmez. Performans için içerik `app.js` içindeki veri ve anlatım motoru ile tarayıcıda oluşturulur. Rastgele hap bilgi sayfaları sol menüye yığılmaz; arama yapıldığında sonuçlarda görünür.
 
