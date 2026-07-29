@@ -465,59 +465,6 @@ p {
   margin-inline: auto;
 }
 
-.concept-list,
-.evidence-list {
-  display: grid;
-  gap: 10px;
-  margin: 18px 0 28px;
-  padding: 0;
-  list-style: none;
-}
-
-.concept-list {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.concept-list li,
-.evidence-list li {
-  border: 1px solid color-mix(in srgb, var(--accent-2) 24%, var(--line));
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--paper) 46%, var(--paper-2));
-}
-
-.concept-list li {
-  min-height: 104px;
-  padding: 14px 15px;
-}
-
-.concept-list strong {
-  display: block;
-  color: var(--ink);
-  font-size: 16px;
-}
-
-.concept-list span {
-  display: block;
-  margin-top: 7px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.evidence-list {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.evidence-list li {
-  min-height: 52px;
-  display: flex;
-  align-items: center;
-  padding: 10px 12px;
-  color: color-mix(in srgb, var(--ink) 84%, var(--muted));
-  font-size: 14px;
-  font-weight: 700;
-}
-
 .article-title-row {
   display: flex;
   align-items: start;
@@ -3445,11 +3392,6 @@ p {
 
   .article-body p {
     text-align: left;
-  }
-
-  .concept-list,
-  .evidence-list {
-    grid-template-columns: 1fr;
   }
 
   .article-body p.long-read {
