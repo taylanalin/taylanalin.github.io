@@ -825,6 +825,10 @@ function chapterId(category, number) {
   return `${category.id}-${number}`;
 }
 
+function displayCategoryTitle(category) {
+  return /^\d+\./.test(category.title) ? category.title : `${category.order}. ${category.title}`;
+}
+
 function allChapters() {
   return categories.flatMap((category) =>
     category.chapters.map((title, index) => ({
@@ -1720,7 +1724,7 @@ function manualArticle(category, chapter) {
     if (block.type === "heading") return `<h2>${escapeHtml(block.text)}</h2>`;
     if (block.type === "list") return `<ul>${block.items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
     return paragraph(block.text);
-  }).join("") + visualFor(category, chapter);
+  }).join("");
 }
 
 function interviewChapter(category, chapter) {
@@ -2469,6 +2473,42 @@ function sceneDiagram(kind, caption, center, labels, subline = "") {
 }
 
 const visualDetails = {
+  Kavram: "Terim sözlükte değil, gerçek bir hizmet akışında hangi sorumluluğu taşıdığıyla öğrenilir.",
+  Görev: "Bu parçanın sistemde hangi işi üstlendiği netleşmeden doğru teknoloji seçimi yapılamaz.",
+  Bağımlılık: "Her karar başka bir ekip, servis, veri kaynağı veya işletme alışkanlığına bağlanır.",
+  Risk: "Bozulduğunda kimin işinin aksayacağı ve hangi güvenlik ya da maliyet etkisini doğuracağı önceden okunur.",
+  Kanıt: "Log, metrik, test sonucu, kabul kaydı veya denetim izi olmadan teknik iddia eksik kalır.",
+  Karar: "İyi karar, teknik doğruluğu sahiplik, bütçe, mevzuat ve sürdürülebilirlikle birlikte tartar.",
+  Compute: "İş yükünün nerede ve nasıl çalışacağını belirler; VM, container ve serverless farklı kontrol-maliyet dengesi kurar.",
+  Storage: "Verinin dosya, blok veya obje olarak nasıl saklanacağını seçer; dayanıklılık kadar erişim ve yaşam döngüsü önemlidir.",
+  Network: "VPC, subnet, route, firewall ve DNS ile trafiğin hangi yoldan geçeceğini ve nerede duracağını belirler.",
+  DB: "Kalıcı ve tutarlı kayıt alanıdır; yedek, indeks, transaction ve restore provasıyla birlikte düşünülür.",
+  Monitor: "Metrik, log, trace ve alarmı birleştirir; canlı sistemin sessiz kalmasını değil anlaşılır konuşmasını sağlar.",
+  Region: "Hizmetin coğrafi evidir; gecikme, mevzuat, veri konumu ve felaket kurtarma kararını etkiler.",
+  AZ: "Aynı region içinde arıza yalıtımı sağlar; tek veri merkezi hatasına karşı hizmeti ayakta tutar.",
+  VPC: "Buluttaki özel ağ sınırıdır; public-private subnet ayrımı ve route tasarımı burada başlar.",
+  Cloud: "Kaynak kiralamanın ötesinde kimlik, ağ, veri, maliyet ve sorumluluk paylaşımı disiplinidir.",
+  Container: "Uygulamayı bağımlılıklarıyla paketler; kalıcı veri, secret, log ve imaj güvenliği ayrıca tasarlanır.",
+  Registry: "İmajların paylaşıldığı depodur; sürüm, imza, tarama ve erişim kontrolü üretim güvenliği için gerekir.",
+  Volume: "Container yaşamından bağımsız kalıcı veri alanıdır; yanlış kullanılırsa veri kaybı veya taşınabilirlik sorunu doğar.",
+  Env: "Ortam davranışını koddan ayırır; gizli bilgiyi düz değişkene yazmak güvenlik borcu üretir.",
+  Log: "Olayın metinsel izidir; zaman, correlation id ve bağlam yoksa kriz anında kanıt zayıflar.",
+  Metric: "Sistemin sayısal nabzıdır; latency, hata oranı, trafik ve saturation birlikte okunur.",
+  Trace: "Bir isteğin servisler arasındaki yolculuğunu gösterir; mikroservislerde kök sebebi daraltır.",
+  Alert: "Dikkat gerektiren durumu haber verir; iyi alarm gürültü değil karar üretir.",
+  SLO: "Kullanıcıya verilen güvenilirlik hedefini sayıya çevirir; alarm ve önceliklendirmeye yön verir.",
+  Backup: "Kopya almakla bitmez; geri dönüş süresi, bütünlük ve düzenli restore provasıyla anlam kazanır.",
+  Offsite: "Yedeği aynı arıza alanının dışına taşır; felaket anında tek noktaya bağımlılığı azaltır.",
+  Immutable: "Yedeğin sonradan değiştirilememesini sağlar; fidye yazılımı riskine karşı kritik korumadır.",
+  Restore: "Yedeğin gerçekten dönüp dönmediğini gösteren andır; test edilmemiş yedek güven değil varsayımdır.",
+  RTO: "Hizmetin ne kadar sürede geri dönmesi gerektiğini tanımlar; bütçe ve mimariyi doğrudan etkiler.",
+  RPO: "Ne kadar veri kaybının kabul edilebilir olduğunu belirler; replikasyon ve yedek sıklığını şekillendirir.",
+  Tag: "Bulut kaynağına sahiplik ve amaç bilgisi verir; etiketsiz kaynak fatura ve denetimde sahipsiz kalır.",
+  Budget: "Harcamayı görünür sınırlarla izler; alarm yoksa maliyet çoğu zaman ay sonunda fark edilir.",
+  Rightsize: "Kaynağı gerçek kullanıma göre ayarlar; fazla kapasite fatura, az kapasite performans riski doğurur.",
+  Reserve: "Öngörülebilir iş yüklerinde indirim sağlar; yanlış tahmin esnekliği azaltabilir.",
+  Idle: "Çalışmadığı halde para yazan kaynaktır; düzenli temizlik yapılmazsa bulutun sessiz maliyeti olur.",
+  Report: "Teknik veriyi karar verilebilir özet haline getirir; sahiplik, trend ve aksiyon göstermelidir.",
   CPU: "Komutları yürütür; hız kadar cache, çekirdek ve veri yoluna erişim de belirleyicidir.",
   RAM: "Çalışan veriyi tutar; yetmediğinde sistem diske taşar ve kullanıcı bunu yavaşlama olarak hisseder.",
   "NVMe / SSD": "Kalıcı kayıttır; I/O beklemesi arttığında en güçlü işlemci bile sırada kalır.",
@@ -2690,6 +2730,76 @@ function renderPieVisual(spec, center) {
   `;
 }
 
+function renderMatrixVisual(spec, center) {
+  const labels = spec.labels.slice(0, 8);
+  const anchors = ["Görev", "Sınır", "Risk", "Kanıt", "Maliyet", "Karar", "Sahiplik", "İşletme"];
+  return `
+    <div class="visual-story visual-decision-map">
+      ${visualHeader(spec, center)}
+      <div class="decision-map">
+        <div class="decision-core">
+          <small>Özet Akıl</small>
+          <strong>${svgLabel(center)}</strong>
+          <span>${svgLabel(spec.note || "Bu kavramlar tek tek ezberlenmez; hizmete etkisi, riski ve kanıtı birlikte okunur.")}</span>
+        </div>
+        ${labels.map((label, index) => `
+          <section class="decision-cell" style="--i:${index}">
+            <em>${anchors[index % anchors.length]}</em>
+            <strong>${svgLabel(visualTitle(label))}</strong>
+            <span>${svgLabel(visualSub(label, index, spec))}</span>
+          </section>
+        `).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderHubVisual(spec, center) {
+  const labels = spec.labels.slice(0, 8);
+  return `
+    <div class="visual-story visual-orbit-map">
+      ${visualHeader(spec, center)}
+      <div class="orbit-map">
+        <div class="orbit-core">
+          <strong>${svgLabel(center)}</strong>
+          <span>${svgLabel(spec.note || "Merkezdeki kavram, çevresindeki rollerle birlikte anlam kazanır.")}</span>
+        </div>
+        ${labels.map((label, index) => `
+          <section class="orbit-node" style="--i:${index}">
+            <strong>${svgLabel(visualTitle(label))}</strong>
+            <span>${svgLabel(visualSub(label, index, spec))}</span>
+          </section>
+        `).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderSystemVisual(spec, center) {
+  const labels = spec.labels.slice(0, 8);
+  const lanes = ["Giriş", "İşlem", "Durum", "Çıkış", "Kontrol", "İz", "Kapasite", "Geri Dönüş"];
+  return `
+    <div class="visual-story visual-system-map">
+      ${visualHeader(spec, center)}
+      <div class="system-map">
+        <div class="system-spine">
+          <strong>${svgLabel(center)}</strong>
+          <span>${svgLabel(spec.note || "Sistem, parçaların sırayla değil birlikte çalışmasıyla güvenilir olur.")}</span>
+        </div>
+        <div class="system-lanes">
+          ${labels.map((label, index) => `
+            <section class="system-lane" style="--i:${index}">
+              <small>${lanes[index % lanes.length]}</small>
+              <strong>${svgLabel(visualTitle(label))}</strong>
+              <span>${svgLabel(visualSub(label, index, spec))}</span>
+            </section>
+          `).join("")}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function renderSceneVisual(spec, center) {
   const labels = spec.labels.slice(0, 8);
   return `
@@ -2775,7 +2885,9 @@ function renderVisualSpec(spec) {
   else if (type === "timeline") body = renderTimelineVisual(normalized, center);
   else if (type === "stack" || type === "layers") body = renderStackVisual(normalized, center);
   else if (type === "split") body = renderSplitVisual(normalized, center);
-  else if (type === "matrix" || type === "decision") body = renderPieVisual(normalized, center);
+  else if (type === "matrix" || type === "decision") body = renderMatrixVisual(normalized, center);
+  else if (type === "hub") body = renderHubVisual(normalized, center);
+  else if (type === "system") body = renderSystemVisual(normalized, center);
   else if (type === "network") body = renderNetworkVisual(normalized, center);
   else if (type === "security" || type === "incident") body = renderSecurityVisual(normalized, center);
   else if (type === "governance") body = renderGovernanceVisual(normalized, center);
@@ -2932,17 +3044,148 @@ const visualBlueprints = {
   ]
 };
 
+function illustrationMotifs(category, chapter, spec) {
+  const titleWords = cleanTitle(chapter)
+    .split(/[\s,:]+/)
+    .filter((word) => word.length > 3)
+    .slice(0, 4);
+  const labels = normalizeVisualSpec(spec).labels.slice(0, 4).map(visualTitle);
+  const fallback = {
+    systems: ["Sunucu", "Ağ", "Kayıt", "Süreklilik"],
+    software: ["Kod", "API", "Veri", "Test"],
+    ai: ["Veri", "Model", "Kaynak", "Onay"],
+    security: ["Kimlik", "Sınır", "Log", "Müdahale"],
+    architecture: ["Kullanıcı", "Servis", "Kayıt", "Akış"],
+    project: ["Paydaş", "Kabul", "Risk", "Kanıt"],
+    leadership: ["Karar", "Ekip", "Bütçe", "Kriz"],
+    interview: ["Tanım", "Örnek", "Risk", "Kanıt"]
+  }[category.mode] || ["Kavram", "Saha", "Kanıt", "Karar"];
+  return [...new Set([...labels, ...titleWords, ...fallback])].slice(0, 4);
+}
+
+function visualSceneFor(category, chapter, spec) {
+  const text = normalizeText(`${category.id} ${chapter.title} ${spec.caption || ""}`);
+  if (text.includes("docker") || text.includes("container") || text.includes("kubernetes") || text.includes("devops")) return "ops";
+  if (text.includes("siber") || text.includes("guvenlik") || text.includes("iam") || text.includes("firewall") || text.includes("ddos") || text.includes("soc")) return "security";
+  if (text.includes("yapay") || text.includes("llm") || text.includes("rag") || text.includes("model") || text.includes("embedding")) return "ai";
+  if (text.includes("kamu") || text.includes("proje") || text.includes("sartname") || text.includes("raci") || text.includes("kvkk")) return "governance";
+  if (text.includes("banka") || text.includes("odeme") || text.includes("lojistik") || text.includes("hastane") || text.includes("savunma") || text.includes("mimari")) return "institution";
+  if (text.includes("kriz") || text.includes("yedek") || text.includes("dns") || text.includes("ssl") || text.includes("kilit") || text.includes("postmortem")) return "incident";
+  if (text.includes("python") || text.includes("sql") || text.includes("api") || text.includes("backend") || text.includes("frontend") || text.includes("javascript")) return "software";
+  if (text.includes("cpu") || text.includes("ram") || text.includes("linux") || text.includes("ag") || text.includes("terminal") || text.includes("donanim")) return "machine";
+  if (category.mode === "interview") return "interview";
+  const scenes = ["machine", "software", "ai", "ops", "security", "institution", "governance", "incident", "interview"];
+  return scenes[(chapter.number + category.order) % scenes.length];
+}
+
+function visualSeed(value) {
+  return [...value].reduce((sum, char) => (sum * 31 + char.charCodeAt(0)) % 9973, 17);
+}
+
+function illustrationStyle(category, chapter, scene) {
+  const seed = visualSeed(`${category.id}-${chapter.id}-${scene}`);
+  const hueA = (seed * 17 + category.order * 29) % 360;
+  const hueB = (hueA + 74 + chapter.number * 9) % 360;
+  const shift = (seed % 19) - 9;
+  const lift = ((Math.floor(seed / 7) % 17) - 8);
+  const scale = 96 + (seed % 9);
+  return [
+    `--scene-hue-a:${hueA}`,
+    `--scene-hue-b:${hueB}`,
+    `--art-shift:${shift}px`,
+    `--art-lift:${lift}px`,
+    `--art-scale:${scale / 100}`
+  ].join(";");
+}
+
+function sceneArtwork(scene, motifs) {
+  const marks = motifs.map((item, index) => `<span style="--i:${index}">${escapeHtml(item)}</span>`).join("");
+  const art = {
+    machine: `
+      <div class="art-machine">
+        <i class="chip"></i><i class="bus b1"></i><i class="bus b2"></i><i class="bus b3"></i>
+        <i class="fan"></i><i class="memory m1"></i><i class="memory m2"></i>
+      </div>`,
+    software: `
+      <div class="art-software">
+        <i class="editor"></i><i class="code c1"></i><i class="code c2"></i><i class="terminal"></i><i class="deploy"></i>
+      </div>`,
+    ai: `
+      <div class="art-ai">
+        <i class="brain"></i><i class="halo h1"></i><i class="halo h2"></i><i class="token t1"></i><i class="token t2"></i><i class="doc"></i>
+      </div>`,
+    ops: `
+      <div class="art-ops">
+        <i class="rack r1"></i><i class="rack r2"></i><i class="pipeline"></i><i class="container k1"></i><i class="container k2"></i><i class="container k3"></i>
+      </div>`,
+    security: `
+      <div class="art-security">
+        <i class="shield"></i><i class="wall w1"></i><i class="wall w2"></i><i class="scan"></i><i class="alert"></i>
+      </div>`,
+    institution: `
+      <div class="art-institution">
+        <i class="building"></i><i class="door"></i><i class="service s1"></i><i class="service s2"></i><i class="record"></i>
+      </div>`,
+    governance: `
+      <div class="art-governance">
+        <i class="table"></i><i class="paper p1"></i><i class="paper p2"></i><i class="stamp"></i><i class="seat a"></i><i class="seat b"></i><i class="seat c"></i>
+      </div>`,
+    incident: `
+      <div class="art-incident">
+        <i class="room"></i><i class="screen main"></i><i class="screen side"></i><i class="pulse"></i><i class="runbook"></i>
+      </div>`,
+    interview: `
+      <div class="art-interview">
+        <i class="board"></i><i class="question"></i><i class="answer"></i><i class="profile"></i><i class="note"></i>
+      </div>`
+  }[scene] || "";
+  return `${art}<div class="image-motifs">${marks}</div>`;
+}
+
+function renderIllustration(category, chapter, spec) {
+  const normalized = normalizeVisualSpec(spec);
+  const title = cleanTitle(chapter);
+  const center = normalized.center || firstPhrase(title);
+  const caption = normalized.caption || "Bu bölümün görsel özeti, kavramı gerçek bir kurum sahnesi içinde okumaya davet eder.";
+  const motifs = illustrationMotifs(category, chapter, normalized);
+  const scene = visualSceneFor(category, chapter, normalized);
+  const style = illustrationStyle(category, chapter, scene);
+  const mode = category.mode || "systems";
+  return `
+    <figure class="visual-canvas visual-image visual-image-${mode} scene-${scene}" style="${style}">
+      <div class="image-frame" aria-label="${escapeHtml(title)} bölümünü özetleyen illüstrasyon">
+        <div class="image-atmosphere" aria-hidden="true">
+          <span class="image-star s1"></span>
+          <span class="image-star s2"></span>
+          <span class="image-star s3"></span>
+          <span class="image-star s4"></span>
+        </div>
+        <div class="image-landscape" aria-hidden="true">
+          <span class="image-beacon"></span>
+          <span class="image-ridge r1"></span>
+          <span class="image-ridge r2"></span>
+          <span class="image-path"></span>
+        </div>
+        <div class="image-artwork" aria-hidden="true">${sceneArtwork(scene, motifs)}</div>
+        <div class="image-story">
+          <small>${escapeHtml(displayCategoryTitle(category))} / Bölüm ${chapter.number}</small>
+          <strong>${escapeHtml(center)}</strong>
+          <p>${escapeHtml(caption)}</p>
+        </div>
+      </div>
+      <figcaption>${escapeHtml(caption)}</figcaption>
+    </figure>
+  `;
+}
+
 function visualFor(category, chapter) {
-  const exactSpec = chapterVisualSpecs[chapter.id];
-  if (exactSpec) return renderVisualSpec(exactSpec);
-  const spec = visualBlueprints[category.id]?.[chapter.number - 1];
-  if (spec) return renderVisualSpec(spec);
-  return renderVisualSpec({
+  const spec = chapterVisualSpecs[chapter.id] || visualBlueprints[category.id]?.[chapter.number - 1] || {
     type: "matrix",
     labels: ["Kavram", "Görev", "Bağımlılık", "Risk", "Kanıt", "Karar"],
     caption: "Bu sayfanın zihinsel özeti, kavramı görev, bağımlılık, risk ve kanıtla birlikte düşünmektir.",
     note: "her teknik terim bir sistem davranışına bağlanır"
-  });
+  };
+  return renderIllustration(category, chapter, spec);
 }
 
 function pillText(index) {
@@ -3056,7 +3299,7 @@ function renderNav() {
       return `
         <div class="category-group ${open ? "open" : ""}">
           <button class="category-button" type="button" data-category="${category.id}">
-            <span>${escapeHtml(category.title)}</span>
+            <span>${escapeHtml(displayCategoryTitle(category))}</span>
             <small>${category.count} bölüm</small>
           </button>
           <div class="chapter-list">${chapterLinks}</div>
@@ -3108,7 +3351,7 @@ function renderHome() {
         ${categories.map((category) => `
           <a class="category-card" href="${category.mode === "pills" ? "#/pills" : `#/chapter/${chapterId(category, 1)}`}">
             <small>${category.order}</small>
-            <h3>${escapeHtml(category.title)}</h3>
+            <h3>${escapeHtml(displayCategoryTitle(category))}</h3>
             <p>${escapeHtml(category.summary)}</p>
             <span>${category.count} bölüm</span>
           </a>
@@ -3134,7 +3377,7 @@ function renderChapter(id) {
   const progress = Math.round(((route.index + 1) / chapters.filter((item) => getCategory(item.categoryId).mode !== "pills").length) * 100);
   els.chapter.innerHTML = `
     <article class="article-card">
-      <p class="kicker">${escapeHtml(category.title)} / Bölüm ${chapter.number}</p>
+      <p class="kicker">${escapeHtml(displayCategoryTitle(category))} / Bölüm ${chapter.number}</p>
       <h1>${escapeHtml(chapter.title)}</h1>
       <p class="chapter-subtitle">${escapeHtml(category.summary)}</p>
       <div class="meta-row">
