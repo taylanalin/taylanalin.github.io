@@ -379,11 +379,13 @@ function routeInfo(chapter) {
 }
 
 function pick(items, seed) {
-  return items[Math.abs(seed) % items.length];
+  if (!Array.isArray(items) || !items.length) return "";
+  const index = Number.isFinite(seed) ? Math.abs(seed) % items.length : 0;
+  return items[index];
 }
 
 function chapterSeed(chapter) {
-  return chapter.number + chapter.numberInCategory * 7 + getCategory(chapter.categoryId).order * 13;
+  return chapter.number + chapter.numberInCategory * 7 + getCategory(chapter.categoryId).categoryNumber * 13;
 }
 
 function articleIntro(chapter) {
