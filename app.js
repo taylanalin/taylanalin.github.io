@@ -302,7 +302,7 @@ const categoryDefinitions = [
 
 const categories = categoryDefinitions.map((category, categoryIndex) => ({
   ...category,
-  order: categoryIndex + 1,
+  categoryNumber: categoryIndex + 1,
   chapters: category.chapters.map(([title, lens, focus], chapterIndex) => ({
     title,
     lens,
@@ -311,7 +311,7 @@ const categories = categoryDefinitions.map((category, categoryIndex) => ({
     categoryTitle: category.title,
     categorySummary: category.summary,
     categoryFrame: category.frame,
-    categoryOrder: categoryIndex + 1,
+    categoryNumber: categoryIndex + 1,
     numberInCategory: chapterIndex + 1
   }))
 }));
@@ -320,7 +320,7 @@ const chapters = categories.flatMap((category) => category.chapters).map((chapte
   ...chapter,
   id: `${String(index + 1).padStart(3, "0")}-${slug(chapter.title)}`,
   number: index + 1,
-  displayNumber: `${chapter.categoryOrder}.${chapter.numberInCategory}`
+  displayNumber: `${chapter.categoryNumber}.${chapter.numberInCategory}`
 }));
 
 const state = {
@@ -536,7 +536,7 @@ function renderNav() {
       return `
         <div class="category-group ${isOpen ? "open" : ""}">
           <button class="category-button" type="button" data-category="${category.id}">
-            <span>${category.order}. ${escapeHtml(category.title)}</span>
+            <span>${category.categoryNumber}. ${escapeHtml(category.title)}</span>
             <small>${category.chapters.length} başlık</small>
           </button>
           <div class="chapter-list">
@@ -604,7 +604,7 @@ function renderHome() {
           .map(
             (category) => `
               <a class="route-card" href="#/chapter/${chapters.find((chapter) => chapter.categoryId === category.id).id}">
-                <small>${category.order}. ana başlık / ${category.chapters.length} alt başlık</small>
+                <small>${category.categoryNumber}. ana başlık / ${category.chapters.length} alt başlık</small>
                 <h3>${escapeHtml(category.title)}</h3>
                 <p>${escapeHtml(category.summary)}</p>
               </a>
