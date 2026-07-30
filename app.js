@@ -685,7 +685,93 @@ function articleText(chapter) {
   const title = chapter.title;
   const lens = chapter.lens;
   const focus = chapter.focus;
-  return `${moment} ${title} başlığını bu yüzden soyut bir terim olarak değil, ${profile.scene} içinde okunması gereken bağımsız bir konu gibi ele almak gerekir. Bu sayfanın merkezindeki bilgi şudur: ${focus} Yeni başlayan biri için bu cümle önce tanım gibi durabilir; fakat ${lens} açısından bakıldığında konu hemen kurum hayatına iner. Çünkü her başlık kendi küçük sahnesinde kullanıcıyı, teknik ekibi, resmi süreci, denetim izini ve yönetsel kararı farklı biçimde etkiler. ${title} özelinde ilk sorulacak soru “bu kavram nedir?” değil, “bu kavram yok sayılırsa hangi iş aksar, hangi kayıt eksik kalır, hangi karar yanlış zemine oturur?” sorusudur. Cevap burada başlar: ${profile.risk}. Bu risk yalnız teknik bir kusur değildir; proje takvimini, şartname dilini, kabul kanıtını, bakım sorumluluğunu ve üst yönetimin güven duygusunu da etkiler. Bu nedenle iyi bir proje yöneticisi konuyu masaya aldığında ${profile.manager} görevini üstlenir. Gereksinim yazılırken hangi ifade kullanılacak, testte ne görülecek, kabul komisyonu hangi belgeyle ikna olacak, işletim ekibi bunu nasıl izleyecek, kullanıcı birimi sonucu nerede hissedecek? Bu sorular başlığı dağıtmaz; tersine metnin omurgasını kurar. ${title} öğrenildiğinde okurun elinde yalnız bir tanım değil, toplantıda kullanılabilir bir sezgi kalmalıdır. O sezgi sayesinde kişi konuyu duyduğunda doğru ekibi çağırır, doğru kanıtı ister, yanlış kolaycılığı fark eder ve üst yönetime sade bir cümle kurar. ${profile.close}`;
+  const endings = [
+    `${title} böyle okunduğunda, okurun zihninde yalnız bir kavram değil, gerçek iş sırasında başvurabileceği sakin bir kontrol noktası kalır.`,
+    `Bu yüzden ${title}, öğrenilip kenara konacak bir madde değil; gerektiğinde toplantıda, kabulde, denetimde ve karar anında tekrar hatırlanacak bir çalışma alışkanlığıdır.`,
+    `Sayfanın sonunda amaç, ${title} adını ezberlemekten çok, bu konu açıldığında hangi sorunun önce sorulacağını sezebilmektir.`,
+    `${lens} tarafındaki bu bakış yerleştiğinde, ${title} artık yabancı bir teknik başlık gibi değil, kurum işinin doğal bir parçası gibi görünür.`,
+    `Kısacası ${title}, doğru anlaşılırsa kişiye hem teknik ayrıntıyı hem de o ayrıntının yönetim masasındaki karşılığını birlikte düşündürür.`,
+    `Buradan alınacak asıl ders, ${title} hakkında konuşurken tanım, kanıt, sorumluluk ve karar arasındaki bağı koparmamaktır.`,
+    `Böyle bir okuma biçimi, ${title} konusunu kuru bilgi olmaktan çıkarır ve kamu hizmeti içinde işe yarayan bir yargıya dönüştürür.`,
+    `Okur bu başlıktan ayrılırken “bunu nerede kullanırım?” sorusuna cevap verebiliyorsa, ${title} gerçekten öğrenilmeye başlamış demektir.`,
+    `${title} için iyi sonuç, çok teknik konuşmak değil; doğru anda doğru kişiye doğru soruyu sorabilecek açıklığa ulaşmaktır.`,
+    `Bu açıklık kurulduğunda ${title}, karmaşık görünen teknoloji dünyasında güvenilir bir yön bulma işaretine dönüşür.`
+  ];
+  const ending = endings[(chapter.number * 3 + chapter.numberInCategory) % endings.length];
+  const variants = [
+    [
+      `${moment} Ben bu tür konuları anlatırken önce kavramın adını değil, bıraktığı izi konuşmayı severim; çünkü ${title} denen şey de tam olarak o izden anlaşılır.`,
+      `${focus} Bu cümleyi kuru bir tanım gibi alma. Bir kurumda iş yürürken ${lens} tarafında küçük görünen bir ayrıntı bazen kullanıcının beklediği cevabı, bazen denetçinin aradığı kaydı, bazen de yöneticinin vereceği kararı belirler.`,
+      `Buradaki incelik, konuyu ${profile.scene} içinde okuyabilmektir. Eğer yalnız araç adı ezberlenirse ${profile.risk}. Oysa iyi okuyan kişi önce işin nerede başladığını, sonra hangi ekiplerin bu bilgiye dayanarak hareket ettiğini görür.`,
+      `Bir proje yöneticisi için ders şudur: ${profile.manager}. Bunu yaparken teknik doğruluğu, resmi süreci, kabul kanıtını ve işletim sorumluluğunu aynı cümlede tutmak gerekir.`,
+      `${ending}`
+    ],
+    [
+      `${moment} İlk bakışta bu yalnız uzmanların konuşacağı bir ayrıntı gibi durabilir; fakat ${title} gündeme geldiğinde masadaki konu aslında kurumun nasıl düşündüğüdür.`,
+      `${focus} Bu noktayı kavramak, yeni başlayan birine kavramın tanımından fazlasını verir: nerede kullanılacağını, hangi hatayı önlediğini ve hangi kararın daha sakin alınmasını sağladığını gösterir.`,
+      `${lens} penceresinden bakınca mesele daha da netleşir. Konu ${profile.scene} ile bağ kurar; bu bağ kurulmazsa ${profile.risk}. Böyle durumlarda teknik ekip ayrı, kullanıcı birimi ayrı, yönetim ayrı gerçekler anlatmaya başlar.`,
+      `Bu yüzden proje yöneticisinin işi yalnız takip yapmak değildir. ${profile.manager} dediğimiz beceri, burada toplantı notundan şartnameye, test kanıtından kabul tutanağına kadar uzanan pratik bir sorumluluğa dönüşür.`,
+      `Sonunda ${title}, ezberlenecek bir başlık olmaktan çıkar; doğru zamanda doğru soruyu sorduran bir yönetim alışkanlığına dönüşür. ${ending}`
+    ],
+    [
+      `${moment} Bu cümleyi duyduğunda hemen teknik tanıma koşmak cazip gelir, ama ${title} için daha iyi başlangıç şudur: kurum bu bilgiye hangi anda ihtiyaç duyar?`,
+      `${focus} Cevap burada yavaş yavaş açılır. Çünkü kamu hizmeti dediğimiz şey ekrandaki sonucun arkasında kayıt, yetki, süreç, güvenlik ve sorumluluk taşıyan uzun bir zincirdir.`,
+      `Bu zincirde ${lens} rolü çoğu zaman sessizdir; fark edilmesi için bir hata, gecikme ya da denetim sorusu beklenir. İşte o anda ${profile.risk}.`,
+      `İyi yönetici bu noktada konuyu büyütmeden ciddiye alır. ${profile.manager}; sonra bunu gereksinime, ölçüte, kanıta ve işletim düzenine çevirir.`,
+      `${title} böyle öğrenildiğinde okurun elinde kuru bilgi değil, sahada işe yarayan bir sezgi kalır. ${ending}`
+    ],
+    [
+      `${moment} ${title} hakkında konuşurken en önemli şey, konuyu gündelik işten koparmamaktır.`,
+      `${focus} Bu bilgi, tek başına güzel bir tanım olduğu için değil, gerçek bir kurum akışında yanlış anlaşılırsa bedel ürettiği için önemlidir.`,
+      `${profile.scene} düşünülünce tablo değişir: kullanıcı yalnız sonucu görür, teknik ekip davranışı izler, denetçi kayıt arar, yönetici ise risk ve değer arasında karar verir. ${lens} tam bu kesişimde anlam kazanır.`,
+      `Zayıf kurgu burada kendini hemen belli eder; ${profile.risk}. Bu yüzden proje yöneticisi ${profile.manager} işini ihmal etmemelidir.`,
+      `Bu başlığı iyi anlayan kişi toplantıda fazla konuşmak zorunda kalmaz; doğru yerde doğru cümleyi kurar. ${ending}`
+    ],
+    [
+      `${moment} Bazen bir konunun önemini anlamak için büyük teoriye değil, küçük bir aksaklığın nasıl büyüdüğüne bakmak yeterlidir; ${title} tam böyle bir başlıktır.`,
+      `${focus} Bu yüzden öğrenme, tanımı okuyup geçmekle bitmez. Kavramın hangi dosyada, hangi ekranda, hangi logda, hangi karar yazısında ya da hangi kabul adımında görünür olduğunu düşünmek gerekir.`,
+      `${lens} tarafı burada bize konunun rengini verir. Eğer o renk kaybolursa ${profile.risk}; herkes iyi niyetle çalışsa bile ortak anlam kurulamaz.`,
+      `Proje yöneticisi bu başlığı masaya aldığında ${profile.manager}. Bunu yapabildiğinde teknik ayrıntı yönetilebilir bir plana dönüşür.`,
+      `${title} sonunda şunu öğretir: iyi teknoloji yönetimi, ayrıntıyı küçümsemeden ama ayrıntıda boğulmadan karar verebilmektir. ${ending}`
+    ],
+    [
+      `${moment} ${title} ilk kez karşına çıktığında karmaşık görünebilir; fakat onu doğru yere koyunca mesele sadeleşir.`,
+      `${focus} Bu sadeleşme önemlidir, çünkü kamu kurumunda öğrenilen her teknik kavram bir noktada hizmet kalitesi, kayıt düzeni, güvenlik veya bütçe kararıyla buluşur.`,
+      `Konuya ${lens} açısından bakınca, arka plandaki bağlantılar belirginleşir. ${profile.scene} içinde bu bağlantılar kurulmazsa ${profile.risk}.`,
+      `Burada proje yöneticisinin değeri ortaya çıkar: ${profile.manager}. Yani bilgiyi yalnız bilmek değil, onu karar verilebilir hale getirmek gerekir.`,
+      `Okur bu sayfadan ayrıldığında ${title} için en azından şunu hissetmeli: Bu konuyu duyarsam nereden başlayacağımı biliyorum. ${ending}`
+    ],
+    [
+      `${moment} Ben olsam ${title} konusunu anlatmaya bir şema çizerek değil, kurumda bir işin nasıl aksayabileceğini göstererek başlarım.`,
+      `${focus} Çünkü bazı kavramlar düzgün çalışırken görünmez; ancak yanlış kurgulandığında herkes aynı anda fark eder.`,
+      `${lens} tam burada işe yarar. Konu ${profile.scene} ile birlikte okunduğunda yalnız teknik ekibin değil, kullanıcının, yöneticinin ve denetçinin de meselesi olur.`,
+      `Aksi halde ${profile.risk}. Bu cümle sert gelebilir ama proje tecrübesi çoğu zaman bunu doğrular.`,
+      `Bu yüzden ${profile.manager} yaklaşımı, ${title} için lüks değil zorunluluktur. ${ending}`
+    ],
+    [
+      `${moment} ${title} için aceleyle “bunu biliyorum” demek kolaydır; asıl zor olan, bu bilginin kurumda hangi davranışı değiştirdiğini görmektir.`,
+      `${focus} Tanım burada başlangıçtır ama hedef değildir. Hedef, kavramı gerçek bir hizmet akışında okuyabilmektir.`,
+      `${profile.scene} içinde düşününce ${lens} yalnız etiket olmaktan çıkar. Bir kararın, bir kaydın, bir erişimin ya da bir teslimin arkasındaki mantığı anlatır.`,
+      `Bu mantık kurulmazsa ${profile.risk}. Proje yöneticisi de tam bu nedenle ${profile.manager} sorumluluğunu taşır.`,
+      `Böyle bakıldığında ${title}, sınavlık bilgi değil, kurum içinde doğru hareket etmeyi sağlayan pratik bir akıl haline gelir. ${ending}`
+    ],
+    [
+      `${moment} Bu başlığı okuyan kişinin hiç kamu tecrübesi olmadığını varsayalım; o zaman ${title} için ilk cümle şu olur: bu konu, işlerin görünmeyen düzenini anlamaya yarar.`,
+      `${focus} Görünmeyen düzen önemlidir, çünkü bir hizmet yalnız ekrandan ibaret değildir; arkasında insan, veri, yetki, kayıt, altyapı ve karar vardır.`,
+      `${lens} bu düzenin hangi tarafına baktığımızı gösterir. Yanlış yerden bakarsak ${profile.risk}; doğru yerden bakarsak sorun daha büyümeden kendini belli eder.`,
+      `Yönetici tarafında karşılığı açıktır: ${profile.manager}. Bunun için bazen teknik ekibi dinlemek, bazen kullanıcı birimine dönmek, bazen de resmi süreçteki kanıtı kontrol etmek gerekir.`,
+      `${title} iyi öğrenildiğinde kişi teknolojiye biraz daha cesur, biraz daha sakin ve çok daha düzenli yaklaşır. ${ending}`
+    ],
+    [
+      `${moment} ${title} bana hep şu dersi hatırlatır: kurumlarda küçük sanılan teknik ayrıntılar, doğru yerde anlaşılmazsa büyük yönetim sorunlarına dönüşebilir.`,
+      `${focus} Bu yüzden konuya yalnız kelime anlamıyla değil, hangi ihtiyacı çözdüğüyle bakmak gerekir.`,
+      `${profile.scene} içinde bu ihtiyaç daha anlaşılır hale gelir. ${lens} ise bize meseleyi hangi gözlükle okuyacağımızı söyler.`,
+      `Bu gözlük takılmazsa ${profile.risk}. Sonrasında en iyi niyetli ekip bile eksik bilgiyle karar almak zorunda kalır.`,
+      `İyi proje yöneticisi burada ${profile.manager}; okur da bu başlığı bitirdiğinde aynı refleksi kazanmalıdır. ${ending}`
+    ]
+  ];
+  const article = variants[(chapter.number + chapter.numberInCategory) % variants.length];
+  return article.join(" ");
 }
 
 function readingMinutes(chapter) {
