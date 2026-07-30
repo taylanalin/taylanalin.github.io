@@ -388,85 +388,7 @@ function chapterSeed(chapter) {
   return chapter.number + chapter.numberInCategory * 7 + getCategory(chapter.categoryId).categoryNumber * 13;
 }
 
-function articleIntro(chapter) {
-  const seed = chapterSeed(chapter);
-  const intros = {
-    "temel-okuryazarlik": [
-      `${chapter.title} ilk bakışta küçük bir teknik konu gibi durabilir; fakat bilgi teknolojilerinde sağlam yürümek isteyen biri için burası zemindeki taşlardan biridir. ${chapter.focus} Bu zemini kurarken acele edip araç isimlerine atlamak yerine, kavramın günlük kurum hayatında hangi problemi çözdüğünü görmek daha değerlidir.`,
-      `Bu bölümde konuyu en yalın yerinden tutalım: ${chapter.focus} Bir kamu hizmeti ekranda tek işlem gibi görünür, ama arkasında cihazdan ağa, işletim sisteminden kayda kadar uzanan sessiz bir düzen vardır. ${chapter.title} o düzenin hangi parçasını aydınlattığını gösterir.`,
-      `Teknoloji öğrenirken bazı başlıklar gösterişli değildir ama her yerde karşına çıkar. ${chapter.title} de onlardan biridir. ${chapter.focus} Bu kavramı iyi oturtan kişi, ileride daha karmaşık sistemleri okurken nereden başlayacağını daha rahat bulur.`
-    ],
-    "yazilim-muhendisligi": [
-      `Yazılım dünyasında ${chapter.title.toLocaleLowerCase("tr-TR")} konusunu anlamak, yalnız kod yazanlar için değil, o kodun hangi hizmeti taşıdığını yönetenler için de önemlidir. ${chapter.focus} Çünkü kurumsal yazılım, insan işini makinenin takip edebileceği açık bir düzene dönüştürür.`,
-      `${chapter.title} bir uygulamanın görünen yüzüyle görünmeyen emeği arasında duran konulardan biridir. ${chapter.focus} Bu noktayı kavramadan proje takvimi, test kapsamı, bakım maliyeti veya kullanıcı etkisi sağlıklı okunamaz.`,
-      `Bir kamu uygulaması başarılı olduğunda kullanıcı çoğu zaman yalnız ekranı görür; başarısız olduğunda ise bütün kurum etkilenir. ${chapter.title}, bu başarının arkasındaki yazılım düşüncesinin bir parçasıdır. ${chapter.focus}`
-    ],
-    "veri-ve-analitik": [
-      `Veriyle ilgili her konu, kurumun hafızasına dokunur. ${chapter.title} bu hafızanın daha doğru, daha sorgulanabilir ve daha güvenilir kullanılmasına yardım eder. ${chapter.focus} Yanlış veriyle kurulan karar, ne kadar güzel raporlanırsa raporlansın kurumu yanlış yöne götürebilir.`,
-      `${chapter.title} yalnız teknik bir veri konusu değildir; yönetimin neye inanarak karar verdiğiyle ilgilidir. ${chapter.focus} Bir sayı panoya düştüğünde arkasındaki tanım, kaynak, dönüşüm ve kalite bilinmiyorsa o sayı güven üretmez.`,
-      `Kamu kurumunda veri satır satır birikmez; başvuru, hizmet, denetim, ödeme ve vatandaş deneyimi olarak birikir. ${chapter.title}, bu birikimi anlamlı karara dönüştürme zincirindeki önemli halkalardan biridir. ${chapter.focus}`
-    ],
-    "altyapi-bulut-operasyon": [
-      `${chapter.title} konusunu düşünürken akılda tutulması gereken şey şudur: canlı sistemler yalnız kuruldukları gün değil, her gün yeniden sınanır. ${chapter.focus} Bu yüzden altyapı ve operasyon başlıkları, görünmeyen ama hizmeti ayakta tutan yönetim alanlarıdır.`,
-      `Bir hizmetin çalışıyor olması başlangıçtır; güvenilir, izlenebilir, ölçeklenebilir ve geri döndürülebilir olması ise olgunluktur. ${chapter.title} bu olgunluğun bir parçasını anlatır. ${chapter.focus}`,
-      `Kamu hizmetinde kesinti yalnız teknik arıza değildir; vatandaşın işinin durması, kurumun güven kaybetmesi ve ekiplerin baskı altında kalmasıdır. ${chapter.title}, bu baskıyı azaltacak işletim düşüncesine bağlanır. ${chapter.focus}`
-    ],
-    "siber-guvenlik": [
-      `Güvenlik başlıklarını korku diliyle değil, sorumluluk diliyle okumak gerekir. ${chapter.title}, kurumun hangi varlığı hangi riske karşı nasıl koruyacağını anlamaya yardım eder. ${chapter.focus}`,
-      `${chapter.title} güvenliğin tek bir cihaz veya yazılımla çözülemeyeceğini hatırlatır. ${chapter.focus} İnsan, süreç, teknoloji, kayıt ve denetim birlikte çalışmadığında güvenlik kağıt üzerinde kalır.`,
-      `Kamu kurumunda güvenlik, yalnız sistemleri değil vatandaşın kuruma duyduğu güveni de korur. ${chapter.title} bu güvenin teknik ve yönetsel taraflarını aynı çerçevede düşünmeyi sağlar. ${chapter.focus}`
-    ],
-    "yapay-zeka": [
-      `Yapay zeka alanında ${chapter.title.toLocaleLowerCase("tr-TR")} konusu, heyecanla temkin arasındaki doğru mesafeyi kurmak için önemlidir. ${chapter.focus} Çünkü akıllı görünen bir sistemin gerçekten değer üretmesi veri, ölçüm, güvenlik ve insan onayıyla mümkündür.`,
-      `${chapter.title} yeni teknolojilere kapılmadan önce basit bir soruya dönmeyi sağlar: Bu yetenek hangi işi daha doğru, daha hızlı veya daha güvenilir hale getiriyor? ${chapter.focus}`,
-      `Kamu kurumunda yapay zeka yalnız verimlilik aracı değildir; karar kalitesi, mahremiyet, açıklanabilirlik ve sorumluluk meselesidir. ${chapter.title} bu nedenle teknik olduğu kadar yönetsel bir başlıktır. ${chapter.focus}`
-    ],
-    "kamu-surecleri": [
-      `${chapter.title}, teknoloji işinin kamu kurumunda hangi idari zeminde yürüdüğünü gösterir. ${chapter.focus} Bu zemini bilmeyen kişi teknik olarak doğru bir işi yanlış süreçle ilerletip projeyi gereksiz yere zorlaştırabilir.`,
-      `Kamu tarafında işlerin yazıya, olura, komisyona, sözleşmeye ve kabule bağlanması bazen yavaşlık gibi görünür; aslında kararın izini korur. ${chapter.title} bu iz düzeninin teknoloji projeleriyle nasıl birleştiğini anlatır. ${chapter.focus}`,
-      `Bir kamu BT yöneticisi için ${chapter.title.toLocaleLowerCase("tr-TR")} konusu, teknik bilgi kadar kritik olabilir. ${chapter.focus} Çünkü hizmetin hayata geçmesi çoğu zaman doğru sistem kadar doğru süreçle mümkündür.`
-    ],
-    "bt-proje-yonetimi": [
-      `BT proje yöneticiliğinde ${chapter.title.toLocaleLowerCase("tr-TR")} konusu, işin dağılmadan ilerlemesini sağlayan temel parçalardan biridir. ${chapter.focus} Proje yöneticisi teknik ayrıntıyı, kullanıcı beklentisini, resmi süreci ve teslim kanıtını aynı akışta tutmak zorundadır.`,
-      `${chapter.title} iyi yönetilmediğinde küçük belirsizlikler büyüyerek takvim, bütçe, kalite ve kabul sorununa dönüşür. ${chapter.focus} Bu yüzden proje yönetimi, yalnız takip işi değil, anlamı ve sorumluluğu düzenleme işidir.`,
-      `Bir projede herkes kendi açısından haklı olabilir; proje yöneticisinin değeri bu haklılıkları ortak plana dönüştürmesidir. ${chapter.title} bu ortak planın kurulmasında özel bir yere sahiptir. ${chapter.focus}`
-    ],
-    "yonetisim-strateji": [
-      `${chapter.title}, teknoloji kararlarını günlük ihtiyaçların ötesine taşıyıp kurumun uzun vadeli yönüyle ilişkilendirir. ${chapter.focus} Üst düzey yönetici için bu başlık, kaynakların neden ve hangi öncelikle kullanılacağını açıklama becerisidir.`,
-      `Strateji tarafında mesele daha fazla teknoloji almak değil, doğru teknolojiyle doğru kurumsal değeri üretmektir. ${chapter.title} bu değeri risk, maliyet, bağımlılık ve sürdürülebilirlik açısından okumaya yardım eder. ${chapter.focus}`,
-      `${chapter.title} yönetim masasında teknik ayrıntının nasıl karar diline çevrileceğini gösterir. ${chapter.focus} Burada başarı, yalnız projeyi başlatmak değil, yıllar sonra da savunulabilir bir yön kurmaktır.`
-    ],
-    "ust-duzey-liderlik": [
-      `${chapter.title} artık teknik bilginin insan, kurum ve kamu sorumluluğu ile birleştiği seviyeye aittir. ${chapter.focus} Bu seviyede liderlik, her şeyi bilmekten çok doğru insanları, doğru soruları ve doğru karar düzenini kurabilmektir.`,
-      `Üst düzey BT liderliği, kriz anında sakin kalmayı, normal zamanda ekip yetiştirmeyi ve stratejik anda kurum adına doğru önceliği seçmeyi gerektirir. ${chapter.title} bu olgunluğun bir parçasını anlatır. ${chapter.focus}`,
-      `${chapter.title} kişiyi araç isimlerinden çıkarıp etki, güven, etik, iletişim ve sürdürülebilirlik alanına taşır. ${chapter.focus} Çünkü kamu teknoloji liderliği sonunda insan hayatına dokunan hizmetleri yönetme sorumluluğudur.`
-    ]
-  };
-  return pick(intros[chapter.categoryId], seed);
-}
-
-function articleMiddle(chapter) {
-  const seed = chapterSeed(chapter);
-  const transitions = [
-    `Burada dikkat edilmesi gereken ilk şey, konunun tek başına durmadığıdır. Bir karar alındığında kullanıcı deneyimi, hizmet sürekliliği, güvenlik, mevzuat, bütçe, tedarik ve denetim aynı masaya gelir. Bu nedenle öğrenme süreci de tek yönde ilerlememelidir; önce kavram anlaşılır, sonra bu kavramın hangi ekiplerin işini etkilediği ve hangi belgelerde görünür hale geldiği düşünülür.`,
-    `Bu konuyu gerçek bir kurum ortamına taşıdığında resim genişler. Teknik ekip uygulanabilirliği, kullanıcı birimi ihtiyacı, güvenlik ekibi riski, satın alma süreci şartları, yönetim ise etkiyi ve önceliği sorar. İyi yönetici bu soruları birbirinden kopuk gündemler gibi değil, aynı kararın farklı yüzleri gibi ele alır.`,
-    `Kavramı öğrenirken yalnız olumlu senaryoyu düşünmek yeterli değildir. Gecikirse ne olur, yanlış uygulanırsa kim etkilenir, veri kalitesi bozulursa hangi rapor şaşar, yetki hatası çıkarsa hangi risk doğar, kabul aşamasında hangi kanıt istenir? Bu sorular konuyu ağırlaştırmaz; aksine onu hayata yaklaştırır.`
-  ];
-  return pick(transitions, seed);
-}
-
-function articleProjectFlow(chapter) {
-  const seed = chapterSeed(chapter);
-  const flows = [
-    `BT proje yöneticisi açısından bu bilgi, toplantıda söylenecek güzel bir cümleden fazlasıdır. Gereksinim yazılırken kapsamı netleştirir, risk kaydında belirsizliği görünür yapar, şartname hazırlanırken ölçülebilir maddeye dönüşür, test planında doğrulama adımı olur ve kabul komisyonu önüne geldiğinde kanıtla konuşur. Böyle ilerleyen projede bilgi parçalanmaz; fikirden teslimata kadar aynı çizgide taşınır.`,
-    `Proje akışında bu başlık önce ihtiyaç cümlesine, sonra teknik değerlendirmeye, ardından plan ve sorumluluk paylaşımına dönüşür. Eğer dış tedarikçi varsa sözleşme ve SLA tarafı da bu akışa eklenir; kamu tarafında resmi yazı, olur, ihale dokümanı veya kabul tutanağı gerektiğinde konu idari zemine oturur. Proje yöneticisi tam da bu geçişleri koparmadan yöneten kişidir.`,
-    `Bu yüzden proje yöneticisi, konuyu kimden dinlediğine göre anlamını değiştirmemelidir. Kullanıcı başka, mühendis başka, güvenlik uzmanı başka, satın alma başka kelimeler kullanabilir; ama proje yöneticisi bu kelimeleri aynı hedefe bağlar. İyi tutanak, iyi karar kaydı ve iyi kabul kriteri bu ortak anlamı korumak için vardır.`
-  ];
-  return pick(flows, seed);
-}
-
-function articlePractice(chapter) {
-  const seed = chapterSeed(chapter);
+function articleText(chapter) {
   const examples = [
     "başvuru alma",
     "randevu verme",
@@ -477,37 +399,20 @@ function articlePractice(chapter) {
     "denetim kaydı oluşturma",
     "kurumlar arası veri paylaşımı"
   ];
-  const example = pick(examples, seed);
-  return `Bunu pekiştirmek için ${example} gibi sade bir kamu hizmetini gözünün önüne getir. ${chapter.title} bu hizmetin neresinde duruyor, kullanıcı hangi adımda sonucunu hissediyor, teknik ekip hangi noktada işletiyor, yönetici bunu hangi karara bağlıyor, denetçi hangi kayıtla izliyor? Aynı hizmet üzerinde bu soruları sormak metni daha canlı hale getirir; çünkü konu artık soyut bir başlık değil, kurum içinde ilerleyen gerçek bir iş akışı olur.`;
-}
-
-function articleClosing(chapter) {
-  const seed = chapterSeed(chapter);
-  const closings = [
-    `${chapter.title} üzerinde yetkinleşmek, onu ezberlemekten çok doğru bağlama yerleştirmektir. Konu önce teknik anlamıyla anlaşılır, sonra proje yönetimi içinde sorumluluk kazanır, kamu sürecinde belge ve onay düzenine bağlanır, en sonunda üst yönetim seviyesinde risk, maliyet ve değer diliyle savunulur. Bu zincir kurulduğunda bilgi dağılmaz; kişinin karar alma gücünü artırır.`,
-    `Bu başlığın sonunda beklenen şey, okurun yalnız tanım yapabilmesi değildir. Beklenen şey, bir projede bu konu ortaya çıktığında hangi soruları soracağını, hangi ekibi masaya çağıracağını, hangi kanıtı arayacağını ve hangi kararı üst makama nasıl anlatacağını sezebilmesidir. Üst düzey kamu BT yöneticiliği tam olarak bu sezginin üzerine kurulur.`,
-    `Sonuçta ${chapter.title}, 200 başlıklı rotanın tek bir tuğlası gibi düşünülebilir. Tek başına küçük görünebilir; fakat önceki ve sonraki başlıklarla birleştiğinde teknolojiyle kurum yönetme becerisini güçlendirir. Bu yüzden okurken amaç hızlı geçmek değil, kavramın kurum hayatındaki yerini sakin biçimde görmektir.`
-  ];
-  return pick(closings, seed);
-}
-
-function articleParagraphs(chapter) {
-  return [
-    articleIntro(chapter),
-    articleMiddle(chapter),
-    articleProjectFlow(chapter),
-    articlePractice(chapter),
-    articleClosing(chapter)
-  ];
+  const example = examples[(chapter.number - 1) % examples.length];
+  const title = chapter.title;
+  const lens = chapter.lens;
+  const focus = chapter.focus;
+  return `${title} konusuna dışarıdan bakan biri çoğu zaman önce adını duyar, sonra bunun hangi araca, hangi ekibe veya hangi teknik terime ait olduğunu anlamaya çalışır; oysa bu başlığı gerçekten öğrenmenin daha iyi yolu, onu kurumun yaşayan bir işinin içine yerleştirmektir. ${focus} Bu cümle ilk anda soyut görünebilir, fakat ${example} gibi herkesin anlayabileceği bir kamu hizmetini düşündüğünde konu hemen somutlaşır: vatandaş bir işlem başlatır, ekran bir cevap üretir, arka tarafta veri okunur, yetki kontrol edilir, kayıt oluşur, bazen başka kurumla bilgi paylaşılır ve bütün bu akışın sonunda yöneticiye “bu hizmet güvenilir mi, sürdürülebilir mi, denetlenebilir mi?” sorusu kalır. ${title} tam da bu sorunun içinde anlam kazanır; çünkü teknoloji yalnız çalışan bir araç değil, doğru yönetilmediğinde hizmet kalitesini, bütçeyi, güvenliği ve kurum itibarını aynı anda etkileyen bir düzendir. Bu yüzden bu başlığı okurken ezberlenecek ilk şey tanım değil, bakış açısıdır: ${lens} açısından mesele neyi görünür kılıyor, hangi kararı kolaylaştırıyor, hangi riski erkenden fark ettiriyor? Yeni başlayan biri için bu yaklaşım, kavramın korkutucu tarafını azaltır; deneyimli biri içinse ayrıntının yönetim değerini açığa çıkarır. Bir proje yöneticisi bu konuyu masaya aldığında yalnız “bunu yapabilir miyiz?” diye sormaz; ihtiyacın kime ait olduğunu, kabul ölçütünün nasıl yazılacağını, ihale veya tedarik gerekiyorsa şartnameye hangi ifadenin gireceğini, teslim sırasında hangi kanıtın aranacağını, işletime geçtikten sonra kimin izleyeceğini ve sorun çıktığında hangi kayıt üzerinden konuşulacağını düşünür. Böyle bakıldığında ${title}, tek başına duran bir ders maddesi olmaktan çıkar; fikirden uygulamaya, uygulamadan işletime, işletimden yönetsel karara giden yolun kendine özgü bir durağı haline gelir. Bu durağın değeri, başka başlıkların cümleleriyle doldurulmasında değil, kendi sorusunu net sormasında yatar: Bu konu kurumun hangi işini daha doğru, daha güvenli, daha ölçülebilir veya daha anlaşılır hale getiriyor? Cevap verilirken acele edilmez; önce kullanıcı tarafındaki etki görülür, sonra teknik arka plan okunur, ardından kamu sürecinin belge, onay, sorumluluk ve denetim düzeniyle bağlantı kurulur. Sonunda okurun elinde kuru bir terim listesi değil, gerçek hayatta kullanılabilecek bir sezgi kalmalıdır. ${title} öğrenildiğinde kişi bir toplantıda bu başlığı duyduğu anda kiminle konuşacağını, hangi soruyu soracağını, hangi kanıtı isteyeceğini ve kararı üst yönetime hangi dille anlatacağını daha rahat bilir; asıl kazanım da budur.`;
 }
 
 function readingMinutes(chapter) {
-  const words = articleParagraphs(chapter).join(" ").split(/\s+/).filter(Boolean).length;
+  const words = articleText(chapter).split(/\s+/).filter(Boolean).length;
   return Math.max(10, Math.round(words / 180));
 }
 
 function renderArticle(chapter) {
-  return articleParagraphs(chapter).map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("");
+  return `<p>${escapeHtml(articleText(chapter))}</p>`;
 }
 
 function closeMobileSidebar() {
