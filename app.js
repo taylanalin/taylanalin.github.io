@@ -311,6 +311,7 @@ const categories = categoryDefinitions.map((category, categoryIndex) => ({
     categoryTitle: category.title,
     categorySummary: category.summary,
     categoryFrame: category.frame,
+    categoryOrder: categoryIndex + 1,
     numberInCategory: chapterIndex + 1
   }))
 }));
@@ -318,7 +319,8 @@ const categories = categoryDefinitions.map((category, categoryIndex) => ({
 const chapters = categories.flatMap((category) => category.chapters).map((chapter, index) => ({
   ...chapter,
   id: `${String(index + 1).padStart(3, "0")}-${slug(chapter.title)}`,
-  number: index + 1
+  number: index + 1,
+  displayNumber: `${chapter.categoryOrder}.${chapter.numberInCategory}`
 }));
 
 const state = {
@@ -534,7 +536,7 @@ function renderNav() {
       return `
         <div class="category-group ${isOpen ? "open" : ""}">
           <button class="category-button" type="button" data-category="${category.id}">
-            <span>${escapeHtml(category.title)}</span>
+            <span>${category.order}. ${escapeHtml(category.title)}</span>
             <small>${category.chapters.length} başlık</small>
           </button>
           <div class="chapter-list">
@@ -542,7 +544,7 @@ function renderNav() {
               .map(
                 (chapter) => `
                   <a class="chapter-link ${activeId === chapter.id ? "active" : ""}" href="#/chapter/${chapter.id}" data-category="${category.id}">
-                    <strong>${chapter.number}. ${escapeHtml(chapter.title)}</strong>
+                    <strong>${chapter.displayNumber} ${escapeHtml(chapter.title)}</strong>
                     <span>${escapeHtml(chapter.lens)}</span>
                   </a>
                 `
@@ -585,24 +587,24 @@ function renderHome() {
           <div class="artifact-lines">
             <i></i><i></i><i></i><i></i><i></i>
           </div>
-          <strong>10 üst başlık, 200 ana başlık, tek gelişim rotası.</strong>
+          <strong>10 ana başlık, 200 alt başlık, tek gelişim rotası.</strong>
         </div>
       </div>
       <div class="stats-row">
-        <div><strong>${chapters.length}</strong><span>ana başlık</span></div>
-        <div><strong>${categories.length}</strong><span>üst başlık</span></div>
+        <div><strong>${chapters.length}</strong><span>alt başlık</span></div>
+        <div><strong>${categories.length}</strong><span>ana başlık</span></div>
         <div><strong>1</strong><span>yönetici rotası</span></div>
       </div>
     </section>
     <section class="route-panel">
-      <h2>Üst Başlıklar</h2>
+      <h2>Ana Başlıklar</h2>
       <p>${escapeHtml(book.subtitle)}</p>
       <div class="route-grid">
         ${categories
           .map(
             (category) => `
               <a class="route-card" href="#/chapter/${chapters.find((chapter) => chapter.categoryId === category.id).id}">
-                <small>${category.order}. rota / ${category.chapters.length} başlık</small>
+                <small>${category.order}. ana başlık / ${category.chapters.length} alt başlık</small>
                 <h3>${escapeHtml(category.title)}</h3>
                 <p>${escapeHtml(category.summary)}</p>
               </a>
@@ -627,7 +629,7 @@ function renderChapter(id) {
   const progress = Math.round(((route.index + 1) / chapters.length) * 100);
   els.chapter.innerHTML = `
     <article class="article-card">
-      <p class="kicker">${escapeHtml(chapter.categoryTitle)} / Başlık ${chapter.number}</p>
+      <p class="kicker">${chapter.displayNumber} / ${escapeHtml(chapter.categoryTitle)}</p>
       <h1>${escapeHtml(chapter.title)}</h1>
       <p class="chapter-subtitle">${escapeHtml(chapter.categorySummary)}</p>
       <div class="meta-row">
