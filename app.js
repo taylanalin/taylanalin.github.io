@@ -319,6 +319,7 @@ const categories = categoryDefinitions.map((category, categoryIndex) => ({
 const chapters = categories.flatMap((category) => category.chapters).map((chapter, index) => ({
   ...chapter,
   id: `${String(index + 1).padStart(3, "0")}-${slug(chapter.title)}`,
+  articlePath: `articles/${String(index + 1).padStart(3, "0")}-${slug(chapter.title)}.html`,
   number: index + 1,
   displayNumber: `${chapter.categoryNumber}.${chapter.numberInCategory}`
 }));
@@ -340,6 +341,12 @@ const els = {
 function slug(value) {
   return value
     .toLocaleLowerCase("tr-TR")
+    .replace(/ı/g, "i")
+    .replace(/ğ/g, "g")
+    .replace(/ü/g, "u")
+    .replace(/ş/g, "s")
+    .replace(/ö/g, "o")
+    .replace(/ç/g, "c")
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/ı/g, "i")
@@ -378,409 +385,18 @@ function routeInfo(chapter) {
   };
 }
 
-function pick(items, seed) {
-  if (!Array.isArray(items) || !items.length) return "";
-  const index = Number.isFinite(seed) ? Math.abs(seed) % items.length : 0;
-  return items[index];
-}
-
-function chapterSeed(chapter) {
-  return chapter.number + chapter.numberInCategory * 7 + getCategory(chapter.categoryId).categoryNumber * 13;
-}
-
-function articleText(chapter) {
-  const customArticles = {
-    "Dosya Sistemi ve Klasör Düzeni":
-      "Bir kurumda dosya sistemi çoğu zaman kimsenin törenle anlatmadığı, fakat herkesin her gün kullandığı sessiz bir hafızadır. Yeni başlayan biri bilgisayarında klasör açmayı basit bir düzenleme işi sanabilir; ama kamu kurumunda bir dosyanın nerede durduğu, kimin eriştiği, hangi adla saklandığı, ne kadar süre korunacağı ve gerektiğinde nasıl bulunacağı doğrudan iş sürekliliğiyle ilgilidir. Bunu en iyi, yıllar önce kapanmış görünen bir iş için eski bir karar yazısı, taranmış bir ek, imzalı bir tutanak veya kabul komisyonu raporu arandığında anlarsın. O an konu artık “klasör açtım, içine belge attım” basitliğinde değildir; kurumun hafızası ya düzenli konuşur ya da herkes birbirine aynı soruyu sormaya başlar: Bu dosya kimdeydi? Son hali hangisiydi? Bunu silmeye yetkimiz var mıydı? Dosya sistemi ve klasör düzeni bu yüzden teknik bir ayrıntı değil, kurumsal güven meselesidir. Sağlıklı bir düzende klasör adı işin türünü anlatır, dosya adı belgenin içeriğini ve tarihini ele verir, sürüm bilgisi yanlış dosyanın imzaya gitmesini engeller, erişim yetkisi kişisel merakı değil görev sorumluluğunu esas alır. Bir proje yöneticisi bu konuyu ciddiye aldığında yalnız ortak klasörde güzel bir ağaç yapısı kurmaz; projenin teklif dosyasını, resmi yazışmalarını, toplantı notlarını, şartname taslaklarını, test kanıtlarını, kabul evrakını ve işletim dokümanını baştan aynı mantığın içine yerleştirir. Çünkü proje ilerledikçe bilgi dağılmaya meyillidir: biri masaüstüne kaydeder, biri e-posta ekinde tutar, biri eski sürüm üzerinden yorum yapar, biri dosyayı kişisel diskte unutup izne çıkar. Bu da küçük bir dağınıklık gibi başlar, sonra yanlış evrakla karar alma, eksik kanıtla kabul yapma, denetimde belge bulamama veya kritik bilgiye erişememe riskine dönüşür. İyi dosya düzeni ise işi yavaşlatmaz; tersine herkesin aynı gerçeğe bakmasını sağlar. Burada öğrenilmesi gereken şey klasör simgesinin kendisi değil, bilginin yaşam döngüsüdür: belge doğar, kullanılır, güncellenir, paylaşılır, korunur, arşivlenir ve gerektiğinde kanıt olarak geri çağrılır. Bu döngüyü anlayan kişi dosya sistemine teknik depo gibi değil, kurumun ortak hafızasını taşıyan bir kayıt düzeni gibi bakar. Sonuçta dosya sistemi ve klasör düzeni, kamu BT yöneticisi için küçük görünen ama büyük sonuçlar doğuran alanlardan biridir; doğru kurulduğunda iş sakinleşir, yanlış kurulduğunda herkes doğru belgeyi ararken zaman, güven ve karar kalitesi kaybeder."
-  };
-  if (customArticles[chapter.title]) return customArticles[chapter.title];
-
-  const chapterMoments = {
-    "temel-okuryazarlik": [
-      "Bir toplantıda herkes uygulama, ağ ve güvenlik diye ayrı ayrı konuşurken asıl eksik şeyin ortak BT haritası olduğunu fark edersin.",
-      "Kasanın içindeki parça listesi ilk anda teknik ayrıntı gibi görünür; yavaşlayan bir hizmette CPU, RAM ve disk aynı hikayenin karakterlerine dönüşür.",
-      "Sunucuda çalışan bir servisin neden durduğunu ararken işletim sisteminin görünmeyen trafik polisi gibi süreçleri yönettiğini anlarsın.",
-      "Bir kurumda dosya sistemi çoğu zaman kimsenin törenle anlatmadığı, fakat herkesin her gün kullandığı sessiz bir hafızadır.",
-      "Yeni gelen personele yanlış klasör yetkisi verildiğinde erişim meselesinin nezaket değil görev sınırı olduğunu görürsün.",
-      "Terminal ekranında tek satırlık bir komut bazen uzun bir toplantıdan daha dürüst cevap verir.",
-      "Log dosyasında görünen küçük bir zaman damgası, bütün gün anlatılan tahminleri bir anda hizaya sokar.",
-      "Ağ kopunca herkes uygulamayı suçlar; oysa ilk bakılması gereken şey çoğu zaman paketin yolda nereye kadar gidebildiğidir.",
-      "Bir adresin yazılıp doğru sunucuya ulaşması sihir değildir; DNS bozulduğunda kurumun tabelası yerinde durur ama kapı bulunamaz.",
-      "Tarayıcıdaki küçük kilit simgesi, vatandaşın verisinin yolda çıplak gezmediğini anlatan ciddi bir güvencedir.",
-      "Bir ekranın açılması için HTML, CSS, JavaScript ve ağ isteklerinin sahne arkasında nasıl sıraya girdiğini gördüğünde arayüze başka bakarsın.",
-      "Sunucu, odada duran güçlü bir makineden çok, kuruma sürekli cevap verme sözü veren nöbetçi bir hizmet noktasıdır.",
-      "İstemci ile sunucunun iş bölümü anlaşılmadığında her hata kullanıcı bilgisayarına ya da merkeze haksızca yüklenir.",
-      "Bir parolanın paylaşılması küçük kolaylık gibi başlar, sonra kimin hangi işlemi yaptığı sorusunu cevapsız bırakır.",
-      "Yedek dosyası alındı sanılan bir sistemde geri dönüş testi yapılmadıysa elde güvence değil yalnız umut vardır.",
-      "Envanter listesi güncel değilse kurum aslında neye sahip olduğunu, neyi koruduğunu ve neye para ödediğini bilemez.",
-      "Yavaşlık şikayeti geldiğinde iyi gözlemci önce belirtinin hangi katmanda doğduğunu ayırır.",
-      "Terimleri tek tek bilmek yetmez; IP, DNS, sunucu, yetki ve log arasındaki bağ kurulunca teknoloji konuşmaya başlar.",
-      "Küçük bir hizmeti uçtan uca çizdiğinde ekranın arkasında veri, ağ, güvenlik ve operasyonun aynı zincirde yürüdüğünü görürsün.",
-      "Temel bilgiden yöneticiliğe geçiş, her ayrıntıyı yapmak değil, doğru ayrıntının hangi kararı etkilediğini bilmektir."
-    ],
-    "yazilim-muhendisligi": [
-      "Bir iş kuralını bilgisayara anlatmaya çalıştığında belirsiz cümlelerin kodda nasıl tökezlediğini görürsün.",
-      "Koşul ve döngü ilk başta ders örneği gibidir; gerçek sistemde yanlış koşul yüzlerce kaydı aynı hataya sürükler.",
-      "Fonksiyonlara bölünmemiş kod, kalabalık bir odada herkesin aynı anda konuşmasına benzer.",
-      "Nesnelerin sorumluluğu karıştığında uygulama çalışsa bile kim neyi değiştirecek sorusu ekibi yorar.",
-      "Yanlış veri yapısı seçimi küçük ekranda görünmez; yoğun kullanım başladığında performans hesabı kendini hatırlatır.",
-      "Hata yönetimi olmayan uygulama, kötü haberi saklayan memur gibi davranır ve sorunu büyütür.",
-      "JSON ilk bakışta süslü metindir; iki sistemin birbirini yanlış anlamaması için ortak sözleşmeye dönüşür.",
-      "API konuşması net değilse kurumlar arası entegrasyon iyi niyetli ama kırılgan bir el sıkışma olarak kalır.",
-      "REST tasarımında kaynak adları ve durum kodları düzgünse sistem kendi niyetini daha kolay anlatır.",
-      "Backend katmanında iş kuralı dağınıksa aynı karar farklı ekranlarda farklı sonuç üretir.",
-      "Arayüzde yanlış yazılmış bir alan adı, sağlam backend'i kullanıcı gözünde başarısız gösterir.",
-      "Mobil uygulamada bağlantı kopması, bildirim gecikmesi ve oturum süresi masaüstünden farklı düşünülmelidir.",
-      "Oturum tasarımı zayıfsa kullanıcı içeri girmiş görünür ama sistem onun kim olduğunu güvenle taşıyamaz.",
-      "Cache hız kazandırır; fakat eski bilgi gösterdiğinde hızın doğrulukla pazarlık ettiğini anlarsın.",
-      "Mesaj kuyruğu, uzun işlerin kapıda yığılmasını önleyen sabırlı bir sıra defteri gibidir.",
-      "Test kültürü yoksa canlı ortam, ekibin hiç planlamadığı en pahalı sınav salonuna dönüşür.",
-      "Kod incelemesi kişisel eleştiri değil, altı ay sonraki ekibe bırakılan bakım kolaylığıdır.",
-      "Git geçmişi düzgün tutulduğunda kurum hangi kararın ne zaman koda dönüştüğünü hatırlar.",
-      "Mimariyi okuyamayan yönetici yalnız parça görür; iyi mimari çizimi parçaların neden birlikte durduğunu anlatır.",
-      "Yazılım kalitesi tesadüfe bırakıldığında çalışan ekranlar zamanla yönetilemeyen yük haline gelir."
-    ],
-    "veri-ve-analitik": [
-      "Veritabanı, kurumun hafızasını çekmeceden çıkarıp sorgulanabilir düzene koyar.",
-      "Tabloda yanlış temsil edilen bir varlık, raporların yıllarca yanlış konuşmasına neden olur.",
-      "SQL öğrenen kişi veriye ricada bulunmaz, açık ve denetlenebilir soru sorar.",
-      "JOIN yanlış kurulduğunda iki doğru tablo birleşip yanlış bir yönetim sonucuna varabilir.",
-      "Index eksikliği bazen kötü yazılım sanılır; oysa sorun verinin aranma yolundadır.",
-      "Transaction mantığı, yarım kalan işlemin kurum kayıtlarında hayalet gibi dolaşmasını önler.",
-      "PostgreSQL gibi güçlü bir veritabanı, doğru yönetilmezse yine kötü modelin yükünü taşımak zorunda kalır.",
-      "Veri kalitesi bozuksa gösterge paneli parlak olabilir ama kararın zemini çamurludur.",
-      "Veri sözlüğü yoksa aynı kelime farklı birimlerde farklı gerçekleri anlatır.",
-      "Ana veri dağılırsa kişi, kurum veya hizmet kaydı her sistemde başka kimliğe bürünür.",
-      "ETL hattında küçük bir dönüşüm hatası, rapora gelene kadar büyük bir kanaate dönüşebilir.",
-      "Veri ambarı, günlük işlem telaşını yönetim sorusuna cevap verecek sakin düzene çevirir.",
-      "Data lake her şeyi atma gölü değildir; düzen yoksa bilgi değil sis biriktirir.",
-      "Dashboard ekrana sayı koyar; KPI ise o sayının hangi davranışı değiştireceğini sorar.",
-      "Raporlama tuzağı, güzel grafiğin eksik tanımı sakladığı yerde başlar.",
-      "Lineage bilinmiyorsa bir rakamın nereden geldiği tartışması karar masasını esir alır.",
-      "KVKK açısından veri, yalnız kolon değil kişiye dokunan sorumluluktur.",
-      "Kurumlar arası veri paylaşımı teknik bağlantıdan önce yetki, amaç ve kayıt meselesidir.",
-      "Karar destek sistemi, yönetici yerine karar vermez; kararın dayandığı zemini berraklaştırır.",
-      "Veri yönetişimi kurulmadığında herkes veri ister ama kimse kalitesinden sahiplik duymaz."
-    ],
-    "altyapi-bulut-operasyon": [
-      "Sunucu işletimi, çalışan hizmetin nabzını kaynak, servis ve güvenlik üzerinden tutmaktır.",
-      "Linux sunucuda küçük bir izin hatası, uygulamanın bütün mantığını çalışmaz hale getirebilir.",
-      "Windows sunucu tarafında politika ve etki alanı düzeni, kullanıcı deneyimini sessizce belirler.",
-      "Veri merkezi kapısının ardında enerji, soğutma ve fiziksel güvenlik dijital hizmetin gerçek bedenidir.",
-      "Sanallaştırma kaynakları çoğaltmaz; onları daha akıllı paylaştırmayı öğretir.",
-      "Depolama kararı yanlışsa yedek, performans ve maliyet aynı anda şikayet etmeye başlar.",
-      "Load balancer iyi çalışırken fark edilmez; bozulduğunda bütün trafik tek kapıya yığılır.",
-      "Monitoring olmayan sistem karanlık odada çalışan makine gibidir; ses gelene kadar kimse durumunu bilmez.",
-      "Log yönetimi dağınıksa olay sonrası herkes kendi defterinden ayrı gerçek okur.",
-      "Observability, sistemin yalnız öldüğünü değil neden yorulduğunu da anlatır.",
-      "Bulut bilişim hız verir; ama kimlik, bölge ve maliyet düşünülmezse hız dağınıklığa dönüşür.",
-      "Bulut maliyeti küçük kaynakların geceleri de çalıştığı unutulduğunda şişer.",
-      "DevOps kültürü duvar yıkmak değil, teslim edilen hizmetin ortak sorumluluğunu kabul etmektir.",
-      "CI/CD hattı düzgünse dağıtım kahramanlık değil tekrarlanabilir bir alışkanlık olur.",
-      "Infrastructure as Code, altyapıyı kişisel hafızadan çıkarıp sürümlenebilir kanıta dönüştürür.",
-      "Konteyner, uygulamayı çantaya koyar; ama çantanın nerede, nasıl ve kimle çalışacağını ayrıca yönetmek gerekir.",
-      "Kubernetes güçlüdür; fakat ne istediğini açık söylemezsen karmaşayı otomatikleştirir.",
-      "Yedekleme, geri dönmeyen yedekle değil başarıyla yapılmış restore ile anlam kazanır.",
-      "Felaket kurtarma planı okunmadan rafta duruyorsa kriz anında plan değil dosya olur.",
-      "İş sürekliliği, teknik sistemi değil kamu hizmetinin toplumdaki etkisini ayakta tutma disiplinidir."
-    ],
-    "siber-guvenlik": [
-      "Güvenliğe risk olarak bakmak, korkuyu ölçülebilir karara çevirmektir.",
-      "Varlık envanteri yoksa neyi koruduğunu bilmeden kale duvarı örmeye çalışırsın.",
-      "Tehdit, zafiyet ve etki ayrılmadığında her alarm aynı büyüklükte görünür.",
-      "Kimlik yönetimi zayıfsa sistem kapısı açıktır ama kimin girdiği belirsizdir.",
-      "MFA ve SSO doğru kurulunca hem güvenlik artar hem kullanıcı gereksiz parola yükünden kurtulur.",
-      "Ayrıcalıklı hesaplar kayıt altına alınmazsa en güçlü anahtarlar cebinde kimin gezdiği bilinmez.",
-      "Ağ güvenliği, sınır çizmek kadar içerideki hareketi de anlamayı gerektirir.",
-      "Zero Trust, kurum içindeyim diye güvenme alışkanlığını disipline eder.",
-      "WAF web uygulamasının kapısında durur ama kötü tasarımın yerine geçmez.",
-      "OWASP hataları, yazılımın aceleyle unutulan kapı ve pencerelerini gösterir.",
-      "SAST ve DAST güvenliği son kontrolden çıkarıp geliştirme yolculuğuna katar.",
-      "Endpoint güvenliği ihmal edilirse en modern merkez, eski bir cihazdan yara alabilir.",
-      "SIEM, log kalabalığını anlamlı güvenlik cümlelerine çevirmeye çalışır.",
-      "SOC operasyonunda değer, alarm sayısında değil doğru olayın zamanında anlaşılmasındadır.",
-      "Olay müdahalesi paniği sıraya koyar: tespit, çevreleme, temizlik, kurtarma ve öğrenme.",
-      "Siber kriz iletişimi kötü kurulursa teknik olay güven krizine dönüşür.",
-      "Veri sızıntısında ilk refleks saklamak değil kanıtı koruyup sorumluluğu yerine getirmektir.",
-      "Farkındalık eğitimi afiş değil, günlük küçük davranışların güvenli alışkanlığa dönüşmesidir.",
-      "Denetim ve uyum, yapılan güvenlik işinin kanıtla konuşabilmesini sağlar.",
-      "Güvenlik programı yönetimi araçları değil insan, süreç, bütçe ve önceliği birlikte yönetir."
-    ],
-    "yapay-zeka": [
-      "Yapay zekaya modelle değil, iyileştirilecek kararın gerçekten var olup olmadığını sorarak başlanır.",
-      "Veri hazırlığı sıkıcı görünür; ama modelin karakteri çoğu zaman bu masada şekillenir.",
-      "Makine öğrenmesi, geçmiş kayıtlardan örüntü çıkarır ama geçmişin hatalarını da öğrenebilir.",
-      "Derin öğrenme etkileyicidir; fakat katmanların gücü açıklama sorumluluğunu ortadan kaldırmaz.",
-      "Model değerlendirme yalnız doğruluk yüzdesi değil, yanlışın kime neye mal olduğunu sormaktır.",
-      "MLOps yoksa model laboratuvarda başarılı olur, canlıda sessizce yaşlanır.",
-      "LLM güçlü bir dil işçisidir; emin görünmesi her zaman doğru bildiği anlamına gelmez.",
-      "Token ve embedding, metni bilgisayarın yakınlık kurabileceği parçalara dönüştürür.",
-      "Vektör veritabanı, kelimeyi değil anlam akrabalığını aradığı için kurum bilgisinde yeni kapı açar.",
-      "RAG mimarisi modele hafıza vermez; doğru belgeye dayanarak konuşma disiplini kazandırır.",
-      "Prompt tasarımı modele rica yazmak değil, işi, sınırı ve beklenen kanıtı net söylemektir.",
-      "Function calling, modelin konuşmaktan çıkıp tanımlı araçlarla işlem yapmasını sağlar.",
-      "Ajan sistemleri büyüleyicidir; fakat plan yapan sistemin nerede duracağını bilmesi gerekir.",
-      "AI güvenliği, modelin okuduğu metinle aldığı talimatı karıştırmamasını sağlamaya çalışır.",
-      "AI yönetişimi, heyecanı insan onayı, risk kaydı ve denetlenebilirlikle dengeler.",
-      "Kurumsal asistan, her soruya cevap veren oyuncak değil güvenilir kaynağa bağlı çalışma arkadaşıdır.",
-      "RPA tekrarlı işi azaltır; yanlış süreç otomatikleşirse hata da hız kazanır.",
-      "Low-code hızlıdır; yönetişim kurulmazsa küçük çözümler görünmez gölge sistemlere dönüşür.",
-      "IoT sensörü sahadan veri getirir; ama o verinin güveni, zamanı ve anlamı ayrıca yönetilmelidir.",
-      "Yeni teknoloji değerlendirmesi, parlayan fikri değer, risk, maliyet ve uygulanabilirlikle tartma disiplinidir."
-    ],
-    "kamu-surecleri": [
-      "Kamu kurumunun çalışma mantığı, kararın kimde doğduğunu ve kaydın nerede yaşadığını anlamakla başlar.",
-      "Merkez ve taşra farklı ritimlerle çalışır; teknoloji projesi bu ritimleri hesaba katmazsa sahada zorlanır.",
-      "Resmi yazı kültürü, kurumun hafızasına düzgün cümleyle iz bırakma sanatıdır.",
-      "Makam oluru, iyi fikri yetkili karar haline getiren resmi eşiktir.",
-      "Yetki devri bilinmezse herkes işi ister ama kararın sorumlusu belirsiz kalır.",
-      "Komisyon mantığı, tek kişinin kanaatini kurumsal değerlendirme ve kayıt düzenine taşır.",
-      "İhale süreci yalnız satın alma değil, kamu kaynağını saydam ve rekabetçi kullanma sınavıdır.",
-      "Yaklaşık maliyet zayıfsa bütçe daha ihale başlamadan gerçeklikten kopar.",
-      "İdari şartname, teknik işin hangi hukuki ve idari kurallarla alınacağını belirler.",
-      "Teknik şartname belirsiz yazılırsa teslim günü herkes kendi anladığını savunur.",
-      "Sözleşme yönetimi imzadan sonra başlar; destek, ceza, bakım ve sorumluluk orada gerçek olur.",
-      "SLA maddeleri iyi yazılmazsa kesinti anında beklenti çok, dayanak az olur.",
-      "Muayene ve kabul, teslim edilen şeyin vaat edilen işle aynı olup olmadığını kanıtla sorar.",
-      "Kabul komisyonu hazırlığı son gün evrak toplamak değil, proje boyunca kanıt biriktirmektir.",
-      "Hakediş süreci teknik teslimin mali kayıtla buluştuğu yerdir.",
-      "Denetim izi yoksa doğru yapılan iş bile sonradan anlatılamaz hale gelir.",
-      "Arşiv ve saklama süresi, belgenin ne zaman korunacağını ve ne zaman bırakılacağını öğretir.",
-      "KVKK ve kamu verisi, hizmet göreviyle kişisel mahremiyet arasındaki ince çizgiyi yönetir.",
-      "Kurumlar arası protokol, iyi niyeti yetki, amaç, süre ve sorumlulukla yazılı zemine taşır.",
-      "Kamu sürecini teknoloji projesine bağlamak, teknik teslimle idari hesabı aynı dosyada buluşturur."
-    ],
-    "bt-proje-yonetimi": [
-      "BT proje yöneticisinin rolü, herkesin dilini anlayıp ortak karar cümlesi kurmaktır.",
-      "Proje başlatma aşaması bulanıksa en iyi ekip bile nereye koştuğunu tartışır.",
-      "İş analizi, yüksek sesle söylenen isteğin arkasındaki gerçek ihtiyacı ortaya çıkarır.",
-      "Paydaş analizi yapılmazsa sessiz kalan kişi proje sonunda en güçlü itirazı getirebilir.",
-      "RACI matrisi, iyi niyeti sorumluluk tablosuna çevirir.",
-      "Kapsam yönetimi yoksa proje her toplantıda biraz daha büyür ve kimse fark etmez.",
-      "İş kırılım yapısı, büyük ve ürkütücü işi yönetilebilir lokmalara ayırır.",
-      "Zaman planı yalnız tarih listesi değil, bağımlılıkların açıkça görünmesidir.",
-      "Kaynak planlama eksikse takvim doğru görünür ama ekip nefes alamaz.",
-      "Risk yönetimi kehanet değil, olası darbeyi önceden yumuşatma çabasıdır.",
-      "Sorun yönetimi gerçekleşmiş engeli sahibi, tarihi ve kararıyla görünür kılar.",
-      "Değişiklik yönetimi, yeni talebin bedelini nezaketle ama açıkça konuşur.",
-      "Toplantı yönetimi iyi değilse kararlar konuşulur, aksiyonlar havada kalır.",
-      "Tutanak yazmak bürokrasi değil, toplantıda oluşan gerçeği kurumsal hafızaya sabitlemektir.",
-      "Durum raporu üst yönetimi ayrıntıya boğmadan karar gerektiren noktayı gösterir.",
-      "Test ve kabul planı sona bırakılırsa teslim günü kanıt arama telaşı başlar.",
-      "Canlıya geçiş planı, hizmeti sahaya indirirken kesinti ve geri dönüş ihtimalini önceden düşünür.",
-      "Tedarikçi yönetimi güvene dayanır ama kanıt, sözleşme ve ritimle ayakta kalır.",
-      "Program yönetimi birden çok projenin aynı hedefe çarpışmadan yürümesini sağlar.",
-      "Portföy yönetimi, her iyi fikrin aynı anda yapılamayacağını kabul edip öncelik kurar."
-    ],
-    "yonetisim-strateji": [
-      "BT stratejisi, teknoloji isteklerini kurumun hizmet hedefleriyle aynı masaya oturtur.",
-      "Yol haritası yoksa bugün alınan karar yarının mimarisini sessizce kilitleyebilir.",
-      "BT yönetişimi, kimin hangi teknoloji kararını hangi ölçüte göre alacağını netleştirir.",
-      "Kurumsal mimari, iş, veri, uygulama ve altyapının birbirine nasıl yaslandığını gösterir.",
-      "Standart ve politika yoksa her ekip iyi niyetle başka düzen kurar.",
-      "Dokümantasyon yönetimi, kurumsal bilgiyi kişilerin hafızasından çıkarır.",
-      "Teknik borç görünmezse bütçe günü geldiğinde geçmiş kararların faizi ödenir.",
-      "Lisans yönetimi dağınıksa kurum hem hukuki hem mali risk taşır.",
-      "BT bütçesi yalnız para cetveli değil, stratejik önceliğin sayıya dökülmüş halidir.",
-      "FinOps, buluttaki esnekliği mali disiplinle aynı çizgide tutar.",
-      "Tedarik stratejisi, neyi içeride öğreneceğini ve neyi dışarıdan alacağını bilinçli seçer.",
-      "Vendor lock-in, kolay başlayan bağımlılığın ileride pazarlık gücünü azaltabileceğini hatırlatır.",
-      "Dijital egemenlik, kritik veri ve sistemlerde bağımlılık sorusunu strateji seviyesine taşır.",
-      "Açık kaynak politikası, özgürlüğü sorumluluk, güvenlik ve katkıyla birlikte düşünür.",
-      "Hizmet kataloğu, BT'nin ne sunduğunu ve hangi beklentiyle sunduğunu görünür kılar.",
-      "SLA yönetimi, beklentiyi ölçülebilir hizmet sözüne çevirir.",
-      "KPI ve OKR, yapılan işin gerçekten değer üretip üretmediğini sormaya yarar.",
-      "Üst makam sunumu, teknik ayrıntıyı seçenek, risk ve karar diline dönüştürür.",
-      "Mevzuat ve teknoloji stratejisi, yenilik isteğini hukuki ve idari gerçeklikle uzlaştırır.",
-      "BT değerini kanıtlamak, yatırımı hizmet kalitesi, risk azalması ve verimlilikle anlatmaktır."
-    ],
-    "ust-duzey-liderlik": [
-      "Teknik liderlikten kurumsal liderliğe geçiş, çözümü bilmekten doğru sistemi kurmaya geçmektir.",
-      "Ekip kurmak, uzmanları aynı odada toplamak değil ortak hizmet sorumluluğunda buluşturmaktır.",
-      "Yetenek geliştirme yapılmazsa kurum aynı kişilerin iyi niyetine bağımlı kalır.",
-      "Bilgiyi tek kişiye hapsetmek, o kişi izin aldığında kurum hafızasını da izne çıkarmaktır.",
-      "Kurum kültürü değişimi, yeni sistemi değil insanların alışkanlığını yönetmeyi gerektirir.",
-      "Dijital dönüşüm, kağıttaki süreci ekrana taşımakla değil işi yeniden düşünmekle başlar.",
-      "Kriz anında ilk altmış dakika, karar düzeni kurulursa paniğin önüne geçer.",
-      "Kriz sonrası öğrenme suçlu aramak değil, aynı olayın tekrarını zorlaştırmaktır.",
-      "Üst makama teknik konu anlatmak, ayrıntıyı etki, seçenek ve risk cümlesine çevirmektir.",
-      "Kamuoyu iletişimi kötü olursa teknik kesinti güven kaybına dönüşür.",
-      "Etik ve kamu sorumluluğu, teknolojinin insana dokunduğu yerde başlar.",
-      "Karar alma disiplini, hız ile kanıtı ve geri dönüş yolunu birlikte düşünür.",
-      "Müzakere yönetimi, haklı taraf seçmekten çok sürdürülebilir uzlaşma kurmaktır.",
-      "Kişisel öğrenme sistemi olmayan yönetici, hızla değişen teknoloji karşısında eski sezgilerine mahkum kalır.",
-      "Trendleri okumak, modayı stratejik fırsattan ayırma sabrı ister.",
-      "Yapay zeka çağında liderlik, verimlilik kadar etik, iş gücü ve güven etkisini de yönetir.",
-      "Sürdürülebilirlik ve enerji, dijital hizmetin fiziksel dünyadaki bedelini hatırlatır.",
-      "Ulusal teknoloji ekosistemi, kamu, özel sektör ve akademi bilgisini aynı hedefe bağlama fırsatıdır.",
-      "İlk yüz gün, yeni liderin sistem, risk, ekip ve bütçe fotoğrafını hızla çektiği dönemdir.",
-      "From Zero to Hero rotası, temel meraktan üst düzey sorumluluğa uzanan bilinçli çalışma planıdır."
-    ]
-  };
-  const moment = (chapterMoments[chapter.categoryId] || [])[chapter.numberInCategory - 1] || chapter.focus;
-
-  const categoryProfiles = {
-    "temel-okuryazarlik": {
-      scene: "masanın üzerindeki bilgisayardan başlayan ve kullanıcının fark etmeden geçtiği teknik katmanlara doğru açılan ilk öğrenme sahnesi",
-      risk: "kavramların ezberlenip birbirine bağlanmaması; böyle olunca sorun çıktığında kişi ekrana bakar ama arka planda hangi düzenin aksadığını okuyamaz",
-      manager: "temel bilgiyi, karmaşık bir projede doğru soruyu sormaya yarayan sakin bir pusulaya çevirmek",
-      close: "Bu başlık sağlam oturduğunda teknoloji korkutucu bir terimler yığını olmaktan çıkar ve kurum hizmetinin nasıl çalıştığını gösteren anlaşılır bir haritaya dönüşür."
-    },
-    "yazilim-muhendisligi": {
-      scene: "kullanıcının bir butona bastığı anda başlayan, arayüzden iş kuralına ve oradan veriye uzanan uygulama yolculuğu",
-      risk: "yazılımın yalnız kod teslimi sanılması; bu bakış gereksinimi belirsiz, testi zayıf, bakımı pahalı ve kullanıcı tarafı huzursuz sistemler üretir",
-      manager: "ekran, servis, veri, test ve sürüm kararlarını aynı hizmet amacı etrafında toplamak",
-      close: "Bu başlık doğru kavrandığında yazılım, geliştirici odasında kapanan bir iş değil, kurumun iş yapma biçimini taşıyan canlı bir hizmet haline gelir."
-    },
-    "veri-ve-analitik": {
-      scene: "bir raporda görünen tek sayının arkasında duran kayıt, tanım, kaynak, dönüşüm ve yorum zinciri",
-      risk: "verinin doğru sanılması; tanımı, kaynağı ve kalitesi bilinmeyen veri güzel grafikler üretir ama kötü kararları da aynı güzellikle süsler",
-      manager: "hangi veriye neden güvenildiğini, hangi raporun hangi kararı beslediğini ve hangi bilginin kim tarafından sahiplenildiğini açıklamak",
-      close: "Bu başlık yerli yerine oturduğunda veri, klasörlerde bekleyen ham kayıt değil, kurumun ne yaptığını ve nereye gitmesi gerektiğini gösteren karar zemini olur."
-    },
-    "altyapi-bulut-operasyon": {
-      scene: "kimsenin görmediği ama herkesin kesintisiz çalışmasını beklediği sunucu, ağ, depolama, izleme ve yedek düzeni",
-      risk: "sistemin yalnız kurulum gününde başarılı sayılması; izlenmeyen, belgelenmeyen ve geri döndürülmeyen altyapı ilk ciddi arızada kurumu savunmasız bırakır",
-      manager: "kapasite, süreklilik, güvenlik, maliyet ve geri dönüş planını tek işletim disiplini içinde okumak",
-      close: "Bu başlık öğrenildiğinde altyapı görünmez bir masraf kalemi olmaktan çıkar ve kamu hizmetinin ayakta kalmasını sağlayan ana omurga olarak görülür."
-    },
-    "siber-guvenlik": {
-      scene: "bir kullanıcının oturum açmasıyla başlayan ve veri, yetki, kayıt, ağ ve insan davranışına kadar genişleyen güven alanı",
-      risk: "güvenliğin tek ürünle çözüleceğinin sanılması; araç alınır ama süreç, farkındalık, kayıt ve sorumluluk kurulmazsa açık kapı başka yerden belirir",
-      manager: "hangi varlığın neden korunacağını, kabul edilebilir riskin nerede bittiğini ve olay anında kimin ne yapacağını netleştirmek",
-      close: "Bu başlık olgunlaştığında güvenlik korku diliyle değil, hizmeti ve vatandaş güvenini koruyan yönetim aklıyla ele alınır."
-    },
-    "yapay-zeka": {
-      scene: "akıllı görünen bir çıktının arkasında duran veri seçimi, model davranışı, insan onayı ve sorumluluk sınırı",
-      risk: "demoya aldanmak; ölçülmeyen, açıklanmayan ve denetlenmeyen yapay zeka hızlı görünür ama yanlış kararı daha hızlı yayabilir",
-      manager: "verimlilik vaadini mahremiyet, adalet, açıklanabilirlik, güvenlik ve kamu sorumluluğu ile birlikte tartmak",
-      close: "Bu başlık yerleştiğinde yapay zeka sihirli bir kutu gibi değil, doğru sınırlarla kullanıldığında karar kalitesini artıran dikkatli bir yardımcı gibi görülür."
-    },
-    "kamu-surecleri": {
-      scene: "teknik ihtiyacın resmi yazı, olur, ihale dokümanı, komisyon kararı, sözleşme ve kabul tutanağına dönüşen idari yolculuğu",
-      risk: "teknik doğruluğun tek başına yeterli sanılması; kamu sürecine bağlanmayan iyi fikir, imza, bütçe, yetki veya denetim aşamasında takılır",
-      manager: "hukuki iz, idari sorumluluk, mali disiplin ve teknik gereksinimi aynı karar dosyasında buluşturmak",
-      close: "Bu başlık kavrandığında kamu süreci yavaşlatan bir formalite gibi değil, kararın izini ve kurumun hesabını koruyan yönetim düzeni olarak okunur."
-    },
-    "bt-proje-yonetimi": {
-      scene: "ihtiyaç cümlesinden başlayıp kapsam, plan, risk, tedarik, test, kabul ve işletime devre kadar uzanan proje hattı",
-      risk: "proje yönetiminin yalnız takvim takip etmek sanılması; anlamı netleşmeyen iş, en sonunda gecikme, ek maliyet ve kabul tartışması olarak geri döner",
-      manager: "kullanıcı, teknik ekip, tedarikçi, güvenlik, satın alma ve üst yönetimi aynı hedef etrafında konuşturmak",
-      close: "Bu başlık oturduğunda proje yöneticisi yalnız toplantı düzenleyen kişi değil, belirsizliği yönetilebilir karara dönüştüren ana bağ olur."
-    },
-    "yonetisim-strateji": {
-      scene: "tek bir teknoloji kararının bütçe, risk, insan kaynağı, bağımlılık, hizmet kalitesi ve uzun vadeli kurum yönüyle birlikte değerlendirildiği yönetim masası",
-      risk: "stratejinin güzel hedef cümlelerinden ibaret kalması; ölçülmeyen ve kaynakla bağlanmayan strateji, günlük işlerin gürültüsünde kaybolur",
-      manager: "hangi teknoloji yatırımının hangi kamu değerini ürettiğini ve hangi önceliğin neden seçildiğini savunmak",
-      close: "Bu başlık olgunlaştığında teknoloji yönetimi satın alma listesi olmaktan çıkar ve kurumun geleceğini şekillendiren bilinçli bir tercih düzenine dönüşür."
-    },
-    "ust-duzey-liderlik": {
-      scene: "teknik ayrıntının insan, kültür, kriz, iletişim, etik ve kurumsal güvenle aynı anda yönetildiği üst seviye karar alanı",
-      risk: "liderliğin her şeyi bilmek sanılması; oysa üst düzey yönetici her ayrıntıyı ezberleyen değil, doğru insanları doğru sorularla aynı sorumlulukta buluşturandır",
-      manager: "ekibin kapasitesini büyütmek, kriz anında sakin karar vermek ve teknolojiyi kamu yararıyla uyumlu tutmak",
-      close: "Bu başlık yerleştiğinde liderlik makam değil, kurumun teknik aklını insan hayatına dokunan hizmetlere dönüştürme sorumluluğu olarak anlaşılır."
-    }
-  };
-  const profile = categoryProfiles[chapter.categoryId] || categoryProfiles["temel-okuryazarlik"];
-  const title = chapter.title;
-  const lens = chapter.lens;
-  const focus = chapter.focus;
-  const endings = [
-    `${title} böyle okunduğunda, okurun zihninde yalnız bir kavram değil, gerçek iş sırasında başvurabileceği sakin bir kontrol noktası kalır.`,
-    `Bu yüzden ${title}, öğrenilip kenara konacak bir madde değil; gerektiğinde toplantıda, kabulde, denetimde ve karar anında tekrar hatırlanacak bir çalışma alışkanlığıdır.`,
-    `Sayfanın sonunda amaç, ${title} adını ezberlemekten çok, bu konu açıldığında hangi sorunun önce sorulacağını sezebilmektir.`,
-    `${lens} tarafındaki bu bakış yerleştiğinde, ${title} artık yabancı bir teknik başlık gibi değil, kurum işinin doğal bir parçası gibi görünür.`,
-    `Kısacası ${title}, doğru anlaşılırsa kişiye hem teknik ayrıntıyı hem de o ayrıntının yönetim masasındaki karşılığını birlikte düşündürür.`,
-    `Buradan alınacak asıl ders, ${title} hakkında konuşurken tanım, kanıt, sorumluluk ve karar arasındaki bağı koparmamaktır.`,
-    `Böyle bir okuma biçimi, ${title} konusunu kuru bilgi olmaktan çıkarır ve kamu hizmeti içinde işe yarayan bir yargıya dönüştürür.`,
-    `Okur bu başlıktan ayrılırken “bunu nerede kullanırım?” sorusuna cevap verebiliyorsa, ${title} gerçekten öğrenilmeye başlamış demektir.`,
-    `${title} için iyi sonuç, çok teknik konuşmak değil; doğru anda doğru kişiye doğru soruyu sorabilecek açıklığa ulaşmaktır.`,
-    `Bu açıklık kurulduğunda ${title}, karmaşık görünen teknoloji dünyasında güvenilir bir yön bulma işaretine dönüşür.`
-  ];
-  const ending = endings[(chapter.number * 3 + chapter.numberInCategory) % endings.length];
-  const variants = [
-    [
-      `${moment} Ben bu tür konuları anlatırken önce kavramın adını değil, bıraktığı izi konuşmayı severim; çünkü ${title} denen şey de tam olarak o izden anlaşılır.`,
-      `${focus} Bu cümleyi kuru bir tanım gibi alma. Bir kurumda iş yürürken ${lens} tarafında küçük görünen bir ayrıntı bazen kullanıcının beklediği cevabı, bazen denetçinin aradığı kaydı, bazen de yöneticinin vereceği kararı belirler.`,
-      `Buradaki incelik, konuyu ${profile.scene} içinde okuyabilmektir. Eğer yalnız araç adı ezberlenirse ${profile.risk}. Oysa iyi okuyan kişi önce işin nerede başladığını, sonra hangi ekiplerin bu bilgiye dayanarak hareket ettiğini görür.`,
-      `Bir proje yöneticisi için ders şudur: ${profile.manager}. Bunu yaparken teknik doğruluğu, resmi süreci, kabul kanıtını ve işletim sorumluluğunu aynı cümlede tutmak gerekir.`,
-      `${ending}`
-    ],
-    [
-      `${moment} İlk bakışta bu yalnız uzmanların konuşacağı bir ayrıntı gibi durabilir; fakat ${title} gündeme geldiğinde masadaki konu aslında kurumun nasıl düşündüğüdür.`,
-      `${focus} Bu noktayı kavramak, yeni başlayan birine kavramın tanımından fazlasını verir: nerede kullanılacağını, hangi hatayı önlediğini ve hangi kararın daha sakin alınmasını sağladığını gösterir.`,
-      `${lens} penceresinden bakınca mesele daha da netleşir. Konu ${profile.scene} ile bağ kurar; bu bağ kurulmazsa ${profile.risk}. Böyle durumlarda teknik ekip ayrı, kullanıcı birimi ayrı, yönetim ayrı gerçekler anlatmaya başlar.`,
-      `Bu yüzden proje yöneticisinin işi yalnız takip yapmak değildir. ${profile.manager} dediğimiz beceri, burada toplantı notundan şartnameye, test kanıtından kabul tutanağına kadar uzanan pratik bir sorumluluğa dönüşür.`,
-      `Sonunda ${title}, ezberlenecek bir başlık olmaktan çıkar; doğru zamanda doğru soruyu sorduran bir yönetim alışkanlığına dönüşür. ${ending}`
-    ],
-    [
-      `${moment} Bu cümleyi duyduğunda hemen teknik tanıma koşmak cazip gelir, ama ${title} için daha iyi başlangıç şudur: kurum bu bilgiye hangi anda ihtiyaç duyar?`,
-      `${focus} Cevap burada yavaş yavaş açılır. Çünkü kamu hizmeti dediğimiz şey ekrandaki sonucun arkasında kayıt, yetki, süreç, güvenlik ve sorumluluk taşıyan uzun bir zincirdir.`,
-      `Bu zincirde ${lens} rolü çoğu zaman sessizdir; fark edilmesi için bir hata, gecikme ya da denetim sorusu beklenir. İşte o anda ${profile.risk}.`,
-      `İyi yönetici bu noktada konuyu büyütmeden ciddiye alır. ${profile.manager}; sonra bunu gereksinime, ölçüte, kanıta ve işletim düzenine çevirir.`,
-      `${title} böyle öğrenildiğinde okurun elinde kuru bilgi değil, sahada işe yarayan bir sezgi kalır. ${ending}`
-    ],
-    [
-      `${moment} ${title} hakkında konuşurken en önemli şey, konuyu gündelik işten koparmamaktır.`,
-      `${focus} Bu bilgi, tek başına güzel bir tanım olduğu için değil, gerçek bir kurum akışında yanlış anlaşılırsa bedel ürettiği için önemlidir.`,
-      `${profile.scene} düşünülünce tablo değişir: kullanıcı yalnız sonucu görür, teknik ekip davranışı izler, denetçi kayıt arar, yönetici ise risk ve değer arasında karar verir. ${lens} tam bu kesişimde anlam kazanır.`,
-      `Zayıf kurgu burada kendini hemen belli eder; ${profile.risk}. Bu yüzden proje yöneticisi ${profile.manager} işini ihmal etmemelidir.`,
-      `Bu başlığı iyi anlayan kişi toplantıda fazla konuşmak zorunda kalmaz; doğru yerde doğru cümleyi kurar. ${ending}`
-    ],
-    [
-      `${moment} Bazen bir konunun önemini anlamak için büyük teoriye değil, küçük bir aksaklığın nasıl büyüdüğüne bakmak yeterlidir; ${title} tam böyle bir başlıktır.`,
-      `${focus} Bu yüzden öğrenme, tanımı okuyup geçmekle bitmez. Kavramın hangi dosyada, hangi ekranda, hangi logda, hangi karar yazısında ya da hangi kabul adımında görünür olduğunu düşünmek gerekir.`,
-      `${lens} tarafı burada bize konunun rengini verir. Eğer o renk kaybolursa ${profile.risk}; herkes iyi niyetle çalışsa bile ortak anlam kurulamaz.`,
-      `Proje yöneticisi bu başlığı masaya aldığında ${profile.manager}. Bunu yapabildiğinde teknik ayrıntı yönetilebilir bir plana dönüşür.`,
-      `${title} sonunda şunu öğretir: iyi teknoloji yönetimi, ayrıntıyı küçümsemeden ama ayrıntıda boğulmadan karar verebilmektir. ${ending}`
-    ],
-    [
-      `${moment} ${title} ilk kez karşına çıktığında karmaşık görünebilir; fakat onu doğru yere koyunca mesele sadeleşir.`,
-      `${focus} Bu sadeleşme önemlidir, çünkü kamu kurumunda öğrenilen her teknik kavram bir noktada hizmet kalitesi, kayıt düzeni, güvenlik veya bütçe kararıyla buluşur.`,
-      `Konuya ${lens} açısından bakınca, arka plandaki bağlantılar belirginleşir. ${profile.scene} içinde bu bağlantılar kurulmazsa ${profile.risk}.`,
-      `Burada proje yöneticisinin değeri ortaya çıkar: ${profile.manager}. Yani bilgiyi yalnız bilmek değil, onu karar verilebilir hale getirmek gerekir.`,
-      `Okur bu sayfadan ayrıldığında ${title} için en azından şunu hissetmeli: Bu konuyu duyarsam nereden başlayacağımı biliyorum. ${ending}`
-    ],
-    [
-      `${moment} Ben olsam ${title} konusunu anlatmaya bir şema çizerek değil, kurumda bir işin nasıl aksayabileceğini göstererek başlarım.`,
-      `${focus} Çünkü bazı kavramlar düzgün çalışırken görünmez; ancak yanlış kurgulandığında herkes aynı anda fark eder.`,
-      `${lens} tam burada işe yarar. Konu ${profile.scene} ile birlikte okunduğunda yalnız teknik ekibin değil, kullanıcının, yöneticinin ve denetçinin de meselesi olur.`,
-      `Aksi halde ${profile.risk}. Bu cümle sert gelebilir ama proje tecrübesi çoğu zaman bunu doğrular.`,
-      `Bu yüzden ${profile.manager} yaklaşımı, ${title} için lüks değil zorunluluktur. ${ending}`
-    ],
-    [
-      `${moment} ${title} için aceleyle “bunu biliyorum” demek kolaydır; asıl zor olan, bu bilginin kurumda hangi davranışı değiştirdiğini görmektir.`,
-      `${focus} Tanım burada başlangıçtır ama hedef değildir. Hedef, kavramı gerçek bir hizmet akışında okuyabilmektir.`,
-      `${profile.scene} içinde düşününce ${lens} yalnız etiket olmaktan çıkar. Bir kararın, bir kaydın, bir erişimin ya da bir teslimin arkasındaki mantığı anlatır.`,
-      `Bu mantık kurulmazsa ${profile.risk}. Proje yöneticisi de tam bu nedenle ${profile.manager} sorumluluğunu taşır.`,
-      `Böyle bakıldığında ${title}, sınavlık bilgi değil, kurum içinde doğru hareket etmeyi sağlayan pratik bir akıl haline gelir. ${ending}`
-    ],
-    [
-      `${moment} Bu başlığı okuyan kişinin hiç kamu tecrübesi olmadığını varsayalım; o zaman ${title} için ilk cümle şu olur: bu konu, işlerin görünmeyen düzenini anlamaya yarar.`,
-      `${focus} Görünmeyen düzen önemlidir, çünkü bir hizmet yalnız ekrandan ibaret değildir; arkasında insan, veri, yetki, kayıt, altyapı ve karar vardır.`,
-      `${lens} bu düzenin hangi tarafına baktığımızı gösterir. Yanlış yerden bakarsak ${profile.risk}; doğru yerden bakarsak sorun daha büyümeden kendini belli eder.`,
-      `Yönetici tarafında karşılığı açıktır: ${profile.manager}. Bunun için bazen teknik ekibi dinlemek, bazen kullanıcı birimine dönmek, bazen de resmi süreçteki kanıtı kontrol etmek gerekir.`,
-      `${title} iyi öğrenildiğinde kişi teknolojiye biraz daha cesur, biraz daha sakin ve çok daha düzenli yaklaşır. ${ending}`
-    ],
-    [
-      `${moment} ${title} bana hep şu dersi hatırlatır: kurumlarda küçük sanılan teknik ayrıntılar, doğru yerde anlaşılmazsa büyük yönetim sorunlarına dönüşebilir.`,
-      `${focus} Bu yüzden konuya yalnız kelime anlamıyla değil, hangi ihtiyacı çözdüğüyle bakmak gerekir.`,
-      `${profile.scene} içinde bu ihtiyaç daha anlaşılır hale gelir. ${lens} ise bize meseleyi hangi gözlükle okuyacağımızı söyler.`,
-      `Bu gözlük takılmazsa ${profile.risk}. Sonrasında en iyi niyetli ekip bile eksik bilgiyle karar almak zorunda kalır.`,
-      `İyi proje yöneticisi burada ${profile.manager}; okur da bu başlığı bitirdiğinde aynı refleksi kazanmalıdır. ${ending}`
-    ]
-  ];
-  const article = variants[(chapter.number + chapter.numberInCategory) % variants.length];
-  return article.join(" ");
-}
-
-function readingMinutes(chapter) {
-  const words = articleText(chapter).split(/\s+/).filter(Boolean).length;
+function readingMinutes(articleHtml) {
+  const text = articleHtml.replace(/<[^>]+>/g, " ");
+  const words = text.split(/\s+/).filter(Boolean).length;
   return Math.max(10, Math.round(words / 180));
 }
 
-function renderArticle(chapter) {
-  return `<p>${escapeHtml(articleText(chapter))}</p>`;
+async function renderArticle(chapter) {
+  const response = await fetch(chapter.articlePath, { cache: "no-store" });
+  if (!response.ok) {
+    throw new Error(`Makale dosyası bulunamadı: ${chapter.articlePath}`);
+  }
+  return response.text();
 }
 
 function closeMobileSidebar() {
@@ -893,7 +509,7 @@ function renderHome() {
   scrollToPageTop();
 }
 
-function renderChapter(id) {
+async function renderChapter(id) {
   const chapter = getChapter(id);
   const route = routeInfo(chapter);
   state.activeCategory = chapter.categoryId;
@@ -902,17 +518,23 @@ function renderChapter(id) {
   els.chapter.classList.remove("hidden");
 
   const progress = Math.round(((route.index + 1) / chapters.length) * 100);
+  let articleHtml = "";
+  try {
+    articleHtml = await renderArticle(chapter);
+  } catch (error) {
+    articleHtml = `<p class="article-missing">${escapeHtml(error.message)}</p>`;
+  }
   els.chapter.innerHTML = `
     <article class="article-card">
       <p class="kicker">${chapter.displayNumber} / ${escapeHtml(chapter.categoryTitle)}</p>
       <h1>${escapeHtml(chapter.title)}</h1>
       <p class="chapter-subtitle">${escapeHtml(chapter.categorySummary)}</p>
       <div class="meta-row">
-        <span>${readingMinutes(chapter)} dk okuma</span>
+        <span>${readingMinutes(articleHtml)} dk okuma</span>
         <span>%${progress}</span>
         <span>${escapeHtml(chapter.lens)}</span>
       </div>
-      <div class="article-body">${renderArticle(chapter)}</div>
+      <div class="article-body">${articleHtml}</div>
       <nav class="bottom-nav" aria-label="Başlık geçişi">
         ${route.previous ? `<a class="text-button" href="#/chapter/${route.previous.id}">Önceki</a>` : `<a class="text-button" href="#/">Ana sayfa</a>`}
         ${route.next ? `<a class="text-button primary" href="#/chapter/${route.next.id}">Sonraki</a>` : `<a class="text-button primary" href="#/">Ana sayfa</a>`}
