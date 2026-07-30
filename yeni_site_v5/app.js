@@ -10,7 +10,7 @@ const book = {
 const categoryDefinitions = [
   {
     id: "temel-okuryazarlik",
-    title: "1. Temel BT Okuryazarlığı",
+    title: "Temel BT Okuryazarlığı",
     summary: "Bilgisayar, işletim sistemi, ağ, web, dosya, terminal ve temel sistem düşüncesi.",
     frame:
       "Bu üst başlıkta amaç, teknoloji dünyasına ilk kez giren kişinin zemini sağlam kurmasıdır. Buradaki her konu daha sonra proje, güvenlik, veri, bulut ve yönetim kararlarına temel oluşturur.",
@@ -39,7 +39,7 @@ const categoryDefinitions = [
   },
   {
     id: "yazilim-muhendisligi",
-    title: "2. Yazılım ve Uygulama Mühendisliği",
+    title: "Yazılım ve Uygulama Mühendisliği",
     summary: "Programlama, API, mimari, kalite, test, kullanıcı deneyimi ve sürdürülebilir yazılım.",
     frame:
       "Bu üst başlık, yazılımı yalnız kod yazma işi olarak değil, kurumsal süreci çalışan dijital hizmete çevirme disiplini olarak ele alır.",
@@ -68,7 +68,7 @@ const categoryDefinitions = [
   },
   {
     id: "veri-ve-analitik",
-    title: "3. Veri, Raporlama ve Analitik",
+    title: "Veri, Raporlama ve Analitik",
     summary: "Veritabanı, SQL, veri kalitesi, veri yönetişimi, raporlama, karar destek ve veri etiği.",
     frame:
       "Bu üst başlık, veriyi kurumun hafızası ve karar zemini olarak ele alır. Sağlam veri olmadan rapor, yapay zeka ve strateji güvenilir olmaz.",
@@ -97,7 +97,7 @@ const categoryDefinitions = [
   },
   {
     id: "altyapi-bulut-operasyon",
-    title: "4. Altyapı, Bulut ve Operasyon",
+    title: "Altyapı, Bulut ve Operasyon",
     summary: "Sunucu, veri merkezi, bulut, DevOps, konteyner, yedekleme, izleme ve hizmet sürekliliği.",
     frame:
       "Bu üst başlık, sistemlerin yalnız kurulmasını değil, yıllarca güvenilir, ölçülebilir ve geri döndürülebilir biçimde işletilmesini öğretir.",
@@ -126,7 +126,7 @@ const categoryDefinitions = [
   },
   {
     id: "siber-guvenlik",
-    title: "5. Siber Güvenlik ve Risk Yönetimi",
+    title: "Siber Güvenlik ve Risk Yönetimi",
     summary: "Risk, IAM, ağ güvenliği, uygulama güvenliği, SOC, olay müdahalesi, veri güvenliği ve denetim.",
     frame:
       "Bu üst başlık, güvenliği araç listesi değil, kamu hizmetini ve vatandaş güvenini koruyan bütünleşik risk yönetimi olarak ele alır.",
@@ -155,7 +155,7 @@ const categoryDefinitions = [
   },
   {
     id: "yapay-zeka",
-    title: "6. Yapay Zeka, Otomasyon ve Yeni Teknolojiler",
+    title: "Yapay Zeka, Otomasyon ve Yeni Teknolojiler",
     summary: "Makine öğrenmesi, LLM, RAG, ajan sistemleri, AI yönetişimi, otomasyon ve teknoloji trendleri.",
     frame:
       "Bu üst başlık, yapay zekayı gösterişli demo olarak değil, veri, güven, ölçüm ve kamu sorumluluğu gerektiren yeni bir karar destek katmanı olarak ele alır.",
@@ -184,7 +184,7 @@ const categoryDefinitions = [
   },
   {
     id: "kamu-surecleri",
-    title: "7. Kamu Kurumu, Mevzuat ve Resmi Süreçler",
+    title: "Kamu Kurumu, Mevzuat ve Resmi Süreçler",
     summary: "Kamu çalışma prensibi, resmi yazı, olur, ihale, şartname, sözleşme, komisyon ve muayene-kabul.",
     frame:
       "Bu üst başlık, kamu kurumunda teknolojinin idari ve hukuki zeminden ayrı yaşayamayacağını gösterir.",
@@ -213,7 +213,7 @@ const categoryDefinitions = [
   },
   {
     id: "bt-proje-yonetimi",
-    title: "8. BT Proje, Program ve Portföy Yönetimi",
+    title: "BT Proje, Program ve Portföy Yönetimi",
     summary: "Proje yöneticiliği, analiz, planlama, risk, toplantı, tutanak, kabul, değişiklik ve program yönetimi.",
     frame:
       "Bu üst başlık, BT proje yöneticisini teknik ekip, kullanıcı birimi, tedarikçi ve üst yönetim arasında gerçek bağ kuracak şekilde hazırlar.",
@@ -242,7 +242,7 @@ const categoryDefinitions = [
   },
   {
     id: "yonetisim-strateji",
-    title: "9. BT Yönetişimi, Strateji ve Finans",
+    title: "BT Yönetişimi, Strateji ve Finans",
     summary: "BT stratejisi, bütçe, lisans, teknik borç, standartlar, mimari, tedarik ve dijital egemenlik.",
     frame:
       "Bu üst başlık, teknolojiyi kurum stratejisine bağlamayı ve kaynakları uzun vadeli kamu değeri üretecek şekilde yönetmeyi öğretir.",
@@ -271,7 +271,7 @@ const categoryDefinitions = [
   },
   {
     id: "ust-duzey-liderlik",
-    title: "10. Üst Düzey Kamu BT Liderliği",
+    title: "Üst Düzey Kamu BT Liderliği",
     summary: "Ekip, kültür, kriz, iletişim, etik, değişim, ilk 100 gün, kişisel rota ve gelecek vizyonu.",
     frame:
       "Bu üst başlık, teknik bilgiyi kurum yönetimi, insan, etik, kriz ve gelecek vizyonu ile birleştirir.",
