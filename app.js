@@ -389,21 +389,79 @@ function chapterSeed(chapter) {
 }
 
 function articleText(chapter) {
-  const examples = [
-    "başvuru alma",
-    "randevu verme",
-    "ödeme toplama",
-    "belge doğrulama",
-    "kurum içi raporlama",
-    "vatandaş bilgilendirme",
-    "denetim kaydı oluşturma",
-    "kurumlar arası veri paylaşımı"
-  ];
-  const example = examples[(chapter.number - 1) % examples.length];
+  const customArticles = {
+    "Dosya Sistemi ve Klasör Düzeni":
+      "Bir kurumda dosya sistemi çoğu zaman kimsenin törenle anlatmadığı, fakat herkesin her gün kullandığı sessiz bir hafızadır. Yeni başlayan biri bilgisayarında klasör açmayı basit bir düzenleme işi sanabilir; ama kamu kurumunda bir dosyanın nerede durduğu, kimin eriştiği, hangi adla saklandığı, ne kadar süre korunacağı ve gerektiğinde nasıl bulunacağı doğrudan iş sürekliliğiyle ilgilidir. Bunu en iyi, yıllar önce kapanmış görünen bir iş için eski bir karar yazısı, taranmış bir ek, imzalı bir tutanak veya kabul komisyonu raporu arandığında anlarsın. O an konu artık “klasör açtım, içine belge attım” basitliğinde değildir; kurumun hafızası ya düzenli konuşur ya da herkes birbirine aynı soruyu sormaya başlar: Bu dosya kimdeydi? Son hali hangisiydi? Bunu silmeye yetkimiz var mıydı? Dosya sistemi ve klasör düzeni bu yüzden teknik bir ayrıntı değil, kurumsal güven meselesidir. Sağlıklı bir düzende klasör adı işin türünü anlatır, dosya adı belgenin içeriğini ve tarihini ele verir, sürüm bilgisi yanlış dosyanın imzaya gitmesini engeller, erişim yetkisi kişisel merakı değil görev sorumluluğunu esas alır. Bir proje yöneticisi bu konuyu ciddiye aldığında yalnız ortak klasörde güzel bir ağaç yapısı kurmaz; projenin teklif dosyasını, resmi yazışmalarını, toplantı notlarını, şartname taslaklarını, test kanıtlarını, kabul evrakını ve işletim dokümanını baştan aynı mantığın içine yerleştirir. Çünkü proje ilerledikçe bilgi dağılmaya meyillidir: biri masaüstüne kaydeder, biri e-posta ekinde tutar, biri eski sürüm üzerinden yorum yapar, biri dosyayı kişisel diskte unutup izne çıkar. Bu da küçük bir dağınıklık gibi başlar, sonra yanlış evrakla karar alma, eksik kanıtla kabul yapma, denetimde belge bulamama veya kritik bilgiye erişememe riskine dönüşür. İyi dosya düzeni ise işi yavaşlatmaz; tersine herkesin aynı gerçeğe bakmasını sağlar. Burada öğrenilmesi gereken şey klasör simgesinin kendisi değil, bilginin yaşam döngüsüdür: belge doğar, kullanılır, güncellenir, paylaşılır, korunur, arşivlenir ve gerektiğinde kanıt olarak geri çağrılır. Bu döngüyü anlayan kişi dosya sistemine teknik depo gibi değil, kurumun ortak hafızasını taşıyan bir kayıt düzeni gibi bakar. Sonuçta dosya sistemi ve klasör düzeni, kamu BT yöneticisi için küçük görünen ama büyük sonuçlar doğuran alanlardan biridir; doğru kurulduğunda iş sakinleşir, yanlış kurulduğunda herkes doğru belgeyi ararken zaman, güven ve karar kalitesi kaybeder."
+  };
+  if (customArticles[chapter.title]) return customArticles[chapter.title];
+
+  const categoryProfiles = {
+    "temel-okuryazarlik": {
+      scene: "masanın üzerindeki bilgisayardan başlayan ve kullanıcının fark etmeden geçtiği teknik katmanlara doğru açılan ilk öğrenme sahnesi",
+      risk: "kavramların ezberlenip birbirine bağlanmaması; böyle olunca sorun çıktığında kişi ekrana bakar ama arka planda hangi düzenin aksadığını okuyamaz",
+      manager: "temel bilgiyi, karmaşık bir projede doğru soruyu sormaya yarayan sakin bir pusulaya çevirmek",
+      close: "Bu başlık sağlam oturduğunda teknoloji korkutucu bir terimler yığını olmaktan çıkar ve kurum hizmetinin nasıl çalıştığını gösteren anlaşılır bir haritaya dönüşür."
+    },
+    "yazilim-muhendisligi": {
+      scene: "kullanıcının bir butona bastığı anda başlayan, arayüzden iş kuralına ve oradan veriye uzanan uygulama yolculuğu",
+      risk: "yazılımın yalnız kod teslimi sanılması; bu bakış gereksinimi belirsiz, testi zayıf, bakımı pahalı ve kullanıcı tarafı huzursuz sistemler üretir",
+      manager: "ekran, servis, veri, test ve sürüm kararlarını aynı hizmet amacı etrafında toplamak",
+      close: "Bu başlık doğru kavrandığında yazılım, geliştirici odasında kapanan bir iş değil, kurumun iş yapma biçimini taşıyan canlı bir hizmet haline gelir."
+    },
+    "veri-ve-analitik": {
+      scene: "bir raporda görünen tek sayının arkasında duran kayıt, tanım, kaynak, dönüşüm ve yorum zinciri",
+      risk: "verinin doğru sanılması; tanımı, kaynağı ve kalitesi bilinmeyen veri güzel grafikler üretir ama kötü kararları da aynı güzellikle süsler",
+      manager: "hangi veriye neden güvenildiğini, hangi raporun hangi kararı beslediğini ve hangi bilginin kim tarafından sahiplenildiğini açıklamak",
+      close: "Bu başlık yerli yerine oturduğunda veri, klasörlerde bekleyen ham kayıt değil, kurumun ne yaptığını ve nereye gitmesi gerektiğini gösteren karar zemini olur."
+    },
+    "altyapi-bulut-operasyon": {
+      scene: "kimsenin görmediği ama herkesin kesintisiz çalışmasını beklediği sunucu, ağ, depolama, izleme ve yedek düzeni",
+      risk: "sistemin yalnız kurulum gününde başarılı sayılması; izlenmeyen, belgelenmeyen ve geri döndürülmeyen altyapı ilk ciddi arızada kurumu savunmasız bırakır",
+      manager: "kapasite, süreklilik, güvenlik, maliyet ve geri dönüş planını tek işletim disiplini içinde okumak",
+      close: "Bu başlık öğrenildiğinde altyapı görünmez bir masraf kalemi olmaktan çıkar ve kamu hizmetinin ayakta kalmasını sağlayan ana omurga olarak görülür."
+    },
+    "siber-guvenlik": {
+      scene: "bir kullanıcının oturum açmasıyla başlayan ve veri, yetki, kayıt, ağ ve insan davranışına kadar genişleyen güven alanı",
+      risk: "güvenliğin tek ürünle çözüleceğinin sanılması; araç alınır ama süreç, farkındalık, kayıt ve sorumluluk kurulmazsa açık kapı başka yerden belirir",
+      manager: "hangi varlığın neden korunacağını, kabul edilebilir riskin nerede bittiğini ve olay anında kimin ne yapacağını netleştirmek",
+      close: "Bu başlık olgunlaştığında güvenlik korku diliyle değil, hizmeti ve vatandaş güvenini koruyan yönetim aklıyla ele alınır."
+    },
+    "yapay-zeka": {
+      scene: "akıllı görünen bir çıktının arkasında duran veri seçimi, model davranışı, insan onayı ve sorumluluk sınırı",
+      risk: "demoya aldanmak; ölçülmeyen, açıklanmayan ve denetlenmeyen yapay zeka hızlı görünür ama yanlış kararı daha hızlı yayabilir",
+      manager: "verimlilik vaadini mahremiyet, adalet, açıklanabilirlik, güvenlik ve kamu sorumluluğu ile birlikte tartmak",
+      close: "Bu başlık yerleştiğinde yapay zeka sihirli bir kutu gibi değil, doğru sınırlarla kullanıldığında karar kalitesini artıran dikkatli bir yardımcı gibi görülür."
+    },
+    "kamu-surecleri": {
+      scene: "teknik ihtiyacın resmi yazı, olur, ihale dokümanı, komisyon kararı, sözleşme ve kabul tutanağına dönüşen idari yolculuğu",
+      risk: "teknik doğruluğun tek başına yeterli sanılması; kamu sürecine bağlanmayan iyi fikir, imza, bütçe, yetki veya denetim aşamasında takılır",
+      manager: "hukuki iz, idari sorumluluk, mali disiplin ve teknik gereksinimi aynı karar dosyasında buluşturmak",
+      close: "Bu başlık kavrandığında kamu süreci yavaşlatan bir formalite gibi değil, kararın izini ve kurumun hesabını koruyan yönetim düzeni olarak okunur."
+    },
+    "bt-proje-yonetimi": {
+      scene: "ihtiyaç cümlesinden başlayıp kapsam, plan, risk, tedarik, test, kabul ve işletime devre kadar uzanan proje hattı",
+      risk: "proje yönetiminin yalnız takvim takip etmek sanılması; anlamı netleşmeyen iş, en sonunda gecikme, ek maliyet ve kabul tartışması olarak geri döner",
+      manager: "kullanıcı, teknik ekip, tedarikçi, güvenlik, satın alma ve üst yönetimi aynı hedef etrafında konuşturmak",
+      close: "Bu başlık oturduğunda proje yöneticisi yalnız toplantı düzenleyen kişi değil, belirsizliği yönetilebilir karara dönüştüren ana bağ olur."
+    },
+    "yonetisim-strateji": {
+      scene: "tek bir teknoloji kararının bütçe, risk, insan kaynağı, bağımlılık, hizmet kalitesi ve uzun vadeli kurum yönüyle birlikte değerlendirildiği yönetim masası",
+      risk: "stratejinin güzel hedef cümlelerinden ibaret kalması; ölçülmeyen ve kaynakla bağlanmayan strateji, günlük işlerin gürültüsünde kaybolur",
+      manager: "hangi teknoloji yatırımının hangi kamu değerini ürettiğini ve hangi önceliğin neden seçildiğini savunmak",
+      close: "Bu başlık olgunlaştığında teknoloji yönetimi satın alma listesi olmaktan çıkar ve kurumun geleceğini şekillendiren bilinçli bir tercih düzenine dönüşür."
+    },
+    "ust-duzey-liderlik": {
+      scene: "teknik ayrıntının insan, kültür, kriz, iletişim, etik ve kurumsal güvenle aynı anda yönetildiği üst seviye karar alanı",
+      risk: "liderliğin her şeyi bilmek sanılması; oysa üst düzey yönetici her ayrıntıyı ezberleyen değil, doğru insanları doğru sorularla aynı sorumlulukta buluşturandır",
+      manager: "ekibin kapasitesini büyütmek, kriz anında sakin karar vermek ve teknolojiyi kamu yararıyla uyumlu tutmak",
+      close: "Bu başlık yerleştiğinde liderlik makam değil, kurumun teknik aklını insan hayatına dokunan hizmetlere dönüştürme sorumluluğu olarak anlaşılır."
+    }
+  };
+  const profile = categoryProfiles[chapter.categoryId] || categoryProfiles["temel-okuryazarlik"];
   const title = chapter.title;
   const lens = chapter.lens;
   const focus = chapter.focus;
-  return `${title} konusuna dışarıdan bakan biri çoğu zaman önce adını duyar, sonra bunun hangi araca, hangi ekibe veya hangi teknik terime ait olduğunu anlamaya çalışır; oysa bu başlığı gerçekten öğrenmenin daha iyi yolu, onu kurumun yaşayan bir işinin içine yerleştirmektir. ${focus} Bu cümle ilk anda soyut görünebilir, fakat ${example} gibi herkesin anlayabileceği bir kamu hizmetini düşündüğünde konu hemen somutlaşır: vatandaş bir işlem başlatır, ekran bir cevap üretir, arka tarafta veri okunur, yetki kontrol edilir, kayıt oluşur, bazen başka kurumla bilgi paylaşılır ve bütün bu akışın sonunda yöneticiye “bu hizmet güvenilir mi, sürdürülebilir mi, denetlenebilir mi?” sorusu kalır. ${title} tam da bu sorunun içinde anlam kazanır; çünkü teknoloji yalnız çalışan bir araç değil, doğru yönetilmediğinde hizmet kalitesini, bütçeyi, güvenliği ve kurum itibarını aynı anda etkileyen bir düzendir. Bu yüzden bu başlığı okurken ezberlenecek ilk şey tanım değil, bakış açısıdır: ${lens} açısından mesele neyi görünür kılıyor, hangi kararı kolaylaştırıyor, hangi riski erkenden fark ettiriyor? Yeni başlayan biri için bu yaklaşım, kavramın korkutucu tarafını azaltır; deneyimli biri içinse ayrıntının yönetim değerini açığa çıkarır. Bir proje yöneticisi bu konuyu masaya aldığında yalnız “bunu yapabilir miyiz?” diye sormaz; ihtiyacın kime ait olduğunu, kabul ölçütünün nasıl yazılacağını, ihale veya tedarik gerekiyorsa şartnameye hangi ifadenin gireceğini, teslim sırasında hangi kanıtın aranacağını, işletime geçtikten sonra kimin izleyeceğini ve sorun çıktığında hangi kayıt üzerinden konuşulacağını düşünür. Böyle bakıldığında ${title}, tek başına duran bir ders maddesi olmaktan çıkar; fikirden uygulamaya, uygulamadan işletime, işletimden yönetsel karara giden yolun kendine özgü bir durağı haline gelir. Bu durağın değeri, başka başlıkların cümleleriyle doldurulmasında değil, kendi sorusunu net sormasında yatar: Bu konu kurumun hangi işini daha doğru, daha güvenli, daha ölçülebilir veya daha anlaşılır hale getiriyor? Cevap verilirken acele edilmez; önce kullanıcı tarafındaki etki görülür, sonra teknik arka plan okunur, ardından kamu sürecinin belge, onay, sorumluluk ve denetim düzeniyle bağlantı kurulur. Sonunda okurun elinde kuru bir terim listesi değil, gerçek hayatta kullanılabilecek bir sezgi kalmalıdır. ${title} öğrenildiğinde kişi bir toplantıda bu başlığı duyduğu anda kiminle konuşacağını, hangi soruyu soracağını, hangi kanıtı isteyeceğini ve kararı üst yönetime hangi dille anlatacağını daha rahat bilir; asıl kazanım da budur.`;
+  return `${title} başlığını gerçekten anlamak için önce onu ${profile.scene} içinde düşünmek gerekir. Burada öğrenilecek ana mesele şudur: ${focus} Bu ifade yalnız bir tanım gibi okunursa çabuk unutulur; fakat ${lens} penceresinden bakıldığında kurumun günlük işleyişinde hangi boşluğu doldurduğu görünür hale gelir. Yeni başlayan biri için ilk eşik, konuyu büyük ve korkutucu bir teknoloji kelimesi olmaktan çıkarıp “bu bilgi hangi işi daha anlaşılır kılıyor?” sorusuna bağlamaktır. Çünkü kamu kurumunda teknoloji hiçbir zaman yalnız teknik ekiplerin odasında kalmaz; kullanıcı biriminin beklentisine, resmi yazışmanın diline, tedarik kararına, güvenlik sorumluluğuna, denetim izine ve üst yönetimin önceliklerine temas eder. ${title} bu temas noktalarından birini aydınlatır. Eğer bu başlık yüzeysel geçilirse ${profile.risk}. Bu yüzden iyi bir öğrenme akışı önce kavramı sakin biçimde tarif eder, sonra onu küçük bir kurum senaryosuna yerleştirir, ardından karar ve sorumluluk tarafını gösterir. Bir proje yöneticisi açısından bakıldığında mesele daha da somutlaşır: ${profile.manager}. Gereksinim yazılırken bu başlık hangi cümleyle ifade edilecek, şartnameye girerse nasıl ölçülecek, testte hangi kanıtla doğrulanacak, kabul komisyonu önünde hangi belgeyle savunulacak, işletime geçince kim izleyecek ve sorun çıktığında hangi kayıt üzerinden konuşulacak? Bu sorular metni dağıtmak için değil, konunun gerçek hayattaki ağırlığını göstermek için sorulur. Çünkü iyi yönetilen teknoloji bilgisinde tanım, örnek, süreç ve karar aynı çizgide ilerler. ${title} de ancak böyle okunduğunda kendi başına anlamlı bir ders haline gelir; başka başlıkların genel cümlelerine yaslanmadan, kendi sorusunu kendi cevabıyla taşır. Sonuçta bu sayfanın amacı okura yalnız “${title} nedir?” dedirtmek değildir; okur sayfadan ayrıldığında bu konuyu bir toplantıda duyarsa hangi riski fark edeceğini, hangi ekibi masaya çağıracağını, hangi belgeyi arayacağını ve üst yönetime hangi sade cümleyle anlatacağını bilmelidir. ${profile.close}`;
 }
 
 function readingMinutes(chapter) {
