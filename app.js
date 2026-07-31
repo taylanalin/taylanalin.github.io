@@ -1755,7 +1755,16 @@ function readingMinutes(articleHtml) {
 }
 
 async function renderArticle(chapter) {
-  const response = await fetch(chapter.articlePath, { cache: "no-store" });
+  let response;
+  try {
+    response = await fetch(chapter.articlePath, { cache: "no-store" });
+  } catch (error) {
+    const hint =
+      location.protocol === "file:"
+        ? "Makale dosyası tarayıcı tarafından engellendi. Siteyi dosyaya çift tıklayarak değil, https://taylanalin.github.io/ adresinden ya da yerel bir web sunucusu üzerinden açmalısınız."
+        : "Makale dosyası şu an yüklenemedi. Sayfayı yenileyin; sorun sürerse tarayıcı önbelleğini temizleyip tekrar deneyin.";
+    throw new Error(hint);
+  }
   if (!response.ok) {
     throw new Error(`Makale dosyası bulunamadı: ${chapter.articlePath}`);
   }
@@ -1893,7 +1902,7 @@ async function renderChapter(id) {
   els.home.classList.add("hidden");
   els.chapter.classList.remove("hidden");
 
-  const progress = Math.round(((route.index + 1) / chapters.length) * 100);
+  const progress = Math.max(1, Math.round(((route.index + 1) / chapters.length) * 100));
   let articleHtml = "";
   try {
     articleHtml = await renderArticle(chapter);
