@@ -11,7 +11,7 @@ const categoryDefinitions = [
   {
     id: "teknoloji-sozlugu",
     title: "Teknoloji Sözlüğü",
-    summary: "Ağ, işletim sistemi, yazılım, veri, bulut, siber güvenlik, yapay zeka ve güncel teknoloji terimlerini canlı örneklerle anlatan geniş sözlük.",
+    summary: "Teknoloji kavramlarını birbirleriyle ilişkili, örnekli ve yönetici bakışıyla okunabilir hale getiren rota.",
     frame:
       "Bu bölümde kavramlar kuru tanım olarak değil, gerçek hayatta nereye dokunduklarıyla birlikte okunur. Bir okuyucu OSI katmanından API'ye, firewall'dan log yönetimine, programlama mantığından yapay zekaya kadar teknoloji dünyasının haritasını parça parça değil, birbirine bağlı bir şehir gibi görür.",
     chapters: [
@@ -158,7 +158,7 @@ const categoryDefinitions = [
       ["132-sla-ve-bakim-maddeleri.html", "SLA ve Bakım Maddeleri", "hizmet seviyesi", "destek süresi, müdahale, çözüm ve bakım beklentilerini netleştirmek."],
       ["133-muayene-ve-kabul.html", "Muayene ve Kabul", "teslim", "teslim edilen işin şartnameye uygunluğunu kanıtla değerlendirmek."],
       ["134-kabul-komisyonu-hazirligi.html", "Kabul Komisyonu Hazırlığı", "kanıt dosyası", "test, rapor, lisans, eğitim ve doküman kanıtlarını düzenlemek."],
-      ["135-hakedis-ve-odeme-sureci.html", "Hakediş ve Ödeme Süreci", "mali işleyiş", "teslimin ödeme sürecine nasıl bağlandığını anlamak."],
+      ["135-hakedis-ve-odeme-sureci.html", "Hakediş ve Ödeme Süreci", "mali işleyiş", "Teslim edilen iş, kabul kanıtı ve ödeme kararının aynı çizgide buluşması."],
       ["136-denetim-izi.html", "Denetim İzi", "hesap verebilirlik", "işlemlerin sonradan izlenebilir ve açıklanabilir kalmasını sağlamak."],
       ["137-arsiv-ve-saklama-sureleri.html", "Arşiv ve Saklama Süreleri", "kurumsal hafıza", "belge ve verilerin mevzuata uygun saklanmasını yönetmek."],
       ["138-kvkk-ve-kamu-verisi.html", "KVKK ve Kamu Verisi", "hukuki uyum", "kişisel veriyi kamu hizmeti içinde sorumlu biçimde işlemek."],
@@ -465,7 +465,7 @@ async function renderChapter(id) {
     <article class="article-card">
       <p class="kicker">${chapter.displayNumber} / ${escapeHtml(chapter.categoryTitle)}</p>
       <h1>${escapeHtml(chapter.title)}</h1>
-      <p class="chapter-subtitle">${escapeHtml(chapter.categorySummary)}</p>
+      <p class="chapter-subtitle">${escapeHtml(chapter.focus)}</p>
       <div class="meta-row">
         <span>${readingMinutes(articleHtml)} dk okuma</span>
         <span>%${progress}</span>
