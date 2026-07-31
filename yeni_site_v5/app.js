@@ -262,7 +262,8 @@ const chapters = categories.flatMap((category) => category.chapters).map((chapte
 }));
 
 const state = {
-  activeCategory: null
+  activeCategory: null,
+  collapsedCategories: new Set()
 };
 
 const els = {
@@ -360,7 +361,10 @@ function renderNav() {
         return haystack.includes(query);
       });
       if (query && !filtered.length && !normalizeText(`${category.title} ${category.summary}`).includes(query)) return "";
-      const isOpen = query || state.activeCategory === category.id || filtered.some((chapter) => chapter.id === activeId);
+      const isOpen =
+        query ||
+        (!state.collapsedCategories.has(category.id) &&
+          (state.activeCategory === category.id || filtered.some((chapter) => chapter.id === activeId)));
       return `
         <div class="category-group ${isOpen ? "open" : ""}">
           <button class="category-button" type="button" data-category="${category.id}">
@@ -387,7 +391,15 @@ function renderNav() {
   document.querySelectorAll(".category-button").forEach((button) => {
     button.addEventListener("click", () => {
       const id = button.dataset.category;
-      state.activeCategory = state.activeCategory === id ? null : id;
+      const group = button.closest(".category-group");
+      const isOpen = group?.classList.contains("open");
+      if (isOpen) {
+        state.collapsedCategories.add(id);
+        if (state.activeCategory === id) state.activeCategory = null;
+      } else {
+        state.collapsedCategories.delete(id);
+        state.activeCategory = id;
+      }
       renderNav();
     });
   });
@@ -395,6 +407,7 @@ function renderNav() {
 
 function renderHome() {
   state.activeCategory = null;
+  state.collapsedCategories.clear();
   closeMobileSidebar();
   els.home.classList.remove("hidden");
   els.chapter.classList.add("hidden");
@@ -450,6 +463,7 @@ async function renderChapter(id) {
   const chapter = getChapter(id);
   const route = routeInfo(chapter);
   state.activeCategory = chapter.categoryId;
+  state.collapsedCategories.delete(chapter.categoryId);
   closeMobileSidebar();
   els.home.classList.add("hidden");
   els.chapter.classList.remove("hidden");
