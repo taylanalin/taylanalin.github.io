@@ -1853,7 +1853,7 @@ function renderHome() {
           <div class="artifact-lines">
             <i></i><i></i><i></i><i></i><i></i>
           </div>
-          <strong>3 büyük rota, 200 bağımsız sayfa, tek yönetici bakışı.</strong>
+          <strong>8 büyük rota, 265 bağımsız sayfa, tek yönetici bakışı.</strong>
         </div>
       </div>
       <div class="stats-row">
