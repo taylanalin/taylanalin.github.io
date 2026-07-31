@@ -391,14 +391,14 @@ h1 {
 
 .route-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
   margin-top: 18px;
 }
 
 .route-card {
   display: block;
-  min-height: 128px;
+  min-height: 176px;
   padding: 16px;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -418,8 +418,14 @@ h1 {
 .route-card h3 {
   margin: 8px 0;
   color: var(--ink);
-  font-size: 17px;
+  font-size: 20px;
   line-height: 1.28;
+}
+
+.route-card p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.58;
 }
 
 .article-card {
