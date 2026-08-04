@@ -1390,6 +1390,106 @@ const scenarios = [
         ]
       }
     ]
+  },
+  {
+    id: "vaka-15",
+    role: "Siber Güvenlik Daire Başkanı",
+    level: "8/10",
+    time: "09:35",
+    category: "Teknik Krizler ve Yönetim",
+    title: "Sertifika Alındı, Oltalama Maili Geldi",
+    roleText:
+      "Bu senaryoda sen Siber Güvenlik Daire Başkanısın. Bakanlık merkez teşkilatının ISO/IEC 27001:2022 Bilgi Güvenliği Yönetim Sistemi belgelendirme süreci başarıyla tamamlanmıştır. Daha tebrikler bitmeden, bazı personele sahte parola güncelleme bağlantısı içeren bir e-posta düştüğü anlaşılır. Senin görevin, sertifika başarısını savunmaya çalışmadan gerçek olayı BGYS mantığıyla yönetmek.",
+    sections: [
+      {
+        type: "paragraphs",
+        paragraphs: [
+          "Saat 09.35. Bir gün önce merkez teşkilatının bilgi güvenliği yönetim sistemi belgelendirme başarısı kurum içinde paylaşılmıştır. Üst yönetim memnundur, ekip yorgun ama gururludur. Tam bu hava sürerken SOC ekranında orta seviyeli bir alarm görünür: aynı başlıkla gelen bir e-posta, kısa sürede farklı birimlerdeki personele ulaşmıştır. Konu satırı masum görünür: Bakanlık parola güncelleme doğrulaması.",
+          "İlk incelemede e-postanın gerçek Bakanlık alan adından gelmediği, ama gönderen adının kurumsal bir birimi taklit ettiği görülür. Bağlantı, kullanıcıyı Bakanlık giriş ekranına benzeyen sahte bir sayfaya yönlendirmektedir. On yedi personel e-postayı açmış, altı personel bağlantıya tıklamış, üç personelin kullanıcı adı ve parolasını girdiği değerlendirilmektedir.",
+          "Bu olay teknik olarak büyük bir felaket değildir. Ama zamanlaması hassastır. Çünkü sertifika sonrası gelen ilk güvenlik olayı, kurum içinde yanlış bir psikoloji doğurabilir: Daha dün ISO belgesi aldık, bugün nasıl oltalama oluyor? İşte Siber Güvenlik Daire Başkanı olarak ilk düzeltmen gereken algı budur. ISO belgesi olay olmayacağı anlamına gelmez; olayın fark edilmesi, yönetilmesi, kayıt altına alınması ve sürekli iyileştirmeye dönüştürülmesi anlamına gelir."
+        ]
+      },
+      {
+        heading: "İlk Refleks",
+        type: "paragraphs",
+        paragraphs: [
+          "İlk refleksin 'bunu kim açmış' diye insan avına çıkmak olmamalıdır. Oltalama olaylarında kişiyi utandırmak, sonraki olayların gizlenmesine yol açar. Doğru ilk refleks şudur: etki alanını daralt, kimlik bilgisi giren hesapları koru, aynı e-postanın yayılımını durdur, kanıtı bozmadan olay kaydını aç.",
+          "SOC ekibine talimatın net olur: IOC listesini çıkarın, sahte alan adını ve IP adreslerini engelleyin, e-posta güvenlik geçidinde aynı başlık ve bağlantı örüntüsünü arayın, tıklayan kullanıcıların hesap hareketlerini kontrol edin, MFA denemelerini inceleyin, parola giren kullanıcıların oturumlarını sonlandırıp parola değişimini zorunlu kılın.",
+          "Sistem ve Ağ tarafına dönersin: DNS ve proxy loglarında sahte adrese erişim var mı bakılacak. Uygulama ekibine dönersin: kurumsal giriş ekranını taklit eden sayfa nedeniyle kullanıcıların ayırt edemediği görsel unsurlar not edilecek. İnsan Kaynakları veya eğitim tarafına dönersin: olay sonrası duyuru suçlayıcı değil, öğretici dille hazırlanacak."
+        ]
+      },
+      {
+        heading: "BTGM Bağlamı",
+        type: "paragraphs",
+        paragraphs: [
+          "Bilgi güvenliği politikası sadece firewall, antivirüs veya SIEM ekranı değildir. İçişleri gibi geniş merkez, taşra ve bağlı kuruluş etkisi olan bir yapıda bilgi güvenliği; iş sürekliliği, kritik verilerin korunması, personel farkındalığı, yasal mevzuata uyum ve sürekli iyileştirme ile birlikte düşünülür.",
+          "Bu yüzden bu olayda kendini savunmaya geçmezsin. 'Sertifikamız var, bu nasıl olur' sorusu yerine 'Sistem olayı gördü mü, müdahale etti mi, kayda aldı mı, tekrarını azaltacak ders çıkardı mı' sorusunu kurarsın. Üst yönetim için güven veren cevap budur."
+        ]
+      },
+      {
+        heading: "Teknik Terim",
+        type: "paragraphs",
+        paragraphs: [
+          "BGYS, Bilgi Güvenliği Yönetim Sistemi demektir. Kurumun bilgi güvenliğini tek tek kahramanların dikkatiyle değil, risk, politika, süreç, sorumluluk, kayıt ve sürekli iyileştirme düzeniyle yönetmesidir. Bir hastanenin sadece iyi doktorlara değil, triyaj, kayıt, sterilizasyon ve acil müdahale prosedürlerine de ihtiyaç duyması gibi düşünebilirsin.",
+          "ISO/IEC 27001, bilgi güvenliği yönetim sisteminin kurulması, işletilmesi, izlenmesi ve iyileştirilmesi için uluslararası bir standarttır. Bu belge 'hiç olay yaşamayacağız' belgesi değildir; 'olayları sistematik olarak yönetebilecek olgunluğa sahibiz' iddiasıdır.",
+          "Oltalama, yani phishing, kullanıcıyı sahte e-posta, mesaj veya web sayfasıyla kandırarak parola, kod, belge veya işlem yaptırmaya çalışan saldırı yöntemidir. Bankadan gelmiş gibi görünen sahte SMS'e benzer; amaç kapıyı teknik olarak kırmak değil, anahtarı kullanıcıdan almaktır.",
+          "MFA, Multi-Factor Authentication, girişte parolaya ek olarak ikinci bir doğrulama faktörü istemektir. Eve girmek için sadece anahtar değil, apartman görevlisinin seni tanıması veya ikinci bir kapı kodu istemesi gibi düşünebilirsin. Parola sızsa bile saldırganın hemen içeri girmesini zorlaştırır.",
+          "IOC, Indicator of Compromise, bir güvenlik olayına işaret eden teknik izdir. Şüpheli IP adresi, sahte alan adı, dosya hash'i veya e-posta başlığı buna örnek olabilir. Olay yerinde bulunan parmak izi gibi düşünebilirsin; tek başına her şeyi anlatmaz ama araştırmayı doğru yere yönlendirir."
+        ]
+      },
+      {
+        heading: "İlk 45 Dakika",
+        type: "paragraphs",
+        paragraphs: [
+          "İlk 45 dakikada tablo netleşir. E-posta dış kaynaklıdır, kurumsal alan adı birebir ele geçirilmemiştir. Sahte sayfa gerçek giriş ekranına görsel olarak benzemektedir ama alan adı farklıdır. MFA kullanan hesaplarda başarılı giriş görülmemiştir; ancak üç kullanıcının parola bilgisini girdiği kuvvetle muhtemeldir.",
+          "Bu noktada iki işi aynı anda yürütürsün. Birinci iş teknik sınırlamadır: oturumları sonlandırmak, parola değişimi yaptırmak, sahte alan adını engellemek, benzer e-postaları karantinaya almak, tıklama ve giriş denemesi yapan hesapları izlemek. İkinci iş yönetimsel güvendir: olayı büyütmeden saklamamak, küçültmeden panik üretmemek.",
+          "Siber güvenlik olaylarında en kötü iki refleks birbirine benzer şekilde zararlıdır. Birincisi 'önemli bir şey yok' diyerek olayı küçümsemek. İkincisi 'her şey tehlikede' diyerek kurumu paniğe sürüklemek. Daire Başkanı olarak senin görevin olayın gerçek boyutunu ölçmek ve o boyuta uygun müdahale kurmaktır."
+        ]
+      },
+      {
+        heading: "Yönetici Kararı",
+        type: "question",
+        paragraphs: [
+          "Seçenek 1: Tıklayan personelin isimlerini üst yönetime listelemek. Avantajı hızlı hesap verme hissi üretir; riski, güvenlik bildirim kültürünü zedelemesi ve personeli sonraki olaylarda susmaya itmesidir.",
+          "Seçenek 2: Olayı sadece teknik ekip içinde tutmak. Avantajı paniği azaltır; riski, bilgi güvenliği yönetim sistemi açısından olay kaydı, farkındalık ve yönetim gözden geçirme fırsatını kaçırmasıdır.",
+          "Seçenek 3: Teknik müdahale tamamlanır, etki alanı ölçülür, kişileri hedef göstermeyen olay raporu hazırlanır, ilgili personele zorunlu parola/MFA kontrolü uygulanır, tüm kuruma kısa farkındalık duyurusu yapılır ve BGYS sürekli iyileştirme kaydına ders olarak işlenir.",
+          "Doğru yaklaşım üçüncü seçenektir. Çünkü siber güvenlikte olgunluk, olayın hiç olmaması değil; olay olduğunda kurumun ölçülü, kanıtlı ve öğrenen bir refleks göstermesidir."
+        ]
+      },
+      {
+        heading: "Genel Müdür Yardımcısına İlk Bilgi",
+        type: "quote",
+        paragraphs: [
+          "Sayın Genel Müdür Yardımcım, Bakanlık personeline yönelik sınırlı kapsamlı bir oltalama e-postası tespit edilmiştir. Kurumsal e-posta alan adımızın ele geçirildiğine dair bulgu yoktur. Sahte bağlantıya tıklayan kullanıcılar ve kimlik bilgisi girdiği değerlendirilen hesaplar belirlenmiş, oturumlar sonlandırılmış, parola değişimi ve ek kontroller başlatılmıştır. Şu aşamada ayrıcalıklı hesap etkilenmesi veya veri sızıntısı bulgusu yoktur. Olay BGYS kapsamında kayıt altına alınmakta, teknik ve farkındalık önlemleri güncellenmektedir."
+        ]
+      },
+      {
+        heading: "Teknik Derinleşme",
+        type: "paragraphs",
+        paragraphs: [
+          "Bu olayda bakılacak teknik katmanlar sırayla bellidir. E-posta başlıklarında SPF, DKIM ve DMARC sonuçları incelenir. SPF, gönderen sunucunun o alan adı adına e-posta göndermeye yetkili olup olmadığını kontrol etmeye yardım eder. DKIM, e-postanın alan adı tarafından kriptografik olarak imzalanıp imzalanmadığını gösterir. DMARC ise SPF ve DKIM sonuçlarına göre alıcı sistemin ne yapması gerektiğine dair politika sağlar.",
+          "Bunu gerçek hayatta şöyle düşünebilirsin: SPF, kuryenin o şirketten gelip gelmediğini kontrol eder; DKIM, zarfın üzerindeki mühür bozulmuş mu ona bakar; DMARC ise mühür ve kurye şüpheliyse güvenliğin paketi içeri alıp almayacağına dair kural koyar.",
+          "Ama e-posta güvenliği kontrolleri tek başına yeterli değildir. Kullanıcı sahte sayfaya giderse proxy ve DNS kayıtları önem kazanır. Parola girildiyse kimlik doğrulama logları, MFA denemeleri ve oturum kayıtları incelenir. Eğer başarılı giriş varsa hangi IP'den, hangi cihazla, hangi uygulamaya erişildiği kontrol edilir. Bu yüzden olay müdahalesi sadece e-posta ekibinin işi değildir; kimlik, ağ, uç nokta ve uygulama logları birlikte okunur."
+        ]
+      },
+      {
+        heading: "Farkındalık Duyurusu",
+        type: "paragraphs",
+        paragraphs: [
+          "Tüm personele gönderilecek duyuru kısa ve sakin olmalıdır: Kurumsal parola güncellemesi gibi görünen sahte bir e-posta tespit edilmiştir. Bakanlık sistemlerine girişte alan adını kontrol ediniz, şüpheli bağlantılardan parola girmeyiniz, tereddüt halinde e-postayı bilgi güvenliği ekibine iletiniz. Bu olay kapsamında gerekli teknik önlemler alınmıştır; benzer e-postaları açmadan bildirmeniz önemlidir.",
+          "Duyuruda 'bazı personelimiz dikkatsizlik yapmıştır' gibi bir cümle kurmazsın. Çünkü güvenlik kültürü utandırma üzerine kurulmaz. Personelin hızlı bildirim yapmasını istiyorsan, bildiren kişiyi cezalandırılacak kişi gibi hissettirmeyeceksin."
+        ]
+      },
+      {
+        heading: "Danışman Notu",
+        type: "paragraphs",
+        paragraphs: [
+          "Bugünün dersi şudur: Siber Güvenlik Daire Başkanı olduğunda sertifika, politika ve denetim dilini gerçek olay yönetimiyle karıştırmayacaksın. Sertifika duvarda asılı duran başarıdır; olay anındaki refleks ise kurumun gerçek güvenlik kasıdır.",
+          "Üst yöneticiler bazen güvenlik belgesini 'artık güvendeyiz' diye okuyabilir. Senin görevin bunu kırmadan düzeltmektir: Güvendeyiz demek, olay yaşamayacağız demek değildir; olay olduğunda görecek, sınırlandıracak, öğrenecek ve iyileştirecek sisteme sahibiz demektir.",
+          "Bir gün Genel Müdür olduğunda güvenlik ekibine sadece 'kaç saldırı engellendi' diye sormayacaksın. Şunu da soracaksın: Kaç olaydan ders çıkarıldı? Hangi prosedür güncellendi? Hangi eğitim hedeflendi? Hangi kontrol eksikliği kapatıldı? Çünkü siber güvenlikte gerçek olgunluk, alarm sayısında değil, öğrenme hızında görünür."
+        ]
+      }
+    ]
   }
 ];
 
@@ -1398,6 +1498,61 @@ const glossaryTerms = [
     term: "APM",
     definition:
       "Application Performance Monitoring. Uygulamanın hangi ekran, servis veya endpointte ne kadar süre harcadığını izlemeye yarayan araç ve yaklaşımdır. Hastanede hastanın sadece ateşine değil, nabzına, tansiyonuna ve kan değerlerine birlikte bakmak gibi düşünebilirsin. Yönetici için APM, 'uygulama yavaş' şikayetini ölçülebilir hale getirir: hangi işlem, hangi saatte, hangi kullanıcı grubunda, hangi servis yüzünden yavaşlıyor sorularına cevap arar."
+  },
+  {
+    term: "BGYS",
+    definition:
+      "Bilgi Güvenliği Yönetim Sistemi. Kurumun bilgi güvenliğini tek tek kişilerin dikkatine bırakmadan; risk, politika, süreç, kayıt, sorumluluk, denetim ve sürekli iyileştirme düzeniyle yönetmesidir. Hastanede sadece iyi doktorların olması yetmez; triyaj, sterilizasyon, kayıt ve acil müdahale prosedürleri de gerekir. BGYS de güvenliği böyle kurumsal bir düzene bağlar."
+  },
+  {
+    term: "DKIM",
+    definition:
+      "DomainKeys Identified Mail. Bir e-postanın gönderildiği alan adı tarafından kriptografik olarak imzalanıp imzalanmadığını kontrol etmeye yarayan e-posta güvenliği mekanizmasıdır. Zarfın üzerindeki mühür gibi düşünebilirsin: mühür doğruysa mesajın gerçekten o alan adı tarafından imzalandığına dair güçlü bir işaret oluşur. Tek başına her saldırıyı durdurmaz ama sahte e-postaları ayırt etmede önemli kanıt sağlar."
+  },
+  {
+    term: "DMARC",
+    definition:
+      "Domain-based Message Authentication, Reporting and Conformance. SPF ve DKIM sonuçlarına göre alıcı e-posta sisteminin ne yapacağını belirleyen politikadır. Güvenlik görevlisine verilen talimat gibi düşünebilirsin: kurye veya mühür şüpheliyse paketi kabul etme, karantinaya al ya da raporla. DMARC doğru kurulursa kurum alan adının taklit edilmesi zorlaşır."
+  },
+  {
+    term: "DNS",
+    definition:
+      "Domain Name System. İnsanların yazdığı alan adlarını sistemlerin kullandığı IP adreslerine çeviren isimlendirme sistemidir. Telefon rehberi gibi düşünebilirsin: ismi yazarsın, arka planda numara bulunur. Oltalama olaylarında DNS kayıtları, kullanıcının hangi sahte adrese gittiğini anlamak için önemli iz sağlar."
+  },
+  {
+    term: "IOC",
+    definition:
+      "Indicator of Compromise. Bir güvenlik olayına işaret eden teknik izdir. Şüpheli IP adresi, sahte alan adı, dosya hash'i, e-posta başlığı veya zararlı bağlantı buna örnek olabilir. Olay yerindeki parmak izi gibi düşünebilirsin; tek başına tüm hikayeyi anlatmaz ama araştırmanın nereye odaklanacağını gösterir."
+  },
+  {
+    term: "ISO/IEC 27001",
+    definition:
+      "Bilgi güvenliği yönetim sisteminin kurulması, işletilmesi, izlenmesi ve sürekli iyileştirilmesi için kullanılan uluslararası standarttır. Bunu 'kurum güvenliği nasıl yönetilecek' sorusuna verilen sistemli cevap gibi düşünebilirsin. ISO/IEC 27001 belgesi, hiç olay yaşanmayacağı anlamına gelmez; olayları risk ve süreç disipliniyle yönetebilecek bir düzen kurulduğunu gösterir."
+  },
+  {
+    term: "MFA",
+    definition:
+      "Multi-Factor Authentication. Sisteme girişte parolaya ek olarak ikinci bir doğrulama faktörü istenmesidir. Eve girmek için sadece anahtar değil, ayrıca apartman kapı kodu veya güvenlik görevlisinin onayı gerekmesi gibi düşünebilirsin. Parola ele geçirilse bile saldırganın hesaba doğrudan girmesini zorlaştırır."
+  },
+  {
+    term: "Oltalama",
+    definition:
+      "Phishing olarak da bilinir. Kullanıcıyı sahte e-posta, mesaj veya web sayfasıyla kandırarak parola, kod, belge ya da işlem yaptırmaya çalışan saldırı yöntemidir. Bankadan gelmiş gibi görünen sahte SMS'e benzer; saldırgan kapıyı teknik olarak kırmak yerine anahtarı kullanıcıdan almaya çalışır."
+  },
+  {
+    term: "Proxy",
+    definition:
+      "Kullanıcı ile internet veya başka bir sistem arasında aracı olarak duran geçiş katmanıdır. Kurum kapısındaki danışma gibi düşünebilirsin: kim nereye gitmek istiyor, bu adrese izin var mı, kayıt tutulmalı mı sorularını yönetir. Oltalama olaylarında proxy logları, kullanıcıların sahte bağlantıya gidip gitmediğini anlamaya yardım eder."
+  },
+  {
+    term: "SOC",
+    definition:
+      "Security Operations Center. Kurumun güvenlik olaylarını izleyen, analiz eden ve müdahale sürecini başlatan güvenlik operasyon merkezidir. Hastanenin acil servisi gibi düşünebilirsin: her gelen belirti felaket değildir ama doğru triyaj yapılmazsa ciddi olaylar geç fark edilir. SOC; SIEM, EDR, ağ ve kimlik loglarını birlikte okuyarak olayı anlamlandırır."
+  },
+  {
+    term: "SPF",
+    definition:
+      "Sender Policy Framework. Bir alan adı adına hangi sunucuların e-posta göndermeye yetkili olduğunu kontrol etmeye yarayan mekanizmadır. Şirket adına paket getiren kuryenin gerçekten yetkili listesinde olup olmadığına bakmak gibi düşünebilirsin. SPF, sahte gönderenli e-postaları azaltır ama tek başına tam koruma sağlamaz; DKIM ve DMARC ile birlikte düşünülmelidir."
   },
   {
     term: "ASN",
