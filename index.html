@@ -3,34 +3,62 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Kamu teknoloji liderliği, proje yöneticiliği, kamu işleyişi ve teknoloji sözlüğünü sekiz büyük rotada anlatan 265 sayfalık rehber." />
-    <title>Kamu Teknoloji ve Liderlik Rehberi</title>
-    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <title>BTGM Yöneticilik Akademisi</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="topbar">
-      <a class="brand" href="#/">Kamu Teknoloji ve Liderlik Rehberi</a>
-      <div class="top-actions">
-        <button id="themeToggle" class="icon-button" type="button" title="Tema değiştir" aria-label="Tema değiştir">●</button>
-        <button id="menuToggle" class="icon-button mobile-only" type="button" title="Başlıklar" aria-label="Başlıklar">☰</button>
-      </div>
-    </header>
-
-    <div class="layout">
-      <aside id="sidebar" class="sidebar">
-        <div class="search-box">
-          <input id="searchInput" type="search" placeholder="Başlık, teknoloji, kamu süreci veya yönetim kavramı ara" />
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Senaryo başlıkları">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">
+            <span>BTGM</span>
+          </div>
+          <div>
+            <h1>BTGM Yöneticilik Akademisi</h1>
+            <p>Üst Düzey Kamu BT Yöneticiliği Senaryoları</p>
+          </div>
         </div>
-        <nav id="chapterNav" class="chapter-nav" aria-label="Üç ana rota"></nav>
+
+        <div class="search-wrap">
+          <label for="scenarioSearch">Senaryo ara</label>
+          <input id="scenarioSearch" type="search" placeholder="Başlık, rol veya konu..." autocomplete="off" />
+        </div>
+
+        <nav id="scenarioNav" class="scenario-nav"></nav>
+
+        <div class="library-tools">
+          <button id="glossaryButton" class="glossary-button" type="button">
+            Teknoloji Sözlüğü
+          </button>
+        </div>
       </aside>
 
       <main class="reader">
-        <section id="homeView" class="home-view"></section>
-        <section id="chapterView" class="chapter-view hidden"></section>
+        <header class="reader-toolbar">
+          <button id="menuButton" class="icon-button" type="button" aria-label="Başlıkları göster">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <div class="toolbar-title">
+            <span id="currentRole">İçişleri Uzmanı</span>
+            <strong id="currentScenario">Senaryo</strong>
+          </div>
+          <div class="reader-actions" aria-label="Okuma ayarları">
+            <button class="mode-button active" type="button" data-size="comfortable">Rahat</button>
+            <button class="mode-button" type="button" data-size="dense">Yoğun</button>
+            <div class="font-control">
+              <label for="fontSizeRange">Font</label>
+              <input id="fontSizeRange" type="range" min="15" max="24" value="18" step="1" />
+              <span id="fontSizeValue">18</span>
+            </div>
+          </div>
+        </header>
+
+        <article id="scenarioContent" class="scenario-content" tabindex="-1"></article>
       </main>
     </div>
 
-    <script src="app.js?v=20260731-5"></script>
+    <script src="app.js"></script>
   </body>
 </html>
